@@ -8,6 +8,7 @@ import HmacSHA256 from 'crypto-js/hmac-sha256';
 import Utf8 from 'crypto-js/enc-utf8';
 import jwtDecode from 'jwt-decode';
 import UserModel, { UserModelType } from 'app/store/user/models/UserModel';
+import { PartialDeep } from 'type-fest';
 import mock from '../mock';
 import mockApi from '../mock-api.json';
 
@@ -15,8 +16,8 @@ type UserType = UserModelType & { password: string };
 
 let usersApi = mockApi.components.examples.auth_users.value as UserType[];
 
-mock.onGet('/api/auth/sign-in').reply((config: { data: string }) => {
-	const data = JSON.parse(config.data) as { email: string; password: string };
+mock.onGet('/api/auth/sign-in').reply((config) => {
+	const data = JSON.parse(config.data as string) as { email: string; password: string };
 
 	const { email, password } = data;
 
@@ -39,7 +40,7 @@ mock.onGet('/api/auth/sign-in').reply((config: { data: string }) => {
 	}
 
 	if (error.length === 0) {
-		delete user.password;
+		delete (user as Partial<UserType>).password;
 
 		const access_token = generateJWTToken({ id: user.uuid });
 
@@ -54,8 +55,8 @@ mock.onGet('/api/auth/sign-in').reply((config: { data: string }) => {
 	return [200, { error }];
 });
 
-mock.onGet('/api/auth/access-token').reply((config: { data: string }) => {
-	const data = JSON.parse(config.data) as { access_token: string };
+mock.onGet('/api/auth/access-token').reply((config) => {
+	const data = JSON.parse(config.data as string) as { access_token: string };
 
 	const { access_token } = data;
 
@@ -64,7 +65,7 @@ mock.onGet('/api/auth/access-token').reply((config: { data: string }) => {
 
 		const user = _.cloneDeep(usersApi.find((_user) => _user.uuid === id));
 
-		delete user.password;
+		delete (user as Partial<UserType>).password;
 
 		const updatedAccessToken = generateJWTToken({ id: user.uuid });
 
@@ -81,8 +82,8 @@ mock.onGet('/api/auth/access-token').reply((config: { data: string }) => {
 	return [401, { error }];
 });
 
-mock.onPost('/api/auth/sign-up').reply((request: { data: string }) => {
-	const data = JSON.parse(request.data) as { displayName: string; password: string; email: string };
+mock.onPost('/api/auth/sign-up').reply((request) => {
+	const data = JSON.parse(request.data as string) as { displayName: string; password: string; email: string };
 	const { displayName, password, email } = data;
 	const isEmailExists = usersApi.find((_user) => _user.data.email === email);
 	const error = [];
@@ -112,7 +113,7 @@ mock.onPost('/api/auth/sign-up').reply((request: { data: string }) => {
 
 		const user = _.cloneDeep(newUser);
 
-		delete user.password;
+		delete (user as Partial<UserType>).password;
 
 		const access_token = generateJWTToken({ id: user.uuid });
 
@@ -126,18 +127,27 @@ mock.onPost('/api/auth/sign-up').reply((request: { data: string }) => {
 	return [200, { error }];
 });
 
-mock.onPost('/api/auth/user/update').reply((config: { data: string }) => {
-	const data = JSON.parse(config.data) as { user: UserType };
+mock.onPost('/api/auth/user/update').reply((config) => {
+	const access_token = config?.headers?.Authorization as string;
+
+	const userData = jwtDecode(access_token);
+	const uuid = (userData as { [key: string]: string }).id;
+
+	const data = JSON.parse(config.data as string) as { user: PartialDeep<UserType> };
 	const { user } = data;
 
+	let updatedUser;
+
 	usersApi = usersApi.map((_user) => {
-		if (user.uuid === _user.uuid) {
-			return _.merge(_user, user);
+		if (uuid === _user.uuid) {
+			updatedUser = _.assign({}, _user, user);
 		}
 		return _user;
 	});
 
-	return [200, user];
+	delete (updatedUser as Partial<UserType>).password;
+
+	return [200, updatedUser];
 });
 
 /**
@@ -164,7 +174,7 @@ function base64url(source: CryptoJS.lib.WordArray) {
 	return encodedSource;
 }
 
-function generateJWTToken(tokenPayload) {
+function generateJWTToken(tokenPayload: { [key:string]: unknown } ) {
 	// Define token header
 	const header = {
 		alg: 'HS256',

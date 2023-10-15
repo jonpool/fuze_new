@@ -1,8 +1,9 @@
 import FuseUtils from '@fuse/utils/FuseUtils';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { UserType } from 'app/store/user';
 import { UserModelType } from 'app/store/user/models/UserModel';
+import { PartialDeep } from 'type-fest';
 import jwtServiceConfig from './jwtServiceConfig';
 /* eslint-disable camelcase, class-methods-use-this */
 
@@ -27,7 +28,7 @@ class JwtService extends FuseUtils.EventEmitter {
 			(response: AxiosResponse<unknown>) => response,
 			(err: AxiosError) =>
 				new Promise(() => {
-					if (err.response.status === 401 && err.config) {
+					if (err?.response?.status === 401 && err.config) {
 						// if you ever get an unauthorized response, logout the user
 						this.emit('onAutoLogout', 'Invalid access_token');
 						_setSession(null);
@@ -127,7 +128,7 @@ class JwtService extends FuseUtils.EventEmitter {
 	 * Signs in with the provided provider.
 	 */
 	signInWithToken = () =>
-		new Promise((resolve, reject) => {
+		new Promise<UserType>((resolve, reject) => {
 			axios
 				.get(jwtServiceConfig.accessToken, {
 					data: {
@@ -137,7 +138,7 @@ class JwtService extends FuseUtils.EventEmitter {
 				.then((response: AxiosResponse<{ user: UserModelType; access_token: string }>) => {
 					if (response.data.user) {
 						_setSession(response.data.access_token);
-						resolve(response.data.user);
+						resolve(response.data.user as UserType);
 					} else {
 						this.logout();
 						reject(new Error('Failed to login with token.'));
@@ -152,7 +153,7 @@ class JwtService extends FuseUtils.EventEmitter {
 	/**
 	 * Updates the user data.
 	 */
-	updateUserData = (user: UserModelType) =>
+	updateUserData = (user: PartialDeep<UserType>) =>
 		axios.post(jwtServiceConfig.updateUser, {
 			user
 		});
@@ -169,7 +170,7 @@ class JwtService extends FuseUtils.EventEmitter {
 /**
  * Sets the session by storing the access token in the local storage and setting the default authorization header.
  */
-function _setSession(access_token: string) {
+function _setSession(access_token: string | null) {
 	if (access_token) {
 		setAccessToken(access_token);
 		axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
@@ -186,7 +187,7 @@ function isAuthTokenValid(access_token: string) {
 	if (!access_token) {
 		return false;
 	}
-	const decoded: { exp } = jwtDecode(access_token);
+	const decoded = jwtDecode<JwtPayload>(access_token);
 	const currentTime = Date.now() / 1000;
 
 	if (decoded.exp < currentTime) {

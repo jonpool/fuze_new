@@ -6,9 +6,10 @@ import navigation from './navigationSlice';
 import settings from './settingsSlice';
 
 /**
- * The root reducer for the Fuse Redux store.
+ * The Fuse reducer.
  */
-const fuseReducers = combineReducers({
+
+const reducer = combineReducers({
 	navigation,
 	settings,
 	navbar,
@@ -16,4 +17,4 @@ const fuseReducers = combineReducers({
 	dialog
 });
 
-export default fuseReducers;
+export default reducer;
