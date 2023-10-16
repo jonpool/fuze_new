@@ -1,15 +1,15 @@
 import { createEntityAdapter, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import navigationConfig from 'app/configs/navigationConfig';
-import FuseUtils from '@fuse/utils';
-import i18next from 'i18next';
-import _ from '@lodash';
 import { AppThunkType, RootStateType } from 'app/store/types';
-import { selectCurrentLanguageId } from 'app/store/i18nSlice';
 import { PartialDeep } from 'type-fest';
-import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { FuseNavigationType } from '@fuse/core/FuseNavigation/types/FuseNavigationType';
 import { selectUserRole, userSliceType } from 'app/store/user/userSlice';
+import FuseNavigationHelper from '@fuse/utils/FuseNavigationHelper';
+import i18next from 'i18next';
+import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
+import FuseUtils from '@fuse/utils';
+import navigationConfig from 'app/configs/navigationConfig';
+import { selectCurrentLanguageId } from '../i18nSlice';
 
 type AppRootStateType = RootStateType<[navigationSliceType, userSliceType]>;
 
@@ -30,9 +30,11 @@ export const appendNavigationItem =
 	(item: FuseNavItemType, parentId?: string | null): AppThunkType =>
 	async (dispatch, getState) => {
 		const AppState = getState() as AppRootStateType;
-		const { navigation } = AppState.fuse;
+		const navigation = selectNavigationAll(AppState);
 
-		dispatch(setNavigation(FuseUtils.appendNavItem(navigation, FuseNavItemModel(item), parentId)));
+		dispatch(setNavigation(FuseNavigationHelper.appendNavItem(navigation, FuseNavItemModel(item), parentId)));
+
+		return Promise.resolve();
 	};
 
 /**
@@ -42,9 +44,9 @@ export const prependNavigationItem =
 	(item: FuseNavItemType, parentId?: string | null): AppThunkType =>
 	async (dispatch, getState) => {
 		const AppState = getState() as AppRootStateType;
-		const { navigation } = AppState.fuse;
+		const navigation = selectNavigationAll(AppState);
 
-		dispatch(setNavigation(FuseUtils.prependNavItem(navigation, FuseNavItemModel(item), parentId)));
+		dispatch(setNavigation(FuseNavigationHelper.prependNavItem(navigation, FuseNavItemModel(item), parentId)));
 
 		return Promise.resolve();
 	};
@@ -56,9 +58,9 @@ export const updateNavigationItem =
 	(id: string, item: PartialDeep<FuseNavItemType>): AppThunkType =>
 	async (dispatch, getState) => {
 		const AppState = getState() as AppRootStateType;
-		const { navigation } = AppState.fuse;
+		const navigation = selectNavigationAll(AppState);
 
-		dispatch(setNavigation(FuseUtils.updateNavItem(navigation, id, item)));
+		dispatch(setNavigation(FuseNavigationHelper.updateNavItem(navigation, id, item)));
 
 		return Promise.resolve();
 	};
@@ -70,9 +72,9 @@ export const removeNavigationItem =
 	(id: string): AppThunkType =>
 	async (dispatch, getState) => {
 		const AppState = getState() as AppRootStateType;
-		const { navigation: _navigation } = AppState.fuse;
+		const navigation = selectNavigationAll(AppState);
 
-		dispatch(setNavigation(FuseUtils.removeNavItem(_navigation, id)));
+		dispatch(setNavigation(FuseNavigationHelper.removeNavItem(navigation, id)));
 
 		return Promise.resolve();
 	};
@@ -99,45 +101,25 @@ export const navigationSlice = createSlice({
 export const { setNavigation, resetNavigation } = navigationSlice.actions;
 
 export const selectNavigation = createSelector(
-	[selectNavigationAll, selectCurrentLanguageId, selectUserRole],
-	(navigation, language, userRole) => {
-		function setTranslationValues(data: FuseNavigationType) {
-			// loop through every object in the array
-			return data.map((item) => {
-				if (item.translate && item.title) {
-					item.title = i18next.t(`navigation:${item.translate}`);
-				}
-
-				// see if there is a children node
-				if (item.children) {
-					// run this function recursively on the children array
-					item.children = setTranslationValues(item.children);
-				}
-				return item;
-			});
+	[selectNavigationAll, selectUserRole, selectCurrentLanguageId],
+	(navigation, userRole) => {
+		function setAdditionalData(data: FuseNavigationType): FuseNavigationType {
+			return data?.map((item) => ({
+				hasPermission: Boolean(FuseUtils.hasPermission(item?.auth, userRole)),
+				...item,
+				...(item.translate && item.title ? { title: i18next.t(`navigation:${item.translate}`) } : {}),
+				...(item.children ? { children: setAdditionalData(item.children) } : {})
+			}));
 		}
 
-		return setTranslationValues(
-			_.merge(
-				[],
-				filterRecursively(navigation, (item) => FuseUtils.hasPermission(item?.auth, userRole))
-			)
-		);
+		const translatedValues = setAdditionalData(navigation);
+
+		return translatedValues;
 	}
 );
 
-function filterRecursively(arr: FuseNavigationType, predicate: (item: FuseNavItemType) => boolean) {
-	return arr.filter(predicate).map((item) => {
-		item = { ...item };
-		if (item.children) {
-			item.children = filterRecursively(item.children, predicate);
-		}
-		return item;
-	});
-}
-
 export const selectFlatNavigation = createSelector([selectNavigation], (navigation) =>
-	FuseUtils.getFlatNavigation(navigation)
+	FuseNavigationHelper.getFlatNavigation(navigation)
 );
 
 export type navigationSliceType = typeof navigationSlice;
