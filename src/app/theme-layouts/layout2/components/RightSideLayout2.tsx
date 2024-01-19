@@ -1,6 +1,7 @@
-import { memo } from 'react';
-import QuickPanel from '../../shared-components/quickPanel/QuickPanel';
-import NotificationPanel from '../../shared-components/notificationPanel/NotificationPanel';
+import { lazy, memo } from 'react';
+
+const QuickPanel = lazy(() => import('app/theme-layouts/shared-components/quickPanel/QuickPanel'));
+const NotificationPanel = lazy(() => import('src/app/main/apps/notifications/NotificationPanel'));
 
 /**
  * The right side layout 2.
