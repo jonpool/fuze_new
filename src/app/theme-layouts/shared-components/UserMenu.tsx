@@ -119,18 +119,16 @@ function UserMenu() {
 						</MenuItem>
 					</>
 				) : (
-					<>
-						<MenuItem
-							onClick={() => {
-								signOut();
-							}}
-						>
-							<ListItemIcon className="min-w-40">
-								<FuseSvgIcon>heroicons-outline:logout</FuseSvgIcon>
-							</ListItemIcon>
-							<ListItemText primary="Sign out" />
-						</MenuItem>
-					</>
+					<MenuItem
+						onClick={() => {
+							signOut();
+						}}
+					>
+						<ListItemIcon className="min-w-40">
+							<FuseSvgIcon>heroicons-outline:logout</FuseSvgIcon>
+						</ListItemIcon>
+						<ListItemText primary="Sign out" />
+					</MenuItem>
 				)}
 			</Popover>
 		</>

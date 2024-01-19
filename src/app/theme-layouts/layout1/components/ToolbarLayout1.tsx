@@ -7,7 +7,6 @@ import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from '@fuse/core/FuseSettings/store/fuseSettingsSlice';
 import { Layout1ConfigDefaultsType } from 'app/theme-layouts/layout1/Layout1Config';
-import NotificationPanelToggleButton from 'src/app/main/apps/notifications/NotificationPanelToggleButton';
 import NavbarToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarToggleButton';
 import { selectFuseNavbar } from 'app/theme-layouts/shared-components/navbar/store/navbarSlice';
 import AdjustFontSize from '../../shared-components/AdjustFontSize';
@@ -77,7 +76,6 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 						<FullScreenToggle />
 						<NavigationSearch />
 						<QuickPanelToggleButton />
-						<NotificationPanelToggleButton />
 						<UserMenu />
 					</div>
 
