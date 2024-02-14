@@ -44,6 +44,7 @@ function MockAdapterProvider(props: MockAdapterProviderProps) {
 			if (!enabled && mock) {
 				mock.restore();
 			}
+
 			setLoading(false);
 		};
 	}, [enabled]);
@@ -53,6 +54,7 @@ function MockAdapterProvider(props: MockAdapterProviderProps) {
 			if (!isInitialMount.current) {
 				dispatch(apiService.util.resetApiState());
 			}
+
 			isInitialMount.current = false;
 		}
 	}, [dispatch]);
