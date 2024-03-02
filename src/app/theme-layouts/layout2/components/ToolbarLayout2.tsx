@@ -4,10 +4,10 @@ import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { useSelector } from 'react-redux';
-import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from '@fuse/core/FuseSettings/store/fuseSettingsSlice';
+import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { Layout2ConfigDefaultsType } from 'app/theme-layouts/layout2/Layout2Config';
 import NavbarToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarToggleButton';
+import { useAppSelector } from 'app/store/hooks';
 import AdjustFontSize from '../../shared-components/AdjustFontSize';
 import FullScreenToggle from '../../shared-components/FullScreenToggle';
 import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
@@ -26,8 +26,8 @@ type ToolbarLayout2Props = {
 function ToolbarLayout2(props: ToolbarLayout2Props) {
 	const { className = '' } = props;
 
-	const config = useSelector(selectFuseCurrentLayoutConfig) as Layout2ConfigDefaultsType;
-	const toolbarTheme = useSelector(selectToolbarTheme);
+	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout2ConfigDefaultsType;
+	const toolbarTheme = useAppSelector(selectToolbarTheme);
 
 	return (
 		<ThemeProvider theme={toolbarTheme}>
