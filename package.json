@@ -1,9 +1,11 @@
 {
     "name": "fuse-react-app",
-    "version": "10.2.0",
+    "version": "10.3.0",
     "private": true,
     "type": "module",
     "dependencies": {
+        "@aws-amplify/auth": "6.0.27",
+        "@aws-amplify/ui-react": "6.1.6",
         "@emotion/cache": "11.11.0",
         "@emotion/react": "11.11.3",
         "@emotion/styled": "11.11.0",
@@ -16,6 +18,7 @@
         "@popperjs/core": "2.11.8",
         "@reduxjs/toolkit": "2.2.1",
         "autosuggest-highlight": "3.3.4",
+        "aws-amplify": "^6.0.25",
         "axios": "1.6.5",
         "axios-mock-adapter": "1.21.5",
         "clsx": "2.1.0",
@@ -23,7 +26,7 @@
         "date-fns": "2.30.0",
         "draft-js": "0.11.7",
         "draftjs-to-html": "0.9.1",
-        "firebase": "10.7.1",
+        "firebase": "^10.10.0",
         "framer-motion": "10.18.0",
         "history": "5.3.0",
         "i18next": "23.7.16",
@@ -156,8 +159,8 @@
         "build-docs": "ts-node --esm ./src/app/main/documentation/material-ui-components/build.ts",
         "ext-rename-js-to-ts": "ts-node --esm ./src/node-scripts/file-ext-rename-js-to-ts.ts",
         "analyze": "react-app-rewired build && source-map-explorer 'build/static/js/*.js' --html analyze-result.html",
-        "postinstall": "node --loader ts-node/esm ./src/node-scripts/fuse-react-message.ts",
-        "poststart": "node --loader ts-node/esm ./src/node-scripts/fuse-react-message.ts",
+        "postinstall": "node src/node-scripts/fuse-react-message.js",
+        "poststart": "node src/node-scripts/fuse-react-message.js",
         "audit": "npm audit --production"
     },
     "engines": {
