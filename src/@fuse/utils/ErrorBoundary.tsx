@@ -1,7 +1,7 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 interface ErrorBoundaryState {
@@ -29,14 +29,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 	}
 
 	render() {
-		const { children } = this.props;
+		const { children = null } = this.props;
 		const { error, errorInfo, hasError } = this.state;
 
 		if (hasError) {
 			return (
 				<div className="bg-white p-24">
-					<h1 className="text-20 font-semibold">Something went wrong.</h1>
-					<p className="text-14 whitespace-pre-wrap">
+					<h1 className="text-2xl font-semibold">Something went wrong.</h1>
+					<p className="text-base whitespace-pre-wrap">
 						{error && error.toString()}
 						<br />
 						{errorInfo && errorInfo.componentStack}

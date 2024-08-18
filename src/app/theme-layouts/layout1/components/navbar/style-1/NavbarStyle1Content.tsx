@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from 'app/theme-layouts/shared-components/navigation/Navigation';
-import NavbarToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarToggleButton';
+import UserMenu from 'app/theme-layouts/shared-components/UserMenu';
+import { Divider } from '@mui/material';
 import Logo from '../../../../shared-components/Logo';
-import UserNavbarHeader from '../../../../shared-components/UserNavbarHeader';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
@@ -48,16 +48,12 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 				<div className="mx-4 flex flex-1">
 					<Logo />
 				</div>
-
-				<NavbarToggleButton className="h-40 w-40 p-0" />
 			</div>
 
 			<StyledContent
 				className="flex min-h-0 flex-1 flex-col"
 				option={{ suppressScrollX: true, wheelPropagation: false }}
 			>
-				<UserNavbarHeader />
-
 				<Navigation layout="vertical" />
 
 				<div className="flex-0 flex items-center justify-center py-48 opacity-10">
@@ -68,6 +64,12 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 					/>
 				</div>
 			</StyledContent>
+
+			<Divider />
+
+			<div className="p-4 md:p-16 w-full">
+				<UserMenu className="w-full" />
+			</div>
 		</Root>
 	);
 }

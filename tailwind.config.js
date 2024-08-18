@@ -688,19 +688,19 @@ module.exports = {
 			]
 		},
 		fontSize: {
-			xs: '1rem',
-			sm: '1.2rem',
-			md: '1.3rem',
-			base: '1.4rem',
-			lg: '1.6rem',
-			xl: '1.8rem',
-			'2xl': '2rem',
-			'3xl': '2.4rem',
-			'4xl': '3.2rem',
-			'5xl': '3.6rem',
-			'6xl': '4rem',
-			'7xl': '4.8rem',
-			'8xl': '6.4rem',
+			xs: '.9rem',
+			sm: '1.1rem',
+			md: '1.2rem',
+			base: '1.3rem',
+			lg: '1.4rem',
+			xl: '1.6rem',
+			'2xl': '1.8rem',
+			'3xl': '2.2rem',
+			'4xl': '2.4rem',
+			'5xl': '2.8rem',
+			'6xl': '3.6rem',
+			'7xl': '5.6rem',
+			'8xl': '7.2rem',
 			'9xl': '9.6rem',
 			'10xl': '12.8rem',
 			10: ['1rem'],
@@ -714,7 +714,9 @@ module.exports = {
 			18: ['1.8rem'],
 			19: ['1.9rem'],
 			20: ['2rem'],
+			22: ['2.2rem'],
 			24: ['2.4rem'],
+			26: ['2.6rem'],
 			28: ['2.8rem'],
 			32: ['3.2rem'],
 			36: ['3.6rem'],
@@ -1324,6 +1326,7 @@ module.exports = {
 			208: '20.8rem',
 			216: '21.6rem',
 			224: '22.4rem',
+			240: '24.0rem',
 			256: '25.6rem',
 			288: '28.8rem',
 			320: '32rem',
@@ -1533,7 +1536,7 @@ module.exports = {
 			typography: ({ theme }) => ({
 				DEFAULT: {
 					css: {
-						fontSize: '1.4rem'
+						fontSize: '1.3rem'
 					}
 				},
 				sm: {
@@ -1543,7 +1546,7 @@ module.exports = {
 				},
 				lg: {
 					css: {
-						fontSize: '1.6rem'
+						fontSize: '1.4rem'
 					}
 				}
 			})

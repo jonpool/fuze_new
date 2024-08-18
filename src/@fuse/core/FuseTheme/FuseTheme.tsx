@@ -28,7 +28,6 @@ const inputGlobalStyles = (
 				backgroundColor: theme.palette.background.default,
 				color: theme.palette.text.primary
 			},
-
 			/*  'code:not([class*="language-"])': {
         color: theme.palette.secondary.dark,
         backgroundColor:
@@ -37,6 +36,12 @@ const inputGlobalStyles = (
         borderRadius: 2,
         lineHeight: 1.7,
       }, */
+			'& .MuiOutlinedInput-root': {
+				backgroundColor: theme.palette.background.paper
+			},
+			'& .border-divider ': {
+				borderColor: `${theme.palette.divider}!important`
+			},
 			'table.simple tbody tr th': {
 				borderColor: theme.palette.divider
 			},
@@ -70,7 +75,6 @@ const inputGlobalStyles = (
 			hr: {
 				borderColor: theme.palette.divider
 			},
-
 			'::-webkit-scrollbar-thumb': {
 				boxShadow: `inset 0 0 0 20px ${
 					theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.24)' : 'rgba(255, 255, 255, 0.24)'

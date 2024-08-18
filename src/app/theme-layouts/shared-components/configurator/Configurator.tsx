@@ -93,25 +93,26 @@ function Configurator() {
 				className="buttonWrapper"
 			>
 				<Button
-					className="settingsButton m-0 h-40 w-40 min-w-40"
+					className="settingsButton m-0 h-36 w-36 min-w-36"
 					onClick={() => handleOpen('settings')}
 					variant="text"
 					color="inherit"
 					disableRipple
+					disableFocusRipple
 				>
 					<span>
-						<FuseSvgIcon size={20}>heroicons-solid:cog</FuseSvgIcon>
+						<FuseSvgIcon size={20}>heroicons-solid:cog-6-tooth</FuseSvgIcon>
 					</span>
 				</Button>
 
 				<Button
-					className="m-0 h-40 w-40 min-w-40"
+					className="m-0 h-36 w-36 min-w-36"
 					onClick={() => handleOpen('schemes')}
 					variant="text"
 					color="inherit"
 					disableRipple
 				>
-					<FuseSvgIcon size={20}>heroicons-outline:color-swatch</FuseSvgIcon>
+					<FuseSvgIcon size={20}>heroicons-outline:swatch</FuseSvgIcon>
 				</Button>
 			</Root>
 

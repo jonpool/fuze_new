@@ -19,13 +19,17 @@ const settingsConfig: FuseSettingsConfigType = {
 		 * The config property defines the layout configuration for the application.
 		 * Check out default layout configs at app/theme-layouts for example app/theme-layouts/layout1/Layout1Config.js
 		 */
-		config: {} // checkout default layout configs at app/theme-layouts for example  app/theme-layouts/layout1/Layout1Config.js
+		config: {
+			navbar: {
+				style: 'style-2'
+			}
+		} // checkout default layout configs at app/theme-layouts for example  app/theme-layouts/layout1/Layout1Config.js
 	},
 
 	/**
 	 * The customScrollbars property defines whether or not to use custom scrollbars in the application.
 	 */
-	customScrollbars: false,
+	customScrollbars: true,
 
 	/**
 	 * The direction property defines the text direction for the application.

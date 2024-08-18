@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import _ from '@lodash';
+import Box from '@mui/material/Box';
 import FuseSvgIcon from '../FuseSvgIcon';
 import { FuseFlatNavItemType } from '../FuseNavigation/types/FuseNavItemType';
 
@@ -77,10 +78,15 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 	}
 
 	return (
-		<div className={clsx('flex flex-1', variant === 'vertical' && 'shrink grow-0 flex-col', className)}>
+		<Box className={clsx('flex flex-shrink overflow-hidden', variant === 'vertical' ? 'flex-col' : '', className)}>
 			{useMemo(() => {
 				return (
-					<div className={clsx('flex flex-1', variant === 'vertical' && 'flex-col')}>
+					<Box
+						className={clsx(
+							'flex flex-1 items-center border rounded-lg',
+							variant === 'vertical' ? 'flex-col' : 'max-h-36'
+						)}
+					>
 						{shortcutItems.map(
 							(_item) =>
 								_item && (
@@ -93,14 +99,11 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 											title={_item.title}
 											placement={variant === 'horizontal' ? 'bottom' : 'left'}
 										>
-											<IconButton
-												className="h-40 w-40 p-0"
-												size="large"
-											>
+											<IconButton className="h-36 w-36 p-0 rounded-0">
 												{_item.icon ? (
-													<FuseSvgIcon>{_item.icon}</FuseSvgIcon>
+													<FuseSvgIcon size={20}>{_item.icon}</FuseSvgIcon>
 												) : (
-													<span className="text-20 font-semibold uppercase">
+													<span className="text-2xl font-semibold uppercase">
 														{_item.title[0]}
 													</span>
 												)}
@@ -115,15 +118,19 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 							placement={variant === 'horizontal' ? 'bottom' : 'left'}
 						>
 							<IconButton
-								className="h-40 w-40 p-0"
+								className="h-36 w-36 p-0 rounded-0"
 								aria-haspopup="true"
 								onClick={addMenuClick}
-								size="large"
 							>
-								<FuseSvgIcon sx={{ color: amber[600] }}>heroicons-solid:star</FuseSvgIcon>
+								<FuseSvgIcon
+									size={20}
+									sx={{ color: amber[600] }}
+								>
+									heroicons-solid:star
+								</FuseSvgIcon>
 							</IconButton>
 						</Tooltip>
-					</div>
+					</Box>
 				);
 			}, [addMenu, variant, shortcutItems])}
 
@@ -202,7 +209,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 					);
 				}, [shortcutItems, shortcuts, searchText])}
 			</Menu>
-		</div>
+		</Box>
 	);
 }
 
@@ -223,11 +230,11 @@ function ShortcutMenuItem(props: {
 			role="button"
 		>
 			<MenuItem key={item.id}>
-				<ListItemIcon className="min-w-40">
+				<ListItemIcon className="min-w-36">
 					{item.icon ? (
 						<FuseSvgIcon>{item.icon}</FuseSvgIcon>
 					) : (
-						<span className="text-center text-20 font-semibold uppercase">{item.title[0]}</span>
+						<span className="text-center text-2xl font-semibold uppercase">{item.title[0]}</span>
 					)}
 				</ListItemIcon>
 				<ListItemText primary={item.title} />

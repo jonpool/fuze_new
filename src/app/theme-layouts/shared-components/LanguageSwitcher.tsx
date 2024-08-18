@@ -35,7 +35,7 @@ function LanguageSwitcher() {
 	return (
 		<>
 			<Button
-				className="h-40 w-64"
+				className="border border-divider"
 				onClick={langMenuClick}
 			>
 				<img
@@ -45,8 +45,11 @@ function LanguageSwitcher() {
 				/>
 
 				<Typography
-					className="mx-4 font-semibold uppercase"
-					color="text.secondary"
+					className="mx-4 font-semibold text-md uppercase"
+					sx={{
+						color: (theme) =>
+							theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary
+					}}
 				>
 					{currentLanguage.id}
 				</Typography>
@@ -73,7 +76,7 @@ function LanguageSwitcher() {
 						key={lng.id}
 						onClick={() => handleLanguageChange(lng)}
 					>
-						<ListItemIcon className="min-w-40">
+						<ListItemIcon className="min-w-36">
 							<img
 								className="min-w-20"
 								src={`assets/images/flags/${lng.flag}.svg`}

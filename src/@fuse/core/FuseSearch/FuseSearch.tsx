@@ -82,18 +82,19 @@ function renderInputComponent(props: RenderInputComponentProps) {
 								inputRef(node);
 							},
 							classes: {
-								input: 'FuseSearch-input py-0 px-16 h-40 md:h-48 ltr:pr-48 rtl:pl-48',
-								notchedOutline: 'rounded-8'
+								input: 'FuseSearch-input py-0 px-16 h-36 md:h-36 ltr:pr-36 rtl:pl-36',
+								notchedOutline: 'rounded-lg'
 							}
 						}}
 						variant="outlined"
 						{...other}
 					/>
 					<FuseSvgIcon
-						className="pointer-events-none absolute top-0 h-40 w-48 p-12 ltr:right-0 rtl:left-0 md:h-48"
+						className="pointer-events-none absolute top-0 h-36 w-36 p-8 ltr:right-0 rtl:left-0"
 						color="action"
+						size={20}
 					>
-						heroicons-outline:search
+						heroicons-outline:magnifying-glass
 					</FuseSvgIcon>
 				</>
 			) : (
@@ -107,7 +108,7 @@ function renderInputComponent(props: RenderInputComponentProps) {
 							inputRef(node);
 						},
 						classes: {
-							input: 'FuseSearch-input py-0 px-16 h-48 md:h-64'
+							input: 'FuseSearch-input py-0 px-16 h-36'
 						}
 					}}
 					variant="standard"
@@ -127,11 +128,11 @@ function renderSuggestion(suggestion: FuseFlatNavItemType, { query, isHighlighte
 			selected={Boolean(isHighlighted)}
 			component="div"
 		>
-			<ListItemIcon className="min-w-40">
+			<ListItemIcon className="min-w-36">
 				{suggestion.icon ? (
 					<FuseSvgIcon>{suggestion.icon}</FuseSvgIcon>
 				) : (
-					<span className="w-24 text-center text-20 font-semibold uppercase">{suggestion.title[0]}</span>
+					<span className="w-24 text-center text-2xl font-semibold uppercase">{suggestion.title[0]}</span>
 				)}
 			</ListItemIcon>
 			<ListItemText
@@ -281,11 +282,8 @@ function FuseSearch(props: FuseSearchProps) {
 		placeholder = 'Search',
 		noResults = 'No results..',
 		trigger = (
-			<IconButton
-				className="h-40 w-40"
-				size="large"
-			>
-				<FuseSvgIcon>heroicons-outline:search</FuseSvgIcon>
+			<IconButton className="border border-divider">
+				<FuseSvgIcon size={20}>heroicons-outline:magnifying-glass</FuseSvgIcon>
 			</IconButton>
 		)
 	} = props;
@@ -417,7 +415,7 @@ function FuseSearch(props: FuseSearchProps) {
 											style={{
 												width: popperNode.current ? popperNode.current.clientWidth : ''
 											}}
-											className="overflow-hidden rounded-8 shadow-lg"
+											className="overflow-hidden rounded-lg shadow-lg"
 										>
 											{options.children}
 											{state.noSuggestions && (
@@ -524,7 +522,7 @@ function FuseSearch(props: FuseSearchProps) {
 										className="mx-8"
 										size="large"
 									>
-										<FuseSvgIcon>heroicons-outline:x</FuseSvgIcon>
+										<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 									</IconButton>
 								</div>
 							</Paper>

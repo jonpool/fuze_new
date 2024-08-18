@@ -4,6 +4,9 @@ import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from 'app/theme-layouts/shared-components/navigation/Navigation';
 import NavbarToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarToggleButton';
+import UserMenu from 'app/theme-layouts/shared-components/UserMenu';
+import { Divider, Hidden } from '@mui/material';
+import NavbarPinToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarPinToggleButton';
 import Logo from '../../../../shared-components/Logo';
 
 const Root = styled('div')(({ theme }) => ({
@@ -26,14 +29,14 @@ const StyledContent = styled(FuseScrollbars)(() => ({
 	overflowX: 'hidden',
 	overflowY: 'auto',
 	WebkitOverflowScrolling: 'touch',
-	background:
-		'linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0) 40%)',
 	backgroundRepeat: 'no-repeat',
 	backgroundSize: '100% 40px, 100% 10px',
 	backgroundAttachment: 'local, scroll'
 }));
 
-type NavbarStyle2ContentProps = { className?: string };
+type NavbarStyle2ContentProps = {
+	className?: string;
+};
 
 /**
  * The navbar style 2 content.
@@ -47,13 +50,26 @@ function NavbarStyle2Content(props: NavbarStyle2ContentProps) {
 				<div className="mx-4 flex flex-1">
 					<Logo />
 				</div>
-
-				<NavbarToggleButton className="h-40 w-40 p-0" />
+				<Hidden lgDown>
+					<NavbarPinToggleButton className="h-32 w-32 p-0" />
+				</Hidden>
+				<Hidden lgUp>
+					<NavbarToggleButton className="h-32 w-32 p-0" />
+				</Hidden>
 			</div>
 
-			<StyledContent option={{ suppressScrollX: true, wheelPropagation: false }}>
+			<StyledContent
+				className="flex min-h-0 flex-1 flex-col"
+				option={{ suppressScrollX: true, wheelPropagation: false }}
+			>
 				<Navigation layout="vertical" />
 			</StyledContent>
+
+			<Divider />
+
+			<div className="p-4 md:p-10 w-full">
+				<UserMenu className="w-full" />
+			</div>
 		</Root>
 	);
 }

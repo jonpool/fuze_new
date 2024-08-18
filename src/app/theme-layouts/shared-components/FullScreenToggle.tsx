@@ -117,10 +117,9 @@ function HeaderFullScreenToggle(props: HeaderFullScreenToggleProps) {
 		>
 			<IconButton
 				onClick={toggleFullScreen}
-				className={clsx('h-40 w-40', className, isFullScreen && 'text-red-500')}
-				size="large"
+				className={clsx('border border-divider', className, isFullScreen && 'text-red-500')}
 			>
-				<FuseSvgIcon>heroicons-outline:arrows-expand</FuseSvgIcon>
+				<FuseSvgIcon size={20}>heroicons-outline:arrows-pointing-out</FuseSvgIcon>
 			</IconButton>
 		</Tooltip>
 	);

@@ -9,12 +9,14 @@ import { Layout1ConfigDefaultsType } from 'app/theme-layouts/layout1/Layout1Conf
 import NavbarToggleButton from 'app/theme-layouts/shared-components/navbar/NavbarToggleButton';
 import { selectFuseNavbar } from 'app/theme-layouts/shared-components/navbar/navbarSlice';
 import { useAppSelector } from 'app/store/hooks';
+import LightDarkModeToggle from 'app/shared-components/LightDarkModeToggle';
+import themeOptions from 'app/configs/themeOptions';
+import _ from '@lodash';
 import AdjustFontSize from '../../shared-components/AdjustFontSize';
 import FullScreenToggle from '../../shared-components/FullScreenToggle';
 import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
 import NavigationShortcuts from '../../shared-components/navigation/NavigationShortcuts';
 import NavigationSearch from '../../shared-components/navigation/NavigationSearch';
-import UserMenu from '../../shared-components/UserMenu';
 import QuickPanelToggleButton from '../../shared-components/quickPanel/QuickPanelToggleButton';
 
 type ToolbarLayout1Props = {
@@ -34,7 +36,7 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 		<ThemeProvider theme={toolbarTheme}>
 			<AppBar
 				id="fuse-toolbar"
-				className={clsx('relative z-20 flex shadow', className)}
+				className={clsx('relative z-20 flex border-b', className)}
 				color="default"
 				sx={{
 					backgroundColor: (theme) =>
@@ -46,7 +48,7 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 				elevation={0}
 			>
 				<Toolbar className="min-h-48 p-0 md:min-h-64">
-					<div className="flex flex-1 px-16">
+					<div className="flex flex-1 px-8 md:px-16 space-x-8 ">
 						{config.navbar.display && config.navbar.position === 'left' && (
 							<>
 								<Hidden lgDown>
@@ -70,25 +72,20 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 						</Hidden>
 					</div>
 
-					<div className="flex h-full items-center overflow-x-auto px-8">
+					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
 						<LanguageSwitcher />
 						<AdjustFontSize />
 						<FullScreenToggle />
+						<LightDarkModeToggle
+							lightTheme={_.find(themeOptions, { id: 'Default' })}
+							darkTheme={_.find(themeOptions, { id: 'Default Dark' })}
+						/>
 						<NavigationSearch />
 						<QuickPanelToggleButton />
-						<UserMenu />
 					</div>
 
 					{config.navbar.display && config.navbar.position === 'right' && (
-						<>
-							<Hidden lgDown>
-								{!navbar.open && <NavbarToggleButton className="mx-0 h-40 w-40 p-0" />}
-							</Hidden>
-
-							<Hidden lgUp>
-								<NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />
-							</Hidden>
-						</>
+						<NavbarToggleButton className="h-36 w-36" />
 					)}
 				</Toolbar>
 			</AppBar>

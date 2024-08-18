@@ -9,6 +9,7 @@ import _ from '@lodash';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import useJwtAuth from 'src/app/auth/services/jwt/useJwtAuth';
+import { AxiosError } from 'axios';
 import { SignUpPayload } from '../JwtAuthProvider';
 /**
  * Form Validation Schema
@@ -58,11 +59,15 @@ function JwtSignUpForm() {
 			.then(() => {
 				// No need to do anything, registered user data will be set at app/auth/AuthRouteProvider
 			})
-			.catch((_errors: { type: 'email' | 'password' | `root.${string}` | 'root'; message: string }[]) => {
-				_errors.forEach(({ message, type }) => {
-					setError(type, { type: 'manual', message });
-				});
-			});
+			.catch(
+				(error: AxiosError<{ type: 'email' | 'password' | `root.${string}` | 'root'; message: string }[]>) => {
+					const _errors = error.response.data;
+
+					_errors.forEach(({ message, type }) => {
+						setError(type, { type: 'manual', message });
+					});
+				}
+			);
 	}
 
 	return (
@@ -149,12 +154,9 @@ function JwtSignUpForm() {
 				name="acceptTermsConditions"
 				control={control}
 				render={({ field }) => (
-					<FormControl
-						className="items-center"
-						error={!!errors.acceptTermsConditions}
-					>
+					<FormControl error={!!errors.acceptTermsConditions}>
 						<FormControlLabel
-							label="I agree to the Terms of Service and Privacy Policy"
+							label="I agree with Terms and Privacy Policy"
 							control={
 								<Checkbox
 									size="small"

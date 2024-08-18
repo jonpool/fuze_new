@@ -18,7 +18,7 @@
     "@popperjs/core": "2.11.8",
     "@reduxjs/toolkit": "2.2.5",
     "autosuggest-highlight": "3.3.4",
-    "aws-amplify": "6.3.6",
+    "aws-amplify": "^6.5.0",
     "axios": "1.7.2",
     "axios-mock-adapter": "1.22.0",
     "clsx": "2.1.1",

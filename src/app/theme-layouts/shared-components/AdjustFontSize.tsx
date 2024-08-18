@@ -3,8 +3,8 @@ import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import clsx from 'clsx';
 
 const marks = [
 	{ value: 0.7, label: '70%' },
@@ -45,13 +45,12 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 	return (
 		<div>
 			<IconButton
-				className={clsx('h-40 w-40', className)}
+				className={clsx('border border-divider', className)}
 				aria-controls="font-size-menu"
 				aria-haspopup="true"
 				onClick={handleClick}
-				size="large"
 			>
-				<FuseSvgIcon>material-outline:format_size</FuseSvgIcon>
+				<FuseSvgIcon size={20}>material-outline:format_size</FuseSvgIcon>
 			</IconButton>
 			<Menu
 				classes={{ paper: 'w-320' }}
@@ -70,7 +69,7 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 				}}
 			>
 				<div className="px-24 py-12">
-					<Typography className="mb-8 flex items-center justify-center text-16 font-semibold">
+					<Typography className="mb-8 flex items-center justify-center text-15 font-semibold">
 						<FuseSvgIcon
 							color="action"
 							className="mr-4"
@@ -80,7 +79,7 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 						Font Size
 					</Typography>
 					<Slider
-						classes={{ markLabel: 'text-12 font-semibold' }}
+						classes={{ markLabel: 'text-md font-semibold' }}
 						value={fontSize}
 						track={false}
 						aria-labelledby="discrete-slider-small-steps"

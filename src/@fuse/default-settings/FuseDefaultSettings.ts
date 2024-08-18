@@ -91,6 +91,24 @@ export const defaultThemeOptions = {
 		fontWeightMedium: 500
 	},
 	components: {
+		MuiSvgIcon: {
+			defaultProps: {},
+			styleOverrides: {
+				root: {},
+				sizeSmall: {
+					width: 16,
+					height: 16
+				},
+				sizeMedium: {
+					width: 20,
+					height: 20
+				},
+				sizeLarge: {
+					width: 24,
+					height: 24
+				}
+			}
+		},
 		MuiAppBar: {
 			defaultProps: {
 				enableColorOnDark: true
@@ -117,7 +135,47 @@ export const defaultThemeOptions = {
 		},
 		MuiButtonBase: {
 			defaultProps: {
-				disableRipple: true
+				// disableRipple: true
+			},
+			styleOverrides: {
+				root: {}
+			}
+		},
+		MuiIconButton: {
+			styleOverrides: {
+				root: {
+					borderRadius: 8
+				},
+				sizeMedium: {
+					width: 36,
+					height: 36,
+					maxHeight: 36
+				},
+				sizeSmall: {
+					width: 32,
+					height: 32,
+					maxHeight: 32
+				},
+				sizeLarge: {
+					width: 40,
+					height: 40,
+					maxHeight: 40
+				}
+			}
+		},
+		MuiBadge: {
+			defaultProps: {},
+			styleOverrides: {
+				root: {}
+			}
+		},
+		MuiAvatar: {
+			defaultProps: {},
+			styleOverrides: {
+				root: {
+					width: 36,
+					height: 36
+				}
 			}
 		},
 		MuiButton: {
@@ -128,20 +186,25 @@ export const defaultThemeOptions = {
 			styleOverrides: {
 				root: {
 					textTransform: 'none'
-
 					// lineHeight: 1,
 				},
 				sizeMedium: {
-					borderRadius: 20,
-					height: 40,
-					minHeight: 40,
-					maxHeight: 40
+					borderRadius: 8,
+					height: 36,
+					minHeight: 36,
+					maxHeight: 36
 				},
 				sizeSmall: {
-					borderRadius: '15px'
+					borderRadius: 8,
+					height: 32,
+					minHeight: 32,
+					maxHeight: 32
 				},
 				sizeLarge: {
-					borderRadius: '28px'
+					height: 40,
+					minHeight: 40,
+					maxHeight: 40,
+					borderRadius: 8
 				},
 				contained: {
 					boxShadow: 'none',
@@ -157,7 +220,7 @@ export const defaultThemeOptions = {
 			},
 			styleOverrides: {
 				contained: {
-					borderRadius: 18
+					borderRadius: 8
 				}
 			}
 		},
@@ -171,7 +234,7 @@ export const defaultThemeOptions = {
 		MuiDialog: {
 			styleOverrides: {
 				paper: {
-					borderRadius: 16
+					borderRadius: 12
 				}
 			}
 		},
@@ -181,9 +244,12 @@ export const defaultThemeOptions = {
 					backgroundImage: 'none'
 				},
 				rounded: {
-					borderRadius: 16
+					borderRadius: 12
 				}
 			}
+		},
+		MuiCard: {
+			styleOverrides: {}
 		},
 		MuiPopover: {
 			styleOverrides: {
@@ -195,38 +261,109 @@ export const defaultThemeOptions = {
 		MuiTextField: {
 			defaultProps: {
 				color: 'secondary'
+			},
+			styleOverrides: {
+				root: {
+					'& > .MuiFormHelperText-root': {
+						marginLeft: 11
+					}
+				}
 			}
 		},
 		MuiInputLabel: {
 			defaultProps: {
 				color: 'secondary'
+			},
+			styleOverrides: {
+				shrink: {
+					transform: 'translate(11px, -7px) scale(0.8)'
+				},
+				root: {
+					transform: 'translate(11px, 8px) scale(1)',
+					'&.Mui-focused': {}
+				}
 			}
 		},
 		MuiSelect: {
 			defaultProps: {
 				color: 'secondary'
+			},
+			styleOverrides: {
+				select: {
+					minHeight: 0
+				}
 			}
 		},
-		MuiOutlinedInput: {
-			defaultProps: {
-				color: 'secondary'
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {}
+			}
+		},
+		MuiInputAdornment: {
+			styleOverrides: {
+				root: {
+					marginRight: 0
+				}
 			}
 		},
 		MuiInputBase: {
 			styleOverrides: {
 				root: {
-					minHeight: 40,
+					// height: 36,
+					minHeight: 36,
+					borderRadius: 8,
 					lineHeight: 1
+				},
+				legend: {
+					fontSize: '0.75em'
+				},
+				input: {
+					padding: '5px 11px'
+				},
+				adornedStart: {
+					paddingLeft: `11px!important`
+				},
+				sizeSmall: {
+					height: 32,
+					minHeight: 32,
+					borderRadius: 8
+				},
+				sizeMedium: {
+					height: 36,
+					minHeight: 36,
+					borderRadius: 8
+				},
+				sizeLarge: {
+					height: 40,
+					minHeight: 40,
+					borderRadius: 8
+				}
+			}
+		},
+		MuiOutlinedInput: {
+			defaultProps: {
+				color: 'secondary'
+			},
+			styleOverrides: {
+				root: {
+					// paddingLeft: 11
+				},
+				input: {
+					padding: '5px 11px'
 				}
 			}
 		},
 		MuiFilledInput: {
 			styleOverrides: {
 				root: {
-					borderRadius: 4,
+					borderRadius: 8,
 					'&:before, &:after': {
 						display: 'none'
 					}
+				},
+
+				input: {
+					padding: '5px 11px'
 				}
 			}
 		},
@@ -269,12 +406,12 @@ export const defaultThemeOptions = {
 export const mustHaveThemeOptions = {
 	typography: {
 		htmlFontSize: 10,
-		fontSize: 14,
+		fontSize: 13,
 		body1: {
-			fontSize: '1.4rem'
+			fontSize: '1.3rem'
 		},
 		body2: {
-			fontSize: '1.4rem'
+			fontSize: '1.3rem'
 		}
 	}
 };
