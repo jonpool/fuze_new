@@ -65,7 +65,6 @@ class FuseAuthorization extends Component<FuseAuthorizationProps, State> {
 		const { pathname } = location;
 
 		const auth = getFuseRouteParamUtil<FuseRouteObjectType['auth']>(pathname, 'auth', false);
-
 		const ignoredPaths = ['/', '/callback', '/sign-in', '/sign-out', '/logout', '/404'];
 
 		// is auth is empy array
@@ -123,4 +122,6 @@ class FuseAuthorization extends Component<FuseAuthorizationProps, State> {
 	}
 }
 
-export default withRouter(FuseAuthorization);
+const FuseAuthorizationWIthRouter = withRouter(FuseAuthorization);
+
+export default FuseAuthorizationWIthRouter;
