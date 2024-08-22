@@ -2,8 +2,8 @@ import { alpha, ThemeProvider } from '@mui/material/styles';
 import { memo, ReactNode, useEffect, useLayoutEffect } from 'react';
 import { Theme } from '@mui/material/styles/createTheme';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import { useAppSelector } from 'app/store/hooks';
-import { selectCurrentLanguageDirection } from 'app/store/i18nSlice';
+import { useAppSelector } from 'src/store/hooks';
+import { selectCurrentLanguageDirection } from 'src/store/i18nSlice';
 
 /**
  * The useEnhancedEffect function is used to conditionally use the useLayoutEffect hook if the window object is defined.

@@ -4,7 +4,7 @@ import './styles/app-components.css';
 import './styles/app-utilities.css';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import routes from 'app/configs/routesConfig';
+import routes from 'src/configs/routesConfig';
 
 // import * as serviceWorker from './serviceWorker';
 // import reportWebVitals from './reportWebVitals';

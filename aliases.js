@@ -8,7 +8,7 @@ const aliases = (prefix = `src`) => ({
   '@mock-api': `${prefix}/@mock-api`,
   '@schema': `${prefix}/@schema`,
   'app/store': `${prefix}/app/store`,
-  'app/shared-components': `${prefix}/app/shared-components`,
+  'src/shared-components': `${prefix}/src/shared-components`,
   'app/configs': `${prefix}/app/configs`,
   'app/theme-layouts': `${prefix}/app/theme-layouts`,
   'app/AppContext': `${prefix}/app/AppContext`,

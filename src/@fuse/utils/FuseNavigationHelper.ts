@@ -1,4 +1,4 @@
-import { User } from 'src/app/auth/user';
+import { User } from 'src/auth/user';
 import { FuseFlatNavItemType, FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
 import _ from '@lodash';

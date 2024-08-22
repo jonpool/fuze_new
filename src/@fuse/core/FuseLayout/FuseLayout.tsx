@@ -7,10 +7,10 @@ import {
 	setSettings
 } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from 'app/store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { useLocation, RouteMatch, RouteObject } from 'react-router-dom';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-import { themeLayoutsType } from 'app/theme-layouts/themeLayouts';
+import { themeLayoutsType } from 'src/theme-layouts/themeLayouts';
 import { PartialDeep } from 'type-fest';
 import { getFuseRouteParamUtil } from '@fuse/hooks/useFuseRouteParameter';
 import FuseLoading from '../FuseLoading';

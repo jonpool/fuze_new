@@ -1,0 +1,55 @@
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import FuseShortcuts from '@fuse/core/FuseShortcuts';
+import { selectIsUserGuest, selectUser, selectUserShortcuts, setUserShortcuts } from 'src/auth/user/store/userSlice';
+import { usePrevious } from '@fuse/hooks';
+import { useEffect } from 'react';
+import _ from '@lodash';
+import useAuth from 'src/auth/useAuth';
+import withSlices from 'src/store/withSlices';
+import { navigationSlice, selectFlatNavigation } from './store/navigationSlice';
+import { User } from '../../../auth/user';
+
+type NavigationShortcutsProps = {
+	className?: string;
+	variant?: 'horizontal' | 'vertical';
+};
+
+/**
+ * The navigation shortcuts.
+ */
+function NavigationShortcuts(props: NavigationShortcutsProps) {
+	const { variant, className } = props;
+	const dispatch = useAppDispatch();
+	const navigation = useAppSelector(selectFlatNavigation);
+	const user = useAppSelector(selectUser);
+
+	const userShortcuts = useAppSelector(selectUserShortcuts) || [];
+	const isUserGuest = useAppSelector(selectIsUserGuest);
+	const prevUserShortcuts = usePrevious(userShortcuts);
+
+	const { updateUser: updateUserService } = useAuth();
+
+	useEffect(() => {
+		if (!isUserGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
+			updateUserService(_.setIn(user, 'data.shortcuts', userShortcuts) as User);
+		}
+	}, [isUserGuest, userShortcuts]);
+
+	function handleShortcutsChange(newShortcuts: string[]) {
+		dispatch(setUserShortcuts(newShortcuts));
+	}
+
+	return (
+		<FuseShortcuts
+			className={className}
+			variant={variant}
+			navigation={navigation}
+			shortcuts={userShortcuts}
+			onChange={handleShortcutsChange}
+		/>
+	);
+}
+
+const NavigationShortcutsWithSlices = withSlices<NavigationShortcutsProps>([navigationSlice])(NavigationShortcuts);
+
+export default NavigationShortcutsWithSlices;

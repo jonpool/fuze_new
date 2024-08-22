@@ -2,7 +2,7 @@ import _ from '@lodash';
 import * as colors from '@mui/material/colors';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { RouteObject } from 'react-router-dom';
-import { User } from 'src/app/auth/user';
+import { User } from 'src/auth/user';
 import { DeepPartial } from 'react-hook-form';
 import { PartialDeep } from 'type-fest';
 import EventEmitter from './EventEmitter';

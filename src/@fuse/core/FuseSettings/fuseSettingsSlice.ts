@@ -8,14 +8,14 @@ import {
 	getParsedQuerySettings,
 	mustHaveThemeOptions
 } from '@fuse/default-settings';
-import settingsConfig from 'app/configs/settingsConfig';
-import themeLayoutConfigs from 'app/theme-layouts/themeLayoutConfigs';
-import { darkPaletteText, lightPaletteText } from 'app/configs/themesConfig';
+import settingsConfig from 'src/configs/settingsConfig';
+import themeLayoutConfigs from 'src/theme-layouts/themeLayoutConfigs';
+import { darkPaletteText, lightPaletteText } from 'src/configs/themesConfig';
 import { FuseSettingsConfigType, FuseThemesType, FuseThemeType } from '@fuse/core/FuseSettings/FuseSettings';
 import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { PartialDeep } from 'type-fest';
-import { RootState } from 'app/store/store';
-import { resetUser, setUser, setUserSettings } from '../../../app/auth/user/store/userSlice';
+import { RootState } from 'src/store/store';
+import { resetUser, setUser, setUserSettings } from 'src/auth/user/store/userSlice';
 // import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 
 export const changeFuseTheme = createAsyncThunk(

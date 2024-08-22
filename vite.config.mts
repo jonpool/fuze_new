@@ -46,7 +46,7 @@ export default defineConfig({
 			"@mock-api": "/src/@mock-api",
 			"@schema": "/src/@schema",
 			"app/store": "/src/app/store",
-			"app/shared-components": "/src/app/shared-components",
+			"src/shared-components": "/src/src/shared-components",
 			"app/configs": "/src/app/configs",
 			"app/theme-layouts": "/src/app/theme-layouts",
 			"app/AppContext": "/src/app/AppContext"

@@ -2,7 +2,7 @@ import { useLocation, matchRoutes, RouteMatch } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import _ from '@lodash';
 import { FuseRouteObjectType } from '@fuse/core/FuseLayout/FuseLayout';
-import routes from 'app/configs/routesConfig';
+import routes from 'src/configs/routesConfig';
 
 export type FuseRouteMatchType = RouteMatch & {
 	route: FuseRouteObjectType;
