@@ -149,7 +149,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "build-docs": "node --no-warnings=ExperimentalWarning --loader  ts-node/esm ./src/app/main/documentation/material-ui-components/build.ts",
