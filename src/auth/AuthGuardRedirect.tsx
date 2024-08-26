@@ -8,7 +8,7 @@ import {
 	setSessionRedirectUrl
 } from '@fuse/core/FuseAuthorization/sessionRedirectUrl';
 import { FuseRouteObjectType } from '@fuse/core/FuseLayout/FuseLayout';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import FuseLoading from '@fuse/core/FuseLoading';
 import useUser from './useUser';
 
@@ -21,6 +21,7 @@ type AuthGuardProps = {
 function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuardProps) {
 	const user = useUser();
 	const { isGuest, role: userRole } = user;
+	const router = useRouter();
 
 	const [accessGranted, setAccessGranted] = useState<boolean>(false);
 	const pathname = usePathname();
@@ -30,9 +31,9 @@ function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuard
 		const redirectUrl = getSessionRedirectUrl() || loginRedirectUrl;
 
 		if (isGuest) {
-			redirect('/sign-in');
+			router.push('/sign-in');
 		} else {
-			redirect(redirectUrl);
+			router.push(redirectUrl);
 			resetSessionRedirectUrl();
 		}
 	}, [isGuest, loginRedirectUrl]);

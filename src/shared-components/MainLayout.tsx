@@ -2,7 +2,7 @@
 
 import { FuseLayoutProps } from '@fuse/core/FuseLayout/FuseLayout';
 import FuseLayout from '@fuse/core/FuseLayout';
-import merge from 'lodash/merge';
+import { useMemo } from 'react';
 import themeLayouts from '../theme-layouts/themeLayouts';
 
 type MainLayoutProps = Omit<FuseLayoutProps, 'layouts'> & {
@@ -13,43 +13,31 @@ type MainLayoutProps = Omit<FuseLayoutProps, 'layouts'> & {
 	rightSidePanel?: boolean;
 };
 
-function MainLayout(props: MainLayoutProps) {
-	const {
-		children,
-		navbar,
-		toolbar,
-		footer,
-		leftSidePanel,
-		rightSidePanel,
-		settings = {}, // Default to an empty object if settings is undefined
-		...rest
-	} = props;
-
-	// Shorthand settings object
-	const shorthandSettings = {
-		layout: {
-			config: {
-				navbar: {
-					display: navbar
-				},
-				toolbar: {
-					display: toolbar
-				},
-				footer: {
-					display: footer
-				},
-				leftSidePanel: {
-					display: leftSidePanel
-				},
-				rightSidePanel: {
-					display: rightSidePanel
+function MainLayout({
+	children,
+	navbar,
+	toolbar,
+	footer,
+	leftSidePanel,
+	rightSidePanel,
+	settings = {}, // Default to an empty object if settings is undefined
+	...rest
+}: MainLayoutProps) {
+	const mergedSettings = useMemo(() => {
+		const shorthandSettings = {
+			layout: {
+				config: {
+					navbar: { display: navbar },
+					toolbar: { display: toolbar },
+					footer: { display: footer },
+					leftSidePanel: { display: leftSidePanel },
+					rightSidePanel: { display: rightSidePanel }
 				}
 			}
-		}
-	};
+		};
+		return { ...settings, ...shorthandSettings };
+	}, [settings, navbar, toolbar, footer, leftSidePanel, rightSidePanel]);
 
-	// Merge shorthand settings with existing settings
-	const mergedSettings = merge({}, settings, shorthandSettings);
 	return (
 		<FuseLayout
 			{...rest}

@@ -8,7 +8,7 @@ import {
 	selectFuseDefaultSettings,
 	setSettings
 } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { themeLayoutsType } from 'src/theme-layouts/themeLayouts';
@@ -45,32 +45,45 @@ function FuseLayout(props: FuseLayoutProps) {
 	const newSettings = useRef<PartialDeep<FuseSettingsConfigType>>(currentSettings);
 
 	const shouldAwaitRender = useCallback(() => {
-		let _newSettings: FuseSettingsConfigType;
+		return new Promise<void>((resolve) => {
+			let _newSettings: FuseSettingsConfigType;
 
-		/**
-		 * On Path changed
-		 */
-		if (settings) {
 			/**
-			 * if matched route has settings
+			 * On Path changed
 			 */
+			if (settings) {
+				/**
+				 * if matched route has settings
+				 */
 
-			_newSettings = generateSettings(defaultSettings, settings);
-		} else if (!_.isEqual(newSettings.current, defaultSettings)) {
-			/**
-			 * Reset to default settings on the new path
-			 */
-			_newSettings = _.merge({}, defaultSettings);
-		} else {
-			_newSettings = newSettings.current as FuseSettingsConfigType;
-		}
+				_newSettings = generateSettings(defaultSettings, settings);
+			} else if (!_.isEqual(newSettings.current, defaultSettings)) {
+				/**
+				 * Reset to default settings on the new path
+				 */
+				_newSettings = _.merge({}, defaultSettings);
+			} else {
+				_newSettings = newSettings.current as FuseSettingsConfigType;
+			}
 
-		if (!_.isEqual(newSettings.current, _newSettings)) {
-			newSettings.current = _newSettings;
-		}
+			if (!_.isEqual(newSettings.current, _newSettings)) {
+				newSettings.current = _newSettings;
+			}
+
+			resolve();
+		});
 	}, [defaultSettings, settings]);
 
-	shouldAwaitRender();
+	const [isSettingsInitialized, setIsSettingsInitialized] = useState(false);
+
+	useEffect(() => {
+		const initializeSettings = async () => {
+			await shouldAwaitRender();
+			setIsSettingsInitialized(true);
+		};
+
+		initializeSettings();
+	}, [shouldAwaitRender]);
 
 	const expectedSettings = useMemo(() => newSettings.current, [newSettings.current]);
 
@@ -85,7 +98,7 @@ function FuseLayout(props: FuseLayoutProps) {
 	}, [pathname]);
 
 	return useMemo(() => {
-		if (!_.isEqual(expectedSettings, currentSettings)) {
+		if (!isSettingsInitialized || !_.isEqual(expectedSettings, currentSettings)) {
 			return <FuseLoading />;
 		}
 
@@ -100,7 +113,7 @@ function FuseLayout(props: FuseLayoutProps) {
 
 			return null;
 		});
-	}, [layouts, layoutStyle, children, expectedSettings, currentSettings]);
+	}, [layouts, layoutStyle, children, expectedSettings, currentSettings, isSettingsInitialized]);
 }
 
 export default FuseLayout;

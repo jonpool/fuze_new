@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import _ from '@lodash';
 import { memo, useEffect, useReducer, useRef, ReactNode } from 'react';
 import Autosuggest, { RenderInputComponentProps, RenderSuggestionParams, ChangeEvent } from 'react-autosuggest';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import FuseSvgIcon from '../FuseSvgIcon';
 import { FuseFlatNavItemType } from '../FuseNavigation/types/FuseNavItemType';
@@ -287,6 +287,7 @@ function FuseSearch(props: FuseSearchProps) {
 			</IconButton>
 		)
 	} = props;
+	const router = useRouter();
 
 	const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -337,7 +338,7 @@ function FuseSearch(props: FuseSearchProps) {
 
 		hideSearch();
 
-		redirect(suggestion.url);
+		router.push(suggestion.url);
 	}
 
 	function handleSuggestionsClearRequested() {
