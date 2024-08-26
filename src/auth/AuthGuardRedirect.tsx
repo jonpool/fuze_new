@@ -30,9 +30,9 @@ function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuard
 		const redirectUrl = getSessionRedirectUrl() || loginRedirectUrl;
 
 		if (isGuest) {
-			redirect('/sign-in');
+			setTimeout(() => redirect('/sign-in'), 0);
 		} else {
-			redirect(redirectUrl);
+			setTimeout(() => redirect(redirectUrl), 0);
 			resetSessionRedirectUrl();
 		}
 	}, [isGuest, loginRedirectUrl]);
