@@ -1,9 +1,20 @@
-import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
+'use client';
+
+import React, {
+	createContext,
+	useState,
+	useEffect,
+	useCallback,
+	useMemo,
+	forwardRef,
+	useImperativeHandle
+} from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { PartialDeep } from 'type-fest';
 import { User } from '../../user';
 import config from './jwtAuthConfig';
+import { AuthProviderComponentType } from '../../types/AuthProvider';
 
 export type JwtAuthStatus = 'configuring' | 'authenticated' | 'unauthenticated';
 
@@ -60,17 +71,17 @@ const defaultAuthContext: JwtAuthContextType = {
 
 export const JwtAuthContext = createContext<JwtAuthContextType>(defaultAuthContext);
 
-export type JwtAuthProviderProps = {
-	children: React.ReactNode;
-};
-
-function JwtAuthProvider(props: JwtAuthProviderProps) {
+const JwtAuthProvider: AuthProviderComponentType = forwardRef(({ children, onAuthStateChanged }, ref) => {
 	const [user, setUser] = useState<User>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [authStatus, setAuthStatus] = useState('configuring');
 
-	const { children } = props;
+	useEffect(() => {
+		if (onAuthStateChanged) {
+			onAuthStateChanged({ authStatus, isAuthenticated, user });
+		}
+	}, [authStatus, user, onAuthStateChanged]);
 
 	/**
 	 * Handle sign-in success
@@ -168,7 +179,7 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
 
 			if (isTokenValid(accessToken)) {
 				try {
-					setIsLoading(true);
+					// setIsLoading(true);
 
 					const response: AxiosResponse<User> = await axios.get(config.getUserUrl, {
 						headers: { Authorization: `Bearer ${accessToken}` }
@@ -187,6 +198,8 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
 				}
 			} else {
 				resetSession();
+				setIsLoading(false);
+
 				return false;
 			}
 		};
@@ -242,7 +255,6 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
 	 */
 	const signOut = useCallback(() => {
 		resetSession();
-
 		setIsAuthenticated(false);
 		setUser(null);
 	}, []);
@@ -348,7 +360,12 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
 		[user, isAuthenticated, isLoading, signIn, signUp, signOut, updateUser, refreshToken, setIsLoading]
 	);
 
+	useImperativeHandle(ref, () => ({
+		signOut,
+		updateUser
+	}));
+
 	return <JwtAuthContext.Provider value={authContextValue}>{children}</JwtAuthContext.Provider>;
-}
+});
 
 export default JwtAuthProvider;

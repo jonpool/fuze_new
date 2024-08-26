@@ -5,17 +5,16 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { selectUser } from 'src/auth/user/store/userSlice';
-import useAuth from 'src/auth/useAuth';
 import { darken } from '@mui/material/styles';
-import { useAppSelector } from 'src/store/hooks';
 import { alpha } from '@mui/system/colorManipulator';
 import Tooltip from '@mui/material/Tooltip';
 import clsx from 'clsx';
 import Popover, { PopoverProps } from '@mui/material/Popover/Popover';
 import { Partial } from 'react-spring';
+import useUser from 'src/auth/useUser';
+import useAuth from 'src/auth/useAuth';
 
 type UserMenuProps = {
 	className?: string;
@@ -28,8 +27,8 @@ type UserMenuProps = {
  */
 function UserMenu(props: UserMenuProps) {
 	const { className, popoverProps, arrowIcon = 'heroicons-outline:chevron-up' } = props;
-	const user = useAppSelector(selectUser);
 	const { signOut } = useAuth();
+	const user = useUser();
 	const [userMenu, setUserMenu] = useState<HTMLElement | null>(null);
 
 	const userMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -63,7 +62,7 @@ function UserMenu(props: UserMenuProps) {
 				onClick={userMenuClick}
 				color="inherit"
 			>
-				{user.data.photoURL ? (
+				{user?.data?.photoURL ? (
 					<Avatar
 						sx={{
 							background: (theme) => theme.palette.background.default,
@@ -90,13 +89,13 @@ function UserMenu(props: UserMenuProps) {
 						component="span"
 						className="title flex font-semibold text-base capitalize truncate  tracking-tight leading-none"
 					>
-						{user.data.displayName}
+						{user?.data?.displayName}
 					</Typography>
 					<Typography
 						className="subtitle flex text-md font-medium tracking-tighter leading-none"
 						color="text.secondary"
 					>
-						{user.data.email}
+						{user?.data?.email}
 					</Typography>
 				</div>
 				<div className="flex flex-shrink-0 items-center space-x-8">
@@ -141,11 +140,11 @@ function UserMenu(props: UserMenuProps) {
 				}}
 				{...popoverProps}
 			>
-				{!user.role || user.role.length === 0 ? (
+				{user.isGuest ? (
 					<>
 						<MenuItem
 							component={Link}
-							to="/sign-in"
+							href="/sign-in"
 							role="button"
 						>
 							<ListItemIcon className="min-w-36">
@@ -155,7 +154,7 @@ function UserMenu(props: UserMenuProps) {
 						</MenuItem>
 						<MenuItem
 							component={Link}
-							to="/sign-up"
+							href="/sign-up"
 							role="button"
 						>
 							<ListItemIcon className="min-w-36">

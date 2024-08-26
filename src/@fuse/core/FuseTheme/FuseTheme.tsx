@@ -4,6 +4,7 @@ import { Theme } from '@mui/material/styles/createTheme';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { useAppSelector } from 'src/store/hooks';
 import { selectCurrentLanguageDirection } from 'src/store/i18nSlice';
+import CssBaseline from '@mui/material/CssBaseline';
 
 /**
  * The useEnhancedEffect function is used to conditionally use the useLayoutEffect hook if the window object is defined.
@@ -116,6 +117,7 @@ function FuseTheme(props: FuseThemeProps) {
 	// console.warn('FuseTheme:: rendered',mainTheme);
 	return (
 		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			{children}
 			{root && inputGlobalStyles}
 		</ThemeProvider>

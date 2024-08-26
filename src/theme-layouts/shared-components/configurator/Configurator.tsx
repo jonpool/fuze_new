@@ -1,3 +1,5 @@
+'use client';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { red } from '@mui/material/colors';
@@ -10,8 +12,8 @@ import SettingsPanel from 'src/theme-layouts/shared-components/configurator/Sett
 import ThemesPanel from 'src/theme-layouts/shared-components/configurator/ThemesPanel';
 import { useAppSelector } from 'src/store/hooks';
 import { User } from 'src/auth/user';
-import { selectIsUserGuest, selectUser, selectUserSettings } from '../../../auth/user/store/userSlice';
-import useAuth from '../../../auth/useAuth';
+import { selectUserSettings } from 'src/auth/user/store/userSlice';
+import useAuth from 'src/auth/useAuth';
 
 const Root = styled('div')(({ theme }) => ({
 	position: 'absolute',
@@ -57,18 +59,16 @@ const Root = styled('div')(({ theme }) => ({
 function Configurator() {
 	const theme = useTheme();
 	const [open, setOpen] = useState('');
-	const isUserGuest = useAppSelector(selectIsUserGuest);
-	const user = useAppSelector(selectUser);
+	const { updateUser, authState } = useAuth();
+	const { isAuthenticated, user } = authState;
 	const userSettings = useAppSelector(selectUserSettings);
 	const prevUserSettings = usePrevious(userSettings);
 
-	const { updateUser } = useAuth();
-
 	useEffect(() => {
-		if (!isUserGuest && prevUserSettings && !_.isEqual(userSettings, prevUserSettings)) {
+		if (isAuthenticated && prevUserSettings && !_.isEqual(userSettings, prevUserSettings)) {
 			updateUser(_.setIn(user, 'data.settings', userSettings) as User);
 		}
-	}, [isUserGuest, userSettings]);
+	}, [isAuthenticated, userSettings]);
 
 	const handlerOptions = {
 		onSwipedLeft: () => Boolean(open) && theme.direction === 'rtl' && handleClose(),

@@ -1,13 +1,14 @@
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+'use client';
+
+import { useAppSelector } from 'src/store/hooks';
 import FuseShortcuts from '@fuse/core/FuseShortcuts';
-import { selectIsUserGuest, selectUser, selectUserShortcuts, setUserShortcuts } from 'src/auth/user/store/userSlice';
 import { usePrevious } from '@fuse/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import _ from '@lodash';
 import useAuth from 'src/auth/useAuth';
 import withSlices from 'src/store/withSlices';
+import { User } from 'src/auth/user';
 import { navigationSlice, selectFlatNavigation } from './store/navigationSlice';
-import { User } from '../../../auth/user';
 
 type NavigationShortcutsProps = {
 	className?: string;
@@ -19,24 +20,20 @@ type NavigationShortcutsProps = {
  */
 function NavigationShortcuts(props: NavigationShortcutsProps) {
 	const { variant, className } = props;
-	const dispatch = useAppDispatch();
 	const navigation = useAppSelector(selectFlatNavigation);
-	const user = useAppSelector(selectUser);
-
-	const userShortcuts = useAppSelector(selectUserShortcuts) || [];
-	const isUserGuest = useAppSelector(selectIsUserGuest);
+	const { updateUser, authState } = useAuth();
+	const { isAuthenticated, user } = authState;
+	const [userShortcuts, setUserShortcuts] = useState<string[]>(user?.data?.shortcuts || []);
 	const prevUserShortcuts = usePrevious(userShortcuts);
 
-	const { updateUser: updateUserService } = useAuth();
-
 	useEffect(() => {
-		if (!isUserGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
-			updateUserService(_.setIn(user, 'data.shortcuts', userShortcuts) as User);
+		if (isAuthenticated && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
+			updateUser(_.setIn(user, 'data.shortcuts', userShortcuts) as User);
 		}
-	}, [isUserGuest, userShortcuts]);
+	}, [isAuthenticated, userShortcuts]);
 
 	function handleShortcutsChange(newShortcuts: string[]) {
-		dispatch(setUserShortcuts(newShortcuts));
+		setUserShortcuts(newShortcuts);
 	}
 
 	return (

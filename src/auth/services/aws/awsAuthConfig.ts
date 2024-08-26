@@ -1,32 +1,41 @@
-type awsAuthConfig = {
-	[key: string]: unknown;
-	oauth: {
-		[key: string]: unknown;
-	};
-};
-const awsAuthConfig: awsAuthConfig = {
-	aws_project_region: import.meta.env.VITE_AWS_PROJECT_REGION,
-	aws_cognito_identity_pool_id: import.meta.env.VITE_AWS_COGNITO_IDENTITY_POOL_ID,
-	aws_cognito_region: import.meta.env.VITE_AWS_COGNITO_REGION,
-	aws_user_pools_id: import.meta.env.VITE_AWS_USER_POOLS_ID,
-	aws_user_pools_web_client_id: import.meta.env.VITE_AWS_USER_POOLS_WEB_CLIENT_ID,
-	oauth: {
-		domain: import.meta.env.VITE_AWS_OAUTH_DOMAIN,
-		scope: ['phone', 'email', 'openid', 'profile', 'aws.cognito.signin.user.admin'],
-		redirectSignIn: import.meta.env.VITE_AWS_OAUTH_REDIRECT_SIGN_IN,
-		redirectSignOut: import.meta.env.VITE_AWS_OAUTH_REDIRECT_SIGN_OUT,
-		responseType: 'code'
-	},
-	aws_cognito_verification_mechanisms: ['EMAIL'],
-	federationTarget: 'COGNITO_USER_POOLS',
-	aws_cognito_username_attributes: ['EMAIL'],
-	aws_cognito_social_providers: ['GOOGLE'],
-	aws_cognito_signup_attributes: ['EMAIL', 'NAME'],
-	aws_cognito_mfa_configuration: 'OFF',
-	aws_cognito_mfa_types: ['SMS'],
-	aws_cognito_password_protection_settings: {
-		passwordPolicyMinLength: 8,
-		passwordPolicyCharacters: []
+import { ResourcesConfig } from '@aws-amplify/core';
+
+const awsAuthConfig: ResourcesConfig = {
+	Auth: {
+		Cognito: {
+			userPoolId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_ID,
+			userPoolClientId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_WEB_CLIENT_ID,
+			identityPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_IDENTITY_POOL_ID,
+			signUpVerificationMethod: 'code',
+			loginWith: {
+				email: true,
+				phone: false,
+				username: false,
+				oauth: {
+					domain: process.env.NEXT_PUBLIC_AWS_OAUTH_DOMAIN,
+					scopes: ['phone', 'email', 'openid', 'profile', 'aws.cognito.signin.user.admin'],
+					redirectSignIn: [process.env.NEXT_PUBLIC_AWS_OAUTH_REDIRECT_SIGN_IN],
+					redirectSignOut: [process.env.NEXT_PUBLIC_AWS_OAUTH_REDIRECT_SIGN_OUT],
+					responseType: 'code',
+					providers: ['Google']
+				}
+			},
+			mfa: {
+				status: 'off',
+				smsEnabled: true
+			},
+			userAttributes: {
+				email: { required: true },
+				name: { required: true }
+			},
+			passwordFormat: {
+				minLength: 8,
+				requireLowercase: false,
+				requireUppercase: false,
+				requireNumbers: false,
+				requireSpecialCharacters: false
+			}
+		}
 	}
 };
 

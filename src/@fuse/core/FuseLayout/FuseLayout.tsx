@@ -1,3 +1,5 @@
+'use client';
+
 import { useDeepCompareEffect } from '@fuse/hooks';
 import _ from '@lodash';
 import {
@@ -8,25 +10,21 @@ import {
 } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { useLocation, RouteMatch, RouteObject } from 'react-router-dom';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { themeLayoutsType } from 'src/theme-layouts/themeLayouts';
 import { PartialDeep } from 'type-fest';
-import { getFuseRouteParamUtil } from '@fuse/hooks/useFuseRouteParameter';
+import { usePathname } from 'next/navigation';
 import FuseLoading from '../FuseLoading';
 
-export type FuseRouteObjectType = RouteObject & {
+export type FuseRouteObjectType = {
 	settings?: FuseSettingsConfigType;
 	auth?: string[] | [] | null | undefined;
 };
 
-export type FuseRouteMatchType = RouteMatch & {
-	route: FuseRouteObjectType;
-};
-
-type FuseLayoutProps = {
+export type FuseLayoutProps = {
 	layouts: themeLayoutsType;
 	children?: React.ReactNode;
+	settings?: PartialDeep<FuseRouteObjectType['settings']>;
 };
 
 /**
@@ -36,17 +34,15 @@ type FuseLayoutProps = {
  * the new settings to generate layouts.
  */
 function FuseLayout(props: FuseLayoutProps) {
-	const { layouts, children } = props;
+	const { layouts, children, settings } = props;
 	const dispatch = useAppDispatch();
-	const settings = useAppSelector(selectFuseCurrentSettings);
+	const currentSettings = useAppSelector(selectFuseCurrentSettings);
 	const defaultSettings = useAppSelector(selectFuseDefaultSettings);
 
-	const layoutStyle = settings.layout.style;
-	const location = useLocation();
-	const { pathname } = location;
+	const layoutStyle = currentSettings.layout.style;
+	const pathname = usePathname();
 
-	const newSettings = useRef<PartialDeep<FuseSettingsConfigType>>(settings);
-	const matchedSettings = getFuseRouteParamUtil<FuseRouteObjectType['settings']>(pathname, 'settings', true);
+	const newSettings = useRef<PartialDeep<FuseSettingsConfigType>>(currentSettings);
 
 	const shouldAwaitRender = useCallback(() => {
 		let _newSettings: FuseSettingsConfigType;
@@ -54,13 +50,12 @@ function FuseLayout(props: FuseLayoutProps) {
 		/**
 		 * On Path changed
 		 */
-		// if (prevPathname !== pathname) {
-		if (matchedSettings) {
+		if (settings) {
 			/**
 			 * if matched route has settings
 			 */
 
-			_newSettings = generateSettings(defaultSettings, matchedSettings);
+			_newSettings = generateSettings(defaultSettings, settings);
 		} else if (!_.isEqual(newSettings.current, defaultSettings)) {
 			/**
 			 * Reset to default settings on the new path
@@ -73,24 +68,24 @@ function FuseLayout(props: FuseLayoutProps) {
 		if (!_.isEqual(newSettings.current, _newSettings)) {
 			newSettings.current = _newSettings;
 		}
-	}, [defaultSettings, matchedSettings]);
+	}, [defaultSettings, settings]);
 
 	shouldAwaitRender();
 
-	const currentSettings = useMemo(() => newSettings.current, [newSettings.current]);
+	const expectedSettings = useMemo(() => newSettings.current, [newSettings.current]);
 
 	useDeepCompareEffect(() => {
-		if (!_.isEqual(currentSettings, settings)) {
-			dispatch(setSettings(currentSettings as FuseSettingsConfigType));
+		if (!_.isEqual(expectedSettings, currentSettings)) {
+			dispatch(setSettings(expectedSettings as FuseSettingsConfigType));
 		}
-	}, [dispatch, currentSettings, settings]);
+	}, [dispatch, expectedSettings, currentSettings]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
 
 	return useMemo(() => {
-		if (!_.isEqual(currentSettings, settings)) {
+		if (!_.isEqual(expectedSettings, currentSettings)) {
 			return <FuseLoading />;
 		}
 
@@ -105,7 +100,7 @@ function FuseLayout(props: FuseLayoutProps) {
 
 			return null;
 		});
-	}, [layouts, layoutStyle, children, currentSettings, settings]);
+	}, [layouts, layoutStyle, children, expectedSettings, currentSettings]);
 }
 
 export default FuseLayout;

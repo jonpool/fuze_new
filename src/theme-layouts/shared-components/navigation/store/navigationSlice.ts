@@ -102,7 +102,7 @@ export const navigationSlice = createSlice({
 /**
  * Lazy load
  * */
-rootReducer.inject(navigationSlice);
+// rootReducer.inject(navigationSlice);
 navigationSlice.injectInto(rootReducer);
 declare module 'src/store/lazyLoadedSlices' {
 	export interface LazyLoadedSlices extends WithSlice<typeof navigationSlice> {}

@@ -1,3 +1,5 @@
+'use client';
+
 import { styled } from '@mui/material/styles';
 import MobileDetect from 'mobile-detect';
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -5,15 +7,15 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import React, { forwardRef, useEffect, useRef, ReactNode, useCallback, useState } from 'react';
 import { selectCustomScrollbarsEnabled } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { useAppSelector } from 'src/store/hooks';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 const Root = styled('div')(() => ({
 	overscrollBehavior: 'contain',
 	minHeight: '100%'
 }));
 
-const md = new MobileDetect(window.navigator.userAgent);
-const isMobile = md.mobile();
+const md = typeof window !== 'undefined' ? new MobileDetect(window.navigator.userAgent) : null;
+const isMobile = md?.mobile();
 
 const handlerNameByEvent = Object.freeze({
 	'ps-scroll-y': 'onScrollY',
@@ -59,8 +61,7 @@ const FuseScrollbars = forwardRef<HTMLDivElement, FuseScrollbarsProps>((props, r
 	const handlerByEvent = useRef<Map<string, EventListener>>(new Map());
 	const [style, setStyle] = useState({});
 	const customScrollbars = useAppSelector(selectCustomScrollbarsEnabled);
-	const location = useLocation();
-	const { pathname } = location;
+	const pathname = usePathname();
 
 	const hookUpEvents = useCallback(() => {
 		Object.keys(handlerNameByEvent).forEach((key) => {

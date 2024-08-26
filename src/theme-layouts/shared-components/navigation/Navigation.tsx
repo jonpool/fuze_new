@@ -1,3 +1,5 @@
+'use client';
+
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import clsx from 'clsx';
 import { useMemo } from 'react';

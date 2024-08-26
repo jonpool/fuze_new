@@ -1,10 +1,8 @@
 import FuseDialog from '@fuse/core/FuseDialog';
 import { styled } from '@mui/material/styles';
 import FuseMessage from '@fuse/core/FuseMessage';
-import FuseSuspense from '@fuse/core/FuseSuspense';
 import clsx from 'clsx';
-import { memo, ReactNode, Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { memo, ReactNode } from 'react';
 import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import Configurator from 'src/theme-layouts/shared-components/configurator/Configurator';
 import { useAppSelector } from 'src/store/hooks';
@@ -46,7 +44,7 @@ function Layout3(props: Layout3Props) {
 	return (
 		<Root
 			id="fuse-layout"
-			className="flex w-full"
+			className="flex flex-auto w-full"
 			config={config}
 		>
 			{config.leftSidePanel.display && <LeftSideLayout3 />}
@@ -76,12 +74,7 @@ function Layout3(props: Layout3Props) {
 					</div>
 
 					<div className="relative z-10 flex min-h-0 flex-auto flex-col">
-						<FuseSuspense>
-							<Outlet />
-						</FuseSuspense>
-						<Suspense>
-							<FuseDialog />
-						</Suspense>
+						<FuseDialog />
 						{children}
 					</div>
 

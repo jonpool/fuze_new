@@ -13,7 +13,7 @@ import { ListItemButton, ListItemButtonProps } from '@mui/material';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
 import { WithRouterProps } from '@fuse/core/withRouter/withRouter';
 import * as PopperJS from '@popperjs/core';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
 import FuseSvgIcon from '../../../FuseSvgIcon';
 
@@ -52,8 +52,9 @@ type FuseNavHorizontalGroupProps = FuseNavItemComponentProps & WithRouterProps;
 function FuseNavHorizontalGroup(props: FuseNavHorizontalGroupProps) {
 	const { item, nestedLevel, dense, checkPermission } = props;
 	const [opened, setOpened] = useState(false);
-	const location = useLocation();
-	const { pathname } = location;
+
+	const pathname = usePathname();
+
 	const theme = useTheme();
 
 	const handleToggle = useDebounce((open: boolean) => {

@@ -1,10 +1,16 @@
-import { useMatches, Link } from 'react-router-dom';
-import { useAppSelector } from 'src/store/hooks';
-import { selectNavigation } from 'src/theme-layouts/shared-components/navigation/store/navigationSlice';
 import Breadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
+import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { useAppSelector } from 'src/store/hooks';
+
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
+import withSlices from 'src/store/withSlices';
+import {
+	navigationSlice,
+	selectNavigation
+} from 'src/theme-layouts/shared-components/navigation/store/navigationSlice';
 
 type PageBreadcrumbProps = BreadcrumbsProps & {
 	className?: string;
@@ -32,28 +38,24 @@ function getNavigationItem(url: string, navigationItems: FuseNavItemType[]): Fus
 
 function PageBreadcrumb(props: PageBreadcrumbProps) {
 	const { className, ...rest } = props;
-	const matches = useMatches();
+	const pathname = usePathname();
 	const navigation = useAppSelector(selectNavigation);
 
-	const crumbs = matches.reduce((acc: { title: string; url: string }[], match) => {
-		if (!match.pathname) return acc;
+	const crumbs = pathname
+		.split('/')
+		.filter(Boolean)
+		.reduce(
+			(acc: { title: string; url: string }[], part, index, array) => {
+				const url = `/${array.slice(0, index + 1).join('/')}`;
+				const navItem = getNavigationItem(url, navigation);
+				const title = navItem?.title || part;
 
-		const { pathname } = match;
+				acc.push({ title, url });
+				return acc;
+			},
+			[{ title: 'Home', url: '/' }]
+		);
 
-		let title = 'Home';
-
-		if (pathname !== '/') {
-			const navItem = getNavigationItem(pathname, navigation);
-			title = navItem?.title || pathname.split('/').pop() || '';
-		}
-
-		acc.push({
-			title,
-			url: pathname
-		});
-
-		return acc;
-	}, []);
 	return (
 		<Breadcrumbs
 			className={clsx('flex w-full', className)}
@@ -61,22 +63,21 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 			color="primary"
 			{...rest}
 		>
-			{crumbs.map(
-				(item, index) =>
-					item?.title !== '' && (
-						<Typography
-							component={item?.url ? Link : 'span'}
-							to={item?.url}
-							key={index}
-							className="block font-medium tracking-tight capitalize max-w-128 truncate"
-							role="button"
-						>
-							{item?.title}
-						</Typography>
-					)
-			)}
+			{crumbs.map((item, index) => (
+				<Typography
+					component={item.url ? Link : 'span'}
+					href={item.url}
+					key={index}
+					className="block font-medium tracking-tight capitalize max-w-128 truncate"
+					role="button"
+				>
+					{item.title}
+				</Typography>
+			))}
 		</Breadcrumbs>
 	);
 }
 
-export default PageBreadcrumb;
+const PageBreadcrumbWithNavigationSlices = withSlices<PageBreadcrumbProps>([navigationSlice])(PageBreadcrumb);
+
+export default PageBreadcrumbWithNavigationSlices;

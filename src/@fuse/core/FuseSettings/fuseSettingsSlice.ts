@@ -15,7 +15,7 @@ import { FuseSettingsConfigType, FuseThemesType, FuseThemeType } from '@fuse/cor
 import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { PartialDeep } from 'type-fest';
 import { RootState } from 'src/store/store';
-import { resetUser, setUser, setUserSettings } from 'src/auth/user/store/userSlice';
+import { setUserSettings } from 'src/auth/user/store/userSlice';
 // import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 
 export const changeFuseTheme = createAsyncThunk(
@@ -141,26 +141,7 @@ export const fuseSettingsSlice = createSlice({
 		})
 	},
 	extraReducers: (builder) => {
-		builder
-			.addCase(setDefaultSettings.fulfilled, (state, action) => action.payload)
-			.addCase(setUser.fulfilled, (state, action) => {
-				const defaults = generateSettings(
-					state.defaults,
-					action.payload?.data?.settings as FuseSettingsConfigType
-				);
-				return {
-					...state,
-					defaults: _.merge({}, defaults),
-					current: _.merge({}, defaults)
-				};
-			})
-			.addCase(resetUser.fulfilled, (state) => {
-				return {
-					...state,
-					defaults: _.merge({}, initialSettings),
-					current: _.merge({}, initialSettings)
-				};
-			});
+		builder.addCase(setDefaultSettings.fulfilled, (state, action) => action.payload);
 	},
 	selectors: {
 		selectFuseSettings: (fuseSettings) => fuseSettings,

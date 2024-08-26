@@ -5,7 +5,6 @@ import { memo, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectFuseCurrentLayoutConfig, selectNavbarTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { Layout3ConfigDefaultsType } from 'src/theme-layouts/layout3/Layout3Config';
-import { useLocation } from 'react-router';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import {
 	navbarCloseMobile,
@@ -14,6 +13,7 @@ import {
 } from 'src/theme-layouts/shared-components/navbar/navbarSlice';
 import NavbarToggleFab from 'src/theme-layouts/shared-components/navbar/NavbarToggleFab';
 import withSlices from 'src/store/withSlices';
+import { usePathname } from 'next/navigation';
 import NavbarLayout3 from './NavbarLayout3';
 import NavbarMobileLayout3 from './NavbarMobileLayout3';
 
@@ -45,9 +45,8 @@ function NavbarWrapperLayout3(props: NavbarWrapperLayout3Props) {
 	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout3ConfigDefaultsType;
 	const navbarTheme = useAppSelector(selectNavbarTheme);
 	const navbar = useAppSelector(selectFuseNavbar);
-	const location = useLocation();
+	const pathname = usePathname();
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-	const { pathname } = location;
 
 	useEffect(() => {
 		if (isMobile) {

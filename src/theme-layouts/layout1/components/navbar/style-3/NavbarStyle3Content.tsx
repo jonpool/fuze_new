@@ -5,16 +5,15 @@ import clsx from 'clsx';
 import { memo, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseNavigation from '@fuse/core/FuseNavigation';
-import { useLocation } from 'react-router-dom';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
-import { Location } from 'history';
 import { Theme } from '@mui/system';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { selectNavigation } from 'src/theme-layouts/shared-components/navigation/store/navigationSlice';
 import { navbarCloseMobile } from 'src/theme-layouts/shared-components/navbar/navbarSlice';
 import { Divider } from '@mui/material';
 import UserMenu from 'src/theme-layouts/shared-components/UserMenu';
+import { usePathname } from 'next/navigation';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
@@ -45,8 +44,8 @@ const StyledPanel = styled(FuseScrollbars)<StyledPanelProps>(({ theme, opened })
 /**
  * Check if the item needs to be opened.
  */
-function needsToBeOpened(location: Location, item: FuseNavItemType) {
-	return location && isUrlInChildren(item, location.pathname);
+function needsToBeOpened(pathname: string, item: FuseNavItemType) {
+	return pathname && isUrlInChildren(item, pathname);
 }
 
 type NavbarStyle3ContentProps = { className?: string; dense?: number };
@@ -61,15 +60,15 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 	const [selectedNavigation, setSelectedNavigation] = useState<FuseNavItemType[]>([]);
 	const [panelOpen, setPanelOpen] = useState(false);
 	const dispatch = useAppDispatch();
-	const location = useLocation();
+	const pathname = usePathname();
 
 	useEffect(() => {
 		navigation?.forEach((item) => {
-			if (needsToBeOpened(location, item)) {
+			if (needsToBeOpened(pathname, item)) {
 				setSelectedNavigation([item]);
 			}
 		});
-	}, [navigation, location]);
+	}, [navigation, pathname]);
 
 	function handleParentItemClick(selected: FuseNavItemType) {
 		/** if there is no child item do not set/open panel

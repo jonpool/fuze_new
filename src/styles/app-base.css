@@ -1,10 +1,9 @@
 
-/*@tailwind base;*/
+@tailwind base;
 
 /**
  * Custom base styles
  */
-
 
 *:not([class^="Mui"]), *:not([class*=" Mui"]),
 ::before:not([class^="Mui"]), ::before:not([class*=" Mui"]),

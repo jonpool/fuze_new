@@ -3,22 +3,24 @@ import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import firebaseConfig from './firebaseAuthConfig';
 
-/**
- * Initialize Firebase
- */
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-/**
- * Firebase App initialization check
- */
 let initialized = false;
 
-try {
-	firebase?.auth();
-	initialized = true;
-} catch (e) {
-	// eslint-disable-next-line no-console
-	console.error(e);
+export function initializeFirebase() {
+	if (!initialized) {
+		try {
+			if (!firebase.apps.length) {
+				firebase.initializeApp(firebaseConfig);
+			}
+
+			firebase.auth(); // Ensure Firebase Auth is available
+			initialized = true;
+		} catch (error) {
+			console.error('Error initializing Firebase:', error);
+			initialized = false;
+		}
+	}
+
+	return initialized;
 }
 
 export const firebaseInitialized = initialized;

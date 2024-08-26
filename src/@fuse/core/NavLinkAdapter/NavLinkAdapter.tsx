@@ -1,40 +1,47 @@
-import { NavLink, NavLinkProps, useNavigate } from 'react-router-dom';
-import { CSSProperties, forwardRef, ReactNode } from 'react';
+import { forwardRef, CSSProperties, ReactNode } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-export type NavLinkAdapterPropsType = NavLinkProps & {
+export type NavLinkAdapterPropsType = {
 	activeClassName?: string;
 	activeStyle?: CSSProperties;
 	children?: ReactNode;
+	href: string;
+	className?: string;
+	style?: CSSProperties;
+	role?: string;
 };
 
 /**
- * The NavLinkAdapter component is a wrapper around the React Router NavLink component.
- * It adds the ability to navigate programmatically using the useNavigate hook.
+ * The NavLinkAdapter component is a wrapper around the Next.js Link component.
+ * It adds the ability to navigate programmatically using the useRouter hook.
  * The component is memoized to prevent unnecessary re-renders.
  */
 const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((props, ref) => {
-	const { activeClassName = 'active', activeStyle, role = 'button', ..._props } = props;
-	const navigate = useNavigate();
+	const { activeClassName = 'active', activeStyle, role = 'button', href, ..._props } = props;
+	const router = useRouter();
+
+	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault();
+		router.push(href);
+	};
 
 	return (
-		<NavLink
-			ref={ref}
-			role={role}
-			{..._props}
-			onClick={(e) => {
-				e.preventDefault();
-				navigate(_props.to);
-			}}
-			className={({ isActive }) =>
-				[_props.className, isActive ? activeClassName : null].filter(Boolean).join(' ')
-			}
-			style={({ isActive }) => ({
-				..._props.style,
-				...(isActive ? activeStyle : null)
-			})}
+		<Link
+			href={href}
+			passHref
+			legacyBehavior
 		>
-			{props.children}
-		</NavLink>
+			<a
+				ref={ref}
+				role={role}
+				onClick={handleClick}
+				className={_props.className}
+				style={_props.style}
+			>
+				{props.children}
+			</a>
+		</Link>
 	);
 });
 

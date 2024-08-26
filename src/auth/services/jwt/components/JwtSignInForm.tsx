@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Button from '@mui/material/Button';
 import useJwtAuth from '../useJwtAuth';
 
@@ -143,7 +143,7 @@ function JwtSignInForm() {
 
 				<Link
 					className="text-md font-medium"
-					to="/pages/auth/forgot-password"
+					href="/pages/auth/forgot-password"
 				>
 					Forgot password?
 				</Link>

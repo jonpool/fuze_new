@@ -1,3 +1,5 @@
+'use client';
+
 import { fuseDark } from '@fuse/colors';
 import { lightBlue, red } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
@@ -62,7 +64,11 @@ export const defaultSettings = {
  * It returns a FuseSettingsConfigType object that can be used to configure the application.
  */
 export function getParsedQuerySettings() {
-	const parsedQueryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+	if (typeof window === 'undefined') {
+		return null;
+	}
+
+	const parsedQueryString = qs.parse(window?.location?.search, { ignoreQueryPrefix: true });
 
 	const { defaultSettings = {} } = parsedQueryString;
 

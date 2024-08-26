@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { changeLanguage, LanguageType, selectCurrentLanguage, selectLanguages } from 'src/store/i18nSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 
@@ -89,7 +89,7 @@ function LanguageSwitcher() {
 
 				<MenuItem
 					component={Link}
-					to="/documentation/configuration/multi-language"
+					href="/documentation/configuration/multi-language"
 					onClick={langMenuClose}
 					role="button"
 				>

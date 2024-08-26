@@ -12,7 +12,7 @@ import { Manager, Popper, Reference } from 'react-popper';
 import { ListItemButton, ListItemButtonProps } from '@mui/material';
 import { Location } from 'history';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import FuseNavBadge from '../../FuseNavBadge';
 import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
 import FuseSvgIcon from '../../../FuseSvgIcon';
@@ -50,8 +50,8 @@ type FuseNavHorizontalCollapseProps = FuseNavItemComponentProps & {
 function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 	const { item, nestedLevel, dense, checkPermission } = props;
 	const [opened, setOpened] = useState(false);
-	const location = useLocation();
-	const { pathname } = location;
+
+	const pathname = usePathname();
 	const theme = useTheme();
 
 	const handleToggle = useDebounce((open: boolean) => {
