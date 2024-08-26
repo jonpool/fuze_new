@@ -76,6 +76,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.mjs"
+    "next.config.mjs",
+    "build/types/**/*.ts"
   ]
 }
