@@ -2,13 +2,13 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
-import useAuth from 'src/auth/useAuth';
+import useAuthState from 'src/auth/useAuthState';
 
 /**
  * Error 401 page.
  */
 function Error401Page() {
-	const { isAuthenticated } = useAuth();
+	const { isAuthenticated } = useAuthState();
 
 	return (
 		<div className="flex flex-1 flex-col items-center justify-center p-16">

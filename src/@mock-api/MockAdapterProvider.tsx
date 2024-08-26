@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import FuseSplashScreen from '@fuse/core/FuseSplashScreen';
 import { useAppDispatch } from 'src/store/hooks';
-import apiService from 'src/store/apiService';
 import ExtendedMockAdapter from './ExtendedMockAdapter';
 import { authApiMocks } from './api/auth-api';
 
@@ -48,16 +47,6 @@ function MockAdapterProvider(props: MockAdapterProviderProps) {
 			setLoading(false);
 		};
 	}, [enabled]);
-
-	useEffect(() => {
-		if (import.meta.hot) {
-			if (!isInitialMount.current) {
-				dispatch(apiService.util.resetApiState());
-			}
-
-			isInitialMount.current = false;
-		}
-	}, [dispatch]);
 
 	return loading ? <FuseSplashScreen /> : children;
 }

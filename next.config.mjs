@@ -2,12 +2,6 @@
 const nextConfig = {
 	output: 'export',
 	reactStrictMode: false,
-	compiler: {
-		styledComponents: {
-			ssr: true
-			// displayName: true,
-		}
-	},
 	eslint: {
 		// Only enable ESLint in development
 		ignoreDuringBuilds: process.env.NODE_ENV === 'production'

@@ -2,13 +2,13 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
-import useAuth from '../../../auth/useAuth';
+import useAuthState from '../../../auth/useAuthState';
 
 /**
  * The Error404Page component renders a custom 404 error page.
  */
 function Error404Page() {
-	const { isAuthenticated } = useAuth();
+	const { isAuthenticated } = useAuthState();
 
 	return (
 		<div className="flex flex-1 flex-col items-center justify-center p-16">
