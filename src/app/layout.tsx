@@ -36,6 +36,7 @@ export default function RootLayout({
 					name="theme-color"
 					content="#000000"
 				/>
+				<base href="/" />
 				<link
 					href="/assets/tailwind-base.css"
 					rel="stylesheet"
