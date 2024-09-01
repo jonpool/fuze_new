@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	output: 'export',
 	reactStrictMode: false,
-	experimental: {
-		turbo: true
-	},
 	eslint: {
 		// Only enable ESLint in development
 		ignoreDuringBuilds: process.env.NODE_ENV === 'production'
