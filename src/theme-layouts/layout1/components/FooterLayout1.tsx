@@ -5,6 +5,7 @@ import { memo } from 'react';
 import { selectFooterTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import clsx from 'clsx';
 import { useAppSelector } from 'src/store/hooks';
+import DemoLayoutFooterContent from 'src/theme-layouts/shared-components/DemoLayoutFooterContent';
 
 type FooterLayout1Props = { className?: string };
 
@@ -31,7 +32,7 @@ function FooterLayout1(props: FooterLayout1Props) {
 				elevation={0}
 			>
 				<Toolbar className="min-h-48 md:min-h-64 px-8 sm:px-12 py-0 flex items-center overflow-x-auto">
-					Footer
+					<DemoLayoutFooterContent />
 				</Toolbar>
 			</AppBar>
 		</ThemeProvider>

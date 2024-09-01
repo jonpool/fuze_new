@@ -11,6 +11,7 @@ import { selectFuseNavbar } from 'src/theme-layouts/shared-components/navbar/nav
 import { useAppSelector } from 'src/store/hooks';
 import themeOptions from 'src/configs/themeOptions';
 import _ from '@lodash';
+import NotificationPanelToggleButton from 'src/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 import AdjustFontSize from '../../shared-components/AdjustFontSize';
 import FullScreenToggle from '../../shared-components/FullScreenToggle';
 import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
@@ -82,6 +83,7 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 						/>
 						<NavigationSearch />
 						<QuickPanelToggleButton />
+						<NotificationPanelToggleButton />
 					</div>
 
 					{config.navbar.display && config.navbar.position === 'right' && (

@@ -1,6 +1,6 @@
 import { forwardRef, CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export type NavLinkAdapterPropsType = {
 	activeClassName?: string;
@@ -20,11 +20,14 @@ export type NavLinkAdapterPropsType = {
 const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((props, ref) => {
 	const { activeClassName = 'active', activeStyle, role = 'button', href, ..._props } = props;
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		router.push(href);
 	};
+
+	const isActive = pathname === href;
 
 	return (
 		<Link
@@ -36,8 +39,8 @@ const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((p
 				ref={ref}
 				role={role}
 				onClick={handleClick}
-				className={_props.className}
-				style={_props.style}
+				className={`${_props.className} ${isActive ? activeClassName : ''}`}
+				style={isActive ? { ..._props.style, ...activeStyle } : _props.style}
 			>
 				{props.children}
 			</a>

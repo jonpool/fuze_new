@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: 'export',
 	reactStrictMode: false,
+	experimental: {
+		turbo: true
+	},
 	eslint: {
 		// Only enable ESLint in development
 		ignoreDuringBuilds: process.env.NODE_ENV === 'production'
@@ -12,6 +14,17 @@ const nextConfig = {
 		// your project has type errors.
 		// !! WARN !!
 		ignoreBuildErrors: true
+	},
+	webpack: (config) => {
+		if (config.module && config.module.rules) {
+			config.module.rules.push({
+				test: /\.(json|js|ts|tsx|jsx)$/, // include multiple file types
+				resourceQuery: /raw/, // applies to imports with ?raw
+				use: 'raw-loader' // use raw-loader for raw text
+			});
+		}
+
+		return config;
 	}
 };
 

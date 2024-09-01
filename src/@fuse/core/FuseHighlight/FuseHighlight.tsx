@@ -1,3 +1,5 @@
+'use client';
+
 import * as Prism from 'prismjs';
 import { ElementType, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import './prism-languages';

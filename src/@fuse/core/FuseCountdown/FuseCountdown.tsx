@@ -1,3 +1,5 @@
+'use client';
+
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import moment from 'moment';

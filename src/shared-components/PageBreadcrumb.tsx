@@ -1,3 +1,5 @@
+'use client';
+
 import Breadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { usePathname } from 'next/navigation';

@@ -197,14 +197,19 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 		[rest]
 	);
 
-	const table = useMaterialReactTable<TData>({
-		columns,
-		data,
-		...defaults,
-		...rest
-	});
+	const tableOptions = useMemo(
+		() => ({
+			columns,
+			data,
+			...defaults,
+			...rest
+		}),
+		[columns, data, defaults, rest]
+	);
 
-	return <MaterialReactTable table={table} />;
+	const tableInstance = useMaterialReactTable<TData>(tableOptions);
+
+	return <MaterialReactTable table={tableInstance} />;
 }
 
 export default DataTable;

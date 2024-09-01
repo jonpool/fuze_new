@@ -15,6 +15,7 @@ import NavigationShortcuts from '../../shared-components/navigation/NavigationSh
 import NavigationSearch from '../../shared-components/navigation/NavigationSearch';
 import UserMenu from '../../shared-components/UserMenu';
 import QuickPanelToggleButton from '../../shared-components/quickPanel/QuickPanelToggleButton';
+import NotificationPanelToggleButton from '../../../app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 
 type ToolbarLayout2Props = {
 	className?: string;
@@ -55,6 +56,7 @@ function ToolbarLayout2(props: ToolbarLayout2Props) {
 						<FullScreenToggle />
 						<NavigationSearch />
 						<QuickPanelToggleButton />
+						<NotificationPanelToggleButton />
 						<Hidden lgDown>
 							<UserMenu
 								className="border border-solid"

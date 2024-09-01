@@ -15,6 +15,7 @@ import UserMenu from '../../shared-components/UserMenu';
 import QuickPanelToggleButton from '../../shared-components/quickPanel/QuickPanelToggleButton';
 import Logo from '../../shared-components/Logo';
 import { Layout3ConfigDefaultsType } from '../Layout3Config';
+import NotificationPanelToggleButton from '../../../app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 
 type ToolbarLayout3Props = {
 	className?: string;
@@ -65,6 +66,7 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 						<AdjustFontSize />
 						<FullScreenToggle />
 						<QuickPanelToggleButton />
+						<NotificationPanelToggleButton />
 						<Hidden lgDown>
 							<UserMenu
 								className="border border-solid"
