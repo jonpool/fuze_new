@@ -185,8 +185,8 @@
     "start": "next start",
     "lint": "next lint",
     "build-docs": "node --no-warnings=ExperimentalWarning --loader  ts-node/esm \"./src/app/(public)/documentation/material-ui-components/utils/build.ts\"",
-    "postinstall": "node src/node-scripts/fuse-react-message.js",
-    "poststart": "node src/node-scripts/fuse-react-message.js",
+    "postinstall": "node src/utils/node-scripts/fuse-react-message.js",
+    "poststart": "node src/utils/node-scripts/fuse-react-message.js",
     "audit": "npm audit --production"
   },
   "engines": {
