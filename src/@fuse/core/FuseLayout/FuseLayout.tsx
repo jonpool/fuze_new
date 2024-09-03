@@ -11,7 +11,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-import { themeLayoutsType } from 'src/theme-layouts/themeLayouts';
+import { themeLayoutsType } from 'src/components/theme-layouts/themeLayouts';
 import { PartialDeep } from 'type-fest';
 import { usePathname } from 'next/navigation';
 import FuseLoading from '../FuseLoading';

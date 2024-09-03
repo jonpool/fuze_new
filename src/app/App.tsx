@@ -1,7 +1,7 @@
 'use client';
 
 import { SnackbarProvider } from 'notistack';
-import MockAdapterProvider from '@mock-api/MockAdapterProvider';
+import MockApiProvider from '@mock-api/MockApiProvider';
 import AuthenticationProvider from 'src/auth/AuthenticationProvider';
 import { useMemo } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
@@ -23,7 +23,7 @@ type AppProps = {
 };
 
 /**
- * The authentication providers.
+ * The Authentication providers.
  */
 const authProviders = [
 	{
@@ -50,13 +50,18 @@ function App(props: AppProps) {
 	return (
 		<ErrorBoundary>
 			<AppContext.Provider value={val}>
+				{/* Date Picker Localization Provider */}
 				<LocalizationProvider
 					dateAdapter={AdapterDateFns}
 					adapterLocale={enUS}
 				>
+					{/* Redux Store Provider */}
 					<Provider store={store}>
-						<MockAdapterProvider>
+						{/* Mock API Provider */}
+						<MockApiProvider>
+							{/* Theme Provider */}
 							<MainThemeProvider>
+								{/* Authentication Provider */}
 								<AuthenticationProvider
 									providers={authProviders}
 									onAuthStateChanged={(authState) => {
@@ -75,6 +80,7 @@ function App(props: AppProps) {
 										}
 									}}
 								>
+									{/* Notistack Notification Provider */}
 									<SnackbarProvider
 										maxSnack={5}
 										anchorOrigin={{
@@ -89,7 +95,7 @@ function App(props: AppProps) {
 									</SnackbarProvider>
 								</AuthenticationProvider>
 							</MainThemeProvider>
-						</MockAdapterProvider>
+						</MockApiProvider>
 					</Provider>
 				</LocalizationProvider>
 			</AppContext.Provider>

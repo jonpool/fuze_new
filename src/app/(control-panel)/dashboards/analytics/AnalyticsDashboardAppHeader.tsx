@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 /**
  * The analytics dashboard app header.

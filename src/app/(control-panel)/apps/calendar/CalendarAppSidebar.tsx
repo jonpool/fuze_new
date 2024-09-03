@@ -3,7 +3,7 @@ import { Checkbox, FormLabel } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { selectSelectedLabels, toggleSelectedLabels } from './calendarAppSlice';
 import { useGetCalendarLabelsQuery } from './CalendarApi';
 import LabelsDialog from './dialogs/labels/LabelsDialog';

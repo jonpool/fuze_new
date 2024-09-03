@@ -6,8 +6,8 @@ import ReactApexChart from 'react-apexcharts';
 import Box from '@mui/material/Box';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
-import FuseTab from 'src/shared-components/tabs/FuseTab';
-import FuseTabs from 'src/shared-components/tabs/FuseTabs';
+import FuseTab from 'src/components/tabs/FuseTab';
+import FuseTabs from 'src/components/tabs/FuseTabs';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 import TaskDistributionDataType from './types/TaskDistributionDataType';
 

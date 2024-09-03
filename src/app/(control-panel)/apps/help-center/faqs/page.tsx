@@ -2,7 +2,7 @@
 
 import Typography from '@mui/material/Typography';
 import { useMemo } from 'react';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FaqList from './FaqList';
 import { useGetHelpCenterFaqCategoriesQuery, useGetHelpCenterFaqsQuery } from '../HelpCenterApi';
 

@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 type DemoHeaderProps = {
 	leftSidebarToggle?: () => void;

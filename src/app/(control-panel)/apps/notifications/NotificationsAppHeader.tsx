@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useSnackbar } from 'notistack';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useCreateNotificationMutation, useDeleteAllNotificationsMutation } from './NotificationApi';
 import NotificationModel from './models/NotificationModel';
 import NotificationTemplate from './NotificationTemplate';

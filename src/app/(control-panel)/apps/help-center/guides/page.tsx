@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import _ from '@lodash';
 import { useMemo } from 'react';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import GuideListMenu from './GuideListMenu';
 import { useGetHelpCenterGuidesQuery, useGetHelpCenterGuideCategoriesQuery } from '../HelpCenterApi';
 

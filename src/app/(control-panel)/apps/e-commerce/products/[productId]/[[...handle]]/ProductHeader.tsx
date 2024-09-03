@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { useParams, useRouter } from 'next/navigation';
 import _ from '@lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import {
 	EcommerceProduct,
 	useCreateECommerceProductMutation,

@@ -9,7 +9,7 @@ import {
 	mustHaveThemeOptions
 } from '@fuse/default-settings';
 import settingsConfig from 'src/configs/settingsConfig';
-import themeLayoutConfigs from 'src/theme-layouts/themeLayoutConfigs';
+import themeLayoutConfigs from 'src/components/theme-layouts/themeLayoutConfigs';
 import { darkPaletteText, lightPaletteText } from 'src/configs/themesConfig';
 import { FuseSettingsConfigType, FuseThemesType, FuseThemeType } from '@fuse/core/FuseSettings/FuseSettings';
 import { ThemeOptions } from '@mui/material/styles/createTheme';

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import NotesSearch from './NotesSearch';
 import { selectVariateDescSize, toggleVariateDescSize } from '../notesAppSlice';
 

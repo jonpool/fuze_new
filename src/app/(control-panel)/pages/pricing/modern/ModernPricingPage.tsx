@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import ModernPricingCard from './ModernPricingCard';
 import ModernPricingFeatureItem from './ModernPricingFeatureItem';
 import ModernPricingItemType from './ModernPricingItemType';

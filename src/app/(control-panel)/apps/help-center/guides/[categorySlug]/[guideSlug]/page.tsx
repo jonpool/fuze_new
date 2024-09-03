@@ -5,7 +5,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useGetHelpCenterGuideByCategoryQuery } from '../../../HelpCenterApi';
 
 /**

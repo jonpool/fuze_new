@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { motion } from 'framer-motion';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import SinglePricingFeatureItem from './SinglePricingFeatureItem';
 import SinglePricingCard from './SinglePricingCard';
 

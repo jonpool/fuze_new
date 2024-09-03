@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 /**
  * The orders header.

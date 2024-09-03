@@ -4,9 +4,9 @@ import { styled } from '@mui/material/styles';
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import { useEffect, useState } from 'react';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import DemoHeader from '../../../shared-components/DemoHeader';
-import DemoContent from '../../../shared-components/DemoContent';
-import DemoSidebar from '../../../shared-components/DemoSidebar';
+import DemoHeader from '../../../components/DemoHeader';
+import DemoContent from '../../../components/DemoContent';
+import DemoSidebar from '../../../components/DemoSidebar';
 
 const Root = styled(FusePageCarded)(() => ({
 	'& .FusePageCarded-header': {},

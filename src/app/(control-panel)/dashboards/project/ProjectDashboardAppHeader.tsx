@@ -7,7 +7,7 @@ import _ from '@lodash';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { darken } from '@mui/material/styles';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useGetProjectDashboardProjectsQuery } from './ProjectDashboardApi';
 import useUser from '../../../../auth/useUser';
 

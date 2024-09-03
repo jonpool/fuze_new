@@ -10,9 +10,9 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
-import FuseTabs from 'src/shared-components/tabs/FuseTabs';
-import FuseTab from 'src/shared-components/tabs/FuseTab';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
+import FuseTabs from 'src/components/tabs/FuseTabs';
+import FuseTab from 'src/components/tabs/FuseTab';
 import { LayoutOptionType } from '../types/OverviewsType';
 
 const Root = styled('div')(() => ({

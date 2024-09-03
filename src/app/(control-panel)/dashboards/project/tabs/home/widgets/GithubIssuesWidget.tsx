@@ -7,8 +7,8 @@ import Box from '@mui/material/Box';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
-import FuseTabs from 'src/shared-components/tabs/FuseTabs';
-import FuseTab from 'src/shared-components/tabs/FuseTab';
+import FuseTabs from 'src/components/tabs/FuseTabs';
+import FuseTab from 'src/components/tabs/FuseTab';
 import GithubIssuesDataType from './types/GithubIssuesDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 

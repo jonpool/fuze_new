@@ -2,8 +2,8 @@
 
 import { styled } from '@mui/material/styles';
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import DemoHeader from '../../../shared-components/DemoHeader';
-import DemoContent from '../../../shared-components/DemoContent';
+import DemoHeader from '../../../components/DemoHeader';
+import DemoContent from '../../../components/DemoContent';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {

@@ -3,7 +3,7 @@
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import FuseLoading from '@fuse/core/FuseLoading';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import BoardItem from './BoardItem';
 import NewBoardItem from './NewBoardItem';
 import { useGetScrumboardBoardsQuery } from '../ScrumboardApi';

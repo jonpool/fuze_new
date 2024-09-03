@@ -77,7 +77,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs",
-    "build/types/**/*.ts",
-    "src/custom.d.ts"
+    "build/types/**/*.ts"
   ]
 }

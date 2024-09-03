@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import SimplePricingCard from './SimplePricingCard';
 import SimplePricingFeatureItem from './SimplePricingFeatureItem';
 import SimplePricingItemType from './SimplePricingItemType';

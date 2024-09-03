@@ -7,7 +7,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from 'next/link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import useFileManagerData from './hooks/useFileManagerData';
 
 /**

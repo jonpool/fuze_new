@@ -4,7 +4,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import Typography from '@mui/material/Typography';
 import Timeline from '@mui/lab/Timeline';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import exampleActivitiesData from './exampleActivitiesData';
 import ActivityTimelineItem from './ActivityTimelineItem';
 

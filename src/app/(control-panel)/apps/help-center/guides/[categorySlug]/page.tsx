@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import _ from '@lodash';
 import GuideListMenu from '../GuideListMenu';
 import { useGetHelpCenterGuideCategoriesQuery, useGetHelpCenterGuidesByCategoryQuery } from '../../HelpCenterApi';

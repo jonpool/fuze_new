@@ -3,7 +3,7 @@
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {

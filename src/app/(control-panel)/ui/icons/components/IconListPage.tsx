@@ -14,7 +14,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import FuseLoading from '@fuse/core/FuseLoading';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useGetIconsListQuery } from '../IconsApi';
 import IconListItem from './IconListItem';
 

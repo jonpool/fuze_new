@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata = await generateMetadata({
-	title: 'Fuse React - Next',
-	description: 'Fuse React - Next by FuseTech',
+	title: 'Fuse React - NextJS',
+	description: 'Fuse React - NextJS by FuseTech',
 	cardImage: '/card.png',
 	robots: 'follow, index',
 	favicon: '/favicon.ico',
@@ -41,11 +41,10 @@ export default function RootLayout({
 					href="/assets/tailwind-base.css"
 					rel="stylesheet"
 				/>
-
 				{/*
-			  manifest.json provides metadata used when your web app is added to the
-			  homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-			*/}
+					manifest.json provides metadata used when your web app is added to the
+					homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+				*/}
 				<link
 					rel="manifest"
 					href="/manifest.json"

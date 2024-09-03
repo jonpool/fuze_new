@@ -11,7 +11,7 @@ import Card from '@mui/material/Card';
 import Link from 'next/link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useAppSelector } from 'src/store/hooks';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FaqList from './faqs/FaqList';
 import { useGetHelpCenterMostlyFaqsQuery } from './HelpCenterApi';
 

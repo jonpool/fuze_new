@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 /**
  * The products header.

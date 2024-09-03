@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { usePathname } from 'next/navigation';
 import SettingsAppNavigation from './SettingsAppNavigation';
 

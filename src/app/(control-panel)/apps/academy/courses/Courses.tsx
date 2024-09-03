@@ -16,7 +16,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import { styled } from '@mui/material/styles';
 import FuseLoading from '@fuse/core/FuseLoading';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import CourseCard from './CourseCard';
 import { Course, useGetAcademyCategoriesQuery, useGetAcademyCoursesQuery } from '../AcademyApi';
 

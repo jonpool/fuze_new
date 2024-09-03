@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import Divider from '@mui/material/Divider';
 import { MouseEvent } from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import ValueSectionSmall from './widgets/ValueSectionSmall';
 import BTCWidgetType from './types/BTCWidgetType';
 import { useGetCryptoDashboardWidgetsQuery } from './CryptoDashboardApi';

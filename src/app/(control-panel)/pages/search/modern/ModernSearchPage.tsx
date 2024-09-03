@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { blue, green } from '@mui/material/colors';
 import { Pagination } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import exampleSearchResponse from '../constants/exampleSearchResponse';
 import SearchItemType from '../types/SearchItemType';
 

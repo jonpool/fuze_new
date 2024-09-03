@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import exampleSearchResponse from '../constants/exampleSearchResponse';
 import SearchItemType from '../types/SearchItemType';
 

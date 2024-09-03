@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Typography from '@mui/material/Typography';
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import MailCompose from './MailCompose';

@@ -7,7 +7,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Box from '@mui/material/Box';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { ChangeEvent, useEffect } from 'react';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { setSearchText, resetSearchText, selectSearchText } from './contactsAppSlice';
 import { selectFilteredContactList, useGetContactsListQuery } from './ContactsApi';
 

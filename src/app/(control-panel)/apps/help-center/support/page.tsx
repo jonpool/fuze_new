@@ -8,7 +8,7 @@ import _ from '@lodash';
 import TextField from '@mui/material/TextField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import PageBreadcrumb from 'src/shared-components/PageBreadcrumb';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 type formValuesType = { name: string; email: string; subject: string; message: string };
 
