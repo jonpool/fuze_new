@@ -7,8 +7,10 @@ import { forwardRef, memo, ReactNode, useImperativeHandle, useRef } from 'react'
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
 import { Theme } from '@mui/system';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 import FusePageCardedSidebar from './FusePageCardedSidebar';
 import FusePageCardedHeader from './FusePageCardedHeader';
+import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
 
 const headerHeight = 120;
 const toolbarHeight = 64;
@@ -31,6 +33,7 @@ type FusePageCardedProps = SystemStyleObject<Theme> & {
 	rightSidebarWidth?: number;
 	rightSidebarOnClose?: () => void;
 	leftSidebarOnClose?: () => void;
+	contentScrollbarsProps?: PartialDeep<FuseScrollbarsProps>;
 };
 
 const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
@@ -202,7 +205,8 @@ const FusePageCarded = forwardRef<
 		leftSidebarVariant = 'permanent',
 		rightSidebarVariant = 'permanent',
 		rightSidebarOnClose,
-		leftSidebarOnClose
+		leftSidebarOnClose,
+		contentScrollbarsProps
 	} = props;
 
 	const leftSidebarRef = useRef<{ toggleSidebar: (T: boolean) => void }>(null);
@@ -268,6 +272,7 @@ const FusePageCarded = forwardRef<
 						<FuseScrollbars
 							className="FusePageCarded-contentWrapper"
 							enable={scroll === 'content'}
+							{...contentScrollbarsProps}
 						>
 							{content && <div className={clsx('FusePageCarded-content')}>{content}</div>}
 						</FuseScrollbars>

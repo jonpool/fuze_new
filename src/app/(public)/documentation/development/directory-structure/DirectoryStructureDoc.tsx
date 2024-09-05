@@ -117,8 +117,17 @@ function DirectoryStructureDoc() {
 				className="mb-16"
 				component="p"
 			>
-				<strong>Route files:</strong> named in PascalCase and use the name of the feature they represent,
-				followed by `Route`. Example: ` ContactAppRoute.tsx`.
+				<strong>Route files:</strong> With Next.js App Router, routes are defined by the file system. Create a
+				page.tsx file inside the app directory to define a route. For nested routes, create subdirectories.
+				Example: `app/contacts/page.tsx` for the contacts route.
+			</Typography>
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				<strong>Layout files:</strong> Create layout.tsx files in the app directory or its subdirectories to
+				define layouts for routes. These layouts will be applied to all pages within that directory and its
+				subdirectories. Example: `app/contacts/layout.tsx` for a layout specific to the contacts feature.
 			</Typography>
 			<Typography
 				className="mb-16"

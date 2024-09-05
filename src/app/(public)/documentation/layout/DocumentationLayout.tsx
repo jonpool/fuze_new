@@ -12,8 +12,8 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import PurchaseButton from 'src/components/theme-layouts/components/PurchaseButton';
+import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import DocumentationNavigation from '../DocumentationNavigation';
-import DocumentationPageBreadcrumb from './DocumentationPageBreadcrumb';
 import DocumentationSidebarHeader from './DocumentationSidebarHeader';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
@@ -52,19 +52,24 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 		<Root
 			header={
 				<div>
-					<div className="flex items-center justify-center pt-12 px-4 md:px-12 max-w-full h-full mb-16 sm:mb-0">
-						<IconButton
-							onClick={() => setLeftSidebarOpen(!leftSidebarOpen)}
-							aria-label="toggle left sidebar"
-						>
-							<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
-						</IconButton>
+					<div className="flex flex-col items-start sm:items-center sm:flex-row justify-center py-4 px-12 max-w-full h-full">
+						<div className="flex flex-1 items-center">
+							<IconButton
+								onClick={() => setLeftSidebarOpen(!leftSidebarOpen)}
+								aria-label="toggle left sidebar"
+							>
+								<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
+							</IconButton>
 
-						<DocumentationPageBreadcrumb />
-
-						<div className="flex flex-1 justify-end items-center space-x-4">
+							<PageBreadcrumb
+								skipHome
+								maxItems={isMobile ? 2 : 5}
+							/>
+						</div>
+						<div className="flex flex-shrink justify-end items-center space-x-4">
 							<PurchaseButton size="small">Purchase</PurchaseButton>
 							<Button
+								className="whitespace-nowrap"
 								component={Link}
 								href="/"
 								variant="contained"

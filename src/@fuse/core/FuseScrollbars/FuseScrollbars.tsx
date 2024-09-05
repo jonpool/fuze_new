@@ -30,7 +30,7 @@ const handlerNameByEvent = Object.freeze({
 	'ps-x-reach-end': 'onXReachEnd'
 });
 
-type FuseScrollbarsProps = {
+export type FuseScrollbarsProps = {
 	id?: string;
 	className?: string;
 	children: ReactNode;
@@ -48,7 +48,7 @@ const FuseScrollbars = forwardRef<HTMLDivElement, FuseScrollbarsProps>((props, r
 		className = '',
 		children,
 		id = '',
-		scrollToTopOnChildChange = true,
+		scrollToTopOnChildChange = false,
 		scrollToTopOnRouteChange = false,
 		enable = true,
 		option = {
@@ -130,6 +130,20 @@ const FuseScrollbars = forwardRef<HTMLDivElement, FuseScrollbarsProps>((props, r
 			setStyle({});
 		}
 	}, [customScrollbars, enable]);
+
+	useEffect(() => {
+		if (customScrollbars && !isMobile) {
+			const hash = window.location.hash.slice(1); // Remove the leading '#'
+
+			if (hash) {
+				const element = document.getElementById(hash);
+
+				if (element) {
+					element.scrollIntoView();
+				}
+			}
+		}
+	}, [customScrollbars, pathname]);
 
 	return (
 		<Root

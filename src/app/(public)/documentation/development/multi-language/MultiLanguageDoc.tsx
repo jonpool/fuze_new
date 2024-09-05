@@ -2,7 +2,7 @@ import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import enLangRaw from 'src/app/(control-panel)/apps/mailbox/i18n/en.ts?raw';
 import i18Raw from 'src/i18n.ts?raw';
-// import appConfigRaw from 'src/app/(control-panel)/apps/mailbox/MailboxAppRoute.tsx?raw';
+import mailboxLocalizationRaw from 'src/app/(control-panel)/apps/mailbox/i18n/index.ts?raw';
 
 /**
  * Theme Layouts Doc
@@ -72,14 +72,14 @@ function MultiLanguageDoc() {
 				component="p"
 			>
 				And register the language file with <code>i18next.addResourceBundle()</code> at
-				<code>src/app/(control-panel)/apps/mailbox/MailboxAppConfig.tsx</code>
+				<code>src/app/(control-panel)/apps/mailbox/i18n/index.ts</code>
 			</Typography>
 
 			<FuseHighlight
 				component="pre"
 				className="language-jsx mb-24"
 			>
-				???
+				{mailboxLocalizationRaw}
 			</FuseHighlight>
 
 			<Typography

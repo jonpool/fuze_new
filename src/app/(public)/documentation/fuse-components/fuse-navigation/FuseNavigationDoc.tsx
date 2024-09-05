@@ -13,6 +13,10 @@ import {
 	setNavigation,
 	updateNavigationItem
 } from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
+import FuseNavigation from '@fuse/core/FuseNavigation';
+import Paper from '@mui/material/Paper';
+import navigationShowcase from './constants/navigationShowcase';
+import navigationShowcaseRaw from './constants/navigationShowcase?raw';
 
 /**
  * FuseNavigation Doc
@@ -293,6 +297,28 @@ function FuseNavigationDoc() {
           }
           `}
 			</FuseHighlight>
+
+			<Typography
+				className="mt-48 mb-8"
+				variant="h4"
+			>
+				Showcase
+			</Typography>
+
+			<div className="flex sm:flex-row flex-col gap-16 my-16 justify-center">
+				<Paper className="flex py-16  max-w-sm rounded">
+					<FuseNavigation
+						navigation={navigationShowcase}
+						layout="vertical"
+					/>
+				</Paper>
+				<FuseHighlight
+					component="pre"
+					className="flex flex-1 language-jsx max-h-md overflow-auto"
+				>
+					{navigationShowcaseRaw}
+				</FuseHighlight>
+			</div>
 
 			<Typography
 				className="mt-48 mb-8"

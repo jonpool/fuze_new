@@ -16,6 +16,7 @@ import {
 
 type PageBreadcrumbProps = BreadcrumbsProps & {
 	className?: string;
+	skipHome?: boolean;
 };
 
 // Function to get the navigation item based on URL
@@ -39,7 +40,7 @@ function getNavigationItem(url: string, navigationItems: FuseNavItemType[]): Fus
 }
 
 function PageBreadcrumb(props: PageBreadcrumbProps) {
-	const { className, ...rest } = props;
+	const { className, skipHome = false, ...rest } = props;
 	const pathname = usePathname();
 	const navigation = useAppSelector(selectNavigation);
 
@@ -55,7 +56,7 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 				acc.push({ title, url });
 				return acc;
 			},
-			[{ title: 'Home', url: '/' }]
+			skipHome ? [] : [{ title: 'Home', url: '/' }]
 		);
 
 	return (

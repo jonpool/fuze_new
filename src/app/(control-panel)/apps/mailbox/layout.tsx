@@ -5,6 +5,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
+import './i18n';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-rightSidebar': {

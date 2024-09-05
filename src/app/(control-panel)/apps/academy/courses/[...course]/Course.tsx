@@ -282,6 +282,9 @@ function Course() {
 			}
 			scroll="content"
 			ref={pageLayout}
+			contentScrollbarsProps={{
+				scrollToTopOnChildChange: true
+			}}
 		/>
 	);
 }
