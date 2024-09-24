@@ -1,6 +1,6 @@
-const path = require('path');
+import path  from 'path';
 
-module.exports = {
+export default {
 	content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
 	safelist: ['pl-24', 'pl-40', 'pl-56', 'pl-72', 'pl-80'],
 	presets: [],
@@ -1572,7 +1572,7 @@ module.exports = {
 	],
 	plugins: [
 		// eslint-disable-next-line import/no-dynamic-require
-		require(path.resolve(__dirname, 'src/@fuse/tailwind/plugins/icon-size')),
+		require('./src/@fuse/tailwind/plugins/icon-size'),
 		// Other third party and/or custom plugins
 		require('@tailwindcss/typography')({ modifiers: ['sm', 'lg'] }),
 		require('@tailwindcss/aspect-ratio')

@@ -17,7 +17,9 @@ import CardedWithSidebarsPageScrollComponent from '../../../(public)/documentati
 import CardedWithSidebarsContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/CardedWithSidebarsContentScrollComponent';
 import overviews from '../../../(public)/documentation/user-interface/page-layouts/constants/overviews';
 
-const OverviewPageLayoutsUI = lazy(() => import('../../../(public)/documentation/user-interface/page-layouts/overview/OverviewPageLayoutsUI'));
+const OverviewPageLayoutsUI = lazy(
+	() => import('../../../(public)/documentation/user-interface/page-layouts/overview/OverviewPageLayoutsUI')
+);
 
 /**
  * The UI configuration for the page layouts.

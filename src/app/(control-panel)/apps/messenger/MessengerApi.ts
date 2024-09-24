@@ -1,5 +1,6 @@
 import { apiService as api } from 'src/store/apiService';
 import { PartialObjectDeep } from 'type-fest/source/partial-deep';
+import ChatMessageModel from './models/ChatMessageModel';
 
 export const addTagTypes = [
 	'messenger_contacts',
@@ -16,16 +17,18 @@ const MessengerApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getMessengerContacts: build.query<GetMessengerContactsApiResponse, GetMessengerContactsApiArg>({
-				query: () => ({ url: `/mock-api/messenger/contacts` }),
+				query: () => ({ url: `/api/mock/messenger/contacts` }),
 				providesTags: ['messenger_contacts']
 			}),
 			getMessengerContact: build.query<GetMessengerContactApiResponse, GetMessengerContactApiArg>({
-				query: (queryArg) => ({ url: `/mock-api/messenger/contacts/${queryArg}` }),
+				query: (queryArg) => ({
+					url: `/api/mock/messenger/contacts/${queryArg}`
+				}),
 				providesTags: ['messenger_contact']
 			}),
 			updateMessengerContact: build.mutation<UpdateMessengerContactApiResponse, UpdateMessengerContactApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/messenger/contacts/${queryArg.id}`,
+					url: `/api/mock/messenger/contacts/${queryArg.id}`,
 					method: 'PUT',
 					data: queryArg
 				}),
@@ -33,36 +36,52 @@ const MessengerApi = api
 			}),
 			deleteMessengerContact: build.mutation<DeleteMessengerContactApiResponse, DeleteMessengerContactApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/messenger/contacts/${queryArg}`,
+					url: `/api/mock/messenger/contacts/${queryArg}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['messenger_contact']
 			}),
 			getMessengerChats: build.query<GetMessengerChatsApiResponse, GetMessengerChatsApiArg>({
-				query: () => ({ url: `/mock-api/messenger/chats` }),
+				query: () => ({ url: `/api/mock/messenger/chat-list` }),
 				providesTags: ['messenger_chats']
 			}),
+			createMessengerChat: build.mutation<CreateMessengerChatApiResponse, CreateMessengerChatApiArg>({
+				query: (queryArg) => ({
+					url: `/api/mock/messenger/chat-list`,
+					method: 'POST',
+					data: queryArg
+				}),
+				invalidatesTags: ['messenger_chats']
+			}),
 			getMessengerChat: build.query<GetMessengerChatApiResponse, GetMessengerChatApiArg>({
-				query: (queryArg) => ({ url: `/mock-api/messenger/chats/${queryArg}` }),
+				query: (queryArg) => ({
+					url: `/api/mock/messenger/messages`,
+					params: { chatId: queryArg }
+				}),
 				providesTags: ['messenger_chat']
 			}),
 			deleteMessengerChat: build.mutation<DeleteMessengerChatApiResponse, DeleteMessengerChatApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/messenger/chats/${queryArg}`,
+					url: `/api/mock/messenger/messages`,
+					params: { chatId: queryArg },
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['messenger_chats']
 			}),
 			sendMessengerMessage: build.mutation<SendMessengerMessageApiResponse, SendMessengerMessageApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/messenger/chats/${queryArg.contactId}`,
+					url: `/api/mock/messenger/messages`,
 					method: 'POST',
-					data: queryArg.message
+					data: ChatMessageModel({
+						chatId: queryArg.chatId,
+						contactId: 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
+						value: queryArg.message
+					})
 				}),
 				invalidatesTags: ['messenger_chat', 'messenger_chats']
 			}),
 			getMessengerUserProfile: build.query<GetMessengerUserProfileApiResponse, GetMessengerUserProfileApiArg>({
-				query: () => ({ url: `/mock-api/messenger/profile` }),
+				query: () => ({ url: `/api/mock/messenger/profile` }),
 				providesTags: ['messenger_user_profile']
 			}),
 			updateMessengerUserProfile: build.mutation<
@@ -70,7 +89,7 @@ const MessengerApi = api
 				UpdateMessengerUserProfileApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/mock-api/messenger/profile`,
+					url: `/api/mock/messenger/profile`,
 					method: 'PUT',
 					data: queryArg
 				}),
@@ -96,6 +115,9 @@ export type DeleteMessengerContactApiArg = string;
 export type GetMessengerChatsApiResponse = /** status 200 OK */ Chat[];
 export type GetMessengerChatsApiArg = void;
 
+export type CreateMessengerChatApiResponse = /** status 200 OK */ Chat;
+export type CreateMessengerChatApiArg = PartialObjectDeep<Chat, object>;
+
 export type GetMessengerChatApiResponse = /** status 200 OK */ Message[];
 export type GetMessengerChatApiArg = string;
 
@@ -103,7 +125,7 @@ export type DeleteMessengerChatApiResponse = unknown;
 export type DeleteMessengerChatApiArg = string;
 
 export type SendMessengerMessageApiArg = {
-	contactId: string;
+	chatId: string;
 	message: string;
 };
 export type SendMessengerMessageApiResponse = Message[];
@@ -146,7 +168,7 @@ export type Contact = {
 
 export type Chat = {
 	id: string;
-	contactId: string;
+	contactIds: string[];
 	unreadCount: number;
 	muted: boolean;
 	lastMessage: string;
@@ -193,6 +215,7 @@ export const {
 	useUpdateMessengerContactMutation,
 	useDeleteMessengerContactMutation,
 	useGetMessengerChatsQuery,
+	useCreateMessengerChatMutation,
 	useGetMessengerChatQuery,
 	useDeleteMessengerChatMutation,
 	useGetMessengerUserProfileQuery,

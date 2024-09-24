@@ -1,13 +1,13 @@
 import _ from '@lodash';
 import FuseUtils from '@fuse/utils';
-import { Chat, Contact, Profile } from '../../app/main/apps/messenger/MessengerApi';
+import { Chat, Contact, Profile } from 'src/app/(control-panel)/apps/messenger/MessengerApi';
 import mockApi from '../mock-api.json';
 import ExtendedMockAdapter, { Params } from '../ExtendedMockAdapter';
 
-const contactsDB = mockApi.components.examples.chat_contacts.value;
-let userDB = mockApi.components.examples.chat_profile.value;
-const userChatListDB = mockApi.components.examples.chat_chats.value as Chat[];
-const messages = mockApi.components.examples.chat_messages.value;
+const contactsDB = mockApi.components.examples.messenger_contacts.value;
+let userDB = mockApi.components.examples.messenger_profile.value;
+const userChatListDB = mockApi.components.examples.messenger_chat_list.value as Chat[];
+const messages = mockApi.components.examples.messenger_messages.value;
 const chatsDB = userChatListDB.map((chat) => ({
 	...chat,
 	messages: messages.map((message) => ({

@@ -7,7 +7,6 @@ import FuseNavigation from '@fuse/core/FuseNavigation';
 import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useMemo } from 'react';
-import { usePathname } from 'next/navigation';
 import MailCompose from './MailCompose';
 import { useGetMailboxFiltersQuery, useGetMailboxFoldersQuery, useGetMailboxLabelsQuery } from '../../MailboxApi';
 
@@ -18,7 +17,6 @@ function MailboxAppSidebarContent() {
 	const { data: folders } = useGetMailboxFoldersQuery();
 	const { data: labels } = useGetMailboxLabelsQuery();
 	const { data: filters } = useGetMailboxFiltersQuery();
-	const pathname = usePathname();
 
 	const { t } = useTranslation('mailboxApp');
 

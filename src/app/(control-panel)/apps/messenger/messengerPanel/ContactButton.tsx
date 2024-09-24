@@ -1,10 +1,10 @@
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import clsx from 'clsx';
-import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import ContactStatus from './ContactStatus';
 import { Chat, Contact } from '../MessengerApi';
+import UserAvatar from '../components/UserAvatar';
 
 const Root = styled(Tooltip)<{ active: number }>(({ theme, active }) => ({
 	width: 70,
@@ -46,7 +46,7 @@ const StyledUreadBadge = styled('div')(({ theme }) => ({
 
 type ContactButtonProps = {
 	contact: Partial<Contact & Chat>;
-	selectedContactId: string;
+	selectedChatId: string;
 	onClick: (id: string) => void;
 };
 
@@ -54,31 +54,30 @@ type ContactButtonProps = {
  * Contact button component.
  */
 function ContactButton(props: ContactButtonProps) {
-	const { contact, selectedContactId, onClick } = props;
+	const { contact, selectedChatId, onClick } = props;
+
+	if (!contact) {
+		return null;
+	}
 
 	return (
 		<Root
 			title={contact.name}
 			placement="left"
-			active={selectedContactId === contact.id ? 1 : 0}
+			active={selectedChatId === contact.id ? 1 : 0}
 		>
 			<Button
 				onClick={() => onClick(contact.id)}
 				className={clsx(
 					'contactButton rounded-0 py-4 h-auto min-h-auto max-h-none',
-					selectedContactId === contact.id && 'active'
+					selectedChatId === contact.id && 'active'
 				)}
 			>
 				{Boolean(contact.unreadCount) && <StyledUreadBadge>{contact.unreadCount}</StyledUreadBadge>}
 
 				<ContactStatus value={contact.status} />
 
-				<Avatar
-					src={contact.avatar}
-					alt={contact.name}
-				>
-					{!contact.avatar || contact.avatar === '' ? contact.name[0] : ''}
-				</Avatar>
+				<UserAvatar user={contact} />
 			</Button>
 		</Root>
 	);

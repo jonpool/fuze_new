@@ -5,7 +5,7 @@ function MaterialOutlinePage() {
 		<IconListPage
 			pageTitle="Material Outline"
 			iconSet="material-outline"
-			apiUrl="/mock-api/ui/icons/material"
+			apiUrl="/api/mock/ui/material-icons"
 		/>
 	);
 }

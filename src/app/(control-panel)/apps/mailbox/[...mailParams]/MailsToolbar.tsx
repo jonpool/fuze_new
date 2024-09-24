@@ -11,10 +11,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { OutlinedInput } from '@mui/material';
 import Hidden from '@mui/material/Hidden';
-import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
 import MailListTitle from './MailListTitle';
-import { useApplyMailboxMailActionMutation, useGetMailboxFoldersQuery, useGetMailboxLabelsQuery } from '../MailboxApi';
+import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useUpdateMailboxMailsMutation } from '../MailboxApi';
 import {
 	selectSearchText,
 	setSearchText,
@@ -48,7 +47,7 @@ function MailToolbar(props: MailToolbarProps) {
 	const { data: folders, isLoading: isFoldersLoading } = useGetMailboxFoldersQuery();
 	const { data: labels, isLoading: isLabelsLoading } = useGetMailboxLabelsQuery();
 
-	const [setActionToMails] = useApplyMailboxMailActionMutation();
+	const [updateMails] = useUpdateMailboxMailsMutation();
 
 	const searchText = useAppSelector(selectSearchText);
 
@@ -105,7 +104,7 @@ function MailToolbar(props: MailToolbarProps) {
 	}
 
 	if (isMailsLoading || isFoldersLoading || isLabelsLoading) {
-		return <FuseLoading />;
+		return null;
 	}
 
 	return (
@@ -226,11 +225,7 @@ function MailToolbar(props: MailToolbarProps) {
 						<Tooltip title="Delete">
 							<IconButton
 								onClick={() => {
-									setActionToMails({
-										type: 'folder',
-										value: trashFolderId,
-										ids: selectedMailIds
-									});
+									updateMails(selectedMailIds.map((id) => ({ id, folder: trashFolderId })));
 								}}
 								aria-label="Delete"
 								size="small"
@@ -260,11 +255,7 @@ function MailToolbar(props: MailToolbarProps) {
 								folders.map((folder) => (
 									<MenuItem
 										onClick={() => {
-											setActionToMails({
-												type: 'folder',
-												value: folder.id,
-												ids: selectedMailIds
-											});
+											updateMails(selectedMailIds.map((id) => ({ id, folder: folder.id })));
 											handleMenuClose();
 										}}
 										key={folder.id}
@@ -295,12 +286,7 @@ function MailToolbar(props: MailToolbarProps) {
 								labels.map((label) => (
 									<MenuItem
 										onClick={() => {
-											setActionToMails({
-												type: 'label',
-												value: label.id,
-												ids: selectedMailIds
-											});
-
+											updateMails(selectedMailIds.map((id) => ({ id, label: label.id })));
 											handleMenuClose();
 										}}
 										key={label.id}
@@ -313,7 +299,7 @@ function MailToolbar(props: MailToolbarProps) {
 						<Tooltip title="Mark as unread">
 							<IconButton
 								onClick={() => {
-									setActionToMails({ type: 'unread', value: true, ids: selectedMailIds });
+									updateMails(selectedMailIds.map((id) => ({ id, unread: true })));
 								}}
 								aria-label="Mark as unread"
 								size="small"
@@ -325,7 +311,7 @@ function MailToolbar(props: MailToolbarProps) {
 						<Tooltip title="Set important">
 							<IconButton
 								onClick={() => {
-									setActionToMails({ type: 'important', value: true, ids: selectedMailIds });
+									updateMails(selectedMailIds.map((id) => ({ id, important: true })));
 								}}
 								aria-label="important"
 								size="small"
@@ -339,7 +325,7 @@ function MailToolbar(props: MailToolbarProps) {
 						<Tooltip title="Set starred">
 							<IconButton
 								onClick={() => {
-									setActionToMails({ type: 'starred', value: true, ids: selectedMailIds });
+									updateMails(selectedMailIds.map((id) => ({ id, starred: true })));
 								}}
 								aria-label="important"
 								size="small"

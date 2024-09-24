@@ -1,14 +1,14 @@
 import _ from '@lodash';
+import { Course } from 'src/app/(control-panel)/apps/academy/AcademyApi';
 import mockApi from '../mock-api.json';
 import ExtendedMockAdapter, { Params } from '../ExtendedMockAdapter';
-import { Course } from '../../app/main/apps/academy/AcademyApi';
 
-const demoCourseContent = mockApi.components.examples.academy_demo_course_content.value;
-const exampleCourseSteps = mockApi.components.examples.academy_demo_course_steps.value;
+const demoCourseContent = mockApi.components.examples.academy_course_step_contents.value[0].html;
+const exampleCourseSteps = mockApi.components.examples.academy_course_steps.value;
 
 const steps = exampleCourseSteps.map((item) => ({
 	...item,
-	content: `${item.content} ${demoCourseContent}`
+	content: `${demoCourseContent}`
 }));
 const courses = mockApi.components.examples.academy_courses.value;
 const categoriesDB = mockApi.components.examples.academy_categories.value;

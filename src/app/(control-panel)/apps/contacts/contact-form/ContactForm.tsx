@@ -495,7 +495,7 @@ function ContactForm(props: ContactFormProps) {
 				className="flex items-center mt-40 py-14 pr-16 pl-4 sm:pr-48 sm:pl-36 border-t"
 				sx={{ backgroundColor: 'background.default' }}
 			>
-				{isNew && (
+				{!isNew && (
 					<Button
 						color="error"
 						onClick={handleRemoveContact}

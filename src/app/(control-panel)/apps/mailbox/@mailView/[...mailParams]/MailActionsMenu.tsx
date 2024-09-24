@@ -8,7 +8,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useRouter } from 'next/navigation';
 import { MouseEvent, useMemo, useState } from 'react';
 import _ from '@lodash';
-import { useApplyMailboxMailActionMutation, useGetMailboxFoldersQuery } from '../../MailboxApi';
+import { useUpdateMailboxMailsMutation, useGetMailboxFoldersQuery } from '../../MailboxApi';
 import useGetMail from '../../hooks/useGetMail';
 
 type MailActionsMenuProps = {
@@ -25,7 +25,7 @@ function MailActionsMenu(props: MailActionsMenuProps) {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 
-	const [setActionToMails] = useApplyMailboxMailActionMutation();
+	const [updateMails] = useUpdateMailboxMailsMutation();
 
 	const { data: mail } = useGetMail();
 
@@ -67,7 +67,7 @@ function MailActionsMenu(props: MailActionsMenuProps) {
 			>
 				<MenuItem
 					onClick={() => {
-						setActionToMails({ type: 'unread', value: true, ids: [mail.id] });
+						updateMails([{ id: mail.id, unread: true }]);
 						handleClose();
 					}}
 				>
@@ -79,7 +79,7 @@ function MailActionsMenu(props: MailActionsMenuProps) {
 
 				<MenuItem
 					onClick={() => {
-						setActionToMails({ type: 'folder', value: spamFolderId, ids: [mail.id] });
+						updateMails([{ id: mail.id, folder: spamFolderId }]);
 						handleClose();
 					}}
 				>
@@ -91,7 +91,7 @@ function MailActionsMenu(props: MailActionsMenuProps) {
 
 				<MenuItem
 					onClick={() => {
-						setActionToMails({ type: 'folder', value: Boolean(trashFolderId), ids: [mail.id] });
+						updateMails([{ id: mail.id, folder: trashFolderId }]);
 						router.push(-1);
 						handleClose();
 					}}

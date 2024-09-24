@@ -1,39 +1,37 @@
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from '@hello-pangea/dnd';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import ListItemButton from '@mui/material/ListItemButton';
+import { ListItemText } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { Task } from '../TasksApi';
 
 type SectionListItemProps = {
-	data: {
-		id: string;
-		title: string;
-	};
-	index: number;
+	data: Task;
 };
 
 /**
  * The section list item.
  */
 function SectionListItem(props: SectionListItemProps) {
-	const { data, index } = props;
+	const { data } = props;
+	const router = useRouter();
 
 	return (
 		<Draggable
 			draggableId={data.id}
-			index={index}
+			index={data.order}
 		>
 			{(provided) => (
 				<>
-					<ListItem
+					<ListItemButton
 						className="px-40 py-12 group"
 						sx={{ bgcolor: 'background.default' }}
-						button
-						component={NavLinkAdapter}
-						href={`/apps/tasks/${data.id}`}
 						ref={provided.innerRef}
 						{...provided.draggableProps}
+						onClick={() => {
+							router.push(`/apps/tasks/${data.id}`);
+						}}
 					>
 						<div
 							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-32 cursor-move md:group-hover:flex"
@@ -47,10 +45,13 @@ function SectionListItem(props: SectionListItemProps) {
 							</FuseSvgIcon>
 						</div>
 						<ListItemText
-							classes={{ root: 'm-0', primary: 'font-semibold text-15 truncate' }}
+							classes={{
+								root: 'm-0',
+								primary: 'font-semibold text-15 truncate'
+							}}
 							primary={data.title}
 						/>
-					</ListItem>
+					</ListItemButton>
 					<Divider />
 				</>
 			)}

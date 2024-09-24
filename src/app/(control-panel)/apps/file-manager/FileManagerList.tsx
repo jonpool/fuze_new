@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { lighten } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import * as React from 'react';
+import FuseLoading from '@fuse/core/FuseLoading';
 import FolderItem from './FolderItem';
 import FileItem from './FileItem';
 import useFileManagerData from './hooks/useFileManagerData';
@@ -11,7 +12,11 @@ import useFileManagerData from './hooks/useFileManagerData';
  * The file manager list.
  */
 function FileManagerList() {
-	const { folders, files } = useFileManagerData();
+	const { folders, files, isLoading } = useFileManagerData();
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
 
 	if (files.length === 0 && folders.length === 0) {
 		return (

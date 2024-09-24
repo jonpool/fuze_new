@@ -23,7 +23,7 @@ function BoardItem(props: BoardItemProps) {
 
 	const { data: members } = useGetScrumboardMembersQuery();
 
-	const boardMembers = board.members.map((id) => _.find(members, { id }));
+	const boardMembers = board?.members?.map((id) => _.find(members, { id }));
 
 	return (
 		<Card

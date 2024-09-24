@@ -108,10 +108,16 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 
 	'& .FusePageSimple-content': {
 		display: 'flex',
+		flexDirection: 'column',
 		flex: '1 1 auto',
 		alignItems: 'start',
 		minHeight: 0,
-		overflowY: 'auto'
+		overflowY: 'auto',
+		'& > .container': {
+			display: 'flex',
+			flexDirection: 'column',
+			minHeight: '100%'
+		}
 	},
 
 	'& .FusePageSimple-sidebarWrapper': {

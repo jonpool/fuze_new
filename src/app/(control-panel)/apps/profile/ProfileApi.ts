@@ -1,6 +1,12 @@
 import { apiService as api } from 'src/store/apiService';
 
-export const addTagTypes = ['profile_photos_videos', 'profile_timeline', 'profile_about'] as const;
+export const addTagTypes = [
+	'profile_albums',
+	'profile_media_items',
+	'profile_activities',
+	'profile_posts',
+	'profile_about'
+] as const;
 
 const ProfileApi = api
 	.enhanceEndpoints({
@@ -8,16 +14,24 @@ const ProfileApi = api
 	})
 	.injectEndpoints({
 		endpoints: (build) => ({
-			getProfilePhotosVideos: build.query<GetProfilePhotosVideosApiResponse, GetProfilePhotosVideosApiArg>({
-				query: () => ({ url: `/mock-api/profile/photos-videos` }),
-				providesTags: ['profile_photos_videos']
+			getProfileAlbums: build.query<GetProfileAlbumsApiResponse, GetProfileAlbumsApiArg>({
+				query: () => ({ url: `/api/mock/profile/albums` }),
+				providesTags: ['profile_albums']
 			}),
-			getProfileTimeline: build.query<GetProfileTimelineApiResponse, GetProfileTimelineApiArg>({
-				query: () => ({ url: `/mock-api/profile/timeline` }),
-				providesTags: ['profile_timeline']
+			getProfileMediaItems: build.query<GetProfileMediaItemsApiResponse, GetProfileMediaItemsApiArg>({
+				query: () => ({ url: `/api/mock/profile/media-items` }),
+				providesTags: ['profile_media_items']
+			}),
+			getProfileActivities: build.query<GetProfileActivitiesApiResponse, GetProfileActivitiesApiArg>({
+				query: () => ({ url: `/api/mock/profile/activities` }),
+				providesTags: ['profile_activities']
+			}),
+			getProfilePosts: build.query<GetProfilePostsApiResponse, GetProfilePostsApiArg>({
+				query: () => ({ url: `/api/mock/profile/posts` }),
+				providesTags: ['profile_posts']
 			}),
 			getProfileAbout: build.query<GetProfileAboutApiResponse, GetProfileAboutApiArg>({
-				query: () => ({ url: `/mock-api/profile/about` }),
+				query: () => ({ url: `/api/mock/profile/about` }),
 				providesTags: ['profile_about']
 			})
 		}),
@@ -26,27 +40,38 @@ const ProfileApi = api
 
 export default ProfileApi;
 
-export type GetProfilePhotosVideosApiResponse = /** status 200 OK */ ProfilePhotosVideos[];
-export type GetProfilePhotosVideosApiArg = void;
+export type GetProfileAlbumsApiResponse = /** status 200 OK */ ProfileAlbum[];
+export type GetProfileAlbumsApiArg = void;
 
-export type GetProfileTimelineApiResponse = /** status 200 OK */ ProfileTimeline;
-export type GetProfileTimelineApiArg = void;
+export type GetProfileMediaItemsApiResponse = /** status 200 OK */ ProfileMediaItem[];
+export type GetProfileMediaItemsApiArg = void;
+
+export type GetProfileActivitiesApiResponse = /** status 200 OK */ ProfileActivity[];
+export type GetProfileActivitiesApiArg = void;
+
+export type GetProfilePostsApiResponse = /** status 200 OK */ ProfilePost[];
+export type GetProfilePostsApiArg = void;
 
 export type GetProfileAboutApiResponse = /** status 200 OK */ ProfileAbout;
 export type GetProfileAboutApiArg = void;
 
-export type ProfilePhotosVideos = {
+export type ProfileAlbum = {
 	id?: string;
 	name?: string;
 	info?: string;
-	media?: {
-		type?: string;
-		title?: string;
-		preview?: string;
-	}[];
+	created_at?: string;
 };
 
-export type Activity = {
+export type ProfileMediaItem = {
+	id?: string;
+	album_id?: string;
+	type?: string;
+	title?: string;
+	preview?: string;
+	created_at?: string;
+};
+
+export type ProfileActivity = {
 	id?: string;
 	user?: {
 		name?: string;
@@ -56,7 +81,7 @@ export type Activity = {
 	time?: string;
 };
 
-export type Post = {
+export type ProfilePost = {
 	id?: string;
 	user?: {
 		name?: string;
@@ -89,11 +114,6 @@ export type Post = {
 			preview?: string;
 		};
 	};
-};
-
-export type ProfileTimeline = {
-	activities?: Activity[];
-	posts?: Post[];
 };
 
 export type ProfileAbout = {
@@ -130,4 +150,10 @@ export type ProfileAbout = {
 	}[];
 };
 
-export const { useGetProfilePhotosVideosQuery, useGetProfileTimelineQuery, useGetProfileAboutQuery } = ProfileApi;
+export const {
+	useGetProfileAlbumsQuery,
+	useGetProfileMediaItemsQuery,
+	useGetProfileActivitiesQuery,
+	useGetProfilePostsQuery,
+	useGetProfileAboutQuery
+} = ProfileApi;

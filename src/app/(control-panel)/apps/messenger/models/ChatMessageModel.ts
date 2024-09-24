@@ -13,7 +13,7 @@ function ChatMessageModel(data?: PartialDeep<Message>) {
 		chatId: '',
 		contactId: '',
 		value: '',
-		createdAt: ''
+		createdAt: new Date().toISOString()
 	});
 }
 

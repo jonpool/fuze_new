@@ -46,6 +46,7 @@ import {
 	useGetScrumboardMembersQuery,
 	useUpdateScrumboardBoardCardMutation
 } from '../../../../ScrumboardApi';
+import useUpdateScrumboardBoard from '../../../../hooks/useUpdateScrumboardBoard';
 
 /**
  * The board card form component.
@@ -65,6 +66,7 @@ function BoardCardForm() {
 
 	const [updateCard] = useUpdateScrumboardBoardCardMutation();
 	const [removeCard] = useDeleteScrumboardBoardCardMutation();
+	const updateBoard = useUpdateScrumboardBoard();
 
 	const list = _.find(listItems, { id: card?.listId });
 
@@ -76,7 +78,7 @@ function BoardCardForm() {
 	const cardForm = watch();
 
 	const updateCardData = useDebounce((newCard: ScrumboardCard) => {
-		updateCard({ boardId, card: { id: card.id, ...newCard } })
+		updateCard(newCard)
 			.unwrap()
 			.then(() => {
 				dispatch(
@@ -217,11 +219,13 @@ function BoardCardForm() {
 							}}
 							renderTags={(value, getTagProps) =>
 								value.map((option, index) => {
+									const { key, ...rest } = getTagProps({ index });
 									return (
 										<Chip
+											key={key}
 											label={typeof option === 'string' ? option : option?.title}
-											{...getTagProps({ index })}
 											className="m-3"
+											{...rest}
 										/>
 									);
 								})
@@ -271,11 +275,13 @@ function BoardCardForm() {
 										return <span />;
 									}
 
+									const { key, ...rest } = getTagProps({ index });
 									return (
 										<Chip
+											key={key}
 											label={option.name}
-											{...getTagProps({ index })}
 											className={clsx('m-3', option?.class)}
+											{...rest}
 											avatar={
 												<Tooltip title={option.name}>
 													<Avatar src={option.avatar} />
@@ -463,9 +469,20 @@ function BoardCardForm() {
 
 						<OptionsMenu
 							onRemoveCard={() => {
-								removeCard({ boardId, cardId: card.id })
+								removeCard(card.id)
 									.unwrap()
 									.then(() => {
+										updateBoard((board) => ({
+											...board,
+											lists: board.lists.map((list) =>
+												list.id === card.listId
+													? {
+															...list,
+															cards: list.cards.filter((id) => id !== card.id)
+														}
+													: list
+											)
+										}));
 										dispatch(closeCardDialog());
 										dispatch(
 											showMessage({

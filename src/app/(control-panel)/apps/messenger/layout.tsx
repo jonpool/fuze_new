@@ -15,14 +15,16 @@ const drawerWidth = 400;
 
 type ChatAppContextType = {
 	setMainSidebarOpen: (isOpen?: boolean) => void;
-	setContactSidebarOpen: (isOpen?: boolean) => void;
+	setContactSidebarOpen: (contactId?: string) => void;
 	setUserSidebarOpen: (isOpen?: boolean) => void;
+	contactSidebarOpen?: string;
 };
 
 export const ChatAppContext = createContext<ChatAppContextType>({
 	setMainSidebarOpen: () => {},
-	setContactSidebarOpen: () => {},
-	setUserSidebarOpen: () => {}
+	setContactSidebarOpen: (_T: string) => {},
+	setUserSidebarOpen: () => {},
+	contactSidebarOpen: null
 });
 
 const Root = styled(FusePageSimple)(() => ({
@@ -61,7 +63,7 @@ function MessengerApp(props: MessengerAppProps) {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const [mainSidebarOpen, setMainSidebarOpen] = useState(!isMobile);
-	const [contactSidebarOpen, setContactSidebarOpen] = useState(false);
+	const [contactSidebarOpen, setContactSidebarOpen] = useState<string | null>(null);
 	const [userSidebarOpen, setUserSidebarOpen] = useState(false);
 
 	useEffect(() => {
@@ -84,9 +86,10 @@ function MessengerApp(props: MessengerAppProps) {
 		() => ({
 			setMainSidebarOpen,
 			setContactSidebarOpen,
-			setUserSidebarOpen
+			setUserSidebarOpen,
+			contactSidebarOpen
 		}),
-		[setMainSidebarOpen, setContactSidebarOpen, setUserSidebarOpen]
+		[setMainSidebarOpen, setContactSidebarOpen, setUserSidebarOpen, contactSidebarOpen]
 	);
 
 	return (
@@ -102,7 +105,7 @@ function MessengerApp(props: MessengerAppProps) {
 				rightSidebarContent={<ContactSidebar />}
 				rightSidebarOpen={contactSidebarOpen}
 				rightSidebarOnClose={() => {
-					setContactSidebarOpen(false);
+					setContactSidebarOpen(null);
 				}}
 				rightSidebarWidth={400}
 				scroll="content"

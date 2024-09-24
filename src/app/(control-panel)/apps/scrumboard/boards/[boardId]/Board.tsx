@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
@@ -10,7 +9,6 @@ import { styled } from '@mui/material/styles';
 import BoardAddList from './board-list/BoardAddList';
 import BoardList from './board-list/BoardList';
 import BoardCardDialog from './dialogs/card/BoardCardDialog';
-import BoardSettingsSidebar from './sidebars/settings/BoardSettingsSidebar';
 import BoardHeader from './BoardHeader';
 import {
 	useUpdateScrumboardBoardListOrderMutation,
@@ -41,8 +39,6 @@ function Board() {
 
 	const [reorderList] = useUpdateScrumboardBoardListOrderMutation();
 	const [reorderCard] = useUpdateScrumboardBoardCardOrderMutation();
-
-	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	function onDragEnd(result: DropResult) {
 		const { source, destination } = result;
@@ -107,7 +103,7 @@ function Board() {
 	return (
 		<>
 			<Root
-				header={<BoardHeader onSetSidebarOpen={setSidebarOpen} />}
+				header={<BoardHeader />}
 				content={
 					board?.lists ? (
 						<div className="flex flex-1 overflow-x-auto overflow-y-hidden h-full">
@@ -142,11 +138,7 @@ function Board() {
 						</div>
 					) : null
 				}
-				rightSidebarOpen={sidebarOpen}
-				rightSidebarContent={<BoardSettingsSidebar onSetSidebarOpen={setSidebarOpen} />}
-				rightSidebarOnClose={() => setSidebarOpen(false)}
 				scroll={isMobile ? 'normal' : 'content'}
-				rightSidebarWidth={320}
 			/>
 			<BoardCardDialog />
 		</>

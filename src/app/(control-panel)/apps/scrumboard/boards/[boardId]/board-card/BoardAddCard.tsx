@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { PartialDeep } from 'type-fest';
 import { alpha } from '@mui/system/colorManipulator';
 import { ScrumboardCard, useCreateScrumboardBoardCardMutation } from '../../../ScrumboardApi';
+import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
 
 type FormType = PartialDeep<ScrumboardCard>;
 
@@ -37,6 +38,7 @@ type BoardAddCardProps = {
  */
 function BoardAddCard(props: BoardAddCardProps) {
 	const { boardId, listId, onCardAdded } = props;
+	const updateBoard = useUpdateScrumboardBoard();
 
 	const [formOpen, setFormOpen] = useState(false);
 
@@ -68,7 +70,18 @@ function BoardAddCard(props: BoardAddCardProps) {
 	function onSubmit(card: FormType) {
 		createCard({ boardId, listId, card })
 			.unwrap()
-			.then(() => {
+			.then((newCard) => {
+				updateBoard((board) => ({
+					...board,
+					lists: board.lists.map((list) =>
+						list.id === listId
+							? {
+									...list,
+									cards: [...list.cards, newCard.id]
+								}
+							: list
+					)
+				}));
 				onCardAdded();
 			});
 

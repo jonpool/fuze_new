@@ -1,44 +1,42 @@
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { IconButton } from '@mui/material';
+import { IconButton, ListItemButton, ListItemText } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { format } from 'date-fns/format';
 import Typography from '@mui/material/Typography';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from '@hello-pangea/dnd';
 import clsx from 'clsx';
 
+import { useRouter } from 'next/navigation';
 import { Task, useUpdateTasksItemMutation } from '../TasksApi';
 
 type TaskListItemProps = {
 	data: Task;
-	index: number;
 };
 
 /**
  * The task list item.
  */
 function TaskListItem(props: TaskListItemProps) {
-	const { data, index } = props;
+	const { data } = props;
 	const [updateTask] = useUpdateTasksItemMutation();
+	const router = useRouter();
 
 	return (
 		<Draggable
 			draggableId={data.id}
-			index={index}
+			index={data.order}
 		>
 			{(provided, snapshot) => (
 				<>
-					<ListItem
+					<ListItemButton
 						className={clsx(snapshot.isDragging ? 'shadow-lg' : 'shadow', 'px-40 py-12 group')}
 						sx={{ bgcolor: 'background.paper' }}
-						button
-						component={NavLinkAdapter}
-						href={`/apps/tasks/${data.id}`}
 						ref={provided.innerRef}
 						{...provided.draggableProps}
+						onClick={() => {
+							router.push(`/apps/tasks/${data.id}`);
+						}}
 					>
 						<div
 							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-32 cursor-move md:group-hover:flex"
@@ -90,7 +88,7 @@ function TaskListItem(props: TaskListItemProps) {
 								</Typography>
 							)}
 						</div>
-					</ListItem>
+					</ListItemButton>
 					<Divider />
 				</>
 			)}

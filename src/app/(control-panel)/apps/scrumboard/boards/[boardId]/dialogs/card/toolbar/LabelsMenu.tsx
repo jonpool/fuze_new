@@ -21,7 +21,7 @@ function LabelsMenu(props: LabelsMenuProps) {
 	const { labels, onToggleLabel } = props;
 
 	const routeParams = useParams();
-	const { boardId } = routeParams;
+	const { boardId } = routeParams as { boardId: string };
 
 	const { data: labelsArr } = useGetScrumboardBoardLabelsQuery(boardId);
 

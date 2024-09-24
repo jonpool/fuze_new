@@ -42,16 +42,12 @@ function MailList() {
 		return <FuseLoading />;
 	}
 
-	if (!filteredData) {
-		return null;
-	}
-
-	if (filteredData.length === 0) {
+	if (!filteredData || filteredData?.length === 0) {
 		return (
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { delay: 0.1 } }}
-				className="flex flex-col flex-1 items-center justify-center p-24"
+				className="flex flex-col flex-1 items-center justify-center p-24 min-h-full"
 			>
 				<FuseSvgIcon
 					className="icon-size-128 mb-16"
@@ -71,7 +67,7 @@ function MailList() {
 	}
 
 	return (
-		<List className="p-0 w-full">
+		<List className="p-0 w-full min-h-full">
 			{filteredData.map((mail) => (
 				<MailListItem
 					mail={mail}

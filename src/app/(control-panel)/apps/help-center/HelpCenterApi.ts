@@ -18,7 +18,7 @@ const HelpCenterApi = apiService
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getHelpCenterGuides: build.query<GetHelpCenterGuidesApiResponse, GetHelpCenterGuidesApiArg>({
-				query: () => ({ url: `/mock-api/help-center/guides` }),
+				query: () => ({ url: `/api/mock/help-center/guides` }),
 				providesTags: ['help_center_guides']
 			}),
 			getHelpCenterGuidesByCategory: build.query<
@@ -26,16 +26,16 @@ const HelpCenterApi = apiService
 				GetHelpCenterGuidesByCategoryApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/mock-api/help-center/guides/${queryArg.categorySlug}`
+					url: `/api/mock/help-center/guides`,
+					params: {
+						categoryId: queryArg.categoryId
+					}
 				}),
 				providesTags: ['help_center_guides_by_category']
 			}),
-			getHelpCenterGuideByCategory: build.query<
-				GetHelpCenterGuideByCategoryApiResponse,
-				GetHelpCenterGuideByCategoryApiArg
-			>({
-				query: (queryArg) => ({
-					url: `/mock-api/help-center/guides/${queryArg.categorySlug}/${queryArg.guideSlug}`
+			getHelpCenterGuideById: build.query<GetHelpCenterGuideByIdApiResponse, GetHelpCenterGuideByIdApiArg>({
+				query: (guideId) => ({
+					url: `/api/mock/help-center/guides/${guideId}`
 				}),
 				providesTags: ['help_center_guide']
 			}),
@@ -43,11 +43,11 @@ const HelpCenterApi = apiService
 				GetHelpCenterGuideCategoriesApiResponse,
 				GetHelpCenterGuideCategoriesApiArg
 			>({
-				query: () => ({ url: `/mock-api/help-center/guides/categories` }),
+				query: () => ({ url: `/api/mock/help-center/guide-categories` }),
 				providesTags: ['help_center_guide_categories']
 			}),
 			getHelpCenterFaqs: build.query<GetHelpCenterFaqsApiResponse, GetHelpCenterFaqsApiArg>({
-				query: () => ({ url: `/mock-api/help-center/faqs` }),
+				query: () => ({ url: `/api/mock/help-center/faqs` }),
 				providesTags: ['help_center_faqs']
 			}),
 			getHelpCenterFaqsByCategory: build.query<
@@ -55,19 +55,22 @@ const HelpCenterApi = apiService
 				GetHelpCenterFaqsByCategoryApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/mock-api/help-center/faqs/${queryArg.categorySlug}`
+					url: `/api/mock/help-center/faqs`,
+					params: {
+						categoryId: queryArg.categoryId
+					}
 				}),
 				providesTags: ['help_center_faqs_by_category']
 			}),
 			getHelpCenterMostlyFaqs: build.query<GetMostlyFaqsApiResponse, GetMostlyFaqsApiArg>({
-				query: () => ({ url: `/mock-api/help-center/faqs/most-asked` }),
+				query: () => ({ url: `/api/mock/help-center/faqs/most` }),
 				providesTags: ['help_center_most_asked_faqs']
 			}),
 			getHelpCenterFaqCategories: build.query<
 				GetHelpCenterFaqCategoriesApiResponse,
 				GetHelpCenterFaqCategoriesApiArg
 			>({
-				query: () => ({ url: `/mock-api/help-center/faqs/categories` }),
+				query: () => ({ url: `/api/mock/help-center/faqs-categories` }),
 				providesTags: ['help_center_faq_categories']
 			})
 		}),
@@ -80,17 +83,11 @@ export type GetHelpCenterGuidesApiArg = void;
 
 export type GetHelpCenterGuidesByCategoryApiResponse = /** status 200 OK */ Guide[];
 export type GetHelpCenterGuidesByCategoryApiArg = {
-	/** category slug */
-	categorySlug: string;
+	categoryId: string;
 };
 
-export type GetHelpCenterGuideByCategoryApiResponse = /** status 200 OK */ Guide;
-export type GetHelpCenterGuideByCategoryApiArg = {
-	/** category slug */
-	categorySlug: string;
-	/** guide slug */
-	guideSlug: string;
-};
+export type GetHelpCenterGuideByIdApiResponse = /** status 200 OK */ Guide;
+export type GetHelpCenterGuideByIdApiArg = string;
 
 export type GetHelpCenterGuideCategoriesApiResponse = /** status 200 OK */ GuideCategory[];
 export type GetHelpCenterGuideCategoriesApiArg = void;
@@ -100,8 +97,7 @@ export type GetHelpCenterFaqsApiArg = void;
 
 export type GetHelpCenterFaqsByCategoryApiResponse = /** status 200 OK */ Faq[];
 export type GetHelpCenterFaqsByCategoryApiArg = {
-	/** category slug */
-	categorySlug: string;
+	categoryId: string;
 };
 
 export type GetMostlyFaqsApiResponse = /** status 200 OK */ Faq[];
@@ -141,7 +137,7 @@ export type FaqCategory = {
 export const {
 	useGetHelpCenterGuidesQuery,
 	useGetHelpCenterGuidesByCategoryQuery,
-	useGetHelpCenterGuideByCategoryQuery,
+	useGetHelpCenterGuideByIdQuery,
 	useGetHelpCenterGuideCategoriesQuery,
 	useGetHelpCenterFaqsQuery,
 	useGetHelpCenterFaqsByCategoryQuery,

@@ -1,5 +1,5 @@
 import { apiService as api } from 'src/store/apiService';
-import { DropResult } from 'react-beautiful-dnd';
+import { DropResult } from '@hello-pangea/dnd';
 import { PartialDeep } from 'type-fest';
 import _ from '@lodash';
 import { createSelector } from '@reduxjs/toolkit';
@@ -27,12 +27,12 @@ const ScrumboardApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getScrumboardMembers: build.query<GetScrumboardMembersApiResponse, GetScrumboardMembersApiArg>({
-				query: () => ({ url: `/mock-api/scrumboard/members` }),
+				query: () => ({ url: `/api/mock/scrumboard/members` }),
 				providesTags: ['scrumboard_members']
 			}),
 			createScrumboardMember: build.mutation<CreateScrumboardMemberApiResponse, CreateScrumboardMemberApiArg>({
 				query: (member) => ({
-					url: `/mock-api/scrumboard/members`,
+					url: `/api/mock/scrumboard/members`,
 					method: 'POST',
 					data: member
 				}),
@@ -40,13 +40,13 @@ const ScrumboardApi = api
 			}),
 			getScrumboardMember: build.query<GetScrumboardMemberApiResponse, GetScrumboardMemberApiArg>({
 				query: (memberId) => ({
-					url: `/mock-api/scrumboard/members/${memberId}`
+					url: `/api/mock/scrumboard/members/${memberId}`
 				}),
 				providesTags: ['scrumboard_member']
 			}),
 			updateScrumboardMember: build.mutation<UpdateScrumboardMemberApiResponse, UpdateScrumboardMemberApiArg>({
 				query: (member) => ({
-					url: `/mock-api/scrumboard/members/${member.id}`,
+					url: `/api/mock/scrumboard/members/${member.id}`,
 					method: 'PUT',
 					data: member
 				}),
@@ -54,14 +54,15 @@ const ScrumboardApi = api
 			}),
 			deleteScrumboardMember: build.mutation<DeleteScrumboardMemberApiResponse, DeleteScrumboardMemberApiArg>({
 				query: (memberId) => ({
-					url: `/mock-api/scrumboard/members/${memberId}`,
+					url: `/api/mock/scrumboard/members/${memberId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['scrumboard_members']
 			}),
 			getScrumboardBoardLists: build.query<GetScrumboardBoardListsApiResponse, GetScrumboardBoardListsApiArg>({
 				query: (boardId) => ({
-					url: `/mock-api/scrumboard/boards/${boardId}/lists`
+					url: `/api/mock/scrumboard/lists`,
+					params: { boardId }
 				}),
 				providesTags: ['scrumboard_board_lists']
 			}),
@@ -69,16 +70,16 @@ const ScrumboardApi = api
 				CreateScrumboardBoardListApiResponse,
 				CreateScrumboardBoardListApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/lists`,
+				query: (listItem) => ({
+					url: `/api/mock/scrumboard/lists`,
 					method: 'POST',
-					data: queryArg.list
+					data: listItem
 				}),
 				invalidatesTags: ['scrumboard_board_lists', 'scrumboard_board']
 			}),
 			getScrumboardBoardList: build.query<GetScrumboardBoardListApiResponse, GetScrumboardBoardListApiArg>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/lists/${queryArg.listId}`
+				query: (listId) => ({
+					url: `/api/mock/scrumboard/lists/${listId}`
 				}),
 				providesTags: ['scrumboard_board_lists', 'scrumboard_board_list']
 			}),
@@ -86,10 +87,10 @@ const ScrumboardApi = api
 				UpdateScrumboardBoardListApiResponse,
 				UpdateScrumboardBoardListApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/lists/${queryArg.list.id}`,
+				query: (list) => ({
+					url: `/api/mock/scrumboard/lists/${list.id}`,
 					method: 'PUT',
-					data: queryArg.list
+					data: list
 				}),
 				invalidatesTags: ['scrumboard_board_lists', 'scrumboard_board_list']
 			}),
@@ -97,15 +98,16 @@ const ScrumboardApi = api
 				DeleteScrumboardBoardListApiResponse,
 				DeleteScrumboardBoardListApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/lists/${queryArg.listId}`,
+				query: (listId) => ({
+					url: `/api/mock/scrumboard/lists/${listId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['scrumboard_board_lists', 'scrumboard_board']
 			}),
 			getScrumboardBoardLabels: build.query<GetScrumboardBoardLabelsApiResponse, GetScrumboardBoardLabelsApiArg>({
 				query: (boardId) => ({
-					url: `/mock-api/scrumboard/boards/${boardId}/labels`
+					url: `/api/mock/scrumboard/labels`,
+					params: { boardId }
 				}),
 				providesTags: ['scrumboard_board_labels']
 			}),
@@ -114,15 +116,15 @@ const ScrumboardApi = api
 				CreateScrumboardBoardLabelApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/labels`,
+					url: `/api/mock/scrumboard/labels`,
 					method: 'POST',
-					data: queryArg.label
+					data: { ...queryArg.label, boardId: queryArg.boardId }
 				}),
 				invalidatesTags: ['scrumboard_board_labels']
 			}),
 			getScrumboardBoardLabel: build.query<GetScrumboardBoardLabelApiResponse, GetScrumboardBoardLabelApiArg>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/labels/${queryArg.labelId}`
+				query: (labelId) => ({
+					url: `/api/mock/scrumboard/labels/${labelId}`
 				}),
 				providesTags: ['scrumboard_board_label']
 			}),
@@ -130,10 +132,10 @@ const ScrumboardApi = api
 				UpdateScrumboardBoardLabelApiResponse,
 				UpdateScrumboardBoardLabelApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/labels/${queryArg.label.id}`,
+				query: (label) => ({
+					url: `/api/mock/scrumboard/labels/${label.id}`,
 					method: 'PUT',
-					data: queryArg.label
+					data: label
 				}),
 				invalidatesTags: ['scrumboard_board_label']
 			}),
@@ -141,8 +143,8 @@ const ScrumboardApi = api
 				DeleteScrumboardBoardLabelApiResponse,
 				DeleteScrumboardBoardLabelApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/labels/${queryArg.labelId}`,
+				query: (labelId) => ({
+					url: `/api/mock/scrumboard/labels/${labelId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['scrumboard_board_labels']
@@ -152,7 +154,8 @@ const ScrumboardApi = api
 				GetScrumboardBoardCardListApiArg
 			>({
 				query: (boardId) => ({
-					url: `/mock-api/scrumboard/boards/${boardId}/cards`
+					url: `/api/mock/scrumboard/cards`,
+					params: { boardId }
 				}),
 				providesTags: ['scrumboard_board_cards']
 			}),
@@ -161,9 +164,9 @@ const ScrumboardApi = api
 				CreateScrumboardBoardCardApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/lists/${queryArg.listId}/cards`,
+					url: `/api/mock/scrumboard/cards`,
 					method: 'POST',
-					data: CardModel(queryArg.card)
+					data: CardModel({ ...queryArg.card, boardId: queryArg.boardId, listId: queryArg.listId })
 				}),
 				invalidatesTags: ['scrumboard_board_cards', 'scrumboard_board']
 			}),
@@ -171,10 +174,10 @@ const ScrumboardApi = api
 				UpdateScrumboardBoardCardApiResponse,
 				UpdateScrumboardBoardCardApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/cards/${queryArg.card.id}`,
+				query: (card) => ({
+					url: `/api/mock/scrumboard/cards/${card.id}`,
 					method: 'PUT',
-					data: queryArg.card
+					data: card
 				}),
 				invalidatesTags: ['scrumboard_board_cards']
 			}),
@@ -182,19 +185,19 @@ const ScrumboardApi = api
 				DeleteScrumboardBoardCardApiResponse,
 				DeleteScrumboardBoardCardApiArg
 			>({
-				query: (queryArg) => ({
-					url: `/mock-api/scrumboard/boards/${queryArg.boardId}/cards/${queryArg.cardId}`,
+				query: (cardId) => ({
+					url: `/api/mock/scrumboard/cards/${cardId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['scrumboard_board_cards']
 			}),
 			getScrumboardBoards: build.query<GetScrumboardBoardsApiResponse, GetScrumboardBoardsApiArg>({
-				query: () => ({ url: `/mock-api/scrumboard/boards` }),
+				query: () => ({ url: `/api/mock/scrumboard/boards` }),
 				providesTags: ['scrumboard_boards']
 			}),
 			createScrumboardBoard: build.mutation<CreateScrumboardBoardApiResponse, CreateScrumboardBoardApiArg>({
 				query: (board) => ({
-					url: `/mock-api/scrumboard/boards`,
+					url: `/api/mock/scrumboard/boards`,
 					method: 'POST',
 					data: BoardModel(board)
 				}),
@@ -202,13 +205,13 @@ const ScrumboardApi = api
 			}),
 			getScrumboardBoard: build.query<GetScrumboardBoardApiResponse, GetScrumboardBoardApiArg>({
 				query: (boardId) => ({
-					url: `/mock-api/scrumboard/boards/${boardId}`
+					url: `/api/mock/scrumboard/boards/${boardId}`
 				}),
 				providesTags: ['scrumboard_board']
 			}),
 			updateScrumboardBoard: build.mutation<UpdateScrumboardBoardApiResponse, UpdateScrumboardBoardApiArg>({
 				query: (board) => ({
-					url: `/mock-api/scrumboard/boards/${board.id}`,
+					url: `/api/mock/scrumboard/boards/${board.id}`,
 					method: 'PUT',
 					data: board
 				}),
@@ -216,7 +219,7 @@ const ScrumboardApi = api
 			}),
 			deleteScrumboardBoard: build.mutation<DeleteScrumboardBoardApiResponse, DeleteScrumboardBoardApiArg>({
 				query: (boardId) => ({
-					url: `/mock-api/scrumboard/boards/${boardId}`,
+					url: `/api/mock/scrumboard/boards/${boardId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['scrumboard_boards']
@@ -235,10 +238,32 @@ const ScrumboardApi = api
 					);
 
 					return {
-						url: `/mock-api/scrumboard/boards/${board.id}`,
+						url: `/api/mock/scrumboard/boards/${board.id}`,
 						method: 'PUT',
-						data: { lists: ordered }
+						data: { ...board, lists: ordered }
 					};
+				},
+				onQueryStarted: async (queryArg, { dispatch, queryFulfilled }) => {
+					const { orderResult, board } = queryArg;
+
+					// Optimistically update the state
+					const ordered = reorder(
+						_.merge([], board.lists),
+						orderResult.source.index,
+						orderResult.destination.index
+					);
+
+					dispatch(
+						ScrumboardApi.util.updateQueryData('getScrumboardBoard', board.id, (draft) => {
+							draft.lists = ordered;
+						})
+					);
+
+					try {
+						await queryFulfilled; // Wait for the mutation to complete
+					} catch {
+						// Handle error if needed (e.g., revert the optimistic update)
+					}
 				},
 				invalidatesTags: ['scrumboard_boards', 'scrumboard_board']
 			}),
@@ -256,10 +281,32 @@ const ScrumboardApi = api
 					);
 
 					return {
-						url: `/mock-api/scrumboard/boards/${board.id}`,
+						url: `/api/mock/scrumboard/boards/${board.id}`,
 						method: 'PUT',
-						data: { lists: ordered }
+						data: { ...board, lists: ordered }
 					};
+				},
+				onQueryStarted: async (queryArg, { dispatch, queryFulfilled }) => {
+					const { orderResult, board } = queryArg;
+
+					// Optimistically update the state
+					const ordered = reorderQuoteMap(
+						_.merge([], board.lists),
+						orderResult.source,
+						orderResult.destination
+					);
+
+					dispatch(
+						ScrumboardApi.util.updateQueryData('getScrumboardBoard', board.id, (draft) => {
+							draft.lists = ordered;
+						})
+					);
+
+					try {
+						await queryFulfilled; // Wait for the mutation to complete
+					} catch {
+						// Handle error if needed (e.g., revert the optimistic update)
+					}
 				},
 				invalidatesTags: ['scrumboard_board_list', 'scrumboard_board']
 			})
@@ -283,10 +330,7 @@ export type GetScrumboardBoardListsApiResponse = /** status 200 OK */ Scrumboard
 export type GetScrumboardBoardListsApiArg = string /** board id */;
 
 export type CreateScrumboardBoardListApiResponse = unknown;
-export type CreateScrumboardBoardListApiArg = {
-	boardId: string;
-	list: PartialDeep<ScrumboardList>;
-};
+export type CreateScrumboardBoardListApiArg = Omit<ScrumboardList, 'id'>;
 
 export type GetScrumboardMemberApiResponse = /** status 200 OK */ ScrumboardMember;
 export type GetScrumboardMemberApiArg = string /** member id */;
@@ -298,22 +342,13 @@ export type DeleteScrumboardMemberApiResponse = unknown;
 export type DeleteScrumboardMemberApiArg = string /** member id */;
 
 export type GetScrumboardBoardListApiResponse = /** status 200 OK */ ScrumboardList;
-export type GetScrumboardBoardListApiArg = {
-	listId: string;
-	boardId: string;
-};
+export type GetScrumboardBoardListApiArg = string;
 
 export type UpdateScrumboardBoardListApiResponse = unknown;
-export type UpdateScrumboardBoardListApiArg = {
-	boardId: string;
-	list: PartialDeep<ScrumboardList>;
-};
+export type UpdateScrumboardBoardListApiArg = ScrumboardList;
 
 export type DeleteScrumboardBoardListApiResponse = unknown;
-export type DeleteScrumboardBoardListApiArg = {
-	listId: string;
-	boardId: string;
-};
+export type DeleteScrumboardBoardListApiArg = string;
 
 export type GetScrumboardBoardLabelsApiResponse = /** status 200 OK */ ScrumboardLabel[];
 export type GetScrumboardBoardLabelsApiArg = string /** board id */;
@@ -325,27 +360,18 @@ export type CreateScrumboardBoardLabelApiArg = {
 };
 
 export type GetScrumboardBoardLabelApiResponse = /** status 200 OK */ ScrumboardLabel;
-export type GetScrumboardBoardLabelApiArg = {
-	labelId: string;
-	boardId: string;
-};
+export type GetScrumboardBoardLabelApiArg = string;
 
 export type UpdateScrumboardBoardLabelApiResponse = unknown;
-export type UpdateScrumboardBoardLabelApiArg = {
-	boardId: string;
-	label: PartialDeep<ScrumboardLabel>;
-};
+export type UpdateScrumboardBoardLabelApiArg = ScrumboardLabel;
 
 export type DeleteScrumboardBoardLabelApiResponse = unknown;
-export type DeleteScrumboardBoardLabelApiArg = {
-	labelId: string;
-	boardId: string;
-};
+export type DeleteScrumboardBoardLabelApiArg = string;
 
 export type GetScrumboardBoardCardListApiResponse = /** status 200 OK */ ScrumboardCard[];
 export type GetScrumboardBoardCardListApiArg = string /** board id */;
 
-export type CreateScrumboardBoardCardApiResponse = unknown;
+export type CreateScrumboardBoardCardApiResponse = /** status 200 OK */ ScrumboardCard;
 export type CreateScrumboardBoardCardApiArg = {
 	boardId: string;
 	listId: string;
@@ -353,16 +379,10 @@ export type CreateScrumboardBoardCardApiArg = {
 };
 
 export type UpdateScrumboardBoardCardApiResponse = unknown;
-export type UpdateScrumboardBoardCardApiArg = {
-	boardId: string;
-	card: PartialDeep<ScrumboardCard>;
-};
+export type UpdateScrumboardBoardCardApiArg = PartialDeep<ScrumboardCard>;
 
 export type DeleteScrumboardBoardCardApiResponse = unknown;
-export type DeleteScrumboardBoardCardApiArg = {
-	cardId: string;
-	boardId: string;
-};
+export type DeleteScrumboardBoardCardApiArg = string;
 
 export type GetScrumboardBoardsApiResponse = /** status 200 OK */ ScrumboardBoard[];
 export type GetScrumboardBoardsApiArg = void;

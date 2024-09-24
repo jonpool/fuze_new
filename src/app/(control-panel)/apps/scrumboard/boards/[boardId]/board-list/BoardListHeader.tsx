@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import { darken } from '@mui/material/styles';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+import { DraggableProvidedDragHandleProps } from '@hello-pangea/dnd';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -22,6 +22,7 @@ import {
 	useDeleteScrumboardBoardListMutation,
 	useUpdateScrumboardBoardListMutation
 } from '../../../ScrumboardApi';
+import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
 
 type FormType = {
 	title: ScrumboardList['title'];
@@ -50,6 +51,7 @@ function BoardListHeader(props: BoardListHeaderProps) {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
 	const [formOpen, setFormOpen] = useState(false);
 
+	const updateBoard = useUpdateScrumboardBoard();
 	const [removeList] = useDeleteScrumboardBoardListMutation();
 	const [updateList] = useUpdateScrumboardBoardListMutation();
 
@@ -95,7 +97,7 @@ function BoardListHeader(props: BoardListHeaderProps) {
 	}
 
 	function onSubmit(newData: FormType) {
-		updateList({ boardId, list: { id: list.id, ...newData } });
+		updateList({ ...list, title: newData.title });
 		handleCloseForm();
 	}
 
@@ -172,10 +174,15 @@ function BoardListHeader(props: BoardListHeaderProps) {
 					>
 						<MenuItem
 							onClick={() => {
-								removeList({
-									boardId,
-									listId: list.id
-								});
+								removeList(list.id)
+									.unwrap()
+									.then(() => {
+										updateBoard((board) => ({
+											...board,
+											lists: board.lists.filter((l) => l.id !== list.id)
+										}));
+										handleMenuClose();
+									});
 							}}
 						>
 							<ListItemIcon className="min-w-36">

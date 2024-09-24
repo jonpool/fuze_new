@@ -3,32 +3,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { lighten } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import FuseLoading from '@fuse/core/FuseLoading';
-import ActivityItem from './ActivityItem';
-import PostItem from './PostItem';
-import { Activity, Post, useGetProfileTimelineQuery } from '../../ProfileApi';
-
-export type TimelineResponseDataType = {
-	activities: Activity[];
-	posts: Post[];
-};
+import TImelineActivities from './TImelineActivities';
+import TimelinePosts from './TimelinePosts';
 
 /**
  * The timeline tab.
  */
 function TimelineTab() {
-	const { data: timeline, isLoading } = useGetProfileTimelineQuery();
-
-	if (isLoading) {
-		return <FuseLoading />;
-	}
-
 	const container = {
 		show: {
 			transition: {
@@ -68,14 +54,7 @@ function TimelineTab() {
 						</div>
 
 						<CardContent className="p-0">
-							<List className="p-0">
-								{timeline.activities.map((activity) => (
-									<ActivityItem
-										item={activity}
-										key={activity.id}
-									/>
-								))}
-							</List>
+							<TImelineActivities />
 						</CardContent>
 					</Card>
 				</div>
@@ -129,14 +108,7 @@ function TimelineTab() {
 						</Box>
 					</Card>
 
-					{timeline.posts.map((post) => (
-						<motion.div
-							variants={item}
-							key={post.id}
-						>
-							<PostItem item={post} />
-						</motion.div>
-					))}
+					<TimelinePosts />
 				</div>
 			</div>
 		</motion.div>

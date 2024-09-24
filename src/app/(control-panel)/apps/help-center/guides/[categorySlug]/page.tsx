@@ -18,7 +18,7 @@ function GuideCategory() {
 	const category = useMemo(() => _.find(categories, { slug: categorySlug }), [categories, categorySlug]);
 
 	const { data: guides } = useGetHelpCenterGuidesByCategoryQuery({
-		categorySlug
+		categoryId: category?.id
 	});
 
 	return (

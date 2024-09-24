@@ -5,7 +5,7 @@ function MaterialSolidPage() {
 		<IconListPage
 			pageTitle="Material Solid"
 			iconSet="material-solid"
-			apiUrl="/mock-api/ui/icons/material"
+			apiUrl="/api/mock/ui/material-icons"
 		/>
 	);
 }

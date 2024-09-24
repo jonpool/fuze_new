@@ -6,7 +6,7 @@ function HeroiconsOutlinePage() {
 			pageTitle="Heroicons Outline"
 			referenceUrl="https://heroicons.com/"
 			iconSet="heroicons-outline"
-			apiUrl="/mock-api/ui/icons/heroicons"
+			apiUrl="/api/mock/ui/heroicons-icons"
 		/>
 	);
 }

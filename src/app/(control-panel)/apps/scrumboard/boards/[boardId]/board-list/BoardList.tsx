@@ -3,7 +3,7 @@ import { lighten, styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
 import clsx from 'clsx';
 import { useRef } from 'react';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from '@hello-pangea/dnd';
 import _ from '@lodash';
 import BoardAddCard from '../board-card/BoardAddCard';
 import BoardCard from '../board-card/BoardCard';

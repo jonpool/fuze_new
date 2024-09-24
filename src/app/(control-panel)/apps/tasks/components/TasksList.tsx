@@ -1,17 +1,23 @@
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
-import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from '@hello-pangea/dnd';
 import FuseLoading from '@fuse/core/FuseLoading';
+import { useMemo } from 'react';
+import _ from '@lodash';
 import TaskListItem from './TaskListItem';
 import SectionListItem from './SectionListItem';
-import { useGetTasksQuery, useReorderTasksMutation } from '../TasksApi';
+import { Task, useGetTasksQuery } from '../TasksApi';
+import useReorderTasks from '../hooks/useReorderTasks';
 
 /**
  * The tasks list.
  */
 function TasksList() {
 	const { data: tasks, isLoading } = useGetTasksQuery();
-	const [reorderList] = useReorderTasksMutation();
+	const reorderList = useReorderTasks();
+	const orderedTasks = useMemo(() => {
+		return _.merge([], tasks).sort((a: Task, b: Task) => a.order - b.order) as Task[];
+	}, [tasks]);
 
 	if (isLoading) {
 		return <FuseLoading />;
@@ -61,13 +67,12 @@ function TasksList() {
 					{(provided: DroppableProvided) => (
 						<>
 							<div ref={provided.innerRef}>
-								{tasks.map((item, index) => {
+								{orderedTasks?.map((item) => {
 									if (item.type === 'task') {
 										return (
 											<TaskListItem
-												data={item}
-												index={index}
 												key={item.id}
+												data={item}
 											/>
 										);
 									}
@@ -76,7 +81,6 @@ function TasksList() {
 										return (
 											<SectionListItem
 												key={item.id}
-												index={index}
 												data={item}
 											/>
 										);

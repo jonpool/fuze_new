@@ -11,12 +11,12 @@ const ECommerceApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getECommerceProducts: build.query<GetECommerceProductsApiResponse, GetECommerceProductsApiArg>({
-				query: () => ({ url: `/mock-api/ecommerce/products` }),
+				query: () => ({ url: `/api/mock/ecommerce/products` }),
 				providesTags: ['eCommerce_products']
 			}),
 			deleteECommerceProducts: build.mutation<DeleteECommerceProductsApiResponse, DeleteECommerceProductsApiArg>({
 				query: (productIds) => ({
-					url: `/mock-api/ecommerce/products`,
+					url: `/api/mock/ecommerce/products`,
 					method: 'DELETE',
 					data: productIds
 				}),
@@ -24,13 +24,13 @@ const ECommerceApi = api
 			}),
 			getECommerceProduct: build.query<GetECommerceProductApiResponse, GetECommerceProductApiArg>({
 				query: (productId) => ({
-					url: `/mock-api/ecommerce/products/${productId}`
+					url: `/api/mock/ecommerce/products/${productId}`
 				}),
 				providesTags: ['eCommerce_product', 'eCommerce_products']
 			}),
 			createECommerceProduct: build.mutation<CreateECommerceProductApiResponse, CreateECommerceProductApiArg>({
 				query: (newProduct) => ({
-					url: `/mock-api/ecommerce/products`,
+					url: `/api/mock/ecommerce/products`,
 					method: 'POST',
 					data: ProductModel(newProduct)
 				}),
@@ -38,7 +38,7 @@ const ECommerceApi = api
 			}),
 			updateECommerceProduct: build.mutation<UpdateECommerceProductApiResponse, UpdateECommerceProductApiArg>({
 				query: (product) => ({
-					url: `/mock-api/ecommerce/products/${product.id}`,
+					url: `/api/mock/ecommerce/products/${product.id}`,
 					method: 'PUT',
 					data: product
 				}),
@@ -46,22 +46,22 @@ const ECommerceApi = api
 			}),
 			deleteECommerceProduct: build.mutation<DeleteECommerceProductApiResponse, DeleteECommerceProductApiArg>({
 				query: (productId) => ({
-					url: `/mock-api/ecommerce/products/${productId}`,
+					url: `/api/mock/ecommerce/products/${productId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['eCommerce_product', 'eCommerce_products']
 			}),
 			getECommerceOrders: build.query<GetECommerceOrdersApiResponse, GetECommerceOrdersApiArg>({
-				query: () => ({ url: `/mock-api/ecommerce/orders` }),
+				query: () => ({ url: `/api/mock/ecommerce/orders` }),
 				providesTags: ['eCommerce_orders']
 			}),
 			getECommerceOrder: build.query<GetECommerceOrderApiResponse, GetECommerceOrderApiArg>({
-				query: (orderId) => ({ url: `/mock-api/ecommerce/orders/${orderId}` }),
+				query: (orderId) => ({ url: `/api/mock/ecommerce/orders/${orderId}` }),
 				providesTags: ['eCommerce_order']
 			}),
 			updateECommerceOrder: build.mutation<UpdateECommerceOrderApiResponse, UpdateECommerceOrderApiArg>({
 				query: (order) => ({
-					url: `/mock-api/ecommerce/orders/${order.id}`,
+					url: `/api/mock/ecommerce/orders/${order.id}`,
 					method: 'PUT',
 					data: order
 				}),
@@ -69,14 +69,14 @@ const ECommerceApi = api
 			}),
 			deleteECommerceOrder: build.mutation<DeleteECommerceOrderApiResponse, DeleteECommerceOrderApiArg>({
 				query: (orderId) => ({
-					url: `/mock-api/ecommerce/orders/${orderId}`,
+					url: `/api/mock/ecommerce/orders/${orderId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['eCommerce_order', 'eCommerce_orders']
 			}),
 			deleteECommerceOrders: build.mutation<DeleteECommerceOrdersApiResponse, DeleteECommerceOrdersApiArg>({
 				query: (ordersId) => ({
-					url: `/mock-api/ecommerce/orders`,
+					url: `/api/mock/ecommerce/orders`,
 					method: 'DELETE',
 					data: ordersId
 				}),

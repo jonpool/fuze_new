@@ -42,16 +42,16 @@ function FileManagerHeader() {
 							separator={<NavigateNextIcon fontSize="small" />}
 						>
 							<div />
-							{path.map((item, index) =>
+							{path?.map((item, index) =>
 								index + 1 === path.length ? (
-									<Typography key={index}>{item.name}</Typography>
+									<Typography key={index}>{item?.name}</Typography>
 								) : (
 									<Link
 										key={index}
 										color="text.primary"
-										href={`/apps/file-manager/${item.id}`}
+										href={`/apps/file-manager/${item?.id}`}
 									>
-										{item.name}
+										{item?.name}
 									</Link>
 								)
 							)}

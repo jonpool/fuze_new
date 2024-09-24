@@ -15,7 +15,6 @@ import MainSidebarMoreMenu from './MainSidebarMoreMenu';
 import { ChatAppContext } from '../../layout';
 import ChatListItem from './ChatListItem';
 import {
-	Chat,
 	useGetMessengerChatsQuery,
 	useGetMessengerContactsQuery,
 	useGetMessengerUserProfileQuery
@@ -28,7 +27,7 @@ function MainSidebar() {
 	const { setUserSidebarOpen } = useContext(ChatAppContext);
 	const { data: contacts } = useGetMessengerContactsQuery();
 	const { data: user } = useGetMessengerUserProfileQuery();
-	const { data: chats } = useGetMessengerChatsQuery();
+	const { data: chatList } = useGetMessengerChatsQuery();
 
 	const [searchText, setSearchText] = useState('');
 
@@ -92,7 +91,7 @@ function MainSidebar() {
 			<div className="flex-auto">
 				<List className="w-full">
 					{useMemo(() => {
-						if (!contacts || !chats) {
+						if (!contacts || !chatList) {
 							return null;
 						}
 
@@ -104,17 +103,11 @@ function MainSidebar() {
 							return FuseUtils.filterArrayByString(arr, _searchText);
 						}
 
-						const chatListContacts =
-							contacts?.length > 0 && chats?.length > 0
-								? chats.map((_chat) => ({
-										..._chat,
-										...contacts.find((_contact) => _contact.id === _chat.contactId)
-									}))
-								: [];
-
 						const filteredContacts = getFilteredArray([...contacts], searchText);
 
-						const filteredChatList = getFilteredArray([...chatListContacts], searchText) as Chat[];
+						const filteredChatList = chatList.filter((chat) =>
+							filteredContacts.some((contact) => chat.contactIds.includes(contact.id))
+						);
 
 						const container = {
 							show: {
@@ -181,7 +174,7 @@ function MainSidebar() {
 								))}
 							</motion.div>
 						);
-					}, [contacts, chats, searchText])}
+					}, [contacts, chatList, searchText])}
 				</List>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ function HeroiconsSolidPage() {
 			pageTitle="Heroicons Solid"
 			referenceUrl="https://heroicons.com/"
 			iconSet="heroicons-solid"
-			apiUrl="/mock-api/ui/icons/heroicons"
+			apiUrl="/api/mock/ui/heroicons-icons"
 		/>
 	);
 }

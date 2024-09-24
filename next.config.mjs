@@ -1,5 +1,14 @@
+import aliases from './aliases.js';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	experimental: {
+		turbo: {
+			caching: false, // Disable caching on build
+			parallel: true, // Keep parallel builds enabled
+			resolveAlias: { ...aliases }
+		}
+	},
 	reactStrictMode: false,
 	swcMinify: true,
 	eslint: {

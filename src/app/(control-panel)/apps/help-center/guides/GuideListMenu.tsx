@@ -30,7 +30,7 @@ function GuideListMenu(props: GuideListMenuProps) {
 					component={Link}
 					className="flex mt-12 font-medium no-underline hover:underline"
 					key={item.id}
-					href={`/apps/help-center/guides/${categorySlug}/${item.slug}`}
+					href={`/apps/help-center/guides/${categorySlug}/${item.id}`}
 					color="secondary"
 					role="button"
 				>

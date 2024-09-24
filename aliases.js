@@ -2,6 +2,7 @@
  * Create aliases for the paths
  */
 const aliases = (prefix = `src`) => ({
+  '@': `${prefix}`,
   '@fuse': `${prefix}/@fuse`,
   '@history': `${prefix}/@history`,
   '@lodash': `${prefix}/@lodash`,
@@ -14,4 +15,4 @@ const aliases = (prefix = `src`) => ({
   'app/AppContext': `${prefix}/app/AppContext`,
 });
 
-module.exports = aliases;
+export default aliases;

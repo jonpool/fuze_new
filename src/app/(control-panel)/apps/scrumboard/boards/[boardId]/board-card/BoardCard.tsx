@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from '@hello-pangea/dnd';
 import { useAppDispatch } from 'src/store/hooks';
 import { AvatarGroup } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
@@ -89,7 +89,7 @@ function BoardCard(props: BoardCardProps) {
 						)}
 						onClick={(ev) => handleCardClick(ev, card)}
 					>
-						{board.settings.cardCoverImages && cardCoverImage && (
+						{board?.settings?.cardCoverImages && cardCoverImage && (
 							<img
 								className="block"
 								src={cardCoverImage.src}

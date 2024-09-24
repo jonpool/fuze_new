@@ -45,11 +45,19 @@ function DevelopmentServerDoc() {
 				running on <b>http://localhost:3000</b> although it could change depending on your setup.
 			</Typography>
 
-			<Typography className="mb-16" component="p">
+			<Typography
+				className="mb-16"
+				component="p"
+			>
 				For more information on the Next.js App Router and development server, please refer to the{' '}
-				<Link href="https://nextjs.org/docs/app/api-reference/next-cli#development" target="_blank" rel="noopener noreferrer">
+				<Link
+					href="https://nextjs.org/docs/app/api-reference/next-cli#development"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					official Next.js documentation
-				</Link>.
+				</Link>
+				.
 			</Typography>
 
 			<div className="my-24 px-24 py-16 border-1 border-red rounded-xl">

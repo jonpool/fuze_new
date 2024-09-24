@@ -6,9 +6,14 @@ import { memo, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import clsx from 'clsx';
 import { Box, CircularProgress } from '@mui/material';
-import { selectSelectedContactId, setSelectedContactId, openChatPanel } from './messengerPanelSlice';
+import { selectSelectedChatId, setSelectedChatId, openChatPanel } from './messengerPanelSlice';
 import ContactButton from './ContactButton';
-import { useGetMessengerChatsQuery, useGetMessengerContactsQuery } from '../MessengerApi';
+import {
+	useCreateMessengerChatMutation,
+	useGetMessengerChatsQuery,
+	useGetMessengerContactsQuery,
+	useGetMessengerUserProfileQuery
+} from '../MessengerApi';
 
 const Root = styled(FuseScrollbars)(({ theme }) => ({
 	background: theme.palette.background.paper
@@ -36,17 +41,20 @@ type ContactListProps = {
 function ContactList(props: ContactListProps) {
 	const { className } = props;
 	const dispatch = useAppDispatch();
-	const selectedContactId = useAppSelector(selectSelectedContactId);
+	const selectedChatId = useAppSelector(selectSelectedChatId);
 	const contactListScroll = useRef<HTMLDivElement>(null);
+	const { data: user } = useGetMessengerUserProfileQuery();
 
+	const [createChat] = useCreateMessengerChatMutation();
 	const { data: chats, isLoading: isChatsLoading } = useGetMessengerChatsQuery();
 	const { data: contacts, isLoading: isContactsLoading } = useGetMessengerContactsQuery();
+	const { data: chatList } = useGetMessengerChatsQuery();
 
 	const chatListContacts = useMemo(() => {
 		return contacts?.length > 0 && chats?.length > 0
 			? chats.map((_chat) => ({
 					..._chat,
-					...contacts.find((_contact) => _contact.id === _chat.contactId)
+					...contacts.find((_contact) => _chat.contactIds.includes(_contact.id))
 				}))
 			: [];
 	}, [contacts, chats]);
@@ -61,9 +69,19 @@ function ContactList(props: ContactListProps) {
 
 	const handleContactClick = (contactId: string) => {
 		dispatch(openChatPanel());
-		dispatch(setSelectedContactId(contactId));
 
-		scrollToTop();
+		const chat = chatList?.find((chat) => chat.contactIds.includes(contactId));
+
+		if (chat) {
+			dispatch(setSelectedChatId(chat.id));
+			scrollToTop();
+		} else {
+			createChat({ contactIds: [contactId, user.id] }).then((res) => {
+				const chatId = res.data.id;
+				dispatch(setSelectedChatId(chatId));
+				scrollToTop();
+			});
+		}
 	};
 
 	if (isContactsLoading || isChatsLoading) {
@@ -102,7 +120,7 @@ function ContactList(props: ContactListProps) {
 								>
 									<ContactButton
 										contact={contact}
-										selectedContactId={selectedContactId}
+										selectedChatId={selectedChatId}
 										onClick={handleContactClick}
 									/>
 								</motion.div>
@@ -119,7 +137,7 @@ function ContactList(props: ContactListProps) {
 							>
 								<ContactButton
 									contact={contact}
-									selectedContactId={selectedContactId}
+									selectedChatId={selectedChatId}
 									onClick={handleContactClick}
 								/>
 							</motion.div>

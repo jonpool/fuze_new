@@ -8,13 +8,26 @@ const FileManagerApi = api
 	})
 	.injectEndpoints({
 		endpoints: (build) => ({
+			getFileManagerAllFolderItems: build.query<
+				GetFileManagerAllFolderItemsApiResponse,
+				GetFileManagerAllFolderItemsApiArg
+			>({
+				query: () => ({
+					url: `/api/mock/file-manager/items`,
+					params: { type: 'folder' }
+				}),
+				providesTags: ['file_manager_folder']
+			}),
 			getFileManagerFolder: build.query<GetFileManagerFolderApiResponse, GetFileManagerFolderApiArg>({
-				query: (folderId) => ({ url: `/mock-api/file-manager/${folderId}` }),
+				query: (folderId) => ({
+					url: `/api/mock/file-manager/items`,
+					params: { folderId }
+				}),
 				providesTags: ['file_manager_folder']
 			}),
 			updateFileManagerFolder: build.mutation<UpdateFileManagerFolderApiResponse, UpdateFileManagerFolderApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/file-manager/${queryArg.folderId}`,
+					url: `/api/mock/file-manager/items/${queryArg.folderId}`,
 					method: 'PUT',
 					body: queryArg.fileManagerItem
 				}),
@@ -22,7 +35,7 @@ const FileManagerApi = api
 			}),
 			deleteFileManagerFolder: build.mutation<DeleteFileManagerFolderApiResponse, DeleteFileManagerFolderApiArg>({
 				query: (folderId) => ({
-					url: `/mock-api/file-manager/${folderId}`,
+					url: `/api/mock/file-manager/items/${folderId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['file_manager_folder']
@@ -32,10 +45,10 @@ const FileManagerApi = api
 	});
 export default FileManagerApi;
 
-export type GetFileManagerFolderApiResponse = {
-	items: FileManagerItem[];
-	path: FileManagerPath[];
-};
+export type GetFileManagerAllFolderItemsApiResponse = FileManagerItem[];
+export type GetFileManagerAllFolderItemsApiArg = null;
+
+export type GetFileManagerFolderApiResponse = FileManagerItem[];
 export type GetFileManagerFolderApiArg = string; // folderId
 
 export type UpdateFileManagerFolderApiResponse = unknown;
@@ -66,8 +79,12 @@ export type FileManagerItem = {
 	description: string;
 };
 
-export const { useGetFileManagerFolderQuery, useUpdateFileManagerFolderMutation, useDeleteFileManagerFolderMutation } =
-	FileManagerApi;
+export const {
+	useGetFileManagerFolderQuery,
+	useUpdateFileManagerFolderMutation,
+	useDeleteFileManagerFolderMutation,
+	useGetFileManagerAllFolderItemsQuery
+} = FileManagerApi;
 
 export type FileManagerApiType = {
 	[FileManagerApi.reducerPath]: ReturnType<typeof FileManagerApi.reducer>;

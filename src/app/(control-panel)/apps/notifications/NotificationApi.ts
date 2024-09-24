@@ -9,30 +9,34 @@ const NotificationApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getAllNotifications: build.query<GetAllNotificationsApiResponse, GetAllNotificationsApiArg>({
-				query: () => ({ url: `/mock-api/notifications` }),
+				query: () => ({ url: `/api/mock/notifications` }),
 				providesTags: ['notifications']
 			}),
 			createNotification: build.mutation<CreateNotificationApiResponse, CreateNotificationApiArg>({
 				query: (notification) => ({
-					url: `/mock-api/notifications`,
+					url: `/api/mock/notifications`,
 					method: 'POST',
 					data: notification
 				}),
 				invalidatesTags: ['notifications']
 			}),
-			deleteAllNotifications: build.mutation<DeleteAllNotificationsApiResponse, DeleteAllNotificationsApiArg>({
-				query: () => ({ url: `/mock-api/notifications`, method: 'DELETE' }),
+			deleteNotifications: build.mutation<DeleteNotificationsApiResponse, DeleteNotificationsApiArg>({
+				query: (notificationIds) => ({
+					url: `/api/mock/notifications`,
+					method: 'DELETE',
+					data: notificationIds
+				}),
 				invalidatesTags: ['notifications']
 			}),
 			getNotification: build.query<GetNotificationApiResponse, GetNotificationApiArg>({
 				query: (notificationId) => ({
-					url: `/mock-api/notifications/${notificationId}`
+					url: `/api/mock/notifications/${notificationId}`
 				}),
 				providesTags: ['notification']
 			}),
 			deleteNotification: build.mutation<DeleteNotificationApiResponse, DeleteNotificationApiArg>({
 				query: (notificationId) => ({
-					url: `/mock-api/notifications/${notificationId}`,
+					url: `/api/mock/notifications/${notificationId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['notifications']
@@ -48,8 +52,8 @@ export type GetAllNotificationsApiArg = void;
 export type CreateNotificationApiResponse = unknown;
 export type CreateNotificationApiArg = Notification;
 
-export type DeleteAllNotificationsApiResponse = unknown;
-export type DeleteAllNotificationsApiArg = void;
+export type DeleteNotificationsApiResponse = unknown;
+export type DeleteNotificationsApiArg = string[];
 
 export type GetNotificationApiResponse = /** status 200 OK */ Notification;
 export type GetNotificationApiArg = string; /** notification id */
@@ -71,7 +75,7 @@ export type Notification = {
 export const {
 	useGetAllNotificationsQuery,
 	useCreateNotificationMutation,
-	useDeleteAllNotificationsMutation,
+	useDeleteNotificationsMutation,
 	useGetNotificationQuery,
 	useDeleteNotificationMutation
 } = NotificationApi;

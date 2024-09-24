@@ -1,5 +1,5 @@
 import _ from '@lodash';
-import { DraggableLocation, DropResult } from 'react-beautiful-dnd';
+import { DraggableLocation, DropResult } from '@hello-pangea/dnd';
 import { ScrumboardBoardList } from '../ScrumboardApi';
 
 // a little function to help us with reordering the result

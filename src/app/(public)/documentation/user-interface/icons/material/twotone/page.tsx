@@ -5,7 +5,7 @@ function MaterialTwotonePage() {
 		<IconListPage
 			pageTitle="Material Twotone"
 			iconSet="material-twotone"
-			apiUrl="/mock-api/ui/icons/material"
+			apiUrl="/api/mock/ui/material-icons"
 		/>
 	);
 }

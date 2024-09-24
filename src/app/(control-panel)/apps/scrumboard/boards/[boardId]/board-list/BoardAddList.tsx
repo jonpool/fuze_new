@@ -13,6 +13,7 @@ import { useParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { ScrumboardList, useCreateScrumboardBoardListMutation } from '../../../ScrumboardApi';
+import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
 
 type FormType = {
 	title: ScrumboardList['title'];
@@ -34,7 +35,9 @@ const schema = z.object({
  */
 function BoardAddList() {
 	const routeParams = useParams();
-	const { boardId } = routeParams;
+	const { boardId } = routeParams as { boardId: string };
+
+	const updateBoard = useUpdateScrumboardBoard();
 
 	const [createList] = useCreateScrumboardBoardListMutation();
 
@@ -64,8 +67,14 @@ function BoardAddList() {
 	}
 
 	function onSubmit(data: FormType) {
-		createList({ boardId, list: data });
-		handleCloseForm();
+		createList({ boardId, ...data }).then((res) => {
+			const newList = res?.data as ScrumboardList;
+			updateBoard((board) => ({
+				...board,
+				lists: [...board.lists, { id: newList.id, cards: [] }]
+			}));
+			handleCloseForm();
+		});
 	}
 
 	return (

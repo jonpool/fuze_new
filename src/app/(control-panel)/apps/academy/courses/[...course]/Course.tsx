@@ -22,7 +22,12 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import Error404Page from 'src/app/(public)/404/Error404Page';
 import CourseInfo from '../../CourseInfo';
 import CourseProgress from '../../CourseProgress';
-import { useGetAcademyCourseQuery, useUpdateAcademyCourseMutation } from '../../AcademyApi';
+import {
+	useGetAcademyCourseQuery,
+	useUpdateAcademyCourseMutation,
+	useGetAcademyCourseStepsQuery
+} from '../../AcademyApi';
+import CourseStepContent from './CourseStepContent';
 
 /**
  * The Course page.
@@ -40,6 +45,12 @@ function Course() {
 			skip: !courseId
 		}
 	);
+	const { data: courseSteps, isLoading: isCourseStepsLoading } = useGetAcademyCourseStepsQuery(
+		{ courseId },
+		{
+			skip: !courseId
+		}
+	);
 	const [updateCourse] = useUpdateAcademyCourseMutation();
 
 	useEffect(() => {
@@ -48,7 +59,10 @@ function Course() {
 		 * Change ActiveStep to 1
 		 */
 		if (course && course?.progress?.currentStep === 0) {
-			updateCourse({ courseId, data: { progress: { currentStep: 1 } } });
+			updateCourse({
+				courseId,
+				data: { ...course, progress: { currentStep: 1, completed: 0 } }
+			});
 		}
 	}, [course]);
 
@@ -63,7 +77,16 @@ function Course() {
 			return;
 		}
 
-		updateCourse({ courseId, data: { progress: { currentStep: index } } });
+		updateCourse({
+			courseId,
+			data: {
+				...course,
+				progress: {
+					currentStep: index,
+					completed: index === course.totalSteps ? 1 : course.progress.completed
+				}
+			}
+		});
 	}
 
 	function handleNext() {
@@ -80,7 +103,7 @@ function Course() {
 
 	const activeStep = currentStep !== 0 ? currentStep : 1;
 
-	if (isLoading) {
+	if (isLoading || isCourseStepsLoading) {
 		return <FuseLoading />;
 	}
 
@@ -124,19 +147,12 @@ function Course() {
 						enableMouseEvents
 						onChangeIndex={handleStepChange}
 					>
-						{course.steps.map((step: { content: string }, index: number) => (
+						{courseSteps?.map((step, index: number) => (
 							<div
 								className="flex justify-center p-16 pb-64 sm:p-24 sm:pb-64 md:p-48 md:pb-64"
 								key={index}
 							>
-								<Paper className="w-full max-w-lg mx-auto sm:my-8 lg:mt-16 p-24 sm:p-40 sm:py-48 rounded-xl shadow overflow-hidden">
-									<div
-										className="prose prose-sm dark:prose-invert w-full max-w-full"
-										// eslint-disable-next-line react/no-danger
-										dangerouslySetInnerHTML={{ __html: step.content }}
-										dir={theme.direction}
-									/>
-								</Paper>
+								<CourseStepContent step={step} />
 							</div>
 						))}
 					</SwipeableViews>
@@ -232,7 +248,7 @@ function Course() {
 						activeStep={activeStep - 1}
 						orientation="vertical"
 					>
-						{course.steps.map((step, index) => {
+						{courseSteps?.map((step, index) => {
 							return (
 								<Step
 									key={index}

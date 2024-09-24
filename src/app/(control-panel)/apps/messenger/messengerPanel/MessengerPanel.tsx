@@ -13,8 +13,12 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import _ from '@lodash';
 import Chat from './Chat';
 import ContactList from './ContactList';
-import { selectSelectedContactId, selectChatPanelOpen, closeChatPanel, openChatPanel } from './messengerPanelSlice';
-import { useGetMessengerContactsQuery } from '../MessengerApi';
+import { selectSelectedChatId, selectChatPanelOpen, closeChatPanel, openChatPanel } from './messengerPanelSlice';
+import {
+	useGetMessengerChatsQuery,
+	useGetMessengerContactsQuery,
+	useGetMessengerUserProfileQuery
+} from '../MessengerApi';
 
 const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
 	position: 'sticky',
@@ -105,9 +109,16 @@ function MessengerPanel() {
 	const theme = useTheme();
 	const ref = useRef<HTMLDivElement>(null);
 
-	const selectedContactId = useAppSelector(selectSelectedContactId);
+	const selectedChatId = useAppSelector(selectSelectedChatId);
 	const { data: contacts } = useGetMessengerContactsQuery();
-	const selectedContact = _.find(contacts, { id: selectedContactId });
+	const { data: chatList } = useGetMessengerChatsQuery();
+	const { data: user } = useGetMessengerUserProfileQuery();
+
+	const chat = chatList?.find((chat) => chat.id === selectedChatId);
+
+	const contactId = chat?.contactIds?.find((id) => id !== user?.id);
+
+	const selectedContact = _.find(contacts, { id: contactId });
 	const open = useAppSelector(selectChatPanelOpen);
 
 	const handlers = useSwipeable({
@@ -179,7 +190,7 @@ function MessengerPanel() {
 					className="shadow-md"
 				>
 					<Toolbar className="px-4">
-						{(!open || selectedContactId === '') && (
+						{(!open || selectedChatId === '') && (
 							<div className="flex flex-1 items-center px-3 space-x-12">
 								<IconButton
 									className="w-56 h-56"
@@ -189,7 +200,7 @@ function MessengerPanel() {
 								>
 									<FuseSvgIcon size={24}>heroicons-outline:chat-bubble-left-right</FuseSvgIcon>
 								</IconButton>
-								{selectedContactId === '' && (
+								{selectedChatId === '' && (
 									<Typography
 										className="text-15"
 										color="inherit"
@@ -224,7 +235,7 @@ function MessengerPanel() {
 				<Paper className="flex flex-1 flex-row min-h-px shadow-0">
 					<ContactList className="flex shrink-0" />
 
-					{open && selectedContact ? (
+					{open && selectedChatId ? (
 						<Chat className="flex flex-1 z-10" />
 					) : (
 						<div className="flex flex-col flex-1 items-center justify-center p-24">

@@ -8,7 +8,7 @@ import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 're
 import InputBase from '@mui/material/InputBase';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useAppSelector } from 'src/store/hooks';
-import { selectSelectedContactId } from './messengerPanelSlice';
+import { selectSelectedChatId } from './messengerPanelSlice';
 import {
 	Message,
 	useGetMessengerChatQuery,
@@ -99,11 +99,14 @@ type ChatProps = {
  */
 function Chat(props: ChatProps) {
 	const { className } = props;
-	const selectedContactId = useAppSelector(selectSelectedContactId);
+	const selectedChatId = useAppSelector(selectSelectedChatId);
 
-	const { data: chat } = useGetMessengerChatQuery(selectedContactId);
+	const { data: chat } = useGetMessengerChatQuery(selectedChatId);
 	const { data: user } = useGetMessengerUserProfileQuery();
 	const [sendMessage] = useSendMessengerMessageMutation();
+	const { data: messages } = useGetMessengerChatQuery(selectedChatId, {
+		skip: !selectedChatId
+	});
 
 	const [messageText, setMessageText] = useState('');
 
@@ -147,8 +150,8 @@ function Chat(props: ChatProps) {
 							return i === chat.length - 1 || (chat[i + 1] && chat[i + 1].contactId !== item.contactId);
 						}
 
-						return chat?.length > 0
-							? chat.map((item, i) => {
+						return messages?.length > 0
+							? messages.map((item, i) => {
 									return (
 										<StyledMessageRow
 											key={i}
@@ -168,7 +171,9 @@ function Chat(props: ChatProps) {
 													className="time absolute hidden w-full text-sm -mb-20 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
 													color="text.secondary"
 												>
-													{formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
+													{formatDistanceToNow(new Date(item.createdAt), {
+														addSuffix: true
+													})}
 												</Typography>
 											</div>
 										</StyledMessageRow>
@@ -208,7 +213,7 @@ function Chat(props: ChatProps) {
 
 					sendMessage({
 						message: messageText,
-						contactId: selectedContactId
+						chatId: selectedChatId
 					});
 
 					setMessageText('');
@@ -244,7 +249,7 @@ function Chat(props: ChatProps) {
 						</form>
 					)
 				);
-			}, [chat, messageText, selectedContactId])}
+			}, [chat, messageText, selectedChatId])}
 		</Paper>
 	);
 }

@@ -18,45 +18,55 @@ const NotesApi = api
 			getNotesList: build.query<GetNotesListApiResponse, GetNotesListApiArg>({
 				query: (routeParams) => {
 					const { filter, id } = routeParams;
-					let url = '';
 
 					if (filter === 'labels') {
-						url = `/mock-api/notes/labels/${id}`;
+						return {
+							url: `/api/mock/notes/items`,
+							params: {
+								labels: id
+							}
+						};
 					}
 
 					if (filter === 'archive') {
-						url = `/mock-api/notes/archive`;
+						return {
+							url: `/api/mock/notes/items`,
+							params: {
+								archived: true
+							}
+						};
 					}
 
 					if (filter === 'reminders') {
-						url = `/mock-api/notes/reminders`;
-					}
-
-					if (!filter) {
-						url = `/mock-api/notes`;
+						return {
+							url: `/api/mock/notes/items`,
+							params: {
+								reminder: 'not_null'
+							}
+						};
 					}
 
 					return {
-						url
+						url: `/api/mock/notes/items`
 					};
 				},
 				providesTags: ['notes_list']
 			}),
 			createNotesItem: build.mutation<CreateNotesItemApiResponse, CreateNotesItemApiArg>({
 				query: (note) => ({
-					url: `/mock-api/notes`,
+					url: `/api/mock/notes/items`,
 					method: 'POST',
 					data: note
 				}),
 				invalidatesTags: ['notes_list', 'notes_item']
 			}),
 			getNotesItem: build.query<GetNotesItemApiResponse, GetNotesItemApiArg>({
-				query: (queryArg) => ({ url: `/mock-api/notes/${queryArg.noteId}` }),
+				query: (queryArg) => ({ url: `/api/mock/notes/items/${queryArg.noteId}` }),
 				providesTags: ['notes_item']
 			}),
 			updateNotesItem: build.mutation<UpdateNotesItemApiResponse, UpdateNotesItemApiArg>({
 				query: (note) => ({
-					url: `/mock-api/notes/${note.id}`,
+					url: `/api/mock/notes/items/${note.id}`,
 					method: 'PUT',
 					data: note
 				}),
@@ -64,30 +74,30 @@ const NotesApi = api
 			}),
 			deleteNotesItem: build.mutation<DeleteNotesItemApiResponse, DeleteNotesItemApiArg>({
 				query: (noteId) => ({
-					url: `/mock-api/notes/${noteId}`,
+					url: `/api/mock/notes/items/${noteId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['notes_list']
 			}),
 			getNotesLabels: build.query<GetNotesLabelsApiResponse, GetNotesLabelsApiArg>({
-				query: () => ({ url: `/mock-api/notes/labels` }),
+				query: () => ({ url: `/api/mock/notes/labels` }),
 				providesTags: ['notes_labels']
 			}),
 			createNotesLabel: build.mutation<CreateNotesLabelApiResponse, CreateNotesLabelApiArg>({
 				query: (noteLabel) => ({
-					url: `/mock-api/notes/labels`,
+					url: `/api/mock/notes/labels`,
 					method: 'POST',
 					data: noteLabel
 				}),
 				invalidatesTags: ['notes_label', 'notes_labels']
 			}),
 			getNotesLabel: build.query<GetNotesLabelApiResponse, GetNotesLabelApiArg>({
-				query: (queryArg) => ({ url: `/mock-api/notes/labels/${queryArg.labelId}` }),
+				query: (queryArg) => ({ url: `/api/mock/notes/labels/${queryArg.labelId}` }),
 				providesTags: ['notes_label']
 			}),
 			updateNotesLabel: build.mutation<UpdateNotesLabelApiResponse, UpdateNotesLabelApiArg>({
 				query: (notesLabel) => ({
-					url: `/mock-api/notes/labels/${notesLabel.id}`,
+					url: `/api/mock/notes/labels/${notesLabel.id}`,
 					method: 'PUT',
 					data: notesLabel
 				}),
@@ -95,17 +105,17 @@ const NotesApi = api
 			}),
 			deleteNotesLabel: build.mutation<DeleteNotesLabelApiResponse, DeleteNotesLabelApiArg>({
 				query: (labelId) => ({
-					url: `/mock-api/notes/labels/${labelId}`,
+					url: `/api/mock/notes/labels/${labelId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['notes_labels']
 			}),
 			getNotesArchivedItems: build.query<GetNotesArchivedItemsApiResponse, GetNotesArchivedItemsApiArg>({
-				query: () => ({ url: `/mock-api/notes/archive` }),
+				query: () => ({ url: `/api/mock/notes/archive` }),
 				providesTags: ['notes_archived_items']
 			}),
 			getNotesReminderItems: build.query<GetNotesReminderItemsApiResponse, GetNotesReminderItemsApiArg>({
-				query: () => ({ url: `/mock-api/notes/reminder` }),
+				query: () => ({ url: `/api/mock/notes/reminder` }),
 				providesTags: ['notes_reminder_items']
 			})
 		}),

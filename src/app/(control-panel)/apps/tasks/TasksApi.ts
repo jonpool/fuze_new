@@ -10,15 +10,17 @@ const TasksApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getTasks: build.query<GetTasksApiResponse, GetTasksApiArg>({
-				query: () => ({ url: `/mock-api/tasks` }),
+				query: () => ({ url: `/api/mock/tasks/items` }),
 				providesTags: ['tasks_list']
 			}),
 			reorderTasks: build.mutation<ReorderTasksApiResponse, ReorderTasksApiArg>({
-				query: ({ startIndex, endIndex }) => ({
-					url: `/mock-api/tasks/reorder`,
-					method: 'POST',
-					data: { startIndex, endIndex }
-				}),
+				query: ({ startIndex, endIndex }) => {
+					return {
+						url: `/api/mock/tasks/reorder`,
+						method: 'POST',
+						data: { startIndex, endIndex }
+					};
+				},
 				invalidatesTags: ['tasks_list'],
 				async onQueryStarted(_, { dispatch, queryFulfilled }) {
 					try {
@@ -40,38 +42,65 @@ const TasksApi = api
 			}),
 			createTasksItem: build.mutation<CreateTasksItemApiResponse, CreateTasksItemApiArg>({
 				query: (task) => ({
-					url: `/mock-api/tasks`,
+					url: `/api/mock/tasks/items`,
 					method: 'POST',
 					data: task
 				}),
 				invalidatesTags: ['tasks_list']
 			}),
 			getTasksItem: build.query<GetTasksItemApiResponse, GetTasksItemApiArg>({
-				query: (taskId) => ({ url: `/mock-api/tasks/${taskId}` }),
+				query: (taskId) => ({ url: `/api/mock/tasks/items/${taskId}` }),
 				providesTags: ['tasks_item']
 			}),
 			deleteTasksItem: build.mutation<DeleteTasksItemApiResponse, DeleteTasksItemApiArg>({
 				query: (taskId) => ({
-					url: `/mock-api/tasks/${taskId}`,
+					url: `/api/mock/tasks/items/${taskId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['tasks_list']
 			}),
+			updateTasksItems: build.mutation<UpdateTasksItemsApiResponse, UpdateTasksItemsApiArg>({
+				query: (tasks) => ({
+					url: `/api/mock/tasks/items`,
+					method: 'PUT',
+					data: tasks
+				}),
+				invalidatesTags: ['tasks_item', 'tasks_list'],
+				async onQueryStarted(updatedTasks, { dispatch, queryFulfilled }) {
+					const patchResult = dispatch(
+						TasksApi.util.updateQueryData('getTasks', undefined, (draft) => {
+							// Update the draft state with the optimistic update
+							updatedTasks.forEach((updatedTask) => {
+								const index = draft.findIndex((task) => task.id === updatedTask.id);
+
+								if (index !== -1) {
+									draft[index] = { ...draft[index], ...updatedTask };
+								}
+							});
+						})
+					);
+					try {
+						await queryFulfilled;
+					} catch {
+						patchResult.undo(); // Rollback if the mutation fails
+					}
+				}
+			}),
 			updateTasksItem: build.mutation<UpdateTasksItemApiResponse, UpdateTasksItemApiArg>({
 				query: (task) => ({
-					url: `/mock-api/tasks/${task.id}`,
+					url: `/api/mock/tasks/items/${task.id}`,
 					method: 'PUT',
 					data: task
 				}),
 				invalidatesTags: ['tasks_item', 'tasks_list']
 			}),
 			getTasksTags: build.query<GetTasksTagsApiResponse, GetTasksTagsApiArg>({
-				query: () => ({ url: `/mock-api/tasks/tags` }),
+				query: () => ({ url: `/api/mock/tasks/tags` }),
 				providesTags: ['tasks_tags']
 			}),
 			createTasksTag: build.mutation<CreateTasksTagApiResponse, CreateTasksTagApiArg>({
 				query: (tag) => ({
-					url: `/mock-api/tasks/tags`,
+					url: `/api/mock/tasks/tags`,
 					method: 'POST',
 					data: tag
 				}),
@@ -96,6 +125,9 @@ export type GetTasksItemApiArg = string;
 
 export type DeleteTasksItemApiResponse = unknown;
 export type DeleteTasksItemApiArg = string;
+
+export type UpdateTasksItemsApiResponse = /** status 200 OK */ Task[];
+export type UpdateTasksItemsApiArg = Partial<Task>[];
 
 export type UpdateTasksItemApiResponse = /** status 200 OK */ Task;
 export type UpdateTasksItemApiArg = Task;
@@ -135,6 +167,7 @@ export const {
 	useGetTasksItemQuery,
 	useDeleteTasksItemMutation,
 	useUpdateTasksItemMutation,
+	useUpdateTasksItemsMutation,
 	useGetTasksTagsQuery,
 	useCreateTasksTagMutation,
 	useReorderTasksMutation

@@ -1,6 +1,6 @@
 import _ from '@lodash';
 import mockApi from '../mock-api.json';
-import { FaqCategory, GuideCategory } from '../../app/main/apps/help-center/HelpCenterApi';
+import { FaqCategory, GuideCategory } from '../../app/(control-panel)/apps/help-center/HelpCenterApi';
 import ExtendedMockAdapter, { Params } from '../ExtendedMockAdapter';
 
 const faqsDB = mockApi.components.examples.help_center_faqs.value;

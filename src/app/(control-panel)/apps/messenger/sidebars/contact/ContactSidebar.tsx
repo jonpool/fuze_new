@@ -2,7 +2,6 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns/format';
-import { useParams } from 'next/navigation';
 import { useContext } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { lighten } from '@mui/material/styles';
@@ -15,10 +14,9 @@ import { useGetMessengerContactQuery } from '../../MessengerApi';
  * The contact sidebar.
  */
 function ContactSidebar() {
-	const { setContactSidebarOpen } = useContext(ChatAppContext);
+	const { contactSidebarOpen, setContactSidebarOpen } = useContext(ChatAppContext);
 
-	const routeParams = useParams<{ contactId: string }>();
-	const { contactId } = routeParams;
+	const contactId = contactSidebarOpen;
 
 	const { data: contact } = useGetMessengerContactQuery(contactId, {
 		skip: !contactId

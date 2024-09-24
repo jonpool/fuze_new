@@ -7,7 +7,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import MailActionsMenu from './MailActionsMenu';
 import MailLabelsMenu from './MailLabelsMenu';
-import { useApplyMailboxMailActionMutation } from '../../MailboxApi';
+import { useUpdateMailboxMailsMutation } from '../../MailboxApi';
 import useGetMail from '../../hooks/useGetMail';
 
 /**
@@ -16,7 +16,7 @@ import useGetMail from '../../hooks/useGetMail';
 function MailToolbar() {
 	const { data: mail, isLoading } = useGetMail();
 
-	const [setActionToMails] = useApplyMailboxMailActionMutation();
+	const [updateMails] = useUpdateMailboxMailsMutation();
 
 	const theme = useTheme();
 	const router = useRouter();
@@ -49,7 +49,7 @@ function MailToolbar() {
 				<MailLabelsMenu
 					labels={mail.labels}
 					onChange={(value) => {
-						setActionToMails({ type: 'labels', value, ids: [mail.id] });
+						updateMails([{ id: mail.id, labels: value }]);
 					}}
 					className="mx-2"
 				/>
@@ -57,7 +57,9 @@ function MailToolbar() {
 				<Tooltip title="Set important">
 					<IconButton
 						className="mx-2"
-						onClick={() => setActionToMails({ type: 'important', value: !mail.important, ids: [mail.id] })}
+						onClick={() => {
+							updateMails([{ id: mail.id, important: !mail.important }]);
+						}}
 					>
 						<FuseSvgIcon className={clsx(mail.important && 'text-red-600 dark:text-red-500')}>
 							heroicons-outline:exclamation-circle
@@ -68,7 +70,9 @@ function MailToolbar() {
 				<Tooltip title="Set starred">
 					<IconButton
 						className="mx-2"
-						onClick={() => setActionToMails({ type: 'starred', value: !mail.starred, ids: [mail.id] })}
+						onClick={() => {
+							updateMails([{ id: mail.id, starred: !mail.starred }]);
+						}}
 					>
 						<FuseSvgIcon className={clsx(mail.starred && 'text-orange-500 dark:text-red-400')}>
 							heroicons-outline:star

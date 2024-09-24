@@ -2,10 +2,10 @@ import { WithSlice, createSlice } from '@reduxjs/toolkit';
 import { rootReducer } from 'src/store/lazyLoadedSlices';
 
 const initialState: {
-	selectedContactId: string;
+	selectedChatId: string;
 	open: boolean;
 } = {
-	selectedContactId: '',
+	selectedChatId: '',
 	open: false
 };
 
@@ -16,11 +16,11 @@ export const messengerPanelSlice = createSlice({
 	name: 'chatPanel',
 	initialState,
 	reducers: {
-		setSelectedContactId: (state, action) => {
-			state.selectedContactId = action.payload as string;
+		setSelectedChatId: (state, action) => {
+			state.selectedChatId = action.payload as string;
 		},
-		removeSelectedContactId: (state) => {
-			state.selectedContactId = '';
+		removeSelectedChatId: (state) => {
+			state.selectedChatId = '';
 		},
 		toggleChatPanel: (state) => {
 			state.open = !state;
@@ -33,7 +33,7 @@ export const messengerPanelSlice = createSlice({
 		}
 	},
 	selectors: {
-		selectSelectedContactId: (state) => state.selectedContactId,
+		selectSelectedChatId: (state) => state.selectedChatId,
 		selectChatPanelOpen: (state) => state.open
 	}
 });
@@ -47,10 +47,10 @@ declare module 'src/store/lazyLoadedSlices' {
 	export interface LazyLoadedSlices extends WithSlice<typeof messengerPanelSlice> {}
 }
 
-export const { setSelectedContactId, openChatPanel, toggleChatPanel, removeSelectedContactId, closeChatPanel } =
+export const { setSelectedChatId, openChatPanel, toggleChatPanel, removeSelectedChatId, closeChatPanel } =
 	messengerPanelSlice.actions;
 
-export const { selectSelectedContactId, selectChatPanelOpen } = injectedSlice.selectors;
+export const { selectSelectedChatId, selectChatPanelOpen } = injectedSlice.selectors;
 
 export type contactsSliceType = typeof messengerPanelSlice;
 

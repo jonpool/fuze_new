@@ -12,24 +12,24 @@ const ContactsApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getContactsList: build.query<GetContactsListApiResponse, GetContactsListApiArg>({
-				query: () => ({ url: `/mock-api/contacts` }),
+				query: () => ({ url: `/api/mock/contacts/items` }),
 				providesTags: ['contacts']
 			}),
 			createContactsItem: build.mutation<CreateContactsItemApiResponse, CreateContactsItemApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/contacts`,
+					url: `/api/mock/contacts/items`,
 					method: 'POST',
 					data: queryArg.contact
 				}),
 				invalidatesTags: ['contacts']
 			}),
 			getContactsItem: build.query<GetContactsItemApiResponse, GetContactsItemApiArg>({
-				query: (contactId) => ({ url: `/mock-api/contacts/${contactId}` }),
+				query: (contactId) => ({ url: `/api/mock/contacts/items/${contactId}` }),
 				providesTags: ['contacts_item']
 			}),
 			updateContactsItem: build.mutation<UpdateContactsItemApiResponse, UpdateContactsItemApiArg>({
 				query: (contact) => ({
-					url: `/mock-api/contacts/${contact.id}`,
+					url: `/api/mock/contacts/items/${contact.id}`,
 					method: 'PUT',
 					data: contact
 				}),
@@ -37,18 +37,18 @@ const ContactsApi = api
 			}),
 			deleteContactsItem: build.mutation<DeleteContactsItemApiResponse, DeleteContactsItemApiArg>({
 				query: (contactId) => ({
-					url: `/mock-api/contacts/${contactId}`,
+					url: `/api/mock/contacts/items/${contactId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['contacts']
 			}),
 			getContactsTag: build.query<GetContactsTagApiResponse, GetContactsTagApiArg>({
-				query: (tagId) => ({ url: `/mock-api/contacts/tags/${tagId}` }),
+				query: (tagId) => ({ url: `/api/mock/contacts/tags/${tagId}` }),
 				providesTags: ['contacts_tag']
 			}),
 			updateContactsTag: build.mutation<UpdateContactsTagApiResponse, UpdateContactsTagApiArg>({
 				query: (tag) => ({
-					url: `/mock-api/contacts/tags/${tag.id}`,
+					url: `/api/mock/contacts/tags/${tag.id}`,
 					method: 'PUT',
 					body: tag
 				}),
@@ -56,22 +56,22 @@ const ContactsApi = api
 			}),
 			deleteContactsTag: build.mutation<DeleteContactsTagApiResponse, DeleteContactsTagApiArg>({
 				query: (tagId) => ({
-					url: `/mock-api/contacts/tags/${tagId}`,
+					url: `/api/mock/contacts/tags/${tagId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['contacts_tags']
 			}),
 			getContactsTags: build.query<GetContactTagsApiResponse, GetContactTagsApiArg>({
-				query: () => ({ url: `/mock-api/contacts/tags` }),
+				query: () => ({ url: `/api/mock/contacts/tags` }),
 				providesTags: ['contacts_tags']
 			}),
 			getContactsCountries: build.query<GetContactsCountriesApiResponse, GetContactsCountriesApiArg>({
-				query: () => ({ url: `/mock-api/countries` }),
+				query: () => ({ url: `/api/mock/countries` }),
 				providesTags: ['countries']
 			}),
 			createContactsTag: build.mutation<CreateContactsTagApiResponse, CreateContactsTagApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/contacts/tags`,
+					url: `/api/mock/contacts/tags`,
 					method: 'POST',
 					body: queryArg.tag
 				}),

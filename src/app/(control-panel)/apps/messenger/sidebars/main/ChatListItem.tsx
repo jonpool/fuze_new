@@ -8,7 +8,7 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import ListItemButton from '@mui/material/ListItemButton';
 import { NavLinkAdapterPropsType } from '@fuse/core/NavLinkAdapter/NavLinkAdapter';
 import UserAvatar from '../../components/UserAvatar';
-import { Chat, Contact } from '../../MessengerApi';
+import { Chat, Contact, useGetMessengerContactsQuery, useGetMessengerUserProfileQuery } from '../../MessengerApi';
 
 type ExtendedListItemProps = NavLinkAdapterPropsType & {
 	component: React.ElementType<NavLinkAdapterPropsType>;
@@ -29,16 +29,20 @@ type ChatListItemProps = {
  */
 function ChatListItem(props: ChatListItemProps) {
 	const { item } = props;
+	const { data: user } = useGetMessengerUserProfileQuery();
+	const { data: contacts } = useGetMessengerContactsQuery();
+
+	const contactId = item.contactIds.find((id) => id !== user?.id);
+	const contact = contacts?.find((contact) => contact.id === contactId);
 
 	return (
 		<StyledListItem
 			component={NavLinkAdapter}
 			className="px-24 py-12 min-h-80"
 			href={`/apps/messenger/${item.id}`}
-			end
 			activeClassName="active"
 		>
-			<UserAvatar user={item} />
+			<UserAvatar user={contact} />
 
 			<ListItemText
 				classes={{
@@ -46,11 +50,11 @@ function ChatListItem(props: ChatListItemProps) {
 					primary: 'font-medium text-base',
 					secondary: 'truncate'
 				}}
-				primary={item.name}
+				primary={contact?.name}
 				secondary={item.lastMessage}
 			/>
 
-			{item.contactId && (
+			{contactId && (
 				<div className="flex flex-col justify-center items-end">
 					{item?.lastMessageAt && (
 						<Typography

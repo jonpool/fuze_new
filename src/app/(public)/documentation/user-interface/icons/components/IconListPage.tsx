@@ -161,7 +161,6 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 							key={icon}
 							icon={icon}
 							size={form.size}
-							selectedIcon={selectedIcon}
 							iconSet={iconSet}
 							onIconSelect={handleSelect}
 							sx={{ borderColor: icon === selectedIcon && 'secondary.main' }}

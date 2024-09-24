@@ -3,7 +3,11 @@ import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useSnackbar } from 'notistack';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
-import { useCreateNotificationMutation, useDeleteAllNotificationsMutation } from './NotificationApi';
+import {
+	useCreateNotificationMutation,
+	useDeleteNotificationsMutation,
+	useGetAllNotificationsQuery
+} from './NotificationApi';
 import NotificationModel from './models/NotificationModel';
 import NotificationTemplate from './NotificationTemplate';
 
@@ -11,12 +15,13 @@ import NotificationTemplate from './NotificationTemplate';
  * The Notifications app header.
  */
 function NotificationsAppHeader() {
-	const [deleteAllNotifications] = useDeleteAllNotificationsMutation();
 	const [addNotification] = useCreateNotificationMutation();
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+	const [deleteNotifications] = useDeleteNotificationsMutation();
+	const { data: notifications } = useGetAllNotificationsQuery();
 
 	function handleDismissAll() {
-		deleteAllNotifications();
+		deleteNotifications(notifications.map((notification) => notification.id));
 	}
 
 	function demoNotification() {

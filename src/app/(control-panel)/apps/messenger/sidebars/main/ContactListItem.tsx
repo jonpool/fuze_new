@@ -1,20 +1,13 @@
-import { styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import ListItemButton from '@mui/material/ListItemButton';
-import { NavLinkAdapterPropsType } from '@fuse/core/NavLinkAdapter/NavLinkAdapter';
+import { useRouter } from 'next/navigation';
 import UserAvatar from '../../components/UserAvatar';
-import { Contact } from '../../MessengerApi';
-
-type ExtendedListItemProps = NavLinkAdapterPropsType & {
-	component: React.ElementType<NavLinkAdapterPropsType>;
-};
-
-const StyledListItem = styled(ListItemButton)<ExtendedListItemProps>(({ theme }) => ({
-	'&.active': {
-		backgroundColor: theme.palette.background.default
-	}
-}));
+import {
+	Contact,
+	useCreateMessengerChatMutation,
+	useGetMessengerChatsQuery,
+	useGetMessengerUserProfileQuery
+} from '../../MessengerApi';
 
 type ContactListItemProps = {
 	item: Contact;
@@ -25,14 +18,29 @@ type ContactListItemProps = {
  */
 function ContactListItem(props: ContactListItemProps) {
 	const { item } = props;
+	const { data: chatList } = useGetMessengerChatsQuery();
+	const [createChat] = useCreateMessengerChatMutation();
+	const { data: user } = useGetMessengerUserProfileQuery();
+
+	const router = useRouter();
+
+	function handleClick() {
+		const chat = chatList?.find((chat) => chat.contactIds.includes(item.id));
+
+		if (chat) {
+			router.push(`/apps/messenger/${chat.id}`);
+		} else {
+			createChat({ contactIds: [item.id, user.id] }).then((res) => {
+				const chatId = res.data.id;
+				router.push(`/apps/messenger/${chatId}`);
+			});
+		}
+	}
 
 	return (
-		<StyledListItem
-			component={NavLinkAdapter}
+		<ListItemButton
 			className="px-24 py-12 min-h-80"
-			href={`/apps/messenger/${item.id}`}
-			end
-			activeClassName="active"
+			onClick={handleClick}
 		>
 			<UserAvatar user={item} />
 
@@ -44,7 +52,7 @@ function ContactListItem(props: ContactListItemProps) {
 				}}
 				primary={item.name}
 			/>
-		</StyledListItem>
+		</ListItemButton>
 	);
 }
 

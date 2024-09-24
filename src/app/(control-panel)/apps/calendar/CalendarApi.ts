@@ -12,34 +12,34 @@ const CalendarApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getCalendarEvents: build.query<GetCalendarEventsApiResponse, GetCalendarEventsApiArg>({
-				query: () => ({ url: `/mock-api/calendar/events` }),
+				query: () => ({ url: `/api/mock/calendar/events` }),
 				providesTags: ['calendar_events']
 			}),
 			createCalendarEvent: build.mutation<CreateCalendarEventApiResponse, CreateCalendarEventApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/calendar/events`,
+					url: `/api/mock/calendar/events`,
 					method: 'POST',
 					data: queryArg.Event
 				}),
 				invalidatesTags: ['calendar_events']
 			}),
 			updateCalendarEvent: build.mutation<UpdateCalendarEventApiResponse, UpdateCalendarEventApiArg>({
-				query: (Event) => ({
-					url: `/mock-api/calendar/events/${Event.id}`,
+				query: (event) => ({
+					url: `/api/mock/calendar/events/${event.id}`,
 					method: 'PUT',
-					data: Event
+					data: event
 				}),
 				invalidatesTags: ['calendar_event', 'calendar_events']
 			}),
 			deleteCalendarEvent: build.mutation<DeleteCalendarEventApiResponse, DeleteCalendarEventApiArg>({
 				query: (id) => ({
-					url: `/mock-api/calendar/events/${id}`,
+					url: `/api/mock/calendar/events/${id}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['calendar_event', 'calendar_events']
 			}),
 			getCalendarLabels: build.query<GetCalendarLabelsApiResponse, GetCalendarLabelsApiArg>({
-				query: () => ({ url: `/mock-api/calendar/labels` }),
+				query: () => ({ url: `/api/mock/calendar/labels` }),
 				providesTags: ['calendar_labels'],
 				async onQueryStarted(id, { dispatch, queryFulfilled }) {
 					try {
@@ -53,7 +53,7 @@ const CalendarApi = api
 			createCalendarLabel: build.mutation<CreateCalendarLabelApiResponse, CreateCalendarLabelApiArg>({
 				query: (Label) => {
 					return {
-						url: `/mock-api/calendar/labels`,
+						url: `/api/mock/calendar/labels`,
 						method: 'POST',
 						data: Label
 					};
@@ -62,7 +62,7 @@ const CalendarApi = api
 			}),
 			updateCalendarLabel: build.mutation<UpdateCalendarLabelApiResponse, UpdateCalendarLabelApiArg>({
 				query: (Label) => ({
-					url: `/mock-api/calendar/labels/${Label.id}`,
+					url: `/api/mock/calendar/labels/${Label.id}`,
 					method: 'PUT',
 					data: Label
 				}),
@@ -70,7 +70,7 @@ const CalendarApi = api
 			}),
 			deleteCalendarLabel: build.mutation<DeleteCalendarLabelApiResponse, DeleteCalendarLabelApiArg>({
 				query: (id) => ({
-					url: `/mock-api/calendar/labels/${id}`,
+					url: `/api/mock/calendar/labels/${id}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['calendar_events', 'calendar_labels']

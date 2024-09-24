@@ -13,14 +13,19 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useAppSelector } from 'src/store/hooks';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FaqList from './faqs/FaqList';
-import { useGetHelpCenterMostlyFaqsQuery } from './HelpCenterApi';
+import { useGetHelpCenterFaqCategoriesQuery, useGetHelpCenterFaqsByCategoryQuery } from './HelpCenterApi';
 
 /**
  * The help center home.
  */
 function HelpCenterApp() {
 	const mainThemeDark = useAppSelector(selectMainThemeDark);
-	const { data: faqsMost } = useGetHelpCenterMostlyFaqsQuery();
+	const { data: faqsCategories } = useGetHelpCenterFaqCategoriesQuery();
+	const mostFaqCategoryId = faqsCategories?.[0]?.id;
+	const { data: faqsMost } = useGetHelpCenterFaqsByCategoryQuery(
+		{ categoryId: mostFaqCategoryId },
+		{ skip: !mostFaqCategoryId }
+	);
 
 	return (
 		<div className="flex flex-col flex-auto min-w-0">

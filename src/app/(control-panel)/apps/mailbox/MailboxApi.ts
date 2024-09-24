@@ -1,5 +1,5 @@
 import { apiService as api } from 'src/store/apiService';
-import { LabelColorsType } from './@mailView/[[...mailParams]]/labelColors';
+import { LabelColorsType } from './@mailView/[...mailParams]/labelColors';
 
 export const addTagTypes = [
 	'mailbox_mail',
@@ -17,69 +17,52 @@ const MailboxApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getMailboxMails: build.query<GetMailboxMailsApiResponse, GetMailboxMailsApiArg>({
-				query: (routeParams) => {
-					const { category, subCategory } = routeParams;
-
-					const url = `/mock-api/mailbox/mails/${category}/${subCategory}`;
-
-					return {
-						url
-					};
-				},
+				query: (params) => ({
+					url: `/api/mock/mailbox/mails`,
+					params
+				}),
 				providesTags: ['mailbox_mails']
 			}),
 			getMailboxMail: build.query<GetMailboxMailApiResponse, GetMailboxMailApiArg>({
 				query: (mailId) => ({
-					url: `/mock-api/mailbox/mail/${mailId}`
+					url: `/api/mock/mailbox/mails/${mailId}`
 				}),
 				providesTags: ['mailbox_mail']
 			}),
-			applyMailboxMailAction: build.mutation<ApplyMailboxMailActionApiResponse, ApplyMailboxMailActionApiArg>({
+			updateMailboxMails: build.mutation<UpdateMailboxMailsApiResponse, UpdateMailboxMailsApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/mailbox/mails/actions`,
-					method: 'POST',
+					url: `/api/mock/mailbox/mails`,
+					method: 'PUT',
 					data: queryArg
 				}),
 				invalidatesTags: ['mailbox_mails', 'mailbox_mail']
 			}),
 			createMailboxMail: build.mutation<CreateMailboxMailApiResponse, CreateMailboxMailApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/mailbox/mails/${queryArg.folderSlug}`,
+					url: `/api/mock/mailbox/mails`,
 					method: 'POST',
 					data: queryArg.mail
 				}),
 				invalidatesTags: ['mailbox_mails']
 			}),
-			getMailboxMailsByLabel: build.query<GetMailboxMailsByLabelApiResponse, GetMailboxMailsByLabelApiArg>({
-				query: (queryArg) => ({
-					url: `/mock-api/mailbox/mails/labels/${queryArg.labelSlug}`
-				}),
-				providesTags: ['mailbox_mails']
-			}),
-			getMailboxMailsByFilter: build.query<GetMailboxMailsByFilterApiResponse, GetMailboxMailsByFilterApiArg>({
-				query: (queryArg) => ({
-					url: `/mock-api/mailbox/mails/filters/${queryArg.filterSlug}`
-				}),
-				providesTags: ['mailbox_mails']
-			}),
 			getMailboxFilters: build.query<GetMailboxFiltersApiResponse, GetMailboxFiltersApiArg>({
-				query: () => ({ url: `/mock-api/mailbox/filters` }),
+				query: () => ({ url: `/api/mock/mailbox/filters` }),
 				providesTags: ['mailbox_filters']
 			}),
 			getMailboxLabels: build.query<GetMailboxLabelsApiResponse, GetMailboxLabelsApiArg>({
-				query: () => ({ url: `/mock-api/mailbox/labels` }),
+				query: () => ({ url: `/api/mock/mailbox/labels` }),
 				providesTags: ['mailbox_labels']
 			}),
 			updateMailboxLabel: build.mutation<UpdateMailboxLabelApiResponse, UpdateMailboxLabelApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/mailbox/labels/${queryArg.labelSlug}`,
+					url: `/api/mock/mailbox/labels/${queryArg.labelSlug}`,
 					method: 'PUT',
 					data: queryArg.label
 				}),
 				invalidatesTags: ['mailbox_label', 'mailbox_labels']
 			}),
 			getMailboxFolders: build.query<GetMailboxFoldersApiResponse, GetMailboxFoldersApiArg>({
-				query: () => ({ url: `/mock-api/mailbox/folders` }),
+				query: () => ({ url: `/api/mock/mailbox/folders` }),
 				providesTags: ['mailbox_folders']
 			})
 		}),
@@ -93,12 +76,8 @@ export type RouteParams = { category: string; subCategory: string };
 export type GetMailboxMailsApiResponse = /** status 200 OK */ MailboxMail[];
 export type GetMailboxMailsApiArg = RouteParams;
 
-export type ApplyMailboxMailActionApiResponse = unknown;
-export type ApplyMailboxMailActionApiArg = {
-	type: MailboxAction;
-	ids: string[];
-	value: boolean | string | string[];
-};
+export type UpdateMailboxMailsApiResponse = unknown;
+export type UpdateMailboxMailsApiArg = Partial<MailboxMail>[];
 
 export type CreateMailboxMailApiResponse = unknown;
 export type CreateMailboxMailApiArg = {
@@ -106,20 +85,9 @@ export type CreateMailboxMailApiArg = {
 	folderSlug: string;
 	mail: MailboxMail;
 };
-export type GetMailboxMailsByLabelApiResponse = /** status 200 OK */ MailboxMail[];
-export type GetMailboxMailsByLabelApiArg = {
-	/** label slug */
-	labelSlug: string;
-};
 
 export type GetMailboxMailApiResponse = MailboxMail;
 export type GetMailboxMailApiArg = string;
-
-export type GetMailboxMailsByFilterApiResponse = /** status 200 OK */ MailboxMail[];
-export type GetMailboxMailsByFilterApiArg = {
-	/** filter slug */
-	filterSlug: string;
-};
 
 export type GetMailboxFiltersApiResponse = /** status 200 OK */ MailboxFilter[];
 export type GetMailboxFiltersApiArg = void;
@@ -203,10 +171,8 @@ export type MailboxAction =
 
 export const {
 	useGetMailboxMailsQuery,
-	useApplyMailboxMailActionMutation,
+	useUpdateMailboxMailsMutation,
 	useCreateMailboxMailMutation,
-	useGetMailboxMailsByLabelQuery,
-	useGetMailboxMailsByFilterQuery,
 	useGetMailboxFiltersQuery,
 	useGetMailboxLabelsQuery,
 	useUpdateMailboxLabelMutation,

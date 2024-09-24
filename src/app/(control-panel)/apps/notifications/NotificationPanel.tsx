@@ -19,8 +19,8 @@ import {
 } from './notificationPanelSlice';
 import {
 	useCreateNotificationMutation,
-	useDeleteAllNotificationsMutation,
 	useDeleteNotificationMutation,
+	useDeleteNotificationsMutation,
 	useGetAllNotificationsQuery
 } from './NotificationApi';
 import NotificationModel from './models/NotificationModel';
@@ -42,7 +42,8 @@ function NotificationPanel() {
 	const state = useAppSelector(selectNotificationPanelState);
 
 	const [deleteNotification] = useDeleteNotificationMutation();
-	const [deleteAllNotifications] = useDeleteAllNotificationsMutation();
+
+	const [deleteNotifications] = useDeleteNotificationsMutation();
 	const [addNotification] = useCreateNotificationMutation();
 
 	const { data: notifications, isLoading } = useGetAllNotificationsQuery();
@@ -91,7 +92,7 @@ function NotificationPanel() {
 	}
 
 	function handleDismissAll() {
-		deleteAllNotifications();
+		deleteNotifications(notifications.map((notification) => notification.id));
 	}
 
 	function demoNotification() {

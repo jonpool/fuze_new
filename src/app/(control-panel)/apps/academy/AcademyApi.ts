@@ -11,16 +11,18 @@ const AcademyApi = apiService
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getAcademyCourses: build.query<GetAcademyCoursesApiResponse, GetAcademyCoursesApiArg>({
-				query: () => ({ url: `/mock-api/academy/courses` }),
+				query: () => ({ url: `/api/mock/academy/courses` }),
 				providesTags: ['academy_courses']
 			}),
 			getAcademyCourse: build.query<GetAcademyCourseApiResponse, GetAcademyCourseApiArg>({
-				query: (queryArg) => ({ url: `/mock-api/academy/courses/${queryArg.courseId}` }),
+				query: (queryArg) => ({
+					url: `/api/mock/academy/courses/${queryArg.courseId}`
+				}),
 				providesTags: ['academy_course']
 			}),
 			updateAcademyCourse: build.mutation<UpdateAcademyCourseApiResponse, UpdateAcademyCourseApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/academy/courses/${queryArg.courseId}`,
+					url: `/api/mock/academy/courses/${queryArg.courseId}`,
 					method: 'PUT',
 					data: queryArg.data
 				}),
@@ -36,13 +38,33 @@ const AcademyApi = apiService
 			}),
 			deleteAcademyCourse: build.mutation<DeleteAcademyCourseApiResponse, DeleteAcademyCourseApiArg>({
 				query: (queryArg) => ({
-					url: `/mock-api/academy/courses/${queryArg.courseId}`,
+					url: `/api/mock/academy/courses/${queryArg.courseId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['academy_courses']
 			}),
+			getAcademyCourseSteps: build.query<GetAcademyCourseStepsApiResponse, GetAcademyCourseStepsApiArg>({
+				query: (queryArg) => ({
+					url: `/api/mock/academy/course-steps`,
+					params: {
+						// courseId: queryArg.courseId
+						courseId: '0' // demo
+					}
+				}),
+				providesTags: ['academy_course']
+			}),
+			getAcademyCourseStepContent: build.query<
+				GetAcademyCourseStepContentApiResponse,
+				GetAcademyCourseStepContentApiArg
+			>({
+				query: (stepId) => ({
+					// url: `/api/mock/academy/course-step-contents/${stepId}`,
+					url: `/api/mock/academy/course-step-contents/0` // demo
+				}),
+				providesTags: ['academy_course']
+			}),
 			getAcademyCategories: build.query<GetAcademyCategoriesApiResponse, GetAcademyCategoriesApiArg>({
-				query: () => ({ url: `/mock-api/academy/categories` }),
+				query: () => ({ url: `/api/mock/academy/categories` }),
 				providesTags: ['academy_categories']
 			})
 		}),
@@ -50,8 +72,10 @@ const AcademyApi = apiService
 	});
 
 export default AcademyApi;
+
 export type GetAcademyCoursesApiResponse = /** status 200 OK */ Course[];
 export type GetAcademyCoursesApiArg = void;
+
 export type GetAcademyCourseApiResponse = /** status 200 OK */ Course;
 export type GetAcademyCourseApiArg = {
 	courseId: string;
@@ -63,6 +87,14 @@ export type UpdateAcademyCourseApiArg = {
 	data: PartialDeep<Course>;
 };
 
+export type GetAcademyCourseStepsApiResponse = /** status 200 OK */ CourseStep[];
+export type GetAcademyCourseStepsApiArg = {
+	courseId: string;
+};
+
+export type GetAcademyCourseStepContentApiResponse = /** status 200 OK */ CourseStepContent;
+export type GetAcademyCourseStepContentApiArg = string;
+
 export type DeleteAcademyCourseApiResponse = unknown;
 export type DeleteAcademyCourseApiArg = {
 	courseId: string;
@@ -70,6 +102,22 @@ export type DeleteAcademyCourseApiArg = {
 
 export type GetAcademyCategoriesApiResponse = /** status 200 OK */ Category[];
 export type GetAcademyCategoriesApiArg = void;
+
+export type CourseStepContent = {
+	id: string;
+	stepId: string;
+	html: string;
+};
+
+export type CourseStep = {
+	id: string;
+	courseId: string;
+	order: number;
+	title: string;
+	subtitle: string;
+	content: string;
+};
+
 export type Course = {
 	id: string;
 	title: string;
@@ -85,12 +133,7 @@ export type Course = {
 		completed: number;
 	};
 	activeStep?: number;
-	steps?: {
-		content?: string;
-		title?: string;
-		subtitle?: string;
-		order?: number;
-	}[];
+	steps?: CourseStep[];
 };
 
 export type Category = {
@@ -105,5 +148,7 @@ export const {
 	useGetAcademyCourseQuery,
 	useUpdateAcademyCourseMutation,
 	useDeleteAcademyCourseMutation,
+	useGetAcademyCourseStepsQuery,
+	useGetAcademyCourseStepContentQuery,
 	useGetAcademyCategoriesQuery
 } = AcademyApi;

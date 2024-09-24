@@ -18,7 +18,7 @@ const FinanceDashboardApi = api
 				GetFinanceDashboardWidgetsApiResponse,
 				GetFinanceDashboardWidgetsApiArg
 			>({
-				query: () => ({ url: `/mock-api/dashboards/finance/widgets` }),
+				query: () => ({ url: `/api/mock/dashboards/finance/widgets` }),
 				providesTags: ['finance_dashboard_widgets']
 			})
 		}),
