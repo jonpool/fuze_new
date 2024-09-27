@@ -23,16 +23,6 @@ const storage = createStorage({
 		: memoryDriver()
 });
 
-const auth0ConfigsPresent = [
-	process.env.AUTH_AUTH0_ID,
-	process.env.AUTH_AUTH0_SECRET,
-	process.env.AUTH_AUTH0_ISSUER
-].every((config) => config && config !== '');
-
-const discordConfigsPresent = [process.env.AUTH_DISCORD_ID, process.env.AUTH_DISCORD_SECRET].every(
-	(config) => config && config !== ''
-);
-
 export const providers: Provider[] = [
 	Credentials({
 		authorize(formInput) {
@@ -58,8 +48,8 @@ export const providers: Provider[] = [
 			};
 		}
 	}),
-	...(auth0ConfigsPresent ? [Auth0] : []),
-	...(discordConfigsPresent ? [Discord] : [])
+	Auth0,
+	Discord
 ];
 
 const config = {
