@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/dashboards/analytics/widgets
+ */
 export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());

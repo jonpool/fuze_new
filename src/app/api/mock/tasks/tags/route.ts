@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/tasks/tags
+ */
 export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
@@ -9,6 +12,9 @@ export async function GET(req: Request) {
 	return new Response(JSON.stringify(items), { status: 200 });
 }
 
+/**
+ * POST api/mock/tasks/tags
+ */
 export async function POST(req: Request) {
 	const api = mockApi('tasks_tags');
 	const requestData = await req.json();

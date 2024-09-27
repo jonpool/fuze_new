@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/mailbox/mails
+ */
 export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
@@ -9,6 +12,9 @@ export async function GET(req: Request) {
 	return new Response(JSON.stringify(items), { status: 200 });
 }
 
+/**
+ * POST api/mock/mailbox/mails
+ */
 export async function POST(req: Request) {
 	const api = mockApi('mailbox_mails');
 	const requestData = await req.json();
@@ -17,6 +23,9 @@ export async function POST(req: Request) {
 	return new Response(JSON.stringify(newItem), { status: 201 });
 }
 
+/**
+ * PUT api/mock/mailbox/mails
+ */
 export async function PUT(req: Request) {
 	const api = mockApi('mailbox_mails');
 	const updatedItems = await req.json();

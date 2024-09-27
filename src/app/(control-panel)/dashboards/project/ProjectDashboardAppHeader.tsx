@@ -8,8 +8,8 @@ import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { darken } from '@mui/material/styles';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
+import useUser from '@/auth/useUser';
 import { useGetProjectDashboardProjectsQuery } from './ProjectDashboardApi';
-import useUser from '../../../../auth/useUser';
 
 /**
  * The ProjectDashboardAppHeader page.

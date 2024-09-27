@@ -41,7 +41,7 @@ function AdminRoleExample() {
 						className="language-js"
 					>
 						{`
-              import {authRoles} from 'auth';
+              import {authRoles} from '@/auth';
               import AdminRoleExample from './AdminRoleExample';
 
               export const AdminRoleExampleConfig = {

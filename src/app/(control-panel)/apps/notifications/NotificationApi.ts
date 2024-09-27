@@ -16,7 +16,7 @@ const NotificationApi = api
 				query: (notification) => ({
 					url: `/api/mock/notifications`,
 					method: 'POST',
-					data: notification
+					body: notification
 				}),
 				invalidatesTags: ['notifications']
 			}),
@@ -24,7 +24,7 @@ const NotificationApi = api
 				query: (notificationIds) => ({
 					url: `/api/mock/notifications`,
 					method: 'DELETE',
-					data: notificationIds
+					body: notificationIds
 				}),
 				invalidatesTags: ['notifications']
 			}),

@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/help-center/guides/{id}
+ */
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('help_center_guides');

@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/ecommerce/orders
+ */
 export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
@@ -9,6 +12,9 @@ export async function GET(req: Request) {
 	return new Response(JSON.stringify(items), { status: 200 });
 }
 
+/**
+ * DELETE api/mock/ecommerce/orders
+ */
 export async function DELETE(req: Request) {
 	const api = mockApi('ecommerce_orders');
 	const ids = await req.json();

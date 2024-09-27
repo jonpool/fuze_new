@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { RedocRawOptions } from 'redoc/typings/services/RedocNormalizedOptions';
-import mockApiJson from 'src/@mock-api/mock-api.json';
+import mockApiJson from 'src/@mock-utils/mockOpenApiSpecs.json';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 const Root = styled('div')(() => ({

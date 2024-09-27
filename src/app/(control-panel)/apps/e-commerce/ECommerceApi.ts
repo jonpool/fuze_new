@@ -18,7 +18,7 @@ const ECommerceApi = api
 				query: (productIds) => ({
 					url: `/api/mock/ecommerce/products`,
 					method: 'DELETE',
-					data: productIds
+					body: productIds
 				}),
 				invalidatesTags: ['eCommerce_products']
 			}),
@@ -32,7 +32,7 @@ const ECommerceApi = api
 				query: (newProduct) => ({
 					url: `/api/mock/ecommerce/products`,
 					method: 'POST',
-					data: ProductModel(newProduct)
+					body: ProductModel(newProduct)
 				}),
 				invalidatesTags: ['eCommerce_products', 'eCommerce_product']
 			}),
@@ -40,7 +40,7 @@ const ECommerceApi = api
 				query: (product) => ({
 					url: `/api/mock/ecommerce/products/${product.id}`,
 					method: 'PUT',
-					data: product
+					body: product
 				}),
 				invalidatesTags: ['eCommerce_product', 'eCommerce_products']
 			}),
@@ -63,7 +63,7 @@ const ECommerceApi = api
 				query: (order) => ({
 					url: `/api/mock/ecommerce/orders/${order.id}`,
 					method: 'PUT',
-					data: order
+					body: order
 				}),
 				invalidatesTags: ['eCommerce_order', 'eCommerce_orders']
 			}),
@@ -78,7 +78,7 @@ const ECommerceApi = api
 				query: (ordersId) => ({
 					url: `/api/mock/ecommerce/orders`,
 					method: 'DELETE',
-					data: ordersId
+					body: ordersId
 				}),
 				invalidatesTags: ['eCommerce_order', 'eCommerce_orders']
 			})
@@ -112,7 +112,7 @@ export type GetECommerceOrdersApiArg = void;
 export type GetECommerceOrderApiResponse = /** status 200 OK */ EcommerceOrder;
 export type GetECommerceOrderApiArg = string; // Order id
 
-export type UpdateECommerceOrderApiResponse = unknown;
+export type UpdateECommerceOrderApiResponse = EcommerceOrder;
 export type UpdateECommerceOrderApiArg = EcommerceOrder; // Order
 
 export type DeleteECommerceOrderApiResponse = unknown;

@@ -24,7 +24,7 @@ const AcademyApi = apiService
 				query: (queryArg) => ({
 					url: `/api/mock/academy/courses/${queryArg.courseId}`,
 					method: 'PUT',
-					data: queryArg.data
+					body: queryArg.data
 				}),
 				async onQueryStarted(id, { dispatch, queryFulfilled }) {
 					try {

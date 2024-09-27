@@ -19,7 +19,7 @@ const CalendarApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/calendar/events`,
 					method: 'POST',
-					data: queryArg.Event
+					body: queryArg.Event
 				}),
 				invalidatesTags: ['calendar_events']
 			}),
@@ -27,7 +27,7 @@ const CalendarApi = api
 				query: (event) => ({
 					url: `/api/mock/calendar/events/${event.id}`,
 					method: 'PUT',
-					data: event
+					body: event
 				}),
 				invalidatesTags: ['calendar_event', 'calendar_events']
 			}),
@@ -55,7 +55,7 @@ const CalendarApi = api
 					return {
 						url: `/api/mock/calendar/labels`,
 						method: 'POST',
-						data: Label
+						body: Label
 					};
 				},
 				invalidatesTags: ['calendar_label', 'calendar_labels']
@@ -64,7 +64,7 @@ const CalendarApi = api
 				query: (Label) => ({
 					url: `/api/mock/calendar/labels/${Label.id}`,
 					method: 'PUT',
-					data: Label
+					body: Label
 				}),
 				invalidatesTags: ['calendar_labels']
 			}),

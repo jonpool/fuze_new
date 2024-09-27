@@ -14,7 +14,6 @@ import clsx from 'clsx';
 import Popover, { PopoverProps } from '@mui/material/Popover/Popover';
 import { Partial } from 'react-spring';
 import useUser from 'src/auth/useUser';
-import useAuth from 'src/auth/useAuth';
 
 type UserMenuProps = {
 	className?: string;
@@ -27,10 +26,8 @@ type UserMenuProps = {
  */
 function UserMenu(props: UserMenuProps) {
 	const { className, popoverProps, arrowIcon = 'heroicons-outline:chevron-up' } = props;
-	const { signOut } = useAuth();
-	const user = useUser();
+	const { data: user, signOut, isGuest } = useUser();
 	const [userMenu, setUserMenu] = useState<HTMLElement | null>(null);
-
 	const userMenuClick = (event: React.MouseEvent<HTMLElement>) => {
 		setUserMenu(event.currentTarget);
 	};
@@ -62,7 +59,7 @@ function UserMenu(props: UserMenuProps) {
 				onClick={userMenuClick}
 				color="inherit"
 			>
-				{user?.data?.photoURL ? (
+				{user?.photoURL ? (
 					<Avatar
 						sx={{
 							background: (theme) => theme.palette.background.default,
@@ -70,7 +67,7 @@ function UserMenu(props: UserMenuProps) {
 						}}
 						className="avatar w-40 h-40 rounded-lg"
 						alt="user photo"
-						src={user.data.photoURL}
+						src={user?.photoURL}
 						variant="rounded"
 					/>
 				) : (
@@ -81,7 +78,7 @@ function UserMenu(props: UserMenuProps) {
 						}}
 						className="avatar md:mx-4"
 					>
-						{user?.data?.displayName?.[0]}
+						{user?.displayName?.[0]}
 					</Avatar>
 				)}
 				<div className="flex flex-col flex-auto space-y-8">
@@ -89,13 +86,13 @@ function UserMenu(props: UserMenuProps) {
 						component="span"
 						className="title flex font-semibold text-base capitalize truncate  tracking-tight leading-none"
 					>
-						{user?.data?.displayName}
+						{user?.displayName}
 					</Typography>
 					<Typography
 						className="subtitle flex text-md font-medium tracking-tighter leading-none"
 						color="text.secondary"
 					>
-						{user?.data?.email}
+						{user?.email}
 					</Typography>
 				</div>
 				<div className="flex flex-shrink-0 items-center space-x-8">
@@ -140,7 +137,7 @@ function UserMenu(props: UserMenuProps) {
 				}}
 				{...popoverProps}
 			>
-				{user.isGuest ? (
+				{isGuest ? (
 					<>
 						<MenuItem
 							component={Link}

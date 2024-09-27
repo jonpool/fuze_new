@@ -15,19 +15,19 @@ const injectedRtkApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getAccountSettings: build.query<GetAccountSettingsApiResponse, GetAccountSettingsApiArg>({
-				query: () => ({ url: `/api/mock/settings/account` }),
+				query: () => ({ url: `/api/mock/app-account-settings/0` }),
 				providesTags: ['settings_account']
 			}),
 			updateAccountSettings: build.mutation<UpdateAccountSettingsApiResponse, UpdateAccountSettingsApiArg>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/account`,
+					url: `/api/mock/app-account-settings/0`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_account']
 			}),
 			getNotificationSettings: build.query<GetNotificationSettingsApiResponse, GetNotificationSettingsApiArg>({
-				query: () => ({ url: `/api/mock/settings/notifications` }),
+				query: () => ({ url: `/api/mock/app-notification-settings/0` }),
 				providesTags: ['settings_notification']
 			}),
 			updateNotificationSettings: build.mutation<
@@ -35,26 +35,26 @@ const injectedRtkApi = api
 				UpdateNotificationSettingsApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/notifications`,
+					url: `/api/mock/app-notification-settings/0`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_notification']
 			}),
 			getSecuritySettings: build.query<GetSecuritySettingsApiResponse, GetSecuritySettingsApiArg>({
-				query: () => ({ url: `/api/mock/settings/security` }),
+				query: () => ({ url: `/api/mock/app-security-settings/0` }),
 				providesTags: ['settings_security']
 			}),
 			updateSecuritySettings: build.mutation<UpdateSecuritySettingsApiResponse, UpdateSecuritySettingsApiArg>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/security`,
+					url: `/api/mock/app-security-settings/0`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_security']
 			}),
 			getPlanBillingSettings: build.query<GetPlanBillingSettingsApiResponse, GetPlanBillingSettingsApiArg>({
-				query: () => ({ url: `/api/mock/settings/plan-billing` }),
+				query: () => ({ url: `/api/mock/app-plan-billing-settings/0` }),
 				providesTags: ['settings_plan_billing']
 			}),
 			updatePlanBillingSettings: build.mutation<
@@ -62,14 +62,14 @@ const injectedRtkApi = api
 				UpdatePlanBillingSettingsApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/plan-billing`,
+					url: `/api/mock/app-plan-billing-settings/0`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_plan_billing']
 			}),
 			getTeamMembersSettings: build.query<GetTeamMembersSettingsApiResponse, GetTeamMembersSettingsApiArg>({
-				query: () => ({ url: `/api/mock/settings/team` }),
+				query: () => ({ url: `/api/mock/app-team-members` }),
 				providesTags: ['settings_team']
 			}),
 			createTeamMemberSettings: build.mutation<
@@ -77,9 +77,9 @@ const injectedRtkApi = api
 				CreateTeamMemberSettingsApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/team`,
+					url: `/api/mock/app-team-members`,
 					method: 'POST',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_team']
 			}),
@@ -88,7 +88,7 @@ const injectedRtkApi = api
 				DeleteTeamMemberSettingsApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/team/${queryArg.memberId}`,
+					url: `/api/mock/app-team-members/${queryArg.memberId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['settings_team_member']
@@ -98,9 +98,9 @@ const injectedRtkApi = api
 				UpdateTeamMemberSettingsApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/settings/team`,
+					url: `/api/mock/app-team-members`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['settings_team']
 			})

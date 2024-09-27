@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/notifications
+ */
 export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
@@ -9,6 +12,9 @@ export async function GET(req: Request) {
 	return new Response(JSON.stringify(items), { status: 200 });
 }
 
+/**
+ * POST api/mock/notifications
+ */
 export async function POST(req: Request) {
 	const api = mockApi('notifications');
 	const requestData = await req.json();
@@ -17,6 +23,9 @@ export async function POST(req: Request) {
 	return new Response(JSON.stringify(newItem), { status: 201 });
 }
 
+/**
+ * DELETE api/mock/notifications
+ */
 export async function DELETE(req: Request) {
 	const api = mockApi('notifications');
 	const ids = await req.json();

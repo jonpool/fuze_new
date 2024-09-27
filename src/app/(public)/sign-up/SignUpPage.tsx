@@ -4,46 +4,13 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import { useState } from 'react';
 import * as React from 'react';
-import _ from '@lodash';
-import JwtSignUpTab from './tabs/JwSignUpTab';
-import FirebaseSignUpTab from './tabs/FirebaseSignUpTab';
-import AwsSignUpTab from './tabs/AwsSignUpTab';
-
-const tabs = [
-	{
-		id: 'jwt',
-		title: 'JWT',
-		logo: 'assets/images/logo/jwt.svg',
-		logoClass: 'h-36 p-4 bg-black rounded-lg'
-	},
-	{
-		id: 'firebase',
-		title: 'Firebase',
-		logo: 'assets/images/logo/firebase.svg',
-		logoClass: 'h-36'
-	},
-	{
-		id: 'aws',
-		title: 'AWS',
-		logo: 'assets/images/logo/aws-amplify.svg',
-		logoClass: 'h-36'
-	}
-];
+import AuthJsForm from '@/auth/forms/AuthJsForm';
 
 /**
  * The sign up page.
  */
 function SignUpPage() {
-	const [selectedTabId, setSelectedTabId] = useState(tabs[0].id);
-
-	function handleSelectTab(id: string) {
-		setSelectedTabId(id);
-	}
-
 	return (
 		<div className="flex min-w-0 flex-1 flex-col items-center sm:flex-row sm:justify-center md:items-start md:justify-start">
 			<Paper className="h-full w-full px-16 py-8 ltr:border-r-1 rtl:border-l-1 sm:h-auto sm:w-auto sm:rounded-xl sm:p-48 sm:shadow md:flex md:h-full md:w-1/2 md:items-center md:justify-end md:rounded-none md:p-64 md:shadow-none">
@@ -67,43 +34,7 @@ function SignUpPage() {
 						</Link>
 					</div>
 
-					<Tabs
-						value={_.findIndex(tabs, { id: selectedTabId })}
-						variant="fullWidth"
-						className="w-full mt-24 mb-32"
-						classes={{
-							indicator: 'flex justify-center bg-transparent w-full h-full'
-						}}
-						TabIndicatorProps={{
-							children: (
-								<Box
-									sx={{ borderColor: (theme) => theme.palette.secondary.main }}
-									className="border-1 border-solid w-full h-full rounded-lg"
-								/>
-							)
-						}}
-					>
-						{tabs.map((item) => (
-							<Tab
-								disableRipple
-								onClick={() => handleSelectTab(item.id)}
-								key={item.id}
-								icon={
-									<img
-										className={item.logoClass}
-										src={item.logo}
-										alt={item.title}
-									/>
-								}
-								className="min-w-0"
-								label={item.title}
-							/>
-						))}
-					</Tabs>
-
-					{selectedTabId === 'jwt' && <JwtSignUpTab />}
-					{selectedTabId === 'firebase' && <FirebaseSignUpTab />}
-					{selectedTabId === 'aws' && <AwsSignUpTab />}
+					<AuthJsForm formType="signup" />
 				</div>
 			</Paper>
 

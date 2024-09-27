@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * GET api/mock/contacts/tags/{id}
+ */
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('contacts_tags');
@@ -12,6 +15,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 	return new Response(JSON.stringify(item), { status: 200 });
 }
 
+/**
+ * PUT api/mock/contacts/tags/{id}
+ */
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('contacts_tags');
@@ -25,6 +31,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 	return new Response(JSON.stringify(updatedItem), { status: 200 });
 }
 
+/**
+ * DELETE api/mock/contacts/tags/{id}
+ */
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('contacts_tags');

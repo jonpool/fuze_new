@@ -1,5 +1,8 @@
 import mockApi from 'src/@mock-utils/mockApi';
 
+/**
+ * PUT api/mock/calendar/events/{id}
+ */
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('calendar_events');
@@ -13,6 +16,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 	return new Response(JSON.stringify(updatedItem), { status: 200 });
 }
 
+/**
+ * DELETE api/mock/calendar/events/{id}
+ */
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('calendar_events');

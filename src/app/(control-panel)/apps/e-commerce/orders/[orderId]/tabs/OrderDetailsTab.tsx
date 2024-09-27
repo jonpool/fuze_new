@@ -52,7 +52,7 @@ function Marker(props: MarkerPropsType) {
 function OrderDetailsTab() {
 	const routeParams = useParams();
 
-	const { orderId } = routeParams;
+	const { orderId } = routeParams as { orderId: string };
 
 	const { data: order, isError } = useGetECommerceOrderQuery(orderId, {
 		skip: !orderId

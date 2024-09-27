@@ -19,8 +19,8 @@ type AuthGuardProps = {
 };
 
 function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuardProps) {
-	const user = useUser();
-	const { isGuest, role: userRole } = user;
+	const { data: user, isGuest } = useUser();
+	const userRole = user?.role;
 	const router = useRouter();
 
 	const [accessGranted, setAccessGranted] = useState<boolean>(false);

@@ -3,7 +3,7 @@ import FuseComponentsNavigation from './fuse-components/FuseComponentsNavigation
 import MaterialUIComponentsNavigation from './material-ui-components/MaterialUIComponentsNavigation';
 import ThirdPartyComponentsNavigation from './third-party-components/ThirdPartyComponentsNavigation';
 import fuseReactLatestVersion from './changelog/constants/fuseReactLatestVersion';
-import { authRoles } from '../../../auth';
+import { authRoles } from '@/auth';
 
 /**
  * Documentation Navigation

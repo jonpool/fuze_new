@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import _ from '@lodash';
 import { useEffect } from 'react';
-import { AxiosError } from 'axios';
+import Error from 'next/error';
 import { SettingsSecurity, useGetSecuritySettingsQuery, useUpdateSecuritySettingsMutation } from '../SettingsApi';
 
 type FormType = SettingsSecurity;
@@ -40,7 +40,7 @@ function SecurityTab() {
 	const { data: securitySettings } = useGetSecuritySettingsQuery();
 	const [updateSecuritySettings, { error: updateError, isSuccess }] = useUpdateSecuritySettingsMutation<{
 		isSuccess: boolean;
-		error: AxiosError<
+		error: Error<
 			{
 				name: keyof FormType;
 				message: string;

@@ -1,14 +1,30 @@
-import { AuthProviderState } from './types/AuthProvider';
-import useAuthState from './useAuthState';
+import { useSession, signOut } from 'next-auth/react';
+import { useMemo } from 'react';
+import { User } from '@/auth/user';
+import { updateDbUser } from '@/auth/authJs';
 
-type useUser = AuthProviderState['user'] & { isGuest: boolean };
+type useUser = {
+	data: User;
+	isGuest: boolean;
+	updateUser: (T: Partial<User>) => void;
+	signOut: typeof signOut;
+};
 
 function useUser(): useUser {
-	const { user } = useAuthState();
+	const { data, update } = useSession();
+	const user = useMemo(() => data?.db, [data]);
+	const isGuest = useMemo(() => !user?.role || user?.role?.length === 0, [user]);
+
+	async function handleUpdateUser(_data: Partial<User>) {
+		await updateDbUser(_data);
+		update();
+	}
 
 	return {
-		...user,
-		isGuest: !user?.role || user?.role?.length === 0
+		data: user,
+		isGuest,
+		signOut,
+		updateUser: handleUpdateUser
 	} as useUser;
 }
 

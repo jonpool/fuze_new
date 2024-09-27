@@ -18,7 +18,7 @@ const TasksApi = api
 					return {
 						url: `/api/mock/tasks/reorder`,
 						method: 'POST',
-						data: { startIndex, endIndex }
+						body: { startIndex, endIndex }
 					};
 				},
 				invalidatesTags: ['tasks_list'],
@@ -44,7 +44,7 @@ const TasksApi = api
 				query: (task) => ({
 					url: `/api/mock/tasks/items`,
 					method: 'POST',
-					data: task
+					body: task
 				}),
 				invalidatesTags: ['tasks_list']
 			}),
@@ -63,7 +63,7 @@ const TasksApi = api
 				query: (tasks) => ({
 					url: `/api/mock/tasks/items`,
 					method: 'PUT',
-					data: tasks
+					body: tasks
 				}),
 				invalidatesTags: ['tasks_item', 'tasks_list'],
 				async onQueryStarted(updatedTasks, { dispatch, queryFulfilled }) {
@@ -90,7 +90,7 @@ const TasksApi = api
 				query: (task) => ({
 					url: `/api/mock/tasks/items/${task.id}`,
 					method: 'PUT',
-					data: task
+					body: task
 				}),
 				invalidatesTags: ['tasks_item', 'tasks_list']
 			}),
@@ -102,7 +102,7 @@ const TasksApi = api
 				query: (tag) => ({
 					url: `/api/mock/tasks/tags`,
 					method: 'POST',
-					data: tag
+					body: tag
 				}),
 				invalidatesTags: ['tasks_tags']
 			})

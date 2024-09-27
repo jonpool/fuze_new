@@ -1,29 +1,24 @@
-import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
-import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BASE_URL } from '@/utils/apiFetch';
 
-const axiosBaseQuery =
-	(): BaseQueryFn<AxiosRequestConfig<unknown>, unknown, AxiosError> =>
-	async ({ url, method, data, params }) => {
-		try {
-			Axios.defaults.baseURL = '/api';
-			const result = await Axios({
-				url,
-				method,
-				data,
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-				params
-			});
-			return { data: result.data };
-		} catch (axiosError) {
-			const error = axiosError as AxiosError;
-			return {
-				error
-			};
+const baseQuery = async (args, api, extraOptions) => {
+	const result = await fetchBaseQuery({
+		baseUrl: BASE_URL,
+		prepareHeaders: (headers, { getState }) => {
+			return headers;
 		}
-	};
+	})(args, api, extraOptions);
+
+	// Example of handling specific error codes
+	if (result.error && result.error.status === 401) {
+		// Logic to handle 401 errors (e.g., refresh token)
+	}
+
+	return result;
+};
 
 export const apiService = createApi({
-	baseQuery: axiosBaseQuery(),
+	baseQuery,
 	endpoints: () => ({}),
 	reducerPath: 'apiService'
 });

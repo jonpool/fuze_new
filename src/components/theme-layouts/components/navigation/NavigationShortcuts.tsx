@@ -5,10 +5,10 @@ import FuseShortcuts from '@fuse/core/FuseShortcuts';
 import { usePrevious } from '@fuse/hooks';
 import { useEffect, useState } from 'react';
 import _ from '@lodash';
-import useAuth from 'src/auth/useAuth';
 import withSlices from 'src/store/withSlices';
 import { User } from 'src/auth/user';
 import { navigationSlice, selectFlatNavigation } from './store/navigationSlice';
+import useUser from '@/auth/useUser';
 
 type NavigationShortcutsProps = {
 	className?: string;
@@ -21,16 +21,15 @@ type NavigationShortcutsProps = {
 function NavigationShortcuts(props: NavigationShortcutsProps) {
 	const { variant, className } = props;
 	const navigation = useAppSelector(selectFlatNavigation);
-	const { updateUser, authState } = useAuth();
-	const { isAuthenticated, user } = authState;
-	const [userShortcuts, setUserShortcuts] = useState<string[]>(user?.data?.shortcuts || []);
+	const { data: user, updateUser, isGuest } = useUser();
+	const [userShortcuts, setUserShortcuts] = useState<string[]>(user?.shortcuts || []);
 	const prevUserShortcuts = usePrevious(userShortcuts);
 
 	useEffect(() => {
-		if (isAuthenticated && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
-			updateUser(_.setIn(user, 'data.shortcuts', userShortcuts) as User);
+		if (!isGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
+			updateUser(_.setIn(user, 'shortcuts', userShortcuts) as User);
 		}
-	}, [isAuthenticated, userShortcuts]);
+	}, [isGuest, userShortcuts]);
 
 	function handleShortcutsChange(newShortcuts: string[]) {
 		setUserShortcuts(newShortcuts);

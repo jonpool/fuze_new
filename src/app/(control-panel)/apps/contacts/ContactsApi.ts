@@ -19,19 +19,21 @@ const ContactsApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/contacts/items`,
 					method: 'POST',
-					data: queryArg.contact
+					body: queryArg.contact
 				}),
 				invalidatesTags: ['contacts']
 			}),
 			getContactsItem: build.query<GetContactsItemApiResponse, GetContactsItemApiArg>({
-				query: (contactId) => ({ url: `/api/mock/contacts/items/${contactId}` }),
+				query: (contactId) => ({
+					url: `/api/mock/contacts/items/${contactId}`
+				}),
 				providesTags: ['contacts_item']
 			}),
 			updateContactsItem: build.mutation<UpdateContactsItemApiResponse, UpdateContactsItemApiArg>({
 				query: (contact) => ({
 					url: `/api/mock/contacts/items/${contact.id}`,
 					method: 'PUT',
-					data: contact
+					body: contact
 				}),
 				invalidatesTags: ['contacts_item', 'contacts']
 			}),

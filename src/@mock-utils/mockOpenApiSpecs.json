@@ -52,6 +52,40 @@
           "id": "bo8nxsz3cdl2w"
         },
         "description": "Retrieve users."
+      },
+      "post": {
+        "summary": "Create user",
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createUser",
+        "x-stoplight": {
+          "id": "q614kdl13b81g"
+        },
+        "description": "Create new user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        }
       }
     },
     "/users/{id}": {
@@ -3832,28 +3866,58 @@
       },
       "parameters": []
     },
-    "/settings/account": {
+    "/app-account-settings": {
       "get": {
-        "summary": "Get account settings",
+        "summary": "Get all apps account settings",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/settings_account"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/app_account_setting"
+                  }
                 },
                 "examples": {
                   "example-1": {
-                    "$ref": "#/components/examples/settings_account"
+                    "$ref": "#/components/examples/app_account_settings"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getAccountSettings",
-        "description": "Retrieve account settings.",
+        "operationId": "getAllAppsAccountSettings",
+        "description": "Retrieve all apps account settings.",
+        "x-stoplight": {
+          "id": "d4ot953v9y203"
+        },
+        "tags": [
+          "settings_account_all"
+        ]
+      },
+      "parameters": []
+    },
+    "/app-account-settings/{id}": {
+      "get": {
+        "summary": "Get app account settings by app id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app_account_setting"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "getAppAccountSettings",
+        "description": "Retrieve app account settings.",
         "x-stoplight": {
           "id": "ry8nlj6smzooi"
         },
@@ -3861,10 +3925,19 @@
           "settings_account"
         ]
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
       "put": {
-        "summary": "Update account settings",
-        "operationId": "updateAccountSettings",
+        "summary": "Update app account settings by app id",
+        "operationId": "updateAppAccountSettings",
         "responses": {
           "200": {
             "description": "OK"
@@ -3873,12 +3946,12 @@
             "description": "Not Found"
           }
         },
-        "description": "Update account settings.",
+        "description": "Update app account settings.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/settings_account"
+                "$ref": "#/components/schemas/app_account_setting"
               },
               "examples": {
                 "example-1": {
@@ -3931,28 +4004,58 @@
         ]
       }
     },
-    "/settings/notifications": {
+    "/app-notification-settings": {
       "get": {
-        "summary": "Get notification settings",
+        "summary": "Get all apps notification settings",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/settings_notifications"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/app_notification_setting"
+                  }
                 },
                 "examples": {
                   "example-1": {
-                    "$ref": "#/components/examples/settings_notifications"
+                    "$ref": "#/components/examples/app_notification_settings"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getNotificationSettings",
-        "description": "Retrieve notification settings.",
+        "operationId": "getAllAppsNotificationSettings",
+        "description": "Retrieve all apps notification settings.",
+        "tags": [
+          "settings_notifications_all"
+        ],
+        "x-stoplight": {
+          "id": "spvin77v3izaf"
+        }
+      },
+      "parameters": []
+    },
+    "/app-notification-settings/{id}": {
+      "get": {
+        "summary": "Get app notification settings by app id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app_notification_setting"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "getAppNotificationSettings",
+        "description": "Retrieve app notification settings.",
         "x-stoplight": {
           "id": "wulhu4bxk0k4p"
         },
@@ -3960,10 +4063,19 @@
           "settings_notification"
         ]
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
       "put": {
-        "summary": "Update notification settings",
-        "operationId": "updateNotificationSettings",
+        "summary": "Update app notification settings by app id",
+        "operationId": "updateAppNotificationSettings",
         "responses": {
           "200": {
             "description": "OK"
@@ -3972,18 +4084,14 @@
             "description": "Not Found"
           }
         },
-        "description": "Update notification settings.",
+        "description": "Update app notification settings.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/settings_notifications"
+                "$ref": "#/components/schemas/app_notification_setting"
               },
-              "examples": {
-                "example-1": {
-                  "$ref": "#/components/examples/settings_notifications"
-                }
-              }
+              "examples": {}
             }
           }
         },
@@ -3995,137 +4103,9 @@
         ]
       }
     },
-    "/settings/security": {
+    "/app-security-settings": {
       "get": {
-        "summary": "Get security settings",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settings_security"
-                },
-                "examples": {
-                  "example-1": {
-                    "$ref": "#/components/examples/settings_security"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getSecuritySettings",
-        "description": "Retrieve security settings.",
-        "x-stoplight": {
-          "id": "r6prltskhn8tv"
-        },
-        "tags": [
-          "settings_security"
-        ]
-      },
-      "parameters": [],
-      "put": {
-        "summary": "Update security settings",
-        "operationId": "updateSecuritySettings",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "description": "Update security settings.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/settings_security"
-              },
-              "examples": {
-                "example-1": {
-                  "$ref": "#/components/examples/settings_security"
-                }
-              }
-            }
-          }
-        },
-        "x-stoplight": {
-          "id": "m3n9qp959fp3l"
-        },
-        "tags": [
-          "settings_security"
-        ]
-      }
-    },
-    "/settings/plan-billing": {
-      "get": {
-        "summary": "Get plan billing settings",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settings_plan_billing"
-                },
-                "examples": {
-                  "example-1": {
-                    "$ref": "#/components/examples/settings_plan_billing"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getPlanBillingSettings",
-        "description": "Retrieve plan billing settings.",
-        "x-stoplight": {
-          "id": "4yetqbo651gul"
-        },
-        "tags": [
-          "settings_plan_billing"
-        ]
-      },
-      "parameters": [],
-      "put": {
-        "summary": "Update plan billing settings",
-        "operationId": "updatePlanBillingSettings",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "description": "Update plan billing settings.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/settings_plan_billing"
-              },
-              "examples": {
-                "example-1": {
-                  "$ref": "#/components/examples/settings_plan_billing"
-                }
-              }
-            }
-          }
-        },
-        "x-stoplight": {
-          "id": "tasn0zzxuyadk"
-        },
-        "tags": [
-          "settings_plan_billing"
-        ]
-      }
-    },
-    "/settings/team": {
-      "get": {
-        "summary": "Get team members",
+        "summary": "Get all apps security settings",
         "responses": {
           "200": {
             "description": "OK",
@@ -4134,20 +4114,234 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/settings_team_member"
+                    "$ref": "#/components/schemas/profile_about"
                   }
                 },
                 "examples": {
                   "example-1": {
-                    "$ref": "#/components/examples/settings_team"
+                    "$ref": "#/components/examples/app_security_settings"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getTeamMembersSettings",
-        "description": "Retrieve team members.",
+        "operationId": "getAllAppsSecuritySettings",
+        "description": "Retrieve all apps security settings.",
+        "x-stoplight": {
+          "id": "r6prltskhn8tv"
+        },
+        "tags": [
+          "settings_security_all"
+        ]
+      },
+      "parameters": []
+    },
+    "/app-security-settings/{id}": {
+      "get": {
+        "summary": "Get app security settings by app id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/app_security_setting"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAppSecuritySettings",
+        "description": "Retrieve app security settings.",
+        "tags": [
+          "settings_security"
+        ],
+        "x-stoplight": {
+          "id": "9i9qaot4p1paa"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update app security settings by app id",
+        "operationId": "updateAppSecuritySettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/app_security_setting"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Update app security settings.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app_security_setting"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "tags": [
+          "settings_security"
+        ],
+        "x-stoplight": {
+          "id": "lgjns3ufmh2q4"
+        }
+      }
+    },
+    "/app-plan-billing-settings": {
+      "get": {
+        "summary": "Get all apps plan billing settings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/app_plan_billing_setting"
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "$ref": "#/components/examples/app_plan_billing_settings"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAllAppsUserPlanBillingSettings",
+        "description": "Retrieve all apps user plan billing settings.",
+        "x-stoplight": {
+          "id": "4yetqbo651gul"
+        },
+        "tags": [
+          "settings_plan_billing_all"
+        ]
+      },
+      "parameters": []
+    },
+    "/app-plan-billing-settings/{id}": {
+      "get": {
+        "summary": "Get app plan billing settings by app id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app_plan_billing_setting"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "getAppPlanBillingSettings",
+        "description": "Retrieve app plan billing settings.",
+        "tags": [
+          "settings_plan_billing"
+        ],
+        "x-stoplight": {
+          "id": "03ib52d9a9yum"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update user plan billing settings by id",
+        "operationId": "updateAppPlanBillingSettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/app_plan_billing_setting"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Update app plan billing settings.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app_plan_billing_setting"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "tags": [
+          "settings_plan_billing"
+        ],
+        "x-stoplight": {
+          "id": "zhkgcyp1ruemf"
+        }
+      }
+    },
+    "/app-team-members": {
+      "get": {
+        "summary": "Get all team members",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/app_team_member"
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "$ref": "#/components/examples/app_team_members"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAllTeamMembersSettings",
+        "description": "Retrieve all team members.",
         "x-stoplight": {
           "id": "9xkxzr9obv2vg"
         },
@@ -4174,7 +4368,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/settings_team_member"
+                "$ref": "#/components/schemas/app_team_member"
               },
               "examples": {
                 "Example 1": {
@@ -4210,7 +4404,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/settings_team_member"
+                  "$ref": "#/components/schemas/app_team_member"
                 }
               }
             }
@@ -4218,7 +4412,7 @@
         }
       }
     },
-    "/settings/team/{id}": {
+    "/app-team-members/{id}": {
       "parameters": [
         {
           "schema": {
@@ -4264,7 +4458,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/settings_team_member"
+                "$ref": "#/components/schemas/app_team_member"
               }
             }
           }
@@ -4567,36 +4761,109 @@
         }
       }
     },
-    "/messenger/profile": {
+    "/messenger/profiles": {
       "get": {
-        "summary": "Get user profile",
+        "summary": "Get messenger user profiles",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/messenger_profile"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/messenger_user_profile"
+                  }
                 },
                 "examples": {
                   "example-1": {
-                    "$ref": "#/components/examples/messenger_profile"
+                    "$ref": "#/components/examples/messenger_user_profiles"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getMessengerUserProfile",
-        "description": "Retrieve Messenger user profile.",
+        "operationId": "getMessengerUserProfiles",
+        "description": "Retrieve Messenger user profiles.",
         "x-stoplight": {
           "id": "ssc3msz8jtmf2"
         },
         "tags": [
-          "messenger_user_profile"
+          "messenger_user_profiles"
         ]
       },
       "parameters": []
+    },
+    "/messenger/profiles/{id}": {
+      "get": {
+        "summary": "Get messenger user profile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/messenger_user_profile"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "getMessengerUserProfile",
+        "description": "Retrieve Messenger user profile.",
+        "tags": [
+          "messenger_user_profile"
+        ],
+        "x-stoplight": {
+          "id": "a0a6jtrr8u616"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update messenger user profile",
+        "tags": [
+          "messenger_user_profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/messenger_user_profile"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateMessengerUserProfile",
+        "x-stoplight": {
+          "id": "ewivv7ho11m20"
+        },
+        "description": "Update Messenger user profile.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/messenger_user_profile"
+              }
+            }
+          }
+        }
+      }
     },
     "/tasks/items": {
       "get": {
@@ -6062,8 +6329,11 @@
           "attachments"
         ]
       },
-      "messenger_profile": {
+      "messenger_user_profile": {
         "description": "",
+        "x-stoplight": {
+          "id": "f3322e9f956a2"
+        },
         "type": "object",
         "properties": {
           "id": {
@@ -6102,7 +6372,8 @@
             "avatar": "assets/images/avatars/brian-hughes.jpg",
             "about": "Hi there! I'm using FuseChat."
           }
-        }
+        },
+        "title": ""
       },
       "academy_course": {
         "type": "object",
@@ -8713,9 +8984,31 @@
           }
         }
       },
-      "settings_account": {
+      "app_account_setting": {
         "type": "object",
+        "x-stoplight": {
+          "id": "74c24b1c868d2"
+        },
+        "x-examples": {
+          "Example 1": {
+            "name": "Brian Hughes",
+            "username": "brianh",
+            "title": "Senior Frontend Developer",
+            "company": "YXZ Software",
+            "about": "Hey! This is Brian; husband, father and gamer. I'm mostly passionate about bleeding edge tech and chocolate! 🍫",
+            "email": "hughes.brian@mail.com",
+            "phone": "121-490-33-12",
+            "country": "United States",
+            "language": "English"
+          }
+        },
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "bav81dfpu8yiv"
+            }
+          },
           "name": {
             "type": "string"
           },
@@ -8743,24 +9036,21 @@
           "language": {
             "type": "string"
           }
-        },
-        "x-examples": {
-          "Example 1": {
-            "name": "Brian Hughes",
-            "username": "brianh",
-            "title": "Senior Frontend Developer",
-            "company": "YXZ Software",
-            "about": "Hey! This is Brian; husband, father and gamer. I'm mostly passionate about bleeding edge tech and chocolate! 🍫",
-            "email": "hughes.brian@mail.com",
-            "phone": "121-490-33-12",
-            "country": "United States",
-            "language": "English"
-          }
         }
       },
-      "settings_notifications": {
+      "app_notification_setting": {
         "type": "object",
+        "x-stoplight": {
+          "id": "d564176bfff1b"
+        },
+        "x-examples": {},
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "svjnanzy5cgzh"
+            }
+          },
           "communication": {
             "type": "boolean"
           },
@@ -8782,22 +9072,31 @@
           "inquiry": {
             "type": "boolean"
           }
+        }
+      },
+      "app_plan_billing_setting": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "ea3ccef0eb5fa"
         },
         "x-examples": {
           "Example 1": {
-            "communication": false,
-            "security": false,
-            "meetups": false,
-            "comments": false,
-            "mention": false,
-            "follow": false,
-            "inquiry": false
+            "plan": "team",
+            "cardHolder": "",
+            "cardNumber": "",
+            "cardExpiration": "",
+            "cardCVC": "",
+            "country": "",
+            "zip": ""
           }
-        }
-      },
-      "settings_plan_billing": {
-        "type": "object",
+        },
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "t4qcai27o8dun"
+            }
+          },
           "plan": {
             "type": "string"
           },
@@ -8819,22 +9118,21 @@
           "zip": {
             "type": "string"
           }
-        },
-        "x-examples": {
-          "Example 1": {
-            "plan": "team",
-            "cardHolder": "",
-            "cardNumber": "",
-            "cardExpiration": "",
-            "cardCVC": "",
-            "country": "",
-            "zip": ""
-          }
         }
       },
-      "settings_security": {
+      "app_security_setting": {
         "type": "object",
+        "x-stoplight": {
+          "id": "3b3ba56d753ec"
+        },
+        "x-examples": {},
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7991s87dry3gg"
+            }
+          },
           "currentPassword": {
             "type": "string"
           },
@@ -8847,22 +9145,29 @@
           "askPasswordChange": {
             "type": "boolean"
           }
-        },
-        "x-examples": {
-          "Example 1": {
-            "currentPassword": "",
-            "newPassword": "",
-            "twoStepVerification": true,
-            "askPasswordChange": false
-          }
         }
       },
-      "settings_team_member": {
+      "app_team_member": {
         "type": "object",
         "x-stoplight": {
           "id": "855f8e6ac60cb"
         },
+        "x-examples": {
+          "Example 1": {
+            "avatar": "images/avatars/male-01.jpg",
+            "name": "Dejesus Michael",
+            "email": "dejesusmichael@mail.org",
+            "role": "admin"
+          }
+        },
+        "title": "settings_team_member",
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "idohza0f98aju"
+            }
+          },
           "avatar": {
             "type": "string"
           },
@@ -8875,16 +9180,7 @@
           "role": {
             "type": "string"
           }
-        },
-        "x-examples": {
-          "Example 1": {
-            "avatar": "images/avatars/male-01.jpg",
-            "name": "Dejesus Michael",
-            "email": "dejesusmichael@mail.org",
-            "role": "admin"
-          }
-        },
-        "title": "settings_team_member"
+        }
       }
     },
     "securitySchemes": {},
@@ -18155,15 +18451,17 @@
           }
         ]
       },
-      "messenger_profile": {
-        "value": {
-          "id": "cfaad35d-07a3-4447-a6c3-d8c3d54fd5df",
-          "name": "Brian Hughes",
-          "email": "hughes.brian@company.com",
-          "status": "online",
-          "avatar": "assets/images/avatars/brian-hughes.jpg",
-          "about": "Hi there! I'm using FuseChat."
-        }
+      "messenger_user_profiles": {
+        "value": [
+          {
+            "id": "cfaad35d-07a3-4447-a6c3-d8c3d54fd5df",
+            "name": "Brian Hughes",
+            "email": "hughes.brian@company.com",
+            "status": "online",
+            "avatar": "assets/images/avatars/brian-hughes.jpg",
+            "about": "Hi there! I'm using FuseChat."
+          }
+        ]
       },
       "messenger_chat_list": {
         "value": [
@@ -33480,6 +33778,23 @@
       "users": {
         "value": [
           {
+            "id": "0",
+            "password": "5;4+0IOx:\\Dy",
+            "role": "admin",
+            "displayName": "Abbott Keitch",
+            "photoURL": "assets/images/avatars/brian-hughes.jpg",
+            "email": "admin@fusetheme.com",
+            "settings": {
+              "layout": {},
+              "theme": {}
+            },
+            "shortcuts": [
+              "apps.calendar",
+              "apps.mailbox",
+              "apps.contacts"
+            ]
+          },
+          {
             "id": "XgbuVEXBU5gtSKdbQRP1Zbbby1i1",
             "password": "5;4+0IOx:\\Dy",
             "role": "admin",
@@ -33623,88 +33938,108 @@
           }
         ]
       },
-      "settings_account": {
-        "value": {
-          "name": "Brian Hughes",
-          "username": "brianh",
-          "title": "Senior Frontend Developer",
-          "company": "YXZ Software",
-          "about": "Hey! This is Brian; husband, father and gamer. I'm mostly passionate about bleeding edge tech and chocolate! 🍫",
-          "email": "hughes.brian@mail.com",
-          "phone": "121-490-33-12",
-          "country": "United States",
-          "language": "English"
-        }
-      },
-      "settings_notifications": {
-        "value": {
-          "communication": true,
-          "security": true,
-          "meetups": false,
-          "comments": false,
-          "mention": true,
-          "follow": true,
-          "inquiry": true
-        }
-      },
-      "settings_plan_billing": {
-        "value": {
-          "plan": "team",
-          "cardHolder": "",
-          "cardNumber": "",
-          "cardExpiration": "",
-          "cardCVC": "",
-          "country": "",
-          "zip": ""
-        }
-      },
-      "settings_security": {
-        "value": {
-          "currentPassword": "changeme",
-          "newPassword": "",
-          "twoStepVerification": true,
-          "askPasswordChange": false
-        }
-      },
-      "settings_team": {
+      "app_account_settings": {
         "value": [
           {
+            "id": "0",
+            "name": "Brian Hughes",
+            "username": "brianh",
+            "title": "Senior Frontend Developer",
+            "company": "YXZ Software",
+            "about": "Hey! This is Brian; husband, father and gamer. I'm mostly passionate about bleeding edge tech and chocolate! 🍫",
+            "email": "hughes.brian@mail.com",
+            "phone": "121-490-33-12",
+            "country": "United States",
+            "language": "English"
+          }
+        ]
+      },
+      "app_notification_settings": {
+        "value": [
+          {
+            "id": "0",
+            "communication": true,
+            "security": true,
+            "meetups": false,
+            "comments": false,
+            "mention": true,
+            "follow": true,
+            "inquiry": true
+          }
+        ]
+      },
+      "app_plan_billing_settings": {
+        "value": [
+          {
+            "id": "0",
+            "plan": "team",
+            "cardHolder": "",
+            "cardNumber": "",
+            "cardExpiration": "",
+            "cardCVC": "",
+            "country": "",
+            "zip": ""
+          }
+        ]
+      },
+      "app_security_settings": {
+        "value": [
+          {
+            "id": "0",
+            "currentPassword": "changeme",
+            "newPassword": "",
+            "twoStepVerification": true,
+            "askPasswordChange": false
+          }
+        ]
+      },
+      "app_team_members": {
+        "value": [
+          {
+            "id": "0",
             "avatar": "assets/images/avatars/male-01.jpg",
             "name": "Dejesus Michael",
             "email": "dejesusmichael@mail.org",
             "role": "admin"
           },
           {
+            "id": "1",
             "avatar": "assets/images/avatars/male-03.jpg",
             "name": "Mclaughlin Steele",
             "email": "mclaughlinsteele@mail.me",
             "role": "admin"
           },
           {
+            "id": "2",
             "avatar": "assets/images/avatars/female-02.jpg",
             "name": "Laverne Dodson",
             "email": "lavernedodson@mail.ca",
             "role": "write"
           },
           {
+            "id": "3",
+            "teamId": "0",
             "avatar": "assets/images/avatars/female-03.jpg",
             "name": "Trudy Berg",
             "email": "trudyberg@mail.us",
             "role": "read"
           },
           {
+            "id": "4",
             "avatar": "assets/images/avatars/male-07.jpg",
             "name": "Lamb Underwood",
             "email": "lambunderwood@mail.me",
             "role": "read"
           },
           {
+            "id": "5",
             "avatar": "assets/images/avatars/male-08.jpg",
             "name": "Mcleod Wagner",
             "email": "mcleodwagner@mail.biz",
             "role": "read"
           },
           {
+            "id": "6",
             "avatar": "assets/images/avatars/female-07.jpg",
             "name": "Shannon Kennedy",
             "email": "shannonkennedy@mail.ca",

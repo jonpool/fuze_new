@@ -13,7 +13,7 @@ import ThemesPanel from 'src/components/theme-layouts/components/configurator/Th
 import { useAppSelector } from 'src/store/hooks';
 import { User } from 'src/auth/user';
 import { selectUserSettings } from 'src/auth/user/store/userSlice';
-import useAuth from 'src/auth/useAuth';
+import useUser from '@/auth/useUser';
 
 const Root = styled('div')(({ theme }) => ({
 	position: 'absolute',
@@ -59,16 +59,15 @@ const Root = styled('div')(({ theme }) => ({
 function Configurator() {
 	const theme = useTheme();
 	const [open, setOpen] = useState('');
-	const { updateUser, authState } = useAuth();
-	const { isAuthenticated, user } = authState;
+	const { data: user, updateUser, isGuest } = useUser();
 	const userSettings = useAppSelector(selectUserSettings);
 	const prevUserSettings = usePrevious(userSettings);
 
 	useEffect(() => {
-		if (isAuthenticated && prevUserSettings && !_.isEqual(userSettings, prevUserSettings)) {
+		if (!isGuest && prevUserSettings && !_.isEqual(userSettings, prevUserSettings)) {
 			updateUser(_.setIn(user, 'data.settings', userSettings) as User);
 		}
-	}, [isAuthenticated, userSettings]);
+	}, [isGuest, userSettings]);
 
 	const handlerOptions = {
 		onSwipedLeft: () => Boolean(open) && theme.direction === 'rtl' && handleClose(),

@@ -33,7 +33,7 @@ const MailboxApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/mailbox/mails`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['mailbox_mails', 'mailbox_mail']
 			}),
@@ -41,7 +41,7 @@ const MailboxApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/mailbox/mails`,
 					method: 'POST',
-					data: queryArg.mail
+					body: queryArg.mail
 				}),
 				invalidatesTags: ['mailbox_mails']
 			}),
@@ -57,7 +57,7 @@ const MailboxApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/mailbox/labels/${queryArg.labelSlug}`,
 					method: 'PUT',
-					data: queryArg.label
+					body: queryArg.label
 				}),
 				invalidatesTags: ['mailbox_label', 'mailbox_labels']
 			}),

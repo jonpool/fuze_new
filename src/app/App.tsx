@@ -1,9 +1,7 @@
 'use client';
 
 import { SnackbarProvider } from 'notistack';
-import MockApiProvider from '@mock-api/MockApiProvider';
-import AuthenticationProvider from 'src/auth/AuthenticationProvider';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { enUS } from 'date-fns/locale/en-US';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,34 +9,14 @@ import { Provider } from 'react-redux';
 import ErrorBoundary from '@fuse/utils/ErrorBoundary';
 import AppContext from 'src/contexts/AppContext';
 
-import AWSAuthProvider from 'src/auth/services/aws/AWSAuthProvider';
-import FirebaseAuthProvider from 'src/auth/services/firebase/FirebaseAuthProvider';
-import JwtAuthProvider from 'src/auth/services/jwt/JwtAuthProvider';
-import { setDefaultSettings, setInitialSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import store from '../store/store';
 import MainThemeProvider from '../contexts/MainThemeProvider';
+import useUser from '@/auth/useUser';
+import { setDefaultSettings, setInitialSettings } from '@/@fuse/core/FuseSettings/fuseSettingsSlice';
 
 type AppProps = {
 	children?: React.ReactNode;
 };
-
-/**
- * The Authentication providers.
- */
-const authProviders = [
-	{
-		name: 'jwt',
-		Provider: JwtAuthProvider
-	},
-	{
-		name: 'aws',
-		Provider: AWSAuthProvider
-	},
-	{
-		name: 'firebase',
-		Provider: FirebaseAuthProvider
-	}
-];
 
 /**
  * The main app component.
@@ -46,6 +24,22 @@ const authProviders = [
 function App(props: AppProps) {
 	const { children } = props;
 	const val = useMemo(() => ({}), []);
+	const { data: user, isGuest } = useUser();
+	const userSettings = useMemo(() => user?.settings, [user]);
+
+	useEffect(() => {
+		if (userSettings) {
+			// Set the default settings when the user settings are set
+			store.dispatch(setDefaultSettings(userSettings));
+		}
+	}, [userSettings]);
+
+	useEffect(() => {
+		if (!isGuest) {
+			// Set the initial settings when the user is not authenticated
+			store.dispatch(setInitialSettings());
+		}
+	}, [isGuest]);
 
 	return (
 		<ErrorBoundary>
@@ -57,13 +51,10 @@ function App(props: AppProps) {
 				>
 					{/* Redux Store Provider */}
 					<Provider store={store}>
-						{/* Mock API Provider */}
-						<MockApiProvider>
-							{/* Theme Provider */}
-							<MainThemeProvider>
-								{/* Authentication Provider */}
-								<AuthenticationProvider
-									providers={authProviders}
+						{/* Theme Provider */}
+						<MainThemeProvider>
+							{/* Authentication Provider */}
+							{/* <AuthenticationProvider
 									onAuthStateChanged={(authState) => {
 										if (authState.authStatus === 'configuring') {
 											return;
@@ -79,23 +70,22 @@ function App(props: AppProps) {
 											store.dispatch(setInitialSettings());
 										}
 									}}
-								>
-									{/* Notistack Notification Provider */}
-									<SnackbarProvider
-										maxSnack={5}
-										anchorOrigin={{
-											vertical: 'bottom',
-											horizontal: 'right'
-										}}
-										classes={{
-											containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
-										}}
-									>
-										{children}
-									</SnackbarProvider>
-								</AuthenticationProvider>
-							</MainThemeProvider>
-						</MockApiProvider>
+								> */}
+							{/* Notistack Notification Provider */}
+							<SnackbarProvider
+								maxSnack={5}
+								anchorOrigin={{
+									vertical: 'bottom',
+									horizontal: 'right'
+								}}
+								classes={{
+									containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
+								}}
+							>
+								{children}
+							</SnackbarProvider>
+							{/* </AuthenticationProvider> */}
+						</MainThemeProvider>
 					</Provider>
 				</LocalizationProvider>
 			</AppContext.Provider>

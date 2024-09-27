@@ -34,7 +34,7 @@ const ScrumboardApi = api
 				query: (member) => ({
 					url: `/api/mock/scrumboard/members`,
 					method: 'POST',
-					data: member
+					body: member
 				}),
 				invalidatesTags: ['scrumboard_members']
 			}),
@@ -48,7 +48,7 @@ const ScrumboardApi = api
 				query: (member) => ({
 					url: `/api/mock/scrumboard/members/${member.id}`,
 					method: 'PUT',
-					data: member
+					body: member
 				}),
 				invalidatesTags: ['scrumboard_member']
 			}),
@@ -73,7 +73,7 @@ const ScrumboardApi = api
 				query: (listItem) => ({
 					url: `/api/mock/scrumboard/lists`,
 					method: 'POST',
-					data: listItem
+					body: listItem
 				}),
 				invalidatesTags: ['scrumboard_board_lists', 'scrumboard_board']
 			}),
@@ -90,7 +90,7 @@ const ScrumboardApi = api
 				query: (list) => ({
 					url: `/api/mock/scrumboard/lists/${list.id}`,
 					method: 'PUT',
-					data: list
+					body: list
 				}),
 				invalidatesTags: ['scrumboard_board_lists', 'scrumboard_board_list']
 			}),
@@ -118,7 +118,7 @@ const ScrumboardApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/scrumboard/labels`,
 					method: 'POST',
-					data: { ...queryArg.label, boardId: queryArg.boardId }
+					body: { ...queryArg.label, boardId: queryArg.boardId }
 				}),
 				invalidatesTags: ['scrumboard_board_labels']
 			}),
@@ -135,7 +135,7 @@ const ScrumboardApi = api
 				query: (label) => ({
 					url: `/api/mock/scrumboard/labels/${label.id}`,
 					method: 'PUT',
-					data: label
+					body: label
 				}),
 				invalidatesTags: ['scrumboard_board_label']
 			}),
@@ -166,7 +166,11 @@ const ScrumboardApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/scrumboard/cards`,
 					method: 'POST',
-					data: CardModel({ ...queryArg.card, boardId: queryArg.boardId, listId: queryArg.listId })
+					body: CardModel({
+						...queryArg.card,
+						boardId: queryArg.boardId,
+						listId: queryArg.listId
+					})
 				}),
 				invalidatesTags: ['scrumboard_board_cards', 'scrumboard_board']
 			}),
@@ -177,7 +181,7 @@ const ScrumboardApi = api
 				query: (card) => ({
 					url: `/api/mock/scrumboard/cards/${card.id}`,
 					method: 'PUT',
-					data: card
+					body: card
 				}),
 				invalidatesTags: ['scrumboard_board_cards']
 			}),
@@ -199,7 +203,7 @@ const ScrumboardApi = api
 				query: (board) => ({
 					url: `/api/mock/scrumboard/boards`,
 					method: 'POST',
-					data: BoardModel(board)
+					body: BoardModel(board)
 				}),
 				invalidatesTags: ['scrumboard_boards', 'scrumboard_board']
 			}),
@@ -213,7 +217,7 @@ const ScrumboardApi = api
 				query: (board) => ({
 					url: `/api/mock/scrumboard/boards/${board.id}`,
 					method: 'PUT',
-					data: board
+					body: board
 				}),
 				invalidatesTags: ['scrumboard_board', 'scrumboard_boards']
 			}),
@@ -240,7 +244,7 @@ const ScrumboardApi = api
 					return {
 						url: `/api/mock/scrumboard/boards/${board.id}`,
 						method: 'PUT',
-						data: { ...board, lists: ordered }
+						body: { ...board, lists: ordered }
 					};
 				},
 				onQueryStarted: async (queryArg, { dispatch, queryFulfilled }) => {
@@ -283,7 +287,7 @@ const ScrumboardApi = api
 					return {
 						url: `/api/mock/scrumboard/boards/${board.id}`,
 						method: 'PUT',
-						data: { ...board, lists: ordered }
+						body: { ...board, lists: ordered }
 					};
 				},
 				onQueryStarted: async (queryArg, { dispatch, queryFulfilled }) => {

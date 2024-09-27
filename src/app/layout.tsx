@@ -1,11 +1,13 @@
 import { Inter } from 'next/font/google';
 import clsx from 'clsx';
-import generateMetadata from '../utils/generateMetadata';
-import App from './App';
 import 'src/styles/splash-screen.css';
 import 'src/styles/app-base.css';
 import 'src/styles/app-components.css';
 import 'src/styles/app-utilities.css';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth/authJs';
+import generateMetadata from '../utils/generateMetadata';
+import App from './App';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,11 +21,13 @@ export const metadata = await generateMetadata({
 	url: 'https://react-material.fusetheme.com'
 });
 
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const session = await auth();
+
 	return (
 		<html lang="en">
 			<head>
@@ -71,7 +75,12 @@ export default function RootLayout({
 				id="__next"
 				className={clsx('loading', inter.className)}
 			>
-				<App>{children}</App>
+				<SessionProvider
+					basePath="/auth"
+					session={session}
+				>
+					<App>{children}</App>
+				</SessionProvider>
 			</body>
 		</html>
 	);

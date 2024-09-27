@@ -56,19 +56,21 @@ const NotesApi = api
 				query: (note) => ({
 					url: `/api/mock/notes/items`,
 					method: 'POST',
-					data: note
+					body: note
 				}),
 				invalidatesTags: ['notes_list', 'notes_item']
 			}),
 			getNotesItem: build.query<GetNotesItemApiResponse, GetNotesItemApiArg>({
-				query: (queryArg) => ({ url: `/api/mock/notes/items/${queryArg.noteId}` }),
+				query: (queryArg) => ({
+					url: `/api/mock/notes/items/${queryArg.noteId}`
+				}),
 				providesTags: ['notes_item']
 			}),
 			updateNotesItem: build.mutation<UpdateNotesItemApiResponse, UpdateNotesItemApiArg>({
 				query: (note) => ({
 					url: `/api/mock/notes/items/${note.id}`,
 					method: 'PUT',
-					data: note
+					body: note
 				}),
 				invalidatesTags: ['notes_item', 'notes_list']
 			}),
@@ -87,19 +89,21 @@ const NotesApi = api
 				query: (noteLabel) => ({
 					url: `/api/mock/notes/labels`,
 					method: 'POST',
-					data: noteLabel
+					body: noteLabel
 				}),
 				invalidatesTags: ['notes_label', 'notes_labels']
 			}),
 			getNotesLabel: build.query<GetNotesLabelApiResponse, GetNotesLabelApiArg>({
-				query: (queryArg) => ({ url: `/api/mock/notes/labels/${queryArg.labelId}` }),
+				query: (queryArg) => ({
+					url: `/api/mock/notes/labels/${queryArg.labelId}`
+				}),
 				providesTags: ['notes_label']
 			}),
 			updateNotesLabel: build.mutation<UpdateNotesLabelApiResponse, UpdateNotesLabelApiArg>({
 				query: (notesLabel) => ({
 					url: `/api/mock/notes/labels/${notesLabel.id}`,
 					method: 'PUT',
-					data: notesLabel
+					body: notesLabel
 				}),
 				invalidatesTags: ['notes_labels']
 			}),

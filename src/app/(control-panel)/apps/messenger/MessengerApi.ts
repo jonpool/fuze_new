@@ -2,6 +2,8 @@ import { apiService as api } from 'src/store/apiService';
 import { PartialObjectDeep } from 'type-fest/source/partial-deep';
 import ChatMessageModel from './models/ChatMessageModel';
 
+const demoUserId = 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df';
+
 export const addTagTypes = [
 	'messenger_contacts',
 	'messenger_contact',
@@ -30,7 +32,7 @@ const MessengerApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/messenger/contacts/${queryArg.id}`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['messenger_contact']
 			}),
@@ -49,7 +51,7 @@ const MessengerApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/messenger/chat-list`,
 					method: 'POST',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['messenger_chats']
 			}),
@@ -72,7 +74,7 @@ const MessengerApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/messenger/messages`,
 					method: 'POST',
-					data: ChatMessageModel({
+					body: ChatMessageModel({
 						chatId: queryArg.chatId,
 						contactId: 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
 						value: queryArg.message
@@ -81,7 +83,7 @@ const MessengerApi = api
 				invalidatesTags: ['messenger_chat', 'messenger_chats']
 			}),
 			getMessengerUserProfile: build.query<GetMessengerUserProfileApiResponse, GetMessengerUserProfileApiArg>({
-				query: () => ({ url: `/api/mock/messenger/profile` }),
+				query: () => ({ url: `/api/mock/messenger/profiles/${demoUserId}` }),
 				providesTags: ['messenger_user_profile']
 			}),
 			updateMessengerUserProfile: build.mutation<
@@ -89,9 +91,9 @@ const MessengerApi = api
 				UpdateMessengerUserProfileApiArg
 			>({
 				query: (queryArg) => ({
-					url: `/api/mock/messenger/profile`,
+					url: `/api/mock/messenger/profiles/${demoUserId}`,
 					method: 'PUT',
-					data: queryArg
+					body: queryArg
 				}),
 				invalidatesTags: ['messenger_user_profile']
 			})
