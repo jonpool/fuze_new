@@ -60,6 +60,7 @@ const config = {
 	},
 	providers,
 	basePath: '/auth',
+	trustHost: true,
 	callbacks: {
 		authorized({ request, auth }) {
 			const { pathname } = request.nextUrl;
