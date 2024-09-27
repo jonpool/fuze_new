@@ -2,10 +2,12 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import _ from '@lodash';
 import { WatchListItemType } from '../types/WatchlistType';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type WatchlistItemProps = {
 	item: WatchListItemType;

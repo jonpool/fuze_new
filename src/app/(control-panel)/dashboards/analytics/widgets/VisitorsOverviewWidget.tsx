@@ -1,5 +1,5 @@
 import { alpha, ThemeProvider, useTheme } from '@mui/material/styles';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { selectContrastMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
@@ -13,6 +13,8 @@ import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
 import VisitorsOverviewWidgetType from './types/VisitorsOverviewWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The visitors overview widget.

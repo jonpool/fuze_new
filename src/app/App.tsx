@@ -53,24 +53,6 @@ function App(props: AppProps) {
 					<Provider store={store}>
 						{/* Theme Provider */}
 						<MainThemeProvider>
-							{/* Authentication Provider */}
-							{/* <AuthenticationProvider
-									onAuthStateChanged={(authState) => {
-										if (authState.authStatus === 'configuring') {
-											return;
-										}
-
-										// Set the default settings when the user settings are set
-										if (authState.user?.data?.settings) {
-											store.dispatch(setDefaultSettings(authState.user?.data?.settings));
-										}
-
-										// Set the initial settings when the user is not authenticated
-										if (!authState.isAuthenticated) {
-											store.dispatch(setInitialSettings());
-										}
-									}}
-								> */}
 							{/* Notistack Notification Provider */}
 							<SnackbarProvider
 								maxSnack={5}

@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper';
 import { lighten, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import Box from '@mui/material/Box';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
@@ -10,6 +10,8 @@ import FuseTab from 'src/components/tabs/FuseTab';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 import TaskDistributionDataType from './types/TaskDistributionDataType';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The TaskDistributionWidget widget.

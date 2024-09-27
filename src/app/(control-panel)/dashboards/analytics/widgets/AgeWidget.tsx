@@ -5,10 +5,12 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { ApexOptions } from 'apexcharts';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { useAppSelector } from 'src/store/hooks';
 import AgeWidgetModelType from './types/AgeWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The age widget.

@@ -2,8 +2,8 @@ import aliases from './aliases.js';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	experimental: {
-		turbo: {
+	experimental:  process.env.NODE_ENV === 'production' ? {} : {
+		turbo:{
 			caching: false, // Disable caching on build
 			parallel: true, // Keep parallel builds enabled
 			resolveAlias: { ...aliases }

@@ -3,12 +3,14 @@ import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
 import _ from '@lodash';
 import ConversionsWidgetType from './types/ConversionsWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The conversions widget.

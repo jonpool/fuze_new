@@ -1,5 +1,7 @@
-import Chart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
+
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 function Area() {
 	const [state] = useState({

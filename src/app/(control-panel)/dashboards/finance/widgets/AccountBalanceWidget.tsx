@@ -2,12 +2,14 @@ import { useTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
 import AccountBalanceWidgetType from './types/AccountBalanceWidgetType';
 import { useGetFinanceDashboardWidgetsQuery } from '../FinanceDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The AccountBalanceWidget widget.

@@ -1,7 +1,7 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -9,6 +9,8 @@ import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
 import NewVsReturningWidgetType from './types/NewVsReturningWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * New vs. returning widget.

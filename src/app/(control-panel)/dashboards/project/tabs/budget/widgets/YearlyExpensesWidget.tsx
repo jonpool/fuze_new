@@ -1,7 +1,7 @@
 import Paper from '@mui/material/Paper';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import IconButton from '@mui/material/IconButton';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { ApexOptions } from 'apexcharts';
@@ -9,6 +9,8 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
 import ExpensesDataType from './types/ExpensesDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The YearlyExpensesWidget widget.

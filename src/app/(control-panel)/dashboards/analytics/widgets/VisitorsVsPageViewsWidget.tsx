@@ -4,12 +4,14 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Tooltip } from '@mui/material';
-import ReactApexChart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
 import _ from '@lodash';
 import VisitorsVsPageViewsType from './types/VisitorsVsPageViewsType';
 import { selectWidget } from '../AnalyticsDashboardApi';
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * Visitors vs. Page Views widget.
