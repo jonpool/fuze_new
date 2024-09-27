@@ -66,7 +66,6 @@ function App(props: AppProps) {
 							>
 								{children}
 							</SnackbarProvider>
-							{/* </AuthenticationProvider> */}
 						</MainThemeProvider>
 					</Provider>
 				</LocalizationProvider>

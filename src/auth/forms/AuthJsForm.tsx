@@ -22,19 +22,16 @@ function AuthJsForm(props: AuthJsFormProps) {
 				<Alert
 					className="mt-16"
 					severity="error"
-					sx={{
-						backgroundColor: (theme) => theme.palette.error.light,
-						color: (theme) => theme.palette.error.dark
-					}}
+					sx={(theme) => ({
+						backgroundColor: theme.palette.error.light,
+						color: theme.palette.error.dark
+					})}
 				>
 					{error}
 				</Alert>
 			)}
-
 			{formType === 'signin' && <AuthJsCredentialsSignInForm />}
-
 			{formType === 'signup' && <AuthJsCredentialsSignUpForm />}
-
 			<AuthJsProviderSelect />
 		</div>
 	);

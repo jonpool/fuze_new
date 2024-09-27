@@ -27,9 +27,9 @@ function PoweredByLinks() {
 			initial="hidden"
 			animate="show"
 			className="flex items-center rounded-lg overflow-hidden"
-			sx={{
-				border: (theme) => `1px solid ${theme.palette.divider}!important`
-			}}
+			sx={(theme) => ({
+				border: `1px solid ${theme.palette.divider}!important`
+			})}
 		>
 			<Tooltip
 				title="React"
@@ -91,7 +91,6 @@ function PoweredByLinks() {
 					/>
 				</IconButton>
 			</Tooltip>
-
 			<Tooltip
 				title="Tailwind"
 				placement="top"
@@ -123,7 +122,6 @@ function PoweredByLinks() {
 					/>
 				</IconButton>
 			</Tooltip>
-
 			<Tooltip
 				title="ViteJs"
 				placement="top"
@@ -144,7 +142,6 @@ function PoweredByLinks() {
 					/>
 				</IconButton>
 			</Tooltip>
-
 			<Tooltip
 				title="TypeScript"
 				placement="top"

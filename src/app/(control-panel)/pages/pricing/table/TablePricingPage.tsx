@@ -96,12 +96,19 @@ function TablePricingPage() {
 									period === 'year' && 'shadow'
 								)}
 								onClick={() => setPeriod('year')}
-								sx={{ backgroundColor: period === 'year' ? 'background.paper' : '' }}
+								sx={[
+									period === 'year'
+										? {
+												backgroundColor: 'background.paper'
+											}
+										: {
+												backgroundColor: ''
+											}
+								]}
 								type="button"
 							>
 								Yearly billing
 							</Box>
-
 							<Box
 								component="button"
 								className={clsx(
@@ -109,7 +116,15 @@ function TablePricingPage() {
 									period === 'month' && 'shadow'
 								)}
 								onClick={() => setPeriod('month')}
-								sx={{ backgroundColor: period === 'month' ? 'background.paper' : '' }}
+								sx={[
+									period === 'month'
+										? {
+												backgroundColor: 'background.paper'
+											}
+										: {
+												backgroundColor: ''
+											}
+								]}
 								type="button"
 							>
 								Monthly billing
@@ -117,10 +132,8 @@ function TablePricingPage() {
 						</Box>
 					</motion.div>
 				</div>
-
 				<TablePricingTable period={period} />
 			</div>
-
 			<Paper className="flex flex-col items-center px-24 py-40 sm:px-64 sm:pb-80 sm:pt-72">
 				<div className="container">
 					<div>
@@ -174,7 +187,6 @@ function TablePricingPage() {
 					</div>
 				</div>
 			</Paper>
-
 			<Box
 				sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
 				className="px-24 py-40 sm:px-64 sm:py-48"
@@ -199,7 +211,6 @@ function TablePricingPage() {
 					</Button>
 				</div>
 			</Box>
-
 			<div className="flex flex-col items-center px-24 pb-32 pt-12 sm:px-64 sm:pb-80 sm:pt-72">
 				<div className="container">
 					<div>

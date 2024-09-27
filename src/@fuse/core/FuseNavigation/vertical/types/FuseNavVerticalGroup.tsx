@@ -64,18 +64,19 @@ function FuseNavVerticalGroup(props: FuseNavItemComponentProps) {
 				>
 					<ListItemText
 						className="fuse-list-subheader-text"
-						sx={{
+						sx={(theme) => ({
 							margin: 0,
 							'& > .MuiListItemText-primary': {
 								fontSize: 12,
-								color: (theme) =>
-									theme.palette.mode === 'dark' ? 'secondary.light' : 'secondary.main',
+								color: 'secondary.main',
 								fontWeight: 600,
 								textTransform: 'uppercase',
 								letterSpacing: '.05em',
-								lineHeight: '20px'
+								lineHeight: '20px',
+								...theme.applyStyles('dark', {
+									color: 'secondary.light'
+								})
 							},
-
 							'& > .MuiListItemText-secondary': {
 								fontSize: 11,
 								color: 'text.disabled',
@@ -83,7 +84,7 @@ function FuseNavVerticalGroup(props: FuseNavItemComponentProps) {
 								fontWeight: 500,
 								lineHeight: '1.5'
 							}
-						}}
+						})}
 						primary={item.title}
 						secondary={item.subtitle}
 					/>

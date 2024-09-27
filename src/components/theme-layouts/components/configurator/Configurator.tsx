@@ -36,13 +36,11 @@ const Root = styled('div')(({ theme }) => ({
 	'&:hover': {
 		backgroundColor: red[500]
 	},
-
 	'& .settingsButton': {
 		'& > span': {
 			animation: 'rotating 3s linear infinite'
 		}
 	},
-
 	'@keyframes rotating': {
 		from: {
 			transform: 'rotate(0deg)'

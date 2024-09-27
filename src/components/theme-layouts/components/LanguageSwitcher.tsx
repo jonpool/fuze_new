@@ -46,15 +46,16 @@ function LanguageSwitcher() {
 
 				<Typography
 					className="mx-4 font-semibold text-md uppercase"
-					sx={{
-						color: (theme) =>
-							theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary
-					}}
+					sx={(theme) => ({
+						color: theme.palette.text.secondary,
+						...theme.applyStyles('dark', {
+							color: theme.palette.text.primary
+						})
+					})}
 				>
 					{currentLanguage.id}
 				</Typography>
 			</Button>
-
 			<Popover
 				open={Boolean(menu)}
 				anchorEl={menu}

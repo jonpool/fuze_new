@@ -29,77 +29,10 @@ type StyledNavBarProps = {
 	anchor?: string;
 };
 
-const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense, open, folded, position }) => ({
+const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 	minWidth: navbarWidth,
 	width: navbarWidth,
 	maxWidth: navbarWidth,
-
-	...(position === 'left' && {
-		borderRight: `1px solid ${theme.palette.divider}`
-	}),
-
-	...(position === 'right' && {
-		borderLight: `1px solid ${theme.palette.divider}`
-	}),
-
-	...(dense && {
-		minWidth: navbarWidthDense,
-		width: navbarWidthDense,
-		maxWidth: navbarWidthDense,
-
-		...(!open && {
-			...(position === 'left' && {
-				marginLeft: -navbarWidthDense
-			}),
-
-			...(position === 'right' && {
-				marginRight: -navbarWidthDense
-			})
-		})
-	}),
-
-	...(!folded && {
-		minWidth: dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth,
-		width: dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth,
-		maxWidth: dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth,
-
-		'& #fuse-navbar-panel': {
-			opacity: '1!important',
-			pointerEvents: 'initial!important'
-		},
-
-		...(!open && {
-			...(position === 'left' && {
-				marginLeft: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
-			}),
-
-			...(position === 'right' && {
-				marginRight: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
-			})
-		})
-	}),
-
-	...(!open && {
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.leavingScreen
-		}),
-		...(position === 'left' && {
-			marginLeft: -(dense ? navbarWidthDense : navbarWidth)
-		}),
-
-		...(position === 'right' && {
-			marginRight: -(dense ? navbarWidthDense : navbarWidth)
-		})
-	}),
-
-	...(open && {
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen
-		})
-	}),
-
 	'& .user-menu': {
 		minWidth: 56,
 		width: 56,
@@ -115,7 +48,117 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense, open, fol
 		'& .arrow': {
 			opacity: 0
 		}
-	}
+	},
+	variants: [
+		{
+			props: {
+				position: 'left'
+			},
+			style: {
+				borderRight: `1px solid ${theme.palette.divider}`
+			}
+		},
+		{
+			props: {
+				position: 'right'
+			},
+			style: {
+				borderLight: `1px solid ${theme.palette.divider}`
+			}
+		},
+		{
+			props: ({ dense }) => dense,
+			style: {
+				minWidth: navbarWidthDense,
+				width: navbarWidthDense,
+				maxWidth: navbarWidthDense
+			}
+		},
+		{
+			props: ({ dense, open, position }) => dense && !open && position === 'left',
+			style: {
+				marginLeft: -navbarWidthDense
+			}
+		},
+		{
+			props: ({ dense, open, position }) => dense && !open && position === 'right',
+			style: {
+				marginRight: -navbarWidthDense
+			}
+		},
+		{
+			props: ({ folded }) => !folded,
+			style: {
+				minWidth: navbarWidth + panelWidth,
+				width: navbarWidth + panelWidth,
+				maxWidth: navbarWidth + panelWidth,
+				'& #fuse-navbar-panel': {
+					opacity: '1!important',
+					pointerEvents: 'initial!important'
+				}
+			}
+		},
+		{
+			props: ({ folded, dense }) => !folded && dense,
+			style: {
+				minWidth: navbarWidthDense + panelWidth
+			}
+		},
+		{
+			props: ({ folded, dense }) => !folded && dense,
+			style: {
+				width: navbarWidthDense + panelWidth
+			}
+		},
+		{
+			props: ({ folded, dense }) => !folded && dense,
+			style: {
+				maxWidth: navbarWidthDense + panelWidth
+			}
+		},
+		{
+			props: ({ folded, open, position }) => !folded && !open && position === 'left',
+			style: {
+				marginLeft: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+			}
+		},
+		{
+			props: ({ folded, open, position }) => !folded && !open && position === 'right',
+			style: {
+				marginRight: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+			}
+		},
+		{
+			props: ({ open }) => !open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.leavingScreen
+				})
+			}
+		},
+		{
+			props: ({ open, position }) => !open && position === 'left',
+			style: {
+				marginLeft: -(dense ? navbarWidthDense : navbarWidth)
+			}
+		},
+		{
+			props: ({ open, position }) => !open && position === 'right',
+			style: {
+				marginRight: -(dense ? navbarWidthDense : navbarWidth)
+			}
+		},
+		{
+			props: ({ open }) => open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.enteringScreen
+				})
+			}
+		}
+	]
 }));
 
 const StyledNavBarMobile = styled(SwipeableDrawer)<StyledNavBarProps>(() => ({

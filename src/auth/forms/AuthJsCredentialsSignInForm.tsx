@@ -85,10 +85,10 @@ function AuthJsCredentialsSignInForm() {
 				<Alert
 					className="mb-32"
 					severity="error"
-					sx={{
-						backgroundColor: (theme) => theme.palette.error.light,
-						color: (theme) => theme.palette.error.dark
-					}}
+					sx={(theme) => ({
+						backgroundColor: theme.palette.error.light,
+						color: theme.palette.error.dark
+					})}
 				>
 					{errors?.root?.message}
 				</Alert>
@@ -111,7 +111,6 @@ function AuthJsCredentialsSignInForm() {
 					/>
 				)}
 			/>
-
 			<Controller
 				name="password"
 				control={control}
@@ -129,7 +128,6 @@ function AuthJsCredentialsSignInForm() {
 					/>
 				)}
 			/>
-
 			<div className="flex flex-col items-center justify-center sm:flex-row sm:justify-between">
 				<Controller
 					name="remember"
@@ -156,7 +154,6 @@ function AuthJsCredentialsSignInForm() {
 					Forgot password?
 				</Link>
 			</div>
-
 			<Button
 				variant="contained"
 				color="secondary"

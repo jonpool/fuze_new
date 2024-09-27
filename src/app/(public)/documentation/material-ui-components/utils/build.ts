@@ -10,8 +10,8 @@ import path, { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const demoDir = 'src/app/(control-panel)/documentation/material-ui-components/components';
-const rootDirectory = path.resolve(__dirname);
+const demoDir = 'src/app/(public)/documentation/material-ui-components/components';
+const rootDirectory = 'src/app/(public)/documentation/material-ui-components';
 const examplesDirectory = path.resolve(rootDirectory, './components');
 const pagesDirectory = path.resolve(rootDirectory, './doc');
 const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
@@ -529,6 +529,7 @@ async function replaceInExamples() {
 		fileSource.then((result) => {
 			result = result
 				.replace('docs/src/modules/components/HighlightedCode', '../../utils/HighlightedCode')
+				.replace('@mui/docs/HighlightedCode', '../../utils/HighlightedCode')
 				.replace(/docs\/src\/modules\/utils\/compose/g, '../../compose')
 				.replace(/docs\/src\/modules\/components\/MarkdownElement/g, '../../utils/MarkdownElement')
 				.replace(/docs\/src\/modules\/components\/HighlightedCode/g, '../../utils/HighlightedCode')

@@ -179,12 +179,16 @@ function GithubIssuesWidget() {
 							<Typography className="mt-4 text-sm sm:text-lg font-medium">Closed</Typography>
 						</div>
 						<Box
-							sx={{
-								backgroundColor: (_theme) =>
+							sx={[
+								(_theme) =>
 									_theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+										? {
+												backgroundColor: lighten(_theme.palette.background.default, 0.4)
+											}
+										: {
+												backgroundColor: lighten(_theme.palette.background.default, 0.02)
+											}
+							]}
 							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
@@ -193,12 +197,16 @@ function GithubIssuesWidget() {
 							<Typography className="mt-4 text-sm font-medium text-center">Fixed</Typography>
 						</Box>
 						<Box
-							sx={{
-								backgroundColor: (_theme) =>
-									_theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={[
+								(theme) =>
+									theme.palette.mode === 'light'
+										? {
+												backgroundColor: lighten(theme.palette.background.default, 0.4)
+											}
+										: {
+												backgroundColor: lighten(theme.palette.background.default, 0.02)
+											}
+							]}
 							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
@@ -207,12 +215,16 @@ function GithubIssuesWidget() {
 							<Typography className="mt-4 text-sm font-medium text-center">Won't Fix</Typography>
 						</Box>
 						<Box
-							sx={{
-								backgroundColor: (_theme) =>
+							sx={[
+								(_theme) =>
 									_theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+										? {
+												backgroundColor: lighten(_theme.palette.background.default, 0.4)
+											}
+										: {
+												backgroundColor: lighten(_theme.palette.background.default, 0.02)
+											}
+							]}
 							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
@@ -221,12 +233,16 @@ function GithubIssuesWidget() {
 							<Typography className="mt-4 text-sm font-medium text-center">Re-opened</Typography>
 						</Box>
 						<Box
-							sx={{
-								backgroundColor: (_theme) =>
+							sx={[
+								(_theme) =>
 									_theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+										? {
+												backgroundColor: lighten(_theme.palette.background.default, 0.4)
+											}
+										: {
+												backgroundColor: lighten(_theme.palette.background.default, 0.02)
+											}
+							]}
 							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">

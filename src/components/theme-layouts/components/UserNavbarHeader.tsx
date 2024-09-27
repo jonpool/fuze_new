@@ -11,7 +11,6 @@ const Root = styled('div')(({ theme }) => ({
 			easing: theme.transitions.easing.easeInOut
 		})
 	},
-
 	'& .avatar': {
 		background: darken(theme.palette.background.default, 0.05),
 		transition: theme.transitions.create('all', {
@@ -35,10 +34,10 @@ function UserNavbarHeader() {
 		<Root className="user relative flex flex-col items-center justify-center p-16 pb-14 shadow-0">
 			<div className="mb-24 flex items-center justify-center">
 				<Avatar
-					sx={{
-						backgroundColor: (theme) => `${theme.palette.background.paper} !important`,
+					sx={(theme) => ({
+						backgroundColor: `${theme.palette.background.paper} !important`,
 						color: 'text.secondary'
-					}}
+					})}
 					className="avatar uppercase h-96 w-96 text-5xl font-bold"
 					src={user.data.photoURL}
 					alt={user.data.displayName}

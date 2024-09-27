@@ -5,7 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
-const Root = styled(Tooltip)<{ position: 'left' | 'right' }>(({ theme, position }) => ({
+const Root = styled(Tooltip)<{ position: 'left' | 'right' }>(({ theme }) => ({
 	'& > .button': {
 		height: 40,
 		position: 'absolute',
@@ -24,32 +24,45 @@ const Root = styled(Tooltip)<{ position: 'left' | 'right' }>(({ theme, position 
 			paddingLeft: 8,
 			paddingRight: 8
 		},
-
 		'& > .button-icon': {
 			fontSize: 18,
 			transition: theme.transitions.create(['transform'], {
 				easing: theme.transitions.easing.easeInOut,
 				duration: theme.transitions.duration.short
 			})
-		},
-
-		...(position === 'left' && {
-			borderBottomLeftRadius: 0,
-			borderTopLeftRadius: 0,
-			paddingLeft: 4,
-			left: 0
-		}),
-
-		...(position === 'right' && {
-			borderBottomRightRadius: 0,
-			borderTopRightRadius: 0,
-			paddingRight: 4,
-			right: 0,
-			'& > .button-icon': {
-				transform: 'rotate(-180deg)'
+		}
+	},
+	variants: [
+		{
+			props: {
+				position: 'left'
+			},
+			style: {
+				'& > .button': {
+					borderBottomLeftRadius: 0,
+					borderTopLeftRadius: 0,
+					paddingLeft: 4,
+					left: 0
+				}
 			}
-		})
-	}
+		},
+		{
+			props: {
+				position: 'right'
+			},
+			style: {
+				'& > .button': {
+					borderBottomRightRadius: 0,
+					borderTopRightRadius: 0,
+					paddingRight: 4,
+					right: 0,
+					'& > .button-icon': {
+						transform: 'rotate(-180deg)'
+					}
+				}
+			}
+		}
+	]
 }));
 
 type NavbarToggleFabProps = {

@@ -24,7 +24,6 @@ const Root = styled('div')(({ theme }) => ({
 	'& .FuseSearch-container': {
 		position: 'relative'
 	},
-
 	'& .FuseSearch-suggestionsContainerOpen': {
 		position: 'absolute',
 		zIndex: 1,
@@ -32,17 +31,14 @@ const Root = styled('div')(({ theme }) => ({
 		left: 0,
 		right: 0
 	},
-
 	'& .FuseSearch-suggestion': {
 		display: 'block'
 	},
-
 	'& .FuseSearch-suggestionsList': {
 		margin: 0,
 		padding: 0,
 		listStyleType: 'none'
 	},
-
 	'& .FuseSearch-input': {
 		transition: theme.transitions.create(['background-color'], {
 			easing: theme.transitions.easing.easeInOut,

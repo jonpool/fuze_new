@@ -25,7 +25,7 @@ type StyledPanelProps = {
 	opened?: boolean;
 };
 
-const StyledPanel = styled(FuseScrollbars)<StyledPanelProps>(({ theme, opened }) => ({
+const StyledPanel = styled(FuseScrollbars)<StyledPanelProps>(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
 	color: theme.palette.text.primary,
 	transition: theme.transitions.create(['opacity'], {
@@ -34,11 +34,16 @@ const StyledPanel = styled(FuseScrollbars)<StyledPanelProps>(({ theme, opened })
 	}),
 	opacity: 0,
 	pointerEvents: 'none',
-	...(opened && {
-		opacity: 1,
-		pointerEvents: 'initial'
-	}),
-	minHeight: 0
+	minHeight: 0,
+	variants: [
+		{
+			props: ({ opened }) => opened,
+			style: {
+				opacity: 1,
+				pointerEvents: 'initial'
+			}
+		}
+	]
 }));
 
 /**

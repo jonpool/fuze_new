@@ -13,20 +13,32 @@ import RightSideLayout3 from './components/RightSideLayout3';
 import ToolbarLayout3 from './components/ToolbarLayout3';
 import { Layout3ConfigDefaultsType } from './Layout3Config';
 
-const Root = styled('div')<{ config: Layout3ConfigDefaultsType }>(({ config }) => ({
-	...(config.mode === 'boxed' && {
-		clipPath: 'inset(0)',
-		maxWidth: `${config.containerWidth}px`,
-		margin: '0 auto',
-		boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-	}),
-	...(config.mode === 'container' && {
-		'& .container': {
-			maxWidth: `${config.containerWidth}px`,
-			width: '100%',
-			margin: '0 auto'
+const Root = styled('div')(({ config }: { config: Layout3ConfigDefaultsType }) => ({
+	variants: [
+		{
+			props: {
+				mode: 'boxed'
+			},
+			style: {
+				clipPath: 'inset(0)',
+				maxWidth: `${config.containerWidth}px`,
+				margin: '0 auto',
+				boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+			}
+		},
+		{
+			props: {
+				mode: 'container'
+			},
+			style: {
+				'& .container': {
+					maxWidth: `${config.containerWidth}px`,
+					width: '100%',
+					margin: '0 auto'
+				}
+			}
 		}
-	})
+	]
 }));
 
 type Layout3Props = {

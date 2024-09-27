@@ -53,10 +53,10 @@ function CompactInvoicePage() {
 							</div>
 
 							<Box
-								sx={{
-									backgroundColor: (theme) => theme.palette.primary.dark,
-									color: (theme) => theme.palette.getContrastText(theme.palette.primary.dark)
-								}}
+								sx={(theme) => ({
+									backgroundColor: theme.palette.primary.dark,
+									color: theme.palette.getContrastText(theme.palette.primary.dark)
+								})}
 								className="-mr-64 grid auto-cols-max grid-flow-col gap-x-32 rounded-l-2xl px-32 py-24"
 							>
 								<div className="w-96 place-self-center">

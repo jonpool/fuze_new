@@ -23,7 +23,7 @@ type StyledNavBarPropsProps = {
 	open: boolean;
 };
 
-const Root = styled('div')<StyledNavBarPropsProps>(({ theme, folded }) => ({
+const Root = styled('div')<StyledNavBarPropsProps>(({ theme }) => ({
 	display: 'flex',
 	flexDirection: 'column',
 	zIndex: 4,
@@ -31,13 +31,17 @@ const Root = styled('div')<StyledNavBarPropsProps>(({ theme, folded }) => ({
 		width: navbarWidth,
 		minWidth: navbarWidth
 	},
-
-	...(folded && {
-		[theme.breakpoints.up('lg')]: {
-			width: 76,
-			minWidth: 76
+	variants: [
+		{
+			props: ({ folded }) => folded,
+			style: {
+				[theme.breakpoints.up('lg')]: {
+					width: 76,
+					minWidth: 76
+				}
+			}
 		}
-	})
+	]
 }));
 
 type StyledNavBarProps = {
@@ -50,91 +54,105 @@ type StyledNavBarProps = {
 	anchor?: string;
 };
 
-const StyledNavbar = styled('div')<StyledNavBarProps>(
-	({ theme, position, folded, foldedandopened, foldedandclosed }) => ({
-		minWidth: navbarWidth,
-		width: navbarWidth,
-		maxWidth: navbarWidth,
-		maxHeight: '100%',
-		transition: theme.transitions.create(['width', 'min-width'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.shorter
-		}),
-
-		...(position === 'left' && {
-			borderRight: `1px solid ${theme.palette.divider}`,
-			left: 0
-		}),
-
-		...(position === 'right' && {
-			borderLight: `1px solid ${theme.palette.divider}`,
-			right: 0
-		}),
-
-		...(folded && {
-			position: 'absolute',
-			width: 76,
-			minWidth: 76,
-			top: 0,
-			bottom: 0
-		}),
-
-		...(foldedandopened && {
-			width: navbarWidth,
-			minWidth: navbarWidth
-		}),
-
-		...(foldedandclosed && {
-			'& .NavbarStyle2-content': {
-				'& .logo-icon': {
-					width: 44,
-					height: 44
-				},
-				'& .logo-text': {
-					opacity: 0
-				},
-				'& .react-badge': {
-					opacity: 0
-				},
-				'& .fuse-list-item': {
-					width: 56
-				},
-				'& .fuse-list-item-text, & .arrow-icon, & .item-badge': {
-					opacity: 0
-				},
-				'& .fuse-list-subheader .fuse-list-subheader-text': {
-					opacity: 0
-				},
-				'& .fuse-list-subheader:before': {
-					content: '""',
-					display: 'block',
-					position: 'absolute',
-					minWidth: 16,
-					borderTop: '2px solid',
-					opacity: 0.2
-				},
-				'& .collapse-children': {
-					display: 'none'
-				},
-				'& .user-menu': {
-					minWidth: 56,
-					'& .title': {
+const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
+	minWidth: navbarWidth,
+	width: navbarWidth,
+	maxWidth: navbarWidth,
+	maxHeight: '100%',
+	transition: theme.transitions.create(['width', 'min-width'], {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.shorter
+	}),
+	variants: [
+		{
+			props: {
+				position: 'left'
+			},
+			style: {
+				borderRight: `1px solid ${theme.palette.divider}`,
+				left: 0
+			}
+		},
+		{
+			props: {
+				position: 'right'
+			},
+			style: {
+				borderLight: `1px solid ${theme.palette.divider}`,
+				right: 0
+			}
+		},
+		{
+			props: ({ folded }) => folded,
+			style: {
+				position: 'absolute',
+				width: 76,
+				minWidth: 76,
+				top: 0,
+				bottom: 0
+			}
+		},
+		{
+			props: ({ foldedandopened }) => foldedandopened,
+			style: {
+				width: navbarWidth,
+				minWidth: navbarWidth
+			}
+		},
+		{
+			props: ({ foldedandclosed }) => foldedandclosed,
+			style: {
+				'& .NavbarStyle2-content': {
+					'& .logo-icon': {
+						width: 44,
+						height: 44
+					},
+					'& .logo-text': {
 						opacity: 0
 					},
-					'& .subtitle': {
+					'& .react-badge': {
 						opacity: 0
 					},
-					'& .info-icon': {
+					'& .fuse-list-item': {
+						width: 56
+					},
+					'& .fuse-list-item-text, & .arrow-icon, & .item-badge': {
 						opacity: 0
 					},
-					'& .arrow': {
+					'& .fuse-list-subheader .fuse-list-subheader-text': {
 						opacity: 0
+					},
+					'& .fuse-list-subheader:before': {
+						content: '""',
+						display: 'block',
+						position: 'absolute',
+						minWidth: 16,
+						borderTop: '2px solid',
+						opacity: 0.2
+					},
+					'& .collapse-children': {
+						display: 'none'
+					},
+					'& .user-menu': {
+						minWidth: 56,
+						'& .title': {
+							opacity: 0
+						},
+						'& .subtitle': {
+							opacity: 0
+						},
+						'& .info-icon': {
+							opacity: 0
+						},
+						'& .arrow': {
+							opacity: 0
+						}
 					}
 				}
 			}
-		})
-	})
-);
+		}
+	]
+}));
 
 const StyledNavbarMobile = styled(SwipeableDrawer)<StyledNavBarProps>(({ theme }) => ({
 	'& > .MuiDrawer-paper': {

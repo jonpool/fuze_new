@@ -105,12 +105,12 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 					<Paper className="preview-wrapper z-20 relative h-3xl w-full rounded-xl shadow-xl flex flex-auto min-h-full overflow-hidden border">
 						<Box
 							className="preview-navbar hidden md:block sticky top-0 flex-0 min-w-224 h-768 border-r z-20"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<div className="h-16" />
 
@@ -144,12 +144,12 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 						<div className="flex flex-col flex-auto">
 							<Box
 								className="preview-header relative z-20 flex flex-shrink-0 items-center justify-end h-64 px-24 sm:px-40 border-b"
-								sx={{
-									backgroundColor: (theme) =>
-										theme.palette.mode === 'light'
-											? lighten(theme.palette.background.default, 0.4)
-											: lighten(theme.palette.background.default, 0.02)
-								}}
+								sx={(theme) => ({
+									backgroundColor: lighten(theme.palette.background.default, 0.02),
+									...theme.applyStyles('light', {
+										backgroundColor: lighten(theme.palette.background.default, 0.4)
+									})
+								})}
 							>
 								<Box
 									className="w-24 h-24 rounded-full"
@@ -165,12 +165,12 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 
 							<Box
 								className="preview-footer relative z-20 flex flex-shrink-0 items-center h-56 px-24 sm:px-40 border-t"
-								sx={{
-									backgroundColor: (theme) =>
-										theme.palette.mode === 'light'
-											? lighten(theme.palette.background.default, 0.4)
-											: lighten(theme.palette.background.default, 0.02)
-								}}
+								sx={(theme) => ({
+									backgroundColor: lighten(theme.palette.background.default, 0.02),
+									...theme.applyStyles('light', {
+										backgroundColor: lighten(theme.palette.background.default, 0.4)
+									})
+								})}
 							>
 								<Box
 									className="w-128 h-16 rounded-full"

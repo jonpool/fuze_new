@@ -23,13 +23,17 @@ function FooterLayout1(props: FooterLayout1Props) {
 				id="fuse-footer"
 				className={clsx('relative z-20 border-t', className)}
 				color="default"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? footerTheme.palette.background.paper
-							: footerTheme.palette.background.default
-				}}
+				sx={(theme) => ({
+					backgroundColor: 'var(--default-background-footerTheme-palette)',
+					...theme.applyStyles('light', {
+						backgroundColor: 'var(--paper-background-footerTheme-palette)'
+					})
+				})}
 				elevation={0}
+				style={{
+					'--paper-background-footerTheme-palette': footerTheme.palette.background.paper,
+					'--default-background-footerTheme-palette': footerTheme.palette.background.default
+				}}
 			>
 				<Toolbar className="min-h-48 md:min-h-64 px-8 sm:px-12 py-0 flex items-center overflow-x-auto">
 					<DemoLayoutFooterContent />

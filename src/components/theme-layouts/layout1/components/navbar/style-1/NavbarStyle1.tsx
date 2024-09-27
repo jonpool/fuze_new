@@ -21,35 +21,54 @@ type StyledNavBarProps = {
 	position: string;
 };
 
-const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, open, position }) => ({
+const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 	minWidth: navbarWidth,
 	width: navbarWidth,
 	maxWidth: navbarWidth,
-	...(!open && {
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.leavingScreen
-		}),
-		...(position === 'left' && {
-			marginLeft: `-${navbarWidth}px`
-		}),
-		...(position === 'right' && {
-			marginRight: `-${navbarWidth}px`
-		})
-	}),
-	...(open && {
-		...(position === 'left' && {
-			borderRight: `1px solid ${theme.palette.divider}`
-		}),
-		...(position === 'right' && {
-			borderLeft: `1px solid ${theme.palette.divider}`
-		}),
-
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen
-		})
-	})
+	variants: [
+		{
+			props: ({ open }) => !open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.leavingScreen
+				})
+			}
+		},
+		{
+			props: ({ open, position }) => !open && position === 'left',
+			style: {
+				marginLeft: `-${navbarWidth}px`
+			}
+		},
+		{
+			props: ({ open, position }) => !open && position === 'right',
+			style: {
+				marginRight: `-${navbarWidth}px`
+			}
+		},
+		{
+			props: ({ open }) => open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.enteringScreen
+				})
+			}
+		},
+		{
+			props: ({ open, position }) => open && position === 'left',
+			style: {
+				borderRight: `1px solid ${theme.palette.divider}`
+			}
+		},
+		{
+			props: ({ open, position }) => open && position === 'right',
+			style: {
+				borderLeft: `1px solid ${theme.palette.divider}`
+			}
+		}
+	]
 }));
 
 const StyledNavBarMobile = styled(SwipeableDrawer)(() => ({

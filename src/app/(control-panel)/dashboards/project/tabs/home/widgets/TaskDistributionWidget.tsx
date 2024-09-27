@@ -133,12 +133,16 @@ function TaskDistributionWidget() {
 				/>
 			</div>
 			<Box
-				sx={{
-					backgroundColor: (_theme) =>
+				sx={[
+					(_theme) =>
 						_theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+							? {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								}
+							: {
+									backgroundColor: lighten(theme.palette.background.default, 0.02)
+								}
+				]}
 				className="grid grid-cols-2 border-t divide-x -m-24 mt-16"
 			>
 				<div className="flex flex-col items-center justify-center p-24 sm:p-32">

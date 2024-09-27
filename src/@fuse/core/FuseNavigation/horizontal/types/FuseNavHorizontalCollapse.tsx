@@ -24,15 +24,12 @@ const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
 	'&.active, &.active:hover, &.active:focus': {
 		backgroundColor: `${theme.palette.secondary.main}!important`,
 		color: `${theme.palette.secondary.contrastText}!important`,
-
 		'&.open': {
 			backgroundColor: 'rgba(0,0,0,.08)'
 		},
-
 		'& > .fuse-list-item-text': {
 			padding: '0 0 0 16px'
 		},
-
 		'& .fuse-list-item-icon': {
 			color: 'inherit'
 		}

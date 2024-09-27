@@ -83,10 +83,10 @@ function AuthJsCredentialsSignUpForm() {
 				<Alert
 					className="mb-32"
 					severity="error"
-					sx={{
-						backgroundColor: (theme) => theme.palette.error.light,
-						color: (theme) => theme.palette.error.dark
-					}}
+					sx={(theme) => ({
+						backgroundColor: theme.palette.error.light,
+						color: theme.palette.error.dark
+					})}
 				>
 					{errors?.root?.message}
 				</Alert>
@@ -109,7 +109,6 @@ function AuthJsCredentialsSignUpForm() {
 					/>
 				)}
 			/>
-
 			<Controller
 				name="email"
 				control={control}
@@ -127,7 +126,6 @@ function AuthJsCredentialsSignUpForm() {
 					/>
 				)}
 			/>
-
 			<Controller
 				name="password"
 				control={control}
@@ -145,7 +143,6 @@ function AuthJsCredentialsSignUpForm() {
 					/>
 				)}
 			/>
-
 			<Controller
 				name="passwordConfirm"
 				control={control}
@@ -163,7 +160,6 @@ function AuthJsCredentialsSignUpForm() {
 					/>
 				)}
 			/>
-
 			<Controller
 				name="acceptTermsConditions"
 				control={control}
@@ -182,7 +178,6 @@ function AuthJsCredentialsSignUpForm() {
 					</FormControl>
 				)}
 			/>
-
 			<Button
 				variant="contained"
 				color="secondary"

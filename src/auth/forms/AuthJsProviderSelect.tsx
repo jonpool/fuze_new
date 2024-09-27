@@ -29,7 +29,6 @@ function AuthJsProviderSelect() {
 				</Typography>
 				<div className="mt-px flex-auto border-t" />
 			</div>
-
 			<div className="flex flex-col gap-12">
 				{Object.values(authJsProviderMap)
 					.filter((provider) => provider.id !== 'credentials')
@@ -39,9 +38,9 @@ function AuthJsProviderSelect() {
 							className="flex items-between text-md"
 							onClick={() => handleSignIn(provider.id)}
 							size="large"
-							sx={{
-								backgroundColor: (theme) => theme.palette.background.default,
-								color: (theme) => theme.palette.text.primary,
+							sx={(theme) => ({
+								backgroundColor: theme.palette.background.default,
+								color: theme.palette.text.primary,
 								// border: `1px solid ${darken(provider.style.bg, 0.1)}`,
 								'&:hover': {
 									color: provider.style.text,
@@ -50,7 +49,7 @@ function AuthJsProviderSelect() {
 										backgroundColor: lighten(provider.style.bg, 0.7)
 									}
 								}
-							}}
+							})}
 							endIcon={
 								<Box className="provider-icon rounded-full flex items-center justify-center w-32 h-32">
 									<img

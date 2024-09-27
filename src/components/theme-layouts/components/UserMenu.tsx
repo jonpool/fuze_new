@@ -47,24 +47,24 @@ function UserMenu(props: UserMenuProps) {
 					'user-menu flex justify-start shrink-0  min-h-56 h-56 rounded-lg p-8 space-x-12',
 					className
 				)}
-				sx={{
-					borderColor: (theme) => theme.palette.divider,
+				sx={(theme) => ({
+					borderColor: theme.palette.divider,
 					'&:hover, &:focus': {
-						backgroundColor: (theme) =>
-							theme.palette.mode === 'dark'
-								? alpha(theme.palette.divider, 0.1)
-								: alpha(theme.palette.divider, 0.6)
+						backgroundColor: alpha(theme.palette.divider, 0.6),
+						...theme.applyStyles('dark', {
+							backgroundColor: alpha(theme.palette.divider, 0.1)
+						})
 					}
-				}}
+				})}
 				onClick={userMenuClick}
 				color="inherit"
 			>
 				{user?.photoURL ? (
 					<Avatar
-						sx={{
-							background: (theme) => theme.palette.background.default,
-							color: (theme) => theme.palette.text.secondary
-						}}
+						sx={(theme) => ({
+							background: theme.palette.background.default,
+							color: theme.palette.text.secondary
+						})}
 						className="avatar w-40 h-40 rounded-lg"
 						alt="user photo"
 						src={user?.photoURL}
@@ -72,10 +72,10 @@ function UserMenu(props: UserMenuProps) {
 					/>
 				) : (
 					<Avatar
-						sx={{
+						sx={(theme) => ({
 							background: (theme) => darken(theme.palette.background.default, 0.05),
-							color: (theme) => theme.palette.text.secondary
-						}}
+							color: theme.palette.text.secondary
+						})}
 						className="avatar md:mx-4"
 					>
 						{user?.displayName?.[0]}
@@ -119,7 +119,6 @@ function UserMenu(props: UserMenuProps) {
 					</FuseSvgIcon>
 				</div>
 			</Button>
-
 			<Popover
 				open={Boolean(userMenu)}
 				anchorEl={userMenu}

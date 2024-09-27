@@ -34,7 +34,6 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 
 				{!last && <TimelineConnector />}
 			</TimelineSeparator>
-
 			<TimelineContent className="flex flex-col items-start pb-48 pt-0">
 				{/* eslint-disable-next-line react/no-danger */}
 				{item.description && <div dangerouslySetInnerHTML={{ __html: item.description }} />}
@@ -72,12 +71,12 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 				{item.extraContent && (
 					<Box
 						className="mt-16 rounded-lg border px-20 py-16"
-						sx={{
-							backgroundColor: (theme) =>
-								theme.palette.mode === 'light'
-									? lighten(theme.palette.background.default, 0.4)
-									: lighten(theme.palette.background.default, 0.02)
-						}}
+						sx={(theme) => ({
+							backgroundColor: lighten(theme.palette.background.default, 0.02),
+							...theme.applyStyles('light', {
+								backgroundColor: lighten(theme.palette.background.default, 0.4)
+							})
+						})}
 					>
 						{/* eslint-disable-next-line react/no-danger */}
 						<div dangerouslySetInnerHTML={{ __html: item.extraContent }} />

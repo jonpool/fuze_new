@@ -63,14 +63,28 @@ function DataTableTopToolbar<TData extends MRT_RowData>({ table }: MRT_TopToolba
 						toolbarProps.ref.current = ref;
 					}
 				}}
-				sx={(theme) => ({
-					backgroundColor: table.options.mrtTheme.baseBackgroundColor,
-					transition: 'all 150ms ease-in-out',
-					zIndex: 1,
-					position: isFullScreen ? 'sticky' : 'relative',
-					top: isFullScreen ? '0' : undefined,
-					...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as unknown as object)
-				})}
+				sx={[
+					(theme) => ({
+						backgroundColor: table.options.mrtTheme.baseBackgroundColor,
+						transition: 'all 150ms ease-in-out',
+						zIndex: 1,
+						...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as unknown as object)
+					}),
+					isFullScreen
+						? {
+								position: 'sticky'
+							}
+						: {
+								position: 'relative'
+							},
+					isFullScreen
+						? {
+								top: '0'
+							}
+						: {
+								top: null
+							}
+				]}
 			>
 				{['both', 'top'].includes(positionToolbarDropZone ?? '') && <MRT_ToolbarDropZone table={table} />}
 
@@ -109,7 +123,6 @@ function DataTableTopToolbar<TData extends MRT_RowData>({ table }: MRT_TopToolba
 					table={table}
 				/>
 			</Box>
-
 			<MRT_ToolbarAlertBanner
 				className="mt-4 rounded-md flex justify-center"
 				stackAlertBanner={stackAlertBanner}

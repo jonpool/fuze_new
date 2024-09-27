@@ -97,7 +97,6 @@ const Root = styled('div')(({ theme }) => ({
 			}
 		}
 	},
-
 	'& .FuseSidePanel-content': {
 		overflow: 'hidden',
 		opacity: 1,
@@ -106,7 +105,6 @@ const Root = styled('div')(({ theme }) => ({
 			duration: theme.transitions.duration.short
 		})
 	},
-
 	'& .FuseSidePanel-buttonWrapper': {
 		position: 'absolute',
 		bottom: 0,
@@ -118,20 +116,17 @@ const Root = styled('div')(({ theme }) => ({
 		width: '100%',
 		minWidth: 56
 	},
-
 	'& .FuseSidePanel-button': {
 		padding: 8,
 		width: 40,
 		height: 40
 	},
-
 	'& .FuseSidePanel-buttonIcon': {
 		transition: theme.transitions.create(['transform'], {
 			easing: theme.transitions.easing.easeInOut,
 			duration: theme.transitions.duration.short
 		})
 	},
-
 	'& .FuseSidePanel-mobileButton': {
 		height: 40,
 		position: 'absolute',
@@ -156,7 +151,6 @@ const Root = styled('div')(({ theme }) => ({
 			paddingLeft: 4,
 			left: 0
 		},
-
 		'&.right': {
 			borderBottomRightRadius: 0,
 			borderTopRightRadius: 0,

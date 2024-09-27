@@ -50,10 +50,10 @@ function ProjectDashboardAppHeader() {
 			<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-32 sm:my-48">
 				<div className="flex flex-auto items-start min-w-0">
 					<Avatar
-						sx={{
+						sx={(theme) => ({
 							background: (theme) => darken(theme.palette.background.default, 0.05),
-							color: (theme) => theme.palette.text.secondary
-						}}
+							color: theme.palette.text.secondary
+						})}
 						className="flex-0 w-64 h-64 mt-4"
 						alt="user photo"
 						src={user?.data?.photoURL}
@@ -105,10 +105,10 @@ function ProjectDashboardAppHeader() {
 				<Button
 					onClick={handleOpenProjectMenu}
 					className="flex items-center border border-solid border-b-0 rounded-b-0 h-36 px-16 text-md sm:text-base"
-					sx={{
-						backgroundColor: (theme) => `${theme.palette.background.default}!important`,
-						borderColor: (theme) => theme.palette.divider
-					}}
+					sx={(theme) => ({
+						backgroundColor: `${theme.palette.background.default}!important`,
+						borderColor: theme.palette.divider
+					})}
 					endIcon={
 						<FuseSvgIcon
 							size={16}
