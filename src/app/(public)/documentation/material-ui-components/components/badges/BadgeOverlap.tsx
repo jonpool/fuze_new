@@ -17,7 +17,6 @@ const circle = (
 		sx={{ ...shapeStyles, ...shapeCircleStyles }}
 	/>
 );
-
 export default function BadgeOverlap() {
 	return (
 		<Stack

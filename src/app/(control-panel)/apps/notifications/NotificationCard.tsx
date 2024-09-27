@@ -9,12 +9,11 @@ import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
 import { MouseEvent } from 'react';
 import { useAppSelector } from 'src/store/hooks';
 import { selectContrastMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { darken, useTheme } from '@mui/material/styles';
+import { darken, ThemeProvider, useTheme } from '@mui/material/styles';
 import green from '@mui/material/colors/green';
 import blue from '@mui/material/colors/blue';
 import red from '@mui/material/colors/red';
 import orange from '@mui/material/colors/orange';
-import FuseTheme from '@fuse/core/FuseTheme';
 import yellow from '@mui/material/colors/yellow';
 import { NotificationModelType } from './models/NotificationModel';
 
@@ -63,17 +62,19 @@ function NotificationCard(props: NotificationCardProps) {
 	};
 
 	return (
-		<FuseTheme theme={contrastTheme}>
+		<ThemeProvider theme={contrastTheme}>
 			<Card
 				className={clsx(
 					'relative flex min-h-64 w-full items-center space-x-8 rounded-xl p-20 shadow',
 					className
 				)}
-				sx={{
-					backgroundColor: bgColor,
-					color: contrastTheme.palette.text.primary,
-					...(item.link ? { '&:hover': { backgroundColor: darken(bgColor, 0.05) } } : {})
-				}}
+				sx={[
+					{
+						backgroundColor: bgColor,
+						color: contrastTheme.palette.text.primary
+					},
+					item.link ? { '&:hover': { backgroundColor: darken(bgColor, 0.05) } } : {}
+				]}
 				elevation={0}
 				component={item.link ? NavLinkAdapter : 'div'}
 				href={item.link || ''}
@@ -137,7 +138,7 @@ function NotificationCard(props: NotificationCardProps) {
 				</IconButton>
 				{item.children}
 			</Card>
-		</FuseTheme>
+		</ThemeProvider>
 	);
 }
 

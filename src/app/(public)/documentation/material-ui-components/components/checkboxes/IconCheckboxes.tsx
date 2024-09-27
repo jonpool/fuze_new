@@ -8,18 +8,14 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function IconCheckboxes() {
-	return (
-		<div>
-			<Checkbox
-				{...label}
-				icon={<FavoriteBorder />}
-				checkedIcon={<Favorite />}
-			/>
-			<Checkbox
-				{...label}
-				icon={<BookmarkBorderIcon />}
-				checkedIcon={<BookmarkIcon />}
-			/>
-		</div>
-	);
+  return (
+    <div>
+      <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+      <Checkbox
+        {...label}
+        icon={<BookmarkBorderIcon />}
+        checkedIcon={<BookmarkIcon />}
+      />
+    </div>
+  );
 }

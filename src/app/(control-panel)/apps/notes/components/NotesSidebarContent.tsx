@@ -23,12 +23,14 @@ const StyledListItemButton = styled(ListItemButton)<ListItemButtonProps & Partia
 		marginBottom: 8,
 		fontWeight: 500,
 		'&.active': {
-			backgroundColor:
-				theme.palette.mode === 'light' ? 'rgba(0, 0, 0, .05)!important' : 'rgba(255, 255, 255, .1)!important',
+			backgroundColor: 'rgba(255, 255, 255, .1)!important',
 			pointerEvents: 'none',
 			'& .list-item-icon': {
 				color: theme.palette.secondary.main
-			}
+			},
+			...theme.applyStyles('light', {
+				backgroundColor: 'rgba(0, 0, 0, .05)!important'
+			})
 		},
 		'& .list-item-icon': {
 			marginRight: 12

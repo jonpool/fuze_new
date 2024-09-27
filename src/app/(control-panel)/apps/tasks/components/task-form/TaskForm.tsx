@@ -152,7 +152,17 @@ function TaskForm() {
 								className="font-semibold"
 								onClick={() => onChange(!value)}
 							>
-								<Box sx={{ color: value ? 'secondary.main' : 'text.disabled' }}>
+								<Box
+									sx={[
+										value
+											? {
+													color: 'secondary.main'
+												}
+											: {
+													color: 'text.disabled'
+												}
+									]}
+								>
 									<FuseSvgIcon>heroicons-outline:check-circle</FuseSvgIcon>
 								</Box>
 								<span className="mx-8">
@@ -172,7 +182,6 @@ function TaskForm() {
 						</IconButton>
 					</div>
 				</div>
-
 				<Controller
 					control={control}
 					name="title"
@@ -193,7 +202,6 @@ function TaskForm() {
 						/>
 					)}
 				/>
-
 				<Controller
 					control={control}
 					name="tags"
@@ -235,7 +243,6 @@ function TaskForm() {
 						name="priority"
 						render={({ field }) => <TaskPrioritySelector {...field} />}
 					/>
-
 					<Controller
 						control={control}
 						name="dueDate"

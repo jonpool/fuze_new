@@ -32,10 +32,10 @@ function CardActivity(props: CardActivityProps) {
 					/>
 					<Box
 						className="flex flex-col mx-16 p-12"
-						sx={{
+						sx={(theme) => ({
 							borderRadius: '5px 20px 20px 5px',
-							border: (theme) => `1px solid ${theme.palette.divider}`
-						}}
+							border: `1px solid ${theme.palette.divider}`
+						})}
 					>
 						<div className="flex items-center">
 							<Typography>{user?.name}</Typography>

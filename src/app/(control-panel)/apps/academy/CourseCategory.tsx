@@ -25,12 +25,14 @@ function CourseCategory(props: CourseCategoryProps) {
 		<Chip
 			className="font-semibold text-md"
 			label={category?.title}
-			sx={{
-				color: (theme) =>
-					theme.palette.mode === 'light' ? darken(category?.color, 0.4) : lighten(category?.color, 0.8),
-				backgroundColor: (theme) =>
-					theme.palette.mode === 'light' ? lighten(category?.color, 0.8) : darken(category?.color, 0.1)
-			}}
+			sx={(theme) => ({
+				color: lighten(category?.color, 0.8),
+				backgroundColor: darken(category?.color, 0.1),
+				...theme.applyStyles('light', {
+					color: darken(category?.color, 0.4),
+					backgroundColor: lighten(category?.color, 0.8)
+				})
+			})}
 			size="small"
 		/>
 	);

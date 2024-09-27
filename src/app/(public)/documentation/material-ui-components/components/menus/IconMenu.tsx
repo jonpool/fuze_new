@@ -22,7 +22,7 @@ export default function IconMenu() {
 					<ListItemText>Cut</ListItemText>
 					<Typography
 						variant="body2"
-						color="text.secondary"
+						sx={{ color: 'text.secondary' }}
 					>
 						⌘X
 					</Typography>
@@ -34,7 +34,7 @@ export default function IconMenu() {
 					<ListItemText>Copy</ListItemText>
 					<Typography
 						variant="body2"
-						color="text.secondary"
+						sx={{ color: 'text.secondary' }}
 					>
 						⌘C
 					</Typography>
@@ -46,7 +46,7 @@ export default function IconMenu() {
 					<ListItemText>Paste</ListItemText>
 					<Typography
 						variant="body2"
-						color="text.secondary"
+						sx={{ color: 'text.secondary' }}
 					>
 						⌘V
 					</Typography>

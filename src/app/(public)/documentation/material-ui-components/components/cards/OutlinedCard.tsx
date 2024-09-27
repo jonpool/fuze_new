@@ -19,9 +19,8 @@ const card = (
 	<>
 		<CardContent>
 			<Typography
-				sx={{ fontSize: 14 }}
-				color="text.secondary"
 				gutterBottom
+				sx={{ color: 'text.secondary', fontSize: 14 }}
 			>
 				Word of the Day
 			</Typography>
@@ -31,12 +30,7 @@ const card = (
 			>
 				be{bull}nev{bull}o{bull}lent
 			</Typography>
-			<Typography
-				sx={{ mb: 1.5 }}
-				color="text.secondary"
-			>
-				adjective
-			</Typography>
+			<Typography sx={{ color: 'text.secondary', mb: 1.5 }}>adjective</Typography>
 			<Typography variant="body2">
 				well meaning and kindly.
 				<br />

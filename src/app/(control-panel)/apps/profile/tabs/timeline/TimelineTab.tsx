@@ -76,12 +76,12 @@ function TimelineTab() {
 						/>
 						<Box
 							className="card-footer flex items-center flex-row border-t-1 px-24 py-12"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<div className="flex flex-1 items-center">
 								<IconButton aria-label="Add photo">
@@ -94,7 +94,6 @@ function TimelineTab() {
 									<FuseSvgIcon size={20}>heroicons-solid:map-pin</FuseSvgIcon>
 								</IconButton>
 							</div>
-
 							<div>
 								<Button
 									variant="contained"
@@ -107,7 +106,6 @@ function TimelineTab() {
 							</div>
 						</Box>
 					</Card>
-
 					<TimelinePosts />
 				</div>
 			</div>

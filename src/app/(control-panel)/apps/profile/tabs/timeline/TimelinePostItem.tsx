@@ -63,7 +63,6 @@ function TimelinePostItem(props: PostProps) {
 				}
 				subheader={item.time}
 			/>
-
 			<CardContent className="px-32">
 				{item.message && (
 					<Typography
@@ -97,7 +96,6 @@ function TimelinePostItem(props: PostProps) {
 					</div>
 				)}
 			</CardContent>
-
 			<CardActions
 				disableSpacing
 				className="px-32"
@@ -126,15 +124,14 @@ function TimelinePostItem(props: PostProps) {
 					<Typography>({item.share})</Typography>
 				</Button>
 			</CardActions>
-
 			<Box
 				className="card-footer flex flex-col px-32 py-24 border-t-1"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				{item.comments && item.comments.length > 0 && (
 					<div>
@@ -148,7 +145,6 @@ function TimelinePostItem(props: PostProps) {
 								heroicons-outline:chevron-down
 							</FuseSvgIcon>
 						</div>
-
 						<List>
 							{item.comments.map((comment) => (
 								<div key={comment.id}>

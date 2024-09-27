@@ -20,7 +20,7 @@ import {
 	useGetMessengerUserProfileQuery
 } from '../MessengerApi';
 
-const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
+const Root = styled('div')<{ opened: number }>(({ theme }) => ({
 	position: 'sticky',
 	display: 'flex',
 	top: 0,
@@ -37,17 +37,6 @@ const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
 		maxWidth: 0,
 		minWidth: 0
 	},
-
-	...(opened && {
-		overflow: 'visible'
-	}),
-
-	...(!opened && {
-		overflow: 'hidden',
-		animation: `hide-panel 1ms linear ${theme.transitions.duration.standard}`,
-		animationFillMode: 'forwards'
-	}),
-
 	'& > .panel': {
 		position: 'absolute',
 		top: 0,
@@ -67,11 +56,6 @@ const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
 			easing: theme.transitions.easing.easeInOut,
 			duration: theme.transitions.duration.standard
 		}),
-
-		...(opened && {
-			transform: theme.direction === 'rtl' ? 'translate3d(290px,0,0)' : 'translate3d(-290px,0,0)'
-		}),
-
 		[theme.breakpoints.down('lg')]: {
 			left: 'auto',
 			position: 'fixed',
@@ -79,15 +63,9 @@ const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
 			boxShadow: 'none',
 			width: 320,
 			minWidth: 320,
-			maxWidth: '100%',
-
-			...(opened && {
-				transform: 'translate3d(0,0,0)',
-				boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
-			})
+			maxWidth: '100%'
 		}
 	},
-
 	'@keyframes hide-panel': {
 		'0%': {
 			overflow: 'visible'
@@ -98,7 +76,42 @@ const Root = styled('div')<{ opened: number }>(({ theme, opened }) => ({
 		'100%': {
 			overflow: 'hidden'
 		}
-	}
+	},
+	variants: [
+		{
+			props: ({ opened }) => opened,
+			style: {
+				overflow: 'visible'
+			}
+		},
+		{
+			props: ({ opened }) => !opened,
+			style: {
+				overflow: 'hidden',
+				animation: `hide-panel 1ms linear ${theme.transitions.duration.standard}`,
+				animationFillMode: 'forwards'
+			}
+		},
+		{
+			props: ({ opened }) => opened,
+			style: {
+				'& > .panel': {
+					transform: theme.direction === 'rtl' ? 'translate3d(290px,0,0)' : 'translate3d(-290px,0,0)'
+				}
+			}
+		},
+		{
+			props: ({ opened }) => opened,
+			style: {
+				'& > .panel': {
+					[theme.breakpoints.down('lg')]: {
+						transform: 'translate3d(0,0,0)',
+						boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+					}
+				}
+			}
+		}
+	]
 }));
 
 /**

@@ -39,12 +39,12 @@ function MainSidebar() {
 		<div className="flex flex-col flex-auto">
 			<Box
 				className="py-16 px-24 border-b-1 flex flex-col flex-shrink-0 sticky top-0 z-10"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<div className="flex justify-between items-center mb-16">
 					{user && (
@@ -62,15 +62,12 @@ function MainSidebar() {
 							<Typography className="mx-16 font-medium">{user?.name}</Typography>
 						</div>
 					)}
-
 					<MainSidebarMoreMenu className="-mx-16" />
 				</div>
-
 				{useMemo(
 					() => (
 						<Paper className="flex p-4 items-center w-full px-8 py-4 border-1 rounded-lg h-36 shadow-none">
 							<FuseSvgIcon color="action">heroicons-solid:magnifying-glass</FuseSvgIcon>
-
 							<Input
 								placeholder="Search or start new chat"
 								className="flex flex-1"
@@ -87,7 +84,6 @@ function MainSidebar() {
 					[searchText]
 				)}
 			</Box>
-
 			<div className="flex-auto">
 				<List className="w-full">
 					{useMemo(() => {

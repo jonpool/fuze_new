@@ -40,7 +40,7 @@ export default function SwitchListSecondary() {
 				<Switch
 					edge="end"
 					onChange={handleToggle('wifi')}
-					checked={checked.indexOf('wifi') !== -1}
+					checked={checked.includes('wifi')}
 					inputProps={{
 						'aria-labelledby': 'switch-list-label-wifi'
 					}}
@@ -57,7 +57,7 @@ export default function SwitchListSecondary() {
 				<Switch
 					edge="end"
 					onChange={handleToggle('bluetooth')}
-					checked={checked.indexOf('bluetooth') !== -1}
+					checked={checked.includes('bluetooth')}
 					inputProps={{
 						'aria-labelledby': 'switch-list-label-bluetooth'
 					}}

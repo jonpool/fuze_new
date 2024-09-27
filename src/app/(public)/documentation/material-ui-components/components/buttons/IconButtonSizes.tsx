@@ -7,8 +7,8 @@ export default function IconButtonSizes() {
 	return (
 		<Stack
 			direction="row"
-			alignItems="center"
 			spacing={1}
+			sx={{ alignItems: 'center' }}
 		>
 			<IconButton
 				aria-label="delete"

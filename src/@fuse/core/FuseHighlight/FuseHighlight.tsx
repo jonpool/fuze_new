@@ -89,7 +89,11 @@ function trimCode(children: FuseHighlightProps['children']) {
 	const sourceString = typeof children === 'string' ? children : children?.default;
 
 	// Split the source into lines
-	const sourceLines = sourceString.split('\n');
+	const sourceLines = sourceString?.split('\n');
+
+	if (!sourceLines) {
+		return '';
+	}
 
 	// Remove the first and the last line of the source
 	// code if they are blank lines. This way, the html

@@ -42,7 +42,6 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 	},
 	'&.me': {
 		paddingLeft: 36,
-
 		'& .bubble': {
 			marginLeft: 'auto',
 			backgroundColor: lighten(theme.palette.primary.main, 0.1),
@@ -62,7 +61,6 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 				borderTopRightRadius: 12
 			}
 		},
-
 		'&.last-of-group': {
 			'& .bubble': {
 				borderBottomRightRadius: 12
@@ -134,7 +132,9 @@ function Chat(props: ChatProps) {
 	return (
 		<Paper
 			className={clsx('flex flex-col relative pb-64 shadow', className)}
-			sx={{ background: (theme) => theme.palette.background.default }}
+			sx={(theme) => ({
+				background: theme.palette.background.default
+			})}
 		>
 			<div
 				ref={chatScroll}
@@ -182,7 +182,6 @@ function Chat(props: ChatProps) {
 							: null;
 					}, [chat, user?.id])}
 				</div>
-
 				{chat?.length === 0 && (
 					<div className="flex flex-col flex-1">
 						<div className="flex flex-col flex-1 items-center justify-center">
@@ -202,7 +201,6 @@ function Chat(props: ChatProps) {
 					</div>
 				)}
 			</div>
-
 			{useMemo(() => {
 				const onMessageSubmit = (ev: FormEvent) => {
 					ev.preventDefault();
@@ -215,10 +213,8 @@ function Chat(props: ChatProps) {
 						message: messageText,
 						chatId: selectedChatId
 					});
-
 					setMessageText('');
 				};
-
 				return (
 					chat && (
 						<form

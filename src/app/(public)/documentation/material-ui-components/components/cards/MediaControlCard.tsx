@@ -25,8 +25,8 @@ export default function MediaControlCard() {
 					</Typography>
 					<Typography
 						variant="subtitle1"
-						color="text.secondary"
 						component="div"
+						sx={{ color: 'text.secondary' }}
 					>
 						Mac Miller
 					</Typography>

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-const StyledStatus = styled('div')<{ value: string }>(({ theme, value }) => ({
+const StyledStatus = styled('div')<{ value: string }>(({ theme }) => ({
 	position: 'absolute',
 	width: 12,
 	height: 12,
@@ -9,22 +9,40 @@ const StyledStatus = styled('div')<{ value: string }>(({ theme, value }) => ({
 	border: `2px solid ${theme.palette.background.default}`,
 	borderRadius: '50%',
 	zIndex: 10,
-
-	...(value === 'online' && {
-		backgroundColor: '#4CAF50'
-	}),
-
-	...(value === 'do-not-disturb' && {
-		backgroundColor: '#F44336'
-	}),
-
-	...(value === 'away' && {
-		backgroundColor: '#FFC107'
-	}),
-
-	...(value === 'offline' && {
-		backgroundColor: '#646464'
-	})
+	variants: [
+		{
+			props: {
+				value: 'online'
+			},
+			style: {
+				backgroundColor: '#4CAF50'
+			}
+		},
+		{
+			props: {
+				value: 'do-not-disturb'
+			},
+			style: {
+				backgroundColor: '#F44336'
+			}
+		},
+		{
+			props: {
+				value: 'away'
+			},
+			style: {
+				backgroundColor: '#FFC107'
+			}
+		},
+		{
+			props: {
+				value: 'offline'
+			},
+			style: {
+				backgroundColor: '#646464'
+			}
+		}
+	]
 }));
 
 type ContactStatusProps = {

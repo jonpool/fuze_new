@@ -39,15 +39,14 @@ function DetailSidebarContent() {
 					<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 				</IconButton>
 			</div>
-
 			<Box
 				className=" w-full rounded-lg border preview h-128 sm:h-256 file-icon flex items-center justify-center my-32"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<motion.div
 					initial={{ scale: 0 }}
@@ -56,9 +55,7 @@ function DetailSidebarContent() {
 					<ItemIcon type={selectedItem.type} />
 				</motion.div>
 			</Box>
-
 			<Typography className="text-17 font-medium">{selectedItem.name}</Typography>
-
 			<div className="text-15 font-medium mt-32">Information</div>
 			<div className="flex flex-col mt-16 border-t border-b divide-y font-medium">
 				<div className="flex items-center justify-between py-12">
@@ -84,14 +81,12 @@ function DetailSidebarContent() {
 					</div>
 				)}
 			</div>
-
 			{selectedItem.description && (
 				<>
 					<div className="text-15 font-medium mt-32 pb-16 border-b">Description</div>
 					<Typography className="py-12">{selectedItem.description}</Typography>
 				</>
 			)}
-
 			<div className="grid grid-cols-2 gap-16 w-full mt-32">
 				<Button
 					className="flex-auto"

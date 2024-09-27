@@ -83,16 +83,14 @@ function ResponsiveAppBar() {
 							}}
 							open={Boolean(anchorElNav)}
 							onClose={handleCloseNavMenu}
-							sx={{
-								display: { xs: 'block', md: 'none' }
-							}}
+							sx={{ display: { xs: 'block', md: 'none' } }}
 						>
 							{pages.map((page) => (
 								<MenuItem
 									key={page}
 									onClick={handleCloseNavMenu}
 								>
-									<Typography textAlign="center">{page}</Typography>
+									<Typography sx={{ textAlign: 'center' }}>{page}</Typography>
 								</MenuItem>
 							))}
 						</Menu>
@@ -127,7 +125,6 @@ function ResponsiveAppBar() {
 							</Button>
 						))}
 					</Box>
-
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open settings">
 							<IconButton
@@ -161,7 +158,7 @@ function ResponsiveAppBar() {
 									key={setting}
 									onClick={handleCloseUserMenu}
 								>
-									<Typography textAlign="center">{setting}</Typography>
+									<Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
 								</MenuItem>
 							))}
 						</Menu>

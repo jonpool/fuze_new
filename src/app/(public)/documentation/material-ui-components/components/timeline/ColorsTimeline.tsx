@@ -7,21 +7,21 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 
 export default function ColorsTimeline() {
-	return (
-		<Timeline position="alternate">
-			<TimelineItem>
-				<TimelineSeparator>
-					<TimelineDot color="secondary" />
-					<TimelineConnector />
-				</TimelineSeparator>
-				<TimelineContent>Secondary</TimelineContent>
-			</TimelineItem>
-			<TimelineItem>
-				<TimelineSeparator>
-					<TimelineDot color="success" />
-				</TimelineSeparator>
-				<TimelineContent>Success</TimelineContent>
-			</TimelineItem>
-		</Timeline>
-	);
+  return (
+    <Timeline position="alternate">
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="secondary" />
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>Secondary</TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="success" />
+        </TimelineSeparator>
+        <TimelineContent>Success</TimelineContent>
+      </TimelineItem>
+    </Timeline>
+  );
 }

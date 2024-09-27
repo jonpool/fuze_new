@@ -59,12 +59,12 @@ function BoardList(props: BoardListProps) {
 					{...provided.dragHandleProps}
 				>
 					<StyledCard
-						sx={{
-							backgroundColor: (theme) =>
-								theme.palette.mode === 'light'
-									? lighten(theme.palette.background.default, 0.4)
-									: lighten(theme.palette.background.default, 0.02)
-						}}
+						sx={(theme) => ({
+							backgroundColor: lighten(theme.palette.background.default, 0.02),
+							...theme.applyStyles('light', {
+								backgroundColor: lighten(theme.palette.background.default, 0.4)
+							})
+						})}
 						className={clsx(
 							snapshot.isDragging ? 'shadow-lg' : 'shadow-0',
 							'w-256 sm:w-320 mx-8 max-h-full flex flex-col rounded-lg border'

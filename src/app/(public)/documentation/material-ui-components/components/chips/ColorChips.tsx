@@ -6,7 +6,7 @@ export default function ColorChips() {
 	return (
 		<Stack
 			spacing={1}
-			alignItems="center"
+			sx={{ alignItems: 'center' }}
 		>
 			<Stack
 				direction="row"

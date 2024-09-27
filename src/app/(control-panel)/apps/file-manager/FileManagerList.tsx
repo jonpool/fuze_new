@@ -40,15 +40,14 @@ function FileManagerList() {
 			{folders?.length > 0 && (
 				<Box
 					className="p-16 w-full rounded-xl mb-24 border"
-					sx={{
-						backgroundColor: (theme) =>
-							theme.palette.mode === 'light'
-								? lighten(theme.palette.background.default, 0.4)
-								: lighten(theme.palette.background.default, 0.02)
-					}}
+					sx={(theme) => ({
+						backgroundColor: lighten(theme.palette.background.default, 0.02),
+						...theme.applyStyles('light', {
+							backgroundColor: lighten(theme.palette.background.default, 0.4)
+						})
+					})}
 				>
 					<Typography className="font-medium">Folders</Typography>
-
 					<div className="flex flex-wrap -m-8 mt-8">
 						{folders.map((item) => (
 							<FolderItem
@@ -59,19 +58,17 @@ function FileManagerList() {
 					</div>
 				</Box>
 			)}
-
 			{files.length > 0 && (
 				<Box
 					className="p-16 w-full rounded-xl mb-24 border"
-					sx={{
-						backgroundColor: (theme) =>
-							theme.palette.mode === 'light'
-								? lighten(theme.palette.background.default, 0.4)
-								: lighten(theme.palette.background.default, 0.02)
-					}}
+					sx={(theme) => ({
+						backgroundColor: lighten(theme.palette.background.default, 0.02),
+						...theme.applyStyles('light', {
+							backgroundColor: lighten(theme.palette.background.default, 0.4)
+						})
+					})}
 				>
 					<Typography className="font-medium">Files</Typography>
-
 					<div className="flex flex-wrap -m-8 mt-8">
 						{files.map((item) => (
 							<FileItem

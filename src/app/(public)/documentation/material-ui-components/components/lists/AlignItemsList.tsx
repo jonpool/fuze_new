@@ -22,10 +22,9 @@ export default function AlignItemsList() {
 					secondary={
 						<>
 							<Typography
-								sx={{ display: 'inline' }}
 								component="span"
 								variant="body2"
-								color="text.primary"
+								sx={{ color: 'text.primary', display: 'inline' }}
 							>
 								Ali Connors
 							</Typography>
@@ -50,10 +49,9 @@ export default function AlignItemsList() {
 					secondary={
 						<>
 							<Typography
-								sx={{ display: 'inline' }}
 								component="span"
 								variant="body2"
-								color="text.primary"
+								sx={{ color: 'text.primary', display: 'inline' }}
 							>
 								to Scott, Alex, Jennifer
 							</Typography>
@@ -78,10 +76,9 @@ export default function AlignItemsList() {
 					secondary={
 						<>
 							<Typography
-								sx={{ display: 'inline' }}
 								component="span"
 								variant="body2"
-								color="text.primary"
+								sx={{ color: 'text.primary', display: 'inline' }}
 							>
 								Sandra Adams
 							</Typography>

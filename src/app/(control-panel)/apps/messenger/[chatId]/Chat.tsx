@@ -51,7 +51,6 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 	},
 	'&.me': {
 		paddingLeft: 36,
-
 		'& .bubble': {
 			marginLeft: 'auto',
 			backgroundColor: lighten(theme.palette.primary.main, 0.1),
@@ -71,7 +70,6 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 				borderTopRightRadius: 12
 			}
 		},
-
 		'&.last-of-group': {
 			'& .bubble': {
 				borderBottomRightRadius: 12
@@ -184,12 +182,12 @@ function Chat(props: ChatProps) {
 		<>
 			<Box
 				className="w-full border-b-1"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<Toolbar className="flex items-center justify-between px-16 w-full">
 					<div className="flex items-center">
@@ -224,7 +222,6 @@ function Chat(props: ChatProps) {
 					<ChatMoreMenu className="-mx-8" />
 				</Toolbar>
 			</Box>
-
 			<div className="flex flex-auto h-full min-h-0 w-full">
 				<div className={clsx('flex flex-1 z-10 flex-col relative', className)}>
 					<div
@@ -270,12 +267,12 @@ function Chat(props: ChatProps) {
 							component="form"
 							onSubmit={onMessageSubmit}
 							className="absolute border-t-1 bottom-0 right-0 left-0 py-16 px-16"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<div className="flex items-center relative">
 								<IconButton type="submit">

@@ -138,12 +138,12 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 					{numSelected > 0 && (
 						<Box
 							className="flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<IconButton
 								aria-haspopup="true"
@@ -178,12 +178,12 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 				{rows.map((row) => {
 					return (
 						<TableCell
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 							className="p-4 md:p-16"
 							key={row.id}
 							align={row.align}

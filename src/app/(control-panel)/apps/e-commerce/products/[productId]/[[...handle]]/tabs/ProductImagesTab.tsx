@@ -15,13 +15,11 @@ const Root = styled('div')(({ theme }) => ({
 		color: orange[400],
 		opacity: 0
 	},
-
 	'& .productImageUpload': {
 		transitionProperty: 'box-shadow',
 		transitionDuration: theme.transitions.duration.short,
 		transitionTimingFunction: theme.transitions.easing.easeInOut
 	},
-
 	'& .productImageItem': {
 		transitionProperty: 'box-shadow',
 		transitionDuration: theme.transitions.duration.short,
@@ -61,12 +59,12 @@ function ProductImagesTab() {
 					control={control}
 					render={({ field: { onChange, value } }) => (
 						<Box
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.2)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.2)
+								})
+							})}
 							component="label"
 							htmlFor="button-file"
 							className="productImageUpload flex items-center justify-center relative w-128 h-128 rounded-lg mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
@@ -86,7 +84,6 @@ function ProductImagesTab() {
 											}
 
 											const reader = new FileReader();
-
 											reader.onload = () => {
 												resolve({
 													id: FuseUtils.generateGUID(),
@@ -94,15 +91,12 @@ function ProductImagesTab() {
 													type: 'image'
 												});
 											};
-
 											reader.onerror = reject;
-
 											reader.readAsBinaryString(file);
 										});
 									}
 
 									const newImage = await readFileAsync();
-
 									onChange([newImage, ...(value as EcommerceProduct['images'])]);
 								}}
 							/>
@@ -124,12 +118,12 @@ function ProductImagesTab() {
 							<>
 								{images.map((media) => (
 									<Box
-										sx={{
-											backgroundColor: (theme) =>
-												theme.palette.mode === 'light'
-													? lighten(theme.palette.background.default, 0.2)
-													: lighten(theme.palette.background.default, 0.02)
-										}}
+										sx={(theme) => ({
+											backgroundColor: lighten(theme.palette.background.default, 0.02),
+											...theme.applyStyles('light', {
+												backgroundColor: lighten(theme.palette.background.default, 0.2)
+											})
+										})}
 										onClick={() => onChange(media.id)}
 										onKeyDown={() => onChange(media.id)}
 										role="button"

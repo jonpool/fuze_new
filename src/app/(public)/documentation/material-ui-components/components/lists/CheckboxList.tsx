@@ -50,7 +50,7 @@ export default function CheckboxList() {
 							<ListItemIcon>
 								<Checkbox
 									edge="start"
-									checked={checked.indexOf(value) !== -1}
+									checked={checked.includes(value)}
 									tabIndex={-1}
 									disableRipple
 									inputProps={{ 'aria-labelledby': labelId }}

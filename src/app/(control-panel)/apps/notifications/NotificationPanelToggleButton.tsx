@@ -4,7 +4,7 @@ import { useAppDispatch } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { Theme, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { toggleNotificationPanel } from './notificationPanelSlice';
 import { useGetAllNotificationsQuery } from './NotificationApi';
@@ -24,10 +24,12 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 		children = (
 			<FuseSvgIcon
 				size={20}
-				sx={{
-					color: (theme: Theme) =>
-						theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary
-				}}
+				sx={(theme) => ({
+					color: theme.palette.text.secondary,
+					...theme.applyStyles('dark', {
+						color: theme.palette.text.primary
+					})
+				})}
 			>
 				heroicons-outline:bell
 			</FuseSvgIcon>
@@ -37,10 +39,8 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 	const [animate, setAnimate] = useState(false);
 	const prevNotificationCount = useRef(notifications?.length);
 	const theme = useTheme();
-
 	const dispatch = useAppDispatch();
 	const controls = useAnimation();
-
 	useEffect(() => {
 		if (animate) {
 			controls.start({

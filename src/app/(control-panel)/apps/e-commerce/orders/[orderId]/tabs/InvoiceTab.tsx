@@ -19,13 +19,11 @@ const Root = styled('div')(({ theme }) => ({
 			paddingRight: `${0}!important`
 		}
 	},
-
 	'& .divider': {
 		width: 1,
 		backgroundColor: theme.palette.divider,
 		height: 144
 	},
-
 	'& .seller': {
 		backgroundColor: theme.palette.primary.dark,
 		color: theme.palette.getContrastText(theme.palette.primary.dark),

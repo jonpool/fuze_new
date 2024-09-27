@@ -52,12 +52,12 @@ function UserSidebar() {
 	return (
 		<div className="flex flex-col flex-auto h-full">
 			<Box
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<Toolbar className="flex items-center px-24 border-b-1">
 					<IconButton onClick={() => setUserSidebarOpen(false)}>
@@ -66,14 +66,12 @@ function UserSidebar() {
 					<Typography className="px-8 font-semibold text-2xl">Profile</Typography>
 				</Toolbar>
 			</Box>
-
 			<div className="flex flex-col justify-center items-center py-32">
 				<UserAvatar
 					className="w-160 h-160 text-64"
 					user={user}
 				/>
 			</div>
-
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="px-24"

@@ -1,8 +1,9 @@
 ---
 productId: material-ui
 title: React Container component
-components: Container
+components: Container, PigmentContainer
 githubLabel: 'component: Container'
+githubSource: packages/mui-material/src/Container
 ---
 
 # Container
@@ -11,7 +12,7 @@ githubLabel: 'component: Container'
 
 While containers can be nested, most layouts do not require a nested container.
 
-{{"component": "modules/components/ComponentLinkHeader.js", "design": false}}
+{{"component": "@mui/docs/ComponentLinkHeader", "design": false}}
 
 ## Fluid
 
@@ -33,3 +34,4 @@ The max-width matches the min-width of the current breakpoint.
 ```jsx
 <Container fixed>
 ```
+

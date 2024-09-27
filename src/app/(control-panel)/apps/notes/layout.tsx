@@ -40,12 +40,12 @@ function NotesApp(props: NotesAppProps) {
 				<div className="flex flex-col w-full items-center p-0 md:p-24">
 					<Box
 						className="w-full rounded-lg border p-12 flex flex-col items-center"
-						sx={{
-							backgroundColor: (theme) =>
-								theme.palette.mode === 'light'
-									? lighten(theme.palette.background.default, 0.4)
-									: lighten(theme.palette.background.default, 0.02)
-						}}
+						sx={(theme) => ({
+							backgroundColor: lighten(theme.palette.background.default, 0.02),
+							...theme.applyStyles('light', {
+								backgroundColor: lighten(theme.palette.background.default, 0.4)
+							})
+						})}
 					>
 						<div className="flex justify-center p-8 pb-16 w-full">
 							<NewNote />

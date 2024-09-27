@@ -38,12 +38,12 @@ function CourseCard(props: CourseCardProps) {
 			<CourseProgress course={course} />
 			<CardActions
 				className="items-center justify-end py-16 px-16"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.03)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.03),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<Button
 					href={`/apps/academy/courses/${course.id}/${course.slug}`}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 export default function CenteredElementGrid() {
 	return (
@@ -12,10 +12,10 @@ export default function CenteredElementGrid() {
 				minHeight={160}
 			>
 				<Grid
-					xs
 					display="flex"
 					justifyContent="center"
 					alignItems="center"
+					size="grow"
 				>
 					<Avatar src="/material-ui-static/images/avatar/1.jpg" />
 				</Grid>
@@ -27,10 +27,10 @@ export default function CenteredElementGrid() {
 					<Avatar src="/material-ui-static/images/avatar/2.jpg" />
 				</Grid>
 				<Grid
-					xs
 					display="flex"
 					justifyContent="center"
 					alignItems="center"
+					size="grow"
 				>
 					<Avatar src="/material-ui-static/images/avatar/3.jpg" />
 				</Grid>

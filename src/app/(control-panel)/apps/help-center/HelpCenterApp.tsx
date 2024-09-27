@@ -32,10 +32,10 @@ function HelpCenterApp() {
 			<ThemeProvider theme={mainThemeDark}>
 				<Box
 					className="relative pt-32 pb-112 px-16 sm:pt-80 sm:pb-192 sm:px-64 overflow-hidden"
-					sx={{
+					sx={(theme) => ({
 						backgroundColor: 'primary.dark',
-						color: (theme) => theme.palette.getContrastText(theme.palette.primary.main)
-					}}
+						color: theme.palette.getContrastText(theme.palette.primary.main)
+					})}
 				>
 					<div className="flex flex-col items-center justify-center  mx-auto w-full">
 						<motion.div
@@ -44,7 +44,6 @@ function HelpCenterApp() {
 						>
 							<PageBreadcrumb color="secondary" />
 						</motion.div>
-
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1, transition: { delay: 0 } }}
@@ -85,7 +84,6 @@ function HelpCenterApp() {
 							/>
 						</motion.div>
 					</div>
-
 					<svg
 						className="absolute inset-0 pointer-events-none"
 						viewBox="0 0 960 540"
@@ -114,7 +112,6 @@ function HelpCenterApp() {
 					</svg>
 				</Box>
 			</ThemeProvider>
-
 			<div className="flex flex-col items-center px-24 sm:px-40">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-y-32 md:gap-y-0 md:gap-x-24 w-full max-w-sm md:max-w-4xl -mt-64 sm:-mt-96">
 					<Card
@@ -134,12 +131,12 @@ function HelpCenterApp() {
 						</div>
 						<Box
 							className="flex items-center justify-center py-16 px-32"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<Typography
 								color="secondary"
@@ -155,7 +152,6 @@ function HelpCenterApp() {
 							</FuseSvgIcon>
 						</Box>
 					</Card>
-
 					<Card
 						component={Link}
 						href="/apps/help-center/guides"
@@ -173,12 +169,12 @@ function HelpCenterApp() {
 						</div>
 						<Box
 							className="flex items-center justify-center py-16 px-32"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<Typography
 								color="secondary"
@@ -194,7 +190,6 @@ function HelpCenterApp() {
 							</FuseSvgIcon>
 						</Box>
 					</Card>
-
 					<Card
 						component={Link}
 						href="/apps/help-center/support"
@@ -212,12 +207,12 @@ function HelpCenterApp() {
 						</div>
 						<Box
 							className="flex items-center justify-center py-16 px-32"
-							sx={{
-								backgroundColor: (theme) =>
-									theme.palette.mode === 'light'
-										? lighten(theme.palette.background.default, 0.4)
-										: lighten(theme.palette.background.default, 0.02)
-							}}
+							sx={(theme) => ({
+								backgroundColor: lighten(theme.palette.background.default, 0.02),
+								...theme.applyStyles('light', {
+									backgroundColor: lighten(theme.palette.background.default, 0.4)
+								})
+							})}
 						>
 							<Typography
 								color="secondary"
@@ -235,7 +230,6 @@ function HelpCenterApp() {
 					</Card>
 				</div>
 			</div>
-
 			<Typography className="mt-96 px-16 text-3xl sm:text-5xl font-extrabold leading-tight tracking-tight text-center">
 				Most frequently asked questions
 			</Typography>
@@ -245,7 +239,6 @@ function HelpCenterApp() {
 			>
 				Here are the most frequently asked questions you may check before getting started
 			</Typography>
-
 			<div className="flex flex-col w-full px-16 items-center my-48">
 				<FaqList
 					className="w-full max-w-4xl"

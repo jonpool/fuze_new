@@ -5,19 +5,16 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 export default function AccessibilityTooltips() {
-	return (
-		<div>
-			<Tooltip title="Delete">
-				<IconButton>
-					<DeleteIcon />
-				</IconButton>
-			</Tooltip>
-			<Tooltip
-				describeChild
-				title="Does not add if it already exists."
-			>
-				<Button>Add</Button>
-			</Tooltip>
-		</div>
-	);
+  return (
+    <div>
+      <Tooltip title="Delete">
+        <IconButton>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip describeChild title="Does not add if it already exists.">
+        <Button>Add</Button>
+      </Tooltip>
+    </div>
+  );
 }

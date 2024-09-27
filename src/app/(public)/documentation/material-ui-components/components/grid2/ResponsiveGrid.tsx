@@ -2,14 +2,17 @@ import * as React from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 const Item = styled(Paper)(({ theme }) => ({
-	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+	backgroundColor: '#fff',
 	...theme.typography.body2,
 	padding: theme.spacing(2),
 	textAlign: 'center',
-	color: theme.palette.text.secondary
+	color: theme.palette.text.secondary,
+	...theme.applyStyles('dark', {
+		backgroundColor: '#1A2027'
+	})
 }));
 
 export default function ResponsiveGrid() {
@@ -22,12 +25,10 @@ export default function ResponsiveGrid() {
 			>
 				{Array.from(Array(6)).map((_, index) => (
 					<Grid
-						xs={2}
-						sm={4}
-						md={4}
 						key={index}
+						size={{ xs: 2, sm: 4, md: 4 }}
 					>
-						<Item>xs=2</Item>
+						<Item>{index + 1}</Item>
 					</Grid>
 				))}
 			</Grid>

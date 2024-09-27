@@ -15,13 +15,16 @@ const Img = styled('img')({
 export default function ComplexGrid() {
 	return (
 		<Paper
-			sx={{
+			sx={(theme) => ({
 				p: 2,
 				margin: 'auto',
 				maxWidth: 500,
 				flexGrow: 1,
-				backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#1A2027' : '#fff')
-			}}
+				backgroundColor: '#fff',
+				...theme.applyStyles('dark', {
+					backgroundColor: '#1A2027'
+				})
+			})}
 		>
 			<Grid
 				container
@@ -67,7 +70,7 @@ export default function ComplexGrid() {
 							</Typography>
 							<Typography
 								variant="body2"
-								color="text.secondary"
+								sx={{ color: 'text.secondary' }}
 							>
 								ID: 1030114
 							</Typography>

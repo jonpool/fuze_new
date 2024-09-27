@@ -5,7 +5,7 @@ type HighlightedCodeProps = {
 	code: string;
 	language: string;
 };
-const HighlightedCode = forwardRef<HTMLDivElement, HighlightedCodeProps>((props, ref) => {
+export const HighlightedCode = forwardRef<HTMLDivElement, HighlightedCodeProps>((props, ref) => {
 	const { code, language, ...other } = props;
 
 	return (

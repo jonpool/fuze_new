@@ -5,13 +5,14 @@ components: Snackbar, SnackbarContent
 githubLabel: 'component: snackbar'
 materialDesign: https://m2.material.io/components/snackbars
 waiAria: https://www.w3.org/TR/wai-aria-1.1/#alert
+githubSource: packages/mui-material/src/Snackbar
 ---
 
 # Snackbar
 
 <p class="description">Snackbars (also known as toasts) are used for brief notifications of processes that have been or will be performed.</p>
 
-{{"component": "modules/components/ComponentLinkHeader.js"}}
+{{"component": "@mui/docs/ComponentLinkHeader"}}
 
 ## Introduction
 
@@ -139,3 +140,4 @@ The Snackbar component is composed of a root `<div>` that houses interior elemen
   </div>
 </div>
 ```
+

@@ -12,12 +12,7 @@ export default function ServerModal() {
 				height: 300,
 				flexGrow: 1,
 				minWidth: 300,
-				transform: 'translateZ(0)',
-				// The position fixed scoping doesn't work in IE11.
-				// Disable this demo to preserve the others.
-				'@media all and (-ms-high-contrast: none)': {
-					display: 'none'
-				}
+				transform: 'translateZ(0)'
 			}}
 			ref={rootRef}
 		>
@@ -37,14 +32,14 @@ export default function ServerModal() {
 				container={() => rootRef.current}
 			>
 				<Box
-					sx={{
+					sx={(theme) => ({
 						position: 'relative',
 						width: 400,
 						bgcolor: 'background.paper',
 						border: '2px solid #000',
-						boxShadow: (theme) => theme.shadows[5],
+						boxShadow: theme.shadows[5],
 						p: 4
-					}}
+					})}
 				>
 					<Typography
 						id="server-modal-title"

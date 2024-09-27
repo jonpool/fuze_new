@@ -110,11 +110,11 @@ function PlanBillingTab() {
 							<>
 								{plans.map((plan) => (
 									<Paper
-										sx={{
+										sx={(theme) => ({
 											'&.selected': {
-												border: (theme) => `3px solid ${theme.palette.secondary.main}`
+												border: `3px solid ${theme.palette.secondary.main}`
 											}
-										}}
+										})}
 										className={clsx(
 											' flex flex-1 cursor-pointer flex-col items-start justify-start rounded-md p-24 border-3 border-transparent relative',
 											field.value === plan.value ? 'selected' : ''

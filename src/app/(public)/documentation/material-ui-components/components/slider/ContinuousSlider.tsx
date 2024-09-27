@@ -17,8 +17,7 @@ export default function ContinuousSlider() {
 			<Stack
 				spacing={2}
 				direction="row"
-				sx={{ mb: 1 }}
-				alignItems="center"
+				sx={{ alignItems: 'center', mb: 1 }}
 			>
 				<VolumeDown />
 				<Slider

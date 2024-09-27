@@ -75,7 +75,6 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 	},
 	'& .fc-daygrid-day-top': {
 		justifyContent: 'center',
-
 		'& .fc-daygrid-day-number': {
 			color: theme.palette.text.secondary,
 			fontWeight: 500,

@@ -6,23 +6,28 @@ import ContactStatus from './ContactStatus';
 import { Chat, Contact } from '../MessengerApi';
 import UserAvatar from '../components/UserAvatar';
 
-const Root = styled(Tooltip)<{ active: number }>(({ theme, active }) => ({
+const Root = styled(Tooltip)<{ active: number }>(({ theme }) => ({
 	width: 70,
 	minWidth: 70,
 	flex: '0 0 auto',
-	...(active && {
-		'&:after': {
-			position: 'absolute',
-			top: 8,
-			right: 0,
-			bottom: 8,
-			content: "''",
-			width: 4,
-			borderTopLeftRadius: 4,
-			borderBottomLeftRadius: 4,
-			backgroundColor: theme.palette.primary.main
+	variants: [
+		{
+			props: ({ active }) => active,
+			style: {
+				'&:after': {
+					position: 'absolute',
+					top: 8,
+					right: 0,
+					bottom: 8,
+					content: "''",
+					width: 4,
+					borderTopLeftRadius: 4,
+					borderBottomLeftRadius: 4,
+					backgroundColor: theme.palette.primary.main
+				}
+			}
 		}
-	})
+	]
 }));
 
 const StyledUreadBadge = styled('div')(({ theme }) => ({

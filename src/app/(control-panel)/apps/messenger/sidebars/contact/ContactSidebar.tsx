@@ -30,12 +30,12 @@ function ContactSidebar() {
 		<div className="flex flex-col flex-auto h-full">
 			<Box
 				className="border-b-1"
-				sx={{
-					backgroundColor: (theme) =>
-						theme.palette.mode === 'light'
-							? lighten(theme.palette.background.default, 0.4)
-							: lighten(theme.palette.background.default, 0.02)
-				}}
+				sx={(theme) => ({
+					backgroundColor: lighten(theme.palette.background.default, 0.02),
+					...theme.applyStyles('light', {
+						backgroundColor: lighten(theme.palette.background.default, 0.4)
+					})
+				})}
 			>
 				<Toolbar className="flex items-center px-4">
 					<IconButton
@@ -53,14 +53,12 @@ function ContactSidebar() {
 					</Typography>
 				</Toolbar>
 			</Box>
-
 			<div className="flex flex-col justify-center items-center mt-32">
 				<UserAvatar
 					className="w-160 h-160 text-64"
 					user={contact}
 				/>
 				<Typography className="mt-16 text-15 font-medium">{contact.name}</Typography>
-
 				<Typography
 					color="text.secondary"
 					className="mt-2 text-md"

@@ -15,14 +15,9 @@ import { selectSelectedMailIds, toggleInSelectedMails } from '../mailboxAppSlice
 import { MailboxMail } from '../MailboxApi';
 
 const StyledListItem = styled(ListItemButton)<ListItemButtonProps & NavLinkAdapterPropsType & { unread: number }>(
-	({ theme, unread }) => ({
+	({ theme }) => ({
 		background: theme.palette.background.default,
 		borderBottom: `1px solid ${theme.palette.divider}`,
-
-		...(unread && {
-			background: theme.palette.background.paper
-		}),
-
 		'&.selected': {
 			'&::after': {
 				content: '""',
@@ -34,7 +29,15 @@ const StyledListItem = styled(ListItemButton)<ListItemButtonProps & NavLinkAdapt
 				width: 3,
 				backgroundColor: theme.palette.primary.main
 			}
-		}
+		},
+		variants: [
+			{
+				props: ({ unread }) => unread,
+				style: {
+					background: theme.palette.background.paper
+				}
+			}
+		]
 	})
 );
 
@@ -78,7 +81,6 @@ function MailListItem(props: MailListItemProps) {
 				}}
 				size="small"
 			/>
-
 			<div className="flex flex-col flex-auto min-w-0">
 				<div className="flex w-full space-x-6 items-center">
 					<Avatar
