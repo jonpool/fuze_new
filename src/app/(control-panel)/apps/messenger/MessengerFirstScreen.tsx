@@ -4,13 +4,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useContext } from 'react';
-import { ChatAppContext } from './layout';
+import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/MessengerAppContext';
 
 /**
  * The chat first screen.
  */
 function MessengerFirstScreen() {
-	const { setMainSidebarOpen } = useContext(ChatAppContext);
+	const { setMainSidebarOpen } = useContext(MessengerAppContext);
 
 	return (
 		<div className="flex flex-col flex-1 items-center justify-center w-full p-24">

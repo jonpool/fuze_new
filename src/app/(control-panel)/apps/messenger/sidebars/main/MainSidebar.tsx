@@ -12,19 +12,19 @@ import { lighten } from '@mui/material/styles';
 import ContactListItem from './ContactListItem';
 import UserAvatar from '../../components/UserAvatar';
 import MainSidebarMoreMenu from './MainSidebarMoreMenu';
-import { ChatAppContext } from '../../layout';
 import ChatListItem from './ChatListItem';
 import {
 	useGetMessengerChatsQuery,
 	useGetMessengerContactsQuery,
 	useGetMessengerUserProfileQuery
 } from '../../MessengerApi';
+import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/MessengerAppContext';
 
 /**
  * The main sidebar.
  */
 function MainSidebar() {
-	const { setUserSidebarOpen } = useContext(ChatAppContext);
+	const { setUserSidebarOpen } = useContext(MessengerAppContext);
 	const { data: contacts } = useGetMessengerContactsQuery();
 	const { data: user } = useGetMessengerUserProfileQuery();
 	const { data: chatList } = useGetMessengerChatsQuery();

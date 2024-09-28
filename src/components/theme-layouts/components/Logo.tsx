@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import MainProjectSelection from '@/components/MainProjectSelection';
 
 const Root = styled('div')(({ theme }) => ({
 	'& > .logo-icon': {
@@ -22,13 +22,27 @@ const Root = styled('div')(({ theme }) => ({
  */
 function Logo() {
 	return (
-		<Root className="flex items-center space-x-8">
+		<Root className="flex flex-1 items-center space-x-8">
 			<img
 				className="logo-icon h-32 w-32"
 				src="/assets/images/logo/logo.svg"
 				alt="logo"
 			/>
-			<div className="logo-text flex space-x-8 items-center">
+			<div className="logo-text flex flex-col flex-auto gap-2">
+				<Typography className="text-2xl tracking-light font-semibold leading-none">FUSE</Typography>
+				<Typography
+					className="text-[13.6px] tracking-light font-semibold leading-none"
+					color="primary"
+					sx={{
+						color: '#82d7f7'
+					}}
+				>
+					REACT
+				</Typography>
+			</div>
+
+			<MainProjectSelection />
+			{/* <div className="logo-text flex space-x-8 items-center">
 				<Typography className="text-2xl tracking-light font-semibold">FUSE</Typography>
 				<Box
 					className="badge flex items-center rounded space-x-6 px-8 py-4"
@@ -45,7 +59,7 @@ function Logo() {
 					/>
 					<span className="react-text text-md font-semibold">React</span>
 				</Box>
-			</div>
+			</div> */}
 		</Root>
 	);
 }

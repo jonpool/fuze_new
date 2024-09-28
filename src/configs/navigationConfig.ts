@@ -765,10 +765,6 @@ const navigationConfig: FuseNavItemType[] = [
 				]
 			}
 		]
-	},
-	{
-		id: 'divider-1',
-		type: 'divider'
 	}
 ];
 

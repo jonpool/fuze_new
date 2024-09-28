@@ -7,14 +7,14 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { lighten } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import UserAvatar from '../../components/UserAvatar';
-import { ChatAppContext } from '../../layout';
 import { useGetMessengerContactQuery } from '../../MessengerApi';
+import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/MessengerAppContext';
 
 /**
  * The contact sidebar.
  */
 function ContactSidebar() {
-	const { contactSidebarOpen, setContactSidebarOpen } = useContext(ChatAppContext);
+	const { contactSidebarOpen, setContactSidebarOpen } = useContext(MessengerAppContext);
 
 	const contactId = contactSidebarOpen;
 
@@ -39,7 +39,7 @@ function ContactSidebar() {
 			>
 				<Toolbar className="flex items-center px-4">
 					<IconButton
-						onClick={() => setContactSidebarOpen(false)}
+						onClick={() => setContactSidebarOpen(null)}
 						color="inherit"
 					>
 						<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>

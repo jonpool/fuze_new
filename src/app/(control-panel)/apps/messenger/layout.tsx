@@ -2,7 +2,7 @@
 
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
@@ -10,22 +10,9 @@ import { usePathname } from 'next/navigation';
 import MainSidebar from './sidebars/main/MainSidebar';
 import ContactSidebar from './sidebars/contact/ContactSidebar';
 import UserSidebar from './sidebars/user/UserSidebar';
+import MessengerAppContext from './contexts/MessengerAppContext';
 
 const drawerWidth = 400;
-
-type ChatAppContextType = {
-	setMainSidebarOpen: (isOpen?: boolean) => void;
-	setContactSidebarOpen: (contactId?: string) => void;
-	setUserSidebarOpen: (isOpen?: boolean) => void;
-	contactSidebarOpen?: string;
-};
-
-export const ChatAppContext = createContext<ChatAppContextType>({
-	setMainSidebarOpen: () => {},
-	setContactSidebarOpen: (_T: string) => {},
-	setUserSidebarOpen: () => {},
-	contactSidebarOpen: null
-});
 
 const Root = styled(FusePageSimple)(() => ({
 	'& .container': {
@@ -82,7 +69,7 @@ function MessengerApp(props: MessengerAppProps) {
 		}
 	}, [isMobile, userSidebarOpen]);
 
-	const ChatAppContextData = useMemo(
+	const MessengerAppContextData = useMemo(
 		() => ({
 			setMainSidebarOpen,
 			setContactSidebarOpen,
@@ -93,7 +80,7 @@ function MessengerApp(props: MessengerAppProps) {
 	);
 
 	return (
-		<ChatAppContext.Provider value={ChatAppContextData as ChatAppContextType}>
+		<MessengerAppContext.Provider value={MessengerAppContextData}>
 			<Root
 				content={children}
 				leftSidebarContent={<MainSidebar />}
@@ -133,7 +120,7 @@ function MessengerApp(props: MessengerAppProps) {
 			>
 				<UserSidebar />
 			</StyledSwipeableDrawer>
-		</ChatAppContext.Provider>
+		</MessengerAppContext.Provider>
 	);
 }
 

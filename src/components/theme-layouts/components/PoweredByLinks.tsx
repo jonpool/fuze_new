@@ -123,22 +123,42 @@ function PoweredByLinks() {
 				</IconButton>
 			</Tooltip>
 			<Tooltip
-				title="ViteJs"
+				title="Next.js"
 				placement="top"
 			>
 				<IconButton
 					className="min-h-40 w-44 flex justify-center items-center rounded-0"
 					component={motion.a}
 					variants={item}
-					href="https://vitejs.dev/"
+					href="https://nextjs.org"
 					target="_blank"
 					rel="noreferrer noopener"
 					role="button"
 				>
 					<img
-						src="/assets/images/logo/vite.svg"
-						alt="vite"
+						src="/assets/images/logo/nextjs-dark.svg"
+						alt="next.js"
 						className="min-w-0 w-28"
+					/>
+				</IconButton>
+			</Tooltip>
+			<Tooltip
+				title="Auth.js"
+				placement="top"
+			>
+				<IconButton
+					className="min-h-40 w-44 flex justify-center items-center rounded-0"
+					component={motion.a}
+					variants={item}
+					href="https://authjs.dev/"
+					target="_blank"
+					rel="noreferrer noopener"
+					role="button"
+				>
+					<img
+						src="/assets/images/logo/authjs.webp"
+						alt="next.js"
+						className="min-w-0 w-24"
 					/>
 				</IconButton>
 			</Tooltip>
@@ -160,30 +180,6 @@ function PoweredByLinks() {
 						sx={{ backgroundColor: '#2e79c7!important', color: '#ffffff!important' }}
 					>
 						<span className="react-text text-sm font-semibold">TS</span>
-					</Box>
-				</IconButton>
-			</Tooltip>
-			<Tooltip
-				title="JavaScript"
-				placement="top"
-			>
-				<IconButton
-					className="min-h-40 w-44 flex justify-center items-center rounded-0"
-					component={motion.a}
-					variants={item}
-					href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-					target="_blank"
-					rel="noreferrer noopener"
-					role="button"
-				>
-					<Box
-						className="min-w-28 w-28 h-28  rounded-2 px-4 py-1 flex items-end justify-end"
-						sx={{
-							backgroundColor: '#f0dc4e!important',
-							color: '#2f2f2c!important'
-						}}
-					>
-						<span className="react-text text-sm font-semibold">JS</span>
 					</Box>
 				</IconButton>
 			</Tooltip>

@@ -128,7 +128,7 @@ function ContactList(props: ContactListProps) {
 						})}
 					<Divider className="mx-24 my-8" />
 					{contacts.map((contact) => {
-						const chatContact = chats.find((_chat) => _chat.contactId === contact.id);
+						const chatContact = chats.find((_chat) => _chat.contactIds.includes(contact.id));
 
 						return !chatContact ? (
 							<motion.div

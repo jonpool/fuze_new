@@ -294,6 +294,6 @@ const FusePageCarded = forwardRef<
 	);
 });
 
-const StyledFusePageCarded = memo(styled(FusePageCarded)``);
+const StyledFusePageCarded: typeof FusePageCarded = memo(styled(FusePageCarded)``);
 
 export default StyledFusePageCarded;

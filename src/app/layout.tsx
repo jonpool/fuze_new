@@ -72,7 +72,7 @@ export default async function RootLayout({
 				/>
 			</head>
 			<body
-				id="__next"
+				id="root"
 				className={clsx('loading', inter.className)}
 			>
 				<SessionProvider

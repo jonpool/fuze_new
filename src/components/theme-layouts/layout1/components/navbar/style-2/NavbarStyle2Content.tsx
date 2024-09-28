@@ -48,10 +48,8 @@ function NavbarStyle2Content(props: NavbarStyle2ContentProps) {
 
 	return (
 		<Root className={clsx('flex h-full flex-auto flex-col overflow-hidden', className)}>
-			<div className="flex h-48 shrink-0 flex-row items-center px-12 md:h-76">
-				<div className="mx-4 flex flex-1">
-					<Logo />
-				</div>
+			<div className="flex h-48 shrink-0 flex-row items-center px-12 md:h-76 gap-6">
+				<Logo />
 				<Hidden lgDown>
 					<NavbarPinToggleButton className="h-32 w-32 p-0" />
 				</Hidden>

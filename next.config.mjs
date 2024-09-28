@@ -19,18 +19,16 @@ const nextConfig = {
 		ignoreDuringBuilds: process.env.NODE_ENV === 'production'
 	},
 	typescript: {
-		// !! WARN !!
 		// Dangerously allow production builds to successfully complete even if
 		// your project has type errors.
-		// !! WARN !!
 		ignoreBuildErrors: true
 	},
 	webpack: (config) => {
 		if (config.module && config.module.rules) {
 			config.module.rules.push({
-				test: /\.(json|js|ts|tsx|jsx)$/, // include multiple file types
-				resourceQuery: /raw/, // applies to imports with ?raw
-				use: 'raw-loader' // use raw-loader for raw text
+				test: /\.(json|js|ts|tsx|jsx)$/,
+				resourceQuery: /raw/,
+				use: 'raw-loader'
 			});
 		}
 

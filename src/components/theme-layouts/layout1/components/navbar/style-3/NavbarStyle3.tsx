@@ -29,7 +29,7 @@ type StyledNavBarProps = {
 	anchor?: string;
 };
 
-const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme }) => ({
+const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense }) => ({
 	minWidth: navbarWidth,
 	width: navbarWidth,
 	maxWidth: navbarWidth,
@@ -223,12 +223,8 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 					'& #fuse-navbar-panel': {
 						maxWidth: '100%',
 						width: panelWidth,
-						...(config.navbar.position === 'left' && {
-							borderRight: `1px solid ${theme.palette.divider}!important`
-						}),
-						...(config.navbar.position === 'right' && {
-							borderLeft: `1px solid ${theme.palette.divider}!important`
-						}),
+						borderRight: `1px solid ${theme.palette.divider}!important`,
+						borderLeft: `1px solid ${theme.palette.divider}!important`,
 						[theme.breakpoints.up('lg')]: {
 							minWidth: panelWidth,
 							maxWidth: 'initial'

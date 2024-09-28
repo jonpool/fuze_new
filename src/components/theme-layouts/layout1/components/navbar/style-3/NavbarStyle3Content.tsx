@@ -11,7 +11,6 @@ import { Theme } from '@mui/system';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { selectNavigation } from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
 import { navbarCloseMobile } from 'src/components/theme-layouts/components/navbar/navbarSlice';
-import { Divider } from '@mui/material';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
 import { usePathname } from 'next/navigation';
 
@@ -127,7 +126,7 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 						}}
 					>
 						<FuseNavigation
-							className={clsx('navigation shrink-0 justify-center min-h-full')}
+							className={clsx('navigation shrink-0 min-h-full')}
 							navigation={navigation}
 							layout="vertical-2"
 							onItemClick={handleParentItemClick}
@@ -136,7 +135,6 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 							dense={Boolean(dense)}
 						/>
 					</FuseScrollbars>
-					<Divider />
 
 					<div className="flex shrink-0 justify-center w-full py-16">
 						<UserMenu className="" />

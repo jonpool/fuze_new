@@ -13,6 +13,7 @@ import { ListItemButton, ListItemButtonProps } from '@mui/material';
 import { Location } from 'history';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react'; // Add this import
 import FuseNavBadge from '../../FuseNavBadge';
 import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
 import FuseSvgIcon from '../../../FuseSvgIcon';
@@ -47,6 +48,7 @@ type FuseNavHorizontalCollapseProps = FuseNavItemComponentProps & {
 function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 	const { item, nestedLevel, dense, checkPermission } = props;
 	const [opened, setOpened] = useState(false);
+	const [isMounted, setIsMounted] = useState(false);
 
 	const pathname = usePathname();
 	const theme = useTheme();
@@ -71,6 +73,10 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 	if (checkPermission && !item?.hasPermission) {
 		return null;
 	}
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
 
 	return useMemo(
 		() => (
@@ -132,56 +138,57 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 							</div>
 						)}
 					</Reference>
-					{ReactDOM.createPortal(
-						<Popper placement={theme.direction === 'ltr' ? 'right' : 'left'}>
-							{({ ref, style, placement }) =>
-								opened && (
-									<div
-										ref={ref}
-										style={{
-											...style,
-											zIndex: 999 + nestedLevel + 1
-										}}
-										data-placement={placement}
-										className={clsx('z-999', !opened && 'pointer-events-none')}
-									>
-										<Grow
-											in={opened}
-											id="menu-fuse-list-grow"
-											style={{ transformOrigin: '0 0 0' }}
+					{isMounted &&
+						ReactDOM.createPortal(
+							<Popper placement={theme.direction === 'ltr' ? 'right' : 'left'}>
+								{({ ref, style, placement }) =>
+									opened && (
+										<div
+											ref={ref}
+											style={{
+												...style,
+												zIndex: 999 + nestedLevel + 1
+											}}
+											data-placement={placement}
+											className={clsx('z-999', !opened && 'pointer-events-none')}
 										>
-											<Paper
-												className="rounded"
-												onMouseEnter={() => handleToggle(true)}
-												onMouseLeave={() => handleToggle(false)}
+											<Grow
+												in={opened}
+												id="menu-fuse-list-grow"
+												style={{ transformOrigin: '0 0 0' }}
 											>
-												{item.children && (
-													<ul
-														className={clsx(
-															'popper-navigation-list',
-															dense && 'dense',
-															'px-0'
-														)}
-													>
-														{item.children.map((_item) => (
-															<FuseNavItem
-																key={_item.id}
-																type={`horizontal-${_item.type}`}
-																item={_item}
-																nestedLevel={nestedLevel + 1}
-																dense={dense}
-															/>
-														))}
-													</ul>
-												)}
-											</Paper>
-										</Grow>
-									</div>
-								)
-							}
-						</Popper>,
-						document.querySelector('#root')
-					)}
+												<Paper
+													className="rounded"
+													onMouseEnter={() => handleToggle(true)}
+													onMouseLeave={() => handleToggle(false)}
+												>
+													{item.children && (
+														<ul
+															className={clsx(
+																'popper-navigation-list',
+																dense && 'dense',
+																'px-0'
+															)}
+														>
+															{item.children.map((_item) => (
+																<FuseNavItem
+																	key={_item.id}
+																	type={`horizontal-${_item.type}`}
+																	item={_item}
+																	nestedLevel={nestedLevel + 1}
+																	dense={dense}
+																/>
+															))}
+														</ul>
+													)}
+												</Paper>
+											</Grow>
+										</div>
+									)
+								}
+							</Popper>,
+							document.querySelector('#root')
+						)}
 				</Manager>
 			</ul>
 		),

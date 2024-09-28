@@ -14,7 +14,6 @@ import { useParams } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Error404Page from 'src/app/(public)/404/Error404Page';
 import ChatMoreMenu from './ChatMoreMenu';
-import { ChatAppContext } from '../layout';
 import {
 	Message,
 	useGetMessengerChatQuery,
@@ -24,6 +23,7 @@ import {
 	useSendMessengerMessageMutation
 } from '../MessengerApi';
 import UserAvatar from '../components/UserAvatar';
+import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/MessengerAppContext';
 
 const StyledMessageRow = styled('div')(({ theme }) => ({
 	'&.contact': {
@@ -106,7 +106,7 @@ type ChatProps = {
  */
 function Chat(props: ChatProps) {
 	const { className } = props;
-	const { setMainSidebarOpen, setContactSidebarOpen } = useContext(ChatAppContext);
+	const { setMainSidebarOpen, setContactSidebarOpen } = useContext(MessengerAppContext);
 	const chatRef = useRef<HTMLDivElement>(null);
 	const [message, setMessage] = useState('');
 

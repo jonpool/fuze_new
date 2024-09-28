@@ -18,14 +18,14 @@ import { lighten } from '@mui/material/styles';
 import { PartialObjectDeep } from 'type-fest/source/partial-deep';
 import Statuses from '../../components/Statuses';
 import UserAvatar from '../../components/UserAvatar';
-import { ChatAppContext } from '../../layout';
 import { Profile, useGetMessengerUserProfileQuery, useUpdateMessengerUserProfileMutation } from '../../MessengerApi';
+import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/MessengerAppContext';
 
 /**
  * The user sidebar.
  */
 function UserSidebar() {
-	const { setUserSidebarOpen } = useContext(ChatAppContext);
+	const { setUserSidebarOpen } = useContext(MessengerAppContext);
 
 	const { data: user } = useGetMessengerUserProfileQuery();
 	const [updateUserData] = useUpdateMessengerUserProfileMutation();

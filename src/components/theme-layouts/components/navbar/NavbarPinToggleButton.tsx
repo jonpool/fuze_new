@@ -23,7 +23,7 @@ function NavbarPinToggleButton(props: NavbarPinToggleButtonProps) {
 	return (
 		<NavbarToggleButton
 			{...rest}
-			className={clsx(folded ? 'opacity-50' : 'opacity-100', rest.className)}
+			className={clsx('rounded', folded ? 'opacity-50' : 'opacity-100', rest.className)}
 		/>
 	);
 }
