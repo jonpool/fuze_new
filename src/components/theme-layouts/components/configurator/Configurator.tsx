@@ -6,14 +6,12 @@ import { red } from '@mui/material/colors';
 import { memo, useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { usePrevious } from '@fuse/hooks';
-import _ from '@lodash';
 import SettingsPanel from 'src/components/theme-layouts/components/configurator/SettingsPanel';
 import ThemesPanel from 'src/components/theme-layouts/components/configurator/ThemesPanel';
-import { useAppSelector } from 'src/store/hooks';
-import { User } from 'src/auth/user';
-import { selectUserSettings } from 'src/auth/user/store/userSlice';
+import { selectFuseCurrentSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
+import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import useUser from '@/auth/useUser';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 const Root = styled('div')(({ theme }) => ({
 	position: 'absolute',
@@ -57,15 +55,20 @@ const Root = styled('div')(({ theme }) => ({
 function Configurator() {
 	const theme = useTheme();
 	const [open, setOpen] = useState('');
-	const { data: user, updateUser, isGuest } = useUser();
-	const userSettings = useAppSelector(selectUserSettings);
-	const prevUserSettings = usePrevious(userSettings);
+	const { updateUserSettings, isGuest } = useUser();
+	const dispatch = useAppDispatch();
+	const settings = useAppSelector(selectFuseCurrentSettings);
 
 	useEffect(() => {
-		if (!isGuest && prevUserSettings && !_.isEqual(userSettings, prevUserSettings)) {
-			updateUser(_.setIn(user, 'data.settings', userSettings) as User);
+		// User is authenticated
+		if (!isGuest && settings) {
+			updateUserSettings(settings).then((newVal) => {
+				if (newVal) {
+					dispatch(showMessage({ message: 'User settings saved with the api' }));
+				}
+			});
 		}
-	}, [isGuest, userSettings]);
+	}, [isGuest, settings]);
 
 	const handlerOptions = {
 		onSwipedLeft: () => Boolean(open) && theme.direction === 'rtl' && handleClose(),

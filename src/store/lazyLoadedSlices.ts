@@ -2,7 +2,6 @@ import { combineSlices } from '@reduxjs/toolkit';
 import { fuseSettingsSlice } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { i18nSlice } from 'src/store/i18nSlice';
 import apiService from './apiService';
-import { userSlice } from '../auth/user/store/userSlice';
 
 // eslint-disable-next-line
 // @ts-ignore
@@ -14,7 +13,6 @@ export const rootReducer = combineSlices(
 	/**
 	 * Static slices
 	 */
-	userSlice,
 	fuseSettingsSlice,
 	i18nSlice,
 	/**

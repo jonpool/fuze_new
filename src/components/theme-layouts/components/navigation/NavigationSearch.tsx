@@ -1,7 +1,7 @@
 import FuseSearch from '@fuse/core/FuseSearch';
 import withSlices from 'src/store/withSlices';
-import { useAppSelector } from 'src/store/hooks';
-import { navigationSlice, selectFlatNavigation } from './store/navigationSlice';
+import { navigationSlice } from './store/navigationSlice';
+import useNavigation from './hooks/useNavigation';
 
 type NavigationSearchProps = {
 	className?: string;
@@ -13,8 +13,7 @@ type NavigationSearchProps = {
  */
 function NavigationSearch(props: NavigationSearchProps) {
 	const { variant, className } = props;
-
-	const navigation = useAppSelector(selectFlatNavigation);
+	const { flattenNavigation: navigation } = useNavigation();
 
 	return (
 		<FuseSearch

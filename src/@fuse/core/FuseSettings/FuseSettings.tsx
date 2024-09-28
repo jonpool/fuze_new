@@ -8,7 +8,6 @@ import { selectFuseCurrentSettings, setDefaultSettings } from '@fuse/core/FuseSe
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { Palette } from '@mui/material/styles/createPalette';
 import { PartialDeep } from 'type-fest';
-import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import FuseLayoutConfigs from '@fuse/core/FuseSettings/FuseLayoutConfigs';
 import usePrevious from '@fuse/hooks/usePrevious';
 import PaletteSelector from './palette-generator/PaletteSelector';
@@ -76,9 +75,7 @@ function FuseSettings() {
 	const settingsChanged = useMemo(() => !_.isEqual(settings, prevSettings), [settings, prevSettings]);
 
 	const handleUpdate = (newSettings: FuseSettingsConfigType) => {
-		dispatch(setDefaultSettings(newSettings)).then(() => {
-			dispatch(showMessage({ message: 'User settings saved with the api' }));
-		});
+		dispatch(setDefaultSettings(newSettings));
 	};
 
 	useEffect(() => {

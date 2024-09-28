@@ -1,14 +1,10 @@
-import { createEntityAdapter, createSelector, createSlice, PayloadAction, WithSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, PayloadAction, WithSlice } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from 'src/store/store';
 import { PartialDeep } from 'type-fest';
 import { FuseFlatNavItemType, FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
-import { selectUserRole } from 'src/auth/user/store/userSlice';
 import FuseNavigationHelper from '@fuse/utils/FuseNavigationHelper';
-import i18next from 'i18next';
 import FuseNavItemModel from '@fuse/core/FuseNavigation/models/FuseNavItemModel';
-import FuseUtils from '@fuse/utils';
 import navigationConfig from 'src/configs/navigationConfig';
-import { selectCurrentLanguageId } from 'src/store/i18nSlice';
 import { rootReducer } from 'src/store/lazyLoadedSlices';
 
 const navigationAdapter = createEntityAdapter<FuseFlatNavItemType>();
@@ -109,30 +105,6 @@ declare module 'src/store/lazyLoadedSlices' {
 }
 
 export const { setNavigation, resetNavigation } = navigationSlice.actions;
-
-export const selectNavigation = createSelector(
-	[selectNavigationAll, selectUserRole, selectCurrentLanguageId],
-	(navigationSimple, userRole) => {
-		const navigation = FuseNavigationHelper.unflattenNavigation(navigationSimple);
-
-		function setAdditionalData(data: FuseNavItemType[]): FuseNavItemType[] {
-			return data?.map((item) => ({
-				hasPermission: Boolean(FuseUtils.hasPermission(item?.auth, userRole)),
-				...item,
-				...(item?.translate && item?.title ? { title: i18next.t(`navigation:${item?.translate}`) } : {}),
-				...(item?.children ? { children: setAdditionalData(item?.children) } : {})
-			}));
-		}
-
-		const translatedValues = setAdditionalData(navigation);
-
-		return translatedValues;
-	}
-);
-
-export const selectFlatNavigation = createSelector([selectNavigation], (navigation) => {
-	return FuseNavigationHelper.flattenNavigation(navigation);
-});
 
 export type navigationSliceType = typeof navigationSlice;
 

@@ -180,7 +180,11 @@ class FuseNavigationHelper {
 	}
 
 	static flattenNavigation(navigation: FuseNavItemType[], parentOrder: string = ''): FuseFlatNavItemType[] {
-		return navigation.flatMap((item, index) => {
+		if (!navigation) {
+			return [];
+		}
+
+		return navigation?.flatMap((item, index) => {
 			const order = parentOrder ? `${parentOrder}.${index + 1}` : `${index + 1}`;
 			let flattened: FuseFlatNavItemType[] = [
 				{ ...item, order, children: item.children?.map((child) => child.id) }

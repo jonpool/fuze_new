@@ -4,15 +4,12 @@ import Breadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useAppSelector } from 'src/store/hooks';
 
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import withSlices from 'src/store/withSlices';
-import {
-	navigationSlice,
-	selectNavigation
-} from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
+import { navigationSlice } from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
+import useNavigation from './theme-layouts/components/navigation/hooks/useNavigation';
 
 type PageBreadcrumbProps = BreadcrumbsProps & {
 	className?: string;
@@ -42,7 +39,7 @@ function getNavigationItem(url: string, navigationItems: FuseNavItemType[]): Fus
 function PageBreadcrumb(props: PageBreadcrumbProps) {
 	const { className, skipHome = false, ...rest } = props;
 	const pathname = usePathname();
-	const navigation = useAppSelector(selectNavigation);
+	const { navigation } = useNavigation();
 
 	const crumbs = pathname
 		.split('/')

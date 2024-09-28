@@ -3,16 +3,16 @@ import { styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import clsx from 'clsx';
 import { memo, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { useAppDispatch } from 'src/store/hooks';
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
 import { Theme } from '@mui/system';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
-import { selectNavigation } from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
 import { navbarCloseMobile } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
 import { usePathname } from 'next/navigation';
+import useNavigation from '@/components/theme-layouts/components/navigation/hooks/useNavigation';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
@@ -60,7 +60,7 @@ type NavbarStyle3ContentProps = { className?: string; dense?: number };
 function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 	const { className = '', dense = false } = props;
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-	const navigation = useAppSelector(selectNavigation);
+	const { navigation } = useNavigation();
 	const [selectedNavigation, setSelectedNavigation] = useState<FuseNavItemType[]>([]);
 	const [panelOpen, setPanelOpen] = useState(false);
 	const dispatch = useAppDispatch();

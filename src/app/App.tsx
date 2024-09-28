@@ -1,7 +1,7 @@
 'use client';
 
 import { SnackbarProvider } from 'notistack';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { enUS } from 'date-fns/locale/en-US';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,8 +11,8 @@ import AppContext from 'src/contexts/AppContext';
 
 import store from '../store/store';
 import MainThemeProvider from '../contexts/MainThemeProvider';
-import useUser from '@/auth/useUser';
-import { setDefaultSettings, setInitialSettings } from '@/@fuse/core/FuseSettings/fuseSettingsSlice';
+
+import AuthenticationProvider from '@/auth/AuthenticationProvider';
 
 type AppProps = {
 	children?: React.ReactNode;
@@ -24,22 +24,6 @@ type AppProps = {
 function App(props: AppProps) {
 	const { children } = props;
 	const val = useMemo(() => ({}), []);
-	const { data: user, isGuest } = useUser();
-	const userSettings = useMemo(() => user?.settings, [user]);
-
-	useEffect(() => {
-		if (userSettings) {
-			// Set the default settings when the user settings are set
-			store.dispatch(setDefaultSettings(userSettings));
-		}
-	}, [userSettings]);
-
-	useEffect(() => {
-		if (!isGuest) {
-			// Set the initial settings when the user is not authenticated
-			store.dispatch(setInitialSettings());
-		}
-	}, [isGuest]);
 
 	return (
 		<ErrorBoundary>
@@ -51,22 +35,25 @@ function App(props: AppProps) {
 				>
 					{/* Redux Store Provider */}
 					<Provider store={store}>
-						{/* Theme Provider */}
-						<MainThemeProvider>
-							{/* Notistack Notification Provider */}
-							<SnackbarProvider
-								maxSnack={5}
-								anchorOrigin={{
-									vertical: 'bottom',
-									horizontal: 'right'
-								}}
-								classes={{
-									containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
-								}}
-							>
-								{children}
-							</SnackbarProvider>
-						</MainThemeProvider>
+						{/* Authentication Provider */}
+						<AuthenticationProvider>
+							{/* Theme Provider */}
+							<MainThemeProvider>
+								{/* Notistack Notification Provider */}
+								<SnackbarProvider
+									maxSnack={5}
+									anchorOrigin={{
+										vertical: 'bottom',
+										horizontal: 'right'
+									}}
+									classes={{
+										containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
+									}}
+								>
+									{children}
+								</SnackbarProvider>
+							</MainThemeProvider>
+						</AuthenticationProvider>
 					</Provider>
 				</LocalizationProvider>
 			</AppContext.Provider>

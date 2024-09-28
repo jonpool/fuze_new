@@ -15,8 +15,6 @@ import { FuseSettingsConfigType, FuseThemesType, FuseThemeType } from '@fuse/cor
 import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { PartialDeep } from 'type-fest';
 import { RootState } from 'src/store/store';
-import { setUserSettings } from 'src/auth/user/store/userSlice';
-// import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 
 export const changeFuseTheme = createAsyncThunk(
 	'fuseSettings/changeFuseTheme',
@@ -106,8 +104,6 @@ export const setDefaultSettings = createAsyncThunk(
 		const settings = AppState.fuseSettings;
 
 		const defaults = generateSettings(settings.defaults, val as FuseSettingsConfigType);
-
-		dispatch(setUserSettings(defaults));
 
 		return {
 			...settings,
