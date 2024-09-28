@@ -38,7 +38,7 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 				style={{ backgroundColor: toolbarTheme.palette.background.paper }}
 			>
 				<Toolbar className="container min-h-48 p-0 md:min-h-64 lg:px-24">
-					<div className={clsx('flex shrink-0 items-center')}>
+					<div className={clsx('flex shrink px-8 md:px-0 space-x-8')}>
 						{config.navbar.display && (
 							<Hidden lgUp>
 								<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />

@@ -7,6 +7,7 @@ import UserMenu from 'src/components/theme-layouts/components/UserMenu';
 import { Divider, Hidden } from '@mui/material';
 import NavbarPinToggleButton from 'src/components/theme-layouts/components/navbar/NavbarPinToggleButton';
 import Logo from '../../../../components/Logo';
+import GoToDocBox from '@/components/theme-layouts/components/GoToDocBox';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
@@ -60,6 +61,8 @@ function NavbarStyle2Content(props: NavbarStyle2ContentProps) {
 			>
 				<Navigation layout="vertical" />
 			</StyledContent>
+
+			<GoToDocBox className="mx-12 my-16" />
 
 			<Divider />
 
