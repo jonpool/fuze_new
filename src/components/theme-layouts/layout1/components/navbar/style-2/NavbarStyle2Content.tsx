@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from 'src/components/theme-layouts/components/navigation/Navigation';
-import NavbarToggleButton from 'src/components/theme-layouts/components/navbar/NavbarToggleButton';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
 import { Divider, Hidden } from '@mui/material';
 import NavbarPinToggleButton from 'src/components/theme-layouts/components/navbar/NavbarPinToggleButton';
@@ -52,9 +51,6 @@ function NavbarStyle2Content(props: NavbarStyle2ContentProps) {
 				<Logo />
 				<Hidden lgDown>
 					<NavbarPinToggleButton className="h-32 w-32 p-0" />
-				</Hidden>
-				<Hidden lgUp>
-					<NavbarToggleButton className="h-32 w-32 p-0" />
 				</Hidden>
 			</div>
 
