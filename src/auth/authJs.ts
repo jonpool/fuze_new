@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth';
 
-import Auth0 from 'next-auth/providers/auth0';
-import Discord from 'next-auth/providers/discord';
 import { createStorage } from 'unstorage';
 import memoryDriver from 'unstorage/drivers/memory';
 import vercelKVDriver from 'unstorage/drivers/vercel-kv';
@@ -9,6 +7,8 @@ import { UnstorageAdapter } from '@auth/unstorage-adapter';
 import type { NextAuthConfig, Session } from 'next-auth';
 import type { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
+import Facebook from 'next-auth/providers/facebook';
+import Google from 'next-auth/providers/google';
 import { User } from '@/auth/user';
 import UserModel from '@/auth/user/models/UserModel';
 import apiFetch from '@/utils/apiFetch';
@@ -48,12 +48,12 @@ export const providers: Provider[] = [
 			};
 		}
 	}),
-	Auth0,
-	Discord
+	Google,
+	Facebook
 ];
 
 const config = {
-	theme: { logo: 'https://authjs.dev/img/logo-sm.png' },
+	theme: { logo: '/assets/images/logo/logo.svg' },
 	adapter: UnstorageAdapter(storage),
 	pages: {
 		signIn: '/sign-in'

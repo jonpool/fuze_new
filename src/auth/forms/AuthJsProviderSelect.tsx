@@ -41,12 +41,13 @@ function AuthJsProviderSelect() {
 							sx={(theme) => ({
 								backgroundColor: theme.palette.background.default,
 								color: theme.palette.text.primary,
-								// border: `1px solid ${darken(provider.style.bg, 0.1)}`,
 								'&:hover': {
-									color: provider.style.text,
-									backgroundColor: provider.style.bg,
+									color: provider?.style?.text || theme.palette.secondary.contrastText,
+									backgroundColor: provider?.style?.bg || theme.palette.secondary.main,
 									'& .provider-icon': {
-										backgroundColor: lighten(provider.style.bg, 0.7)
+										backgroundColor: provider?.style?.bg
+											? lighten(provider?.style?.bg, 0.7)
+											: theme.palette.secondary.light
 									}
 								}
 							})}
@@ -63,10 +64,13 @@ function AuthJsProviderSelect() {
 							<span className="flex flex-1">Sign in with {provider.name}</span>
 						</Button>
 					))}
-
-				{/* <pre>
-				<code>{JSON.stringify(authJsProviderMap, null, 2)}</code>
-			</pre> */}
+				<Button
+					className="text-md"
+					href="https://authjs.dev/getting-started#official-providers"
+					target="_blank"
+				>
+					+ more auth providers
+				</Button>
 			</div>
 		</div>
 	);
