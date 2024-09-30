@@ -3,8 +3,6 @@ import { styled, ThemeProvider } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { memo, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFuseCurrentLayoutConfig, selectNavbarTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { Layout2ConfigDefaultsType } from 'src/components/theme-layouts/layout2/Layout2Config';
 import NavbarToggleFabLayout2 from 'src/components/theme-layouts/layout2/components/NavbarToggleFabLayout2';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import {
@@ -14,6 +12,8 @@ import {
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import withSlices from 'src/store/withSlices';
 import { usePathname } from 'next/navigation';
+import { useNavbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarLayout2 from './NavbarLayout2';
 import NavbarMobileLayout2 from './NavbarMobileLayout2';
 
@@ -41,8 +41,10 @@ type NavbarWrapperLayout2Props = {
 function NavbarWrapperLayout2(props: NavbarWrapperLayout2Props) {
 	const { className = '' } = props;
 	const dispatch = useAppDispatch();
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout2ConfigDefaultsType;
-	const navbarTheme = useAppSelector(selectNavbarTheme);
+
+	const { config } = useFuseLayoutSettings();
+
+	const navbarTheme = useNavbarTheme();
 	const navbar = useAppSelector(selectFuseNavbar);
 	const pathname = usePathname();
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));

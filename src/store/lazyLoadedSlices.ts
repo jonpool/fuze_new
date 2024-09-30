@@ -1,6 +1,4 @@
 import { combineSlices } from '@reduxjs/toolkit';
-import { fuseSettingsSlice } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { i18nSlice } from 'src/store/i18nSlice';
 import apiService from './apiService';
 
 // eslint-disable-next-line
@@ -13,8 +11,7 @@ export const rootReducer = combineSlices(
 	/**
 	 * Static slices
 	 */
-	fuseSettingsSlice,
-	i18nSlice,
+	// ---->>> You can add static slices here
 	/**
 	 * Dynamic slices
 	 */

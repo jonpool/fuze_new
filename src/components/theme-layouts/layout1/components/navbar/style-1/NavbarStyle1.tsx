@@ -2,16 +2,16 @@ import Hidden from '@mui/material/Hidden';
 import { Theme } from '@mui/system/createTheme';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import {
 	navbarCloseMobile,
 	resetNavbar,
 	selectFuseNavbar
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useEffect } from 'react';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarStyle1Content from './NavbarStyle1Content';
+import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
 const navbarWidth = 280;
 
@@ -84,7 +84,10 @@ const StyledNavBarMobile = styled(SwipeableDrawer)(() => ({
  */
 function NavbarStyle1() {
 	const dispatch = useAppDispatch();
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout1ConfigDefaultsType;
+
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout1ConfigDefaultsType;
+
 	const navbar = useAppSelector(selectFuseNavbar);
 
 	useEffect(() => {

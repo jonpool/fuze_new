@@ -3,9 +3,8 @@ import { styled } from '@mui/material/styles';
 import FuseMessage from '@fuse/core/FuseMessage';
 import clsx from 'clsx';
 import { memo, ReactNode } from 'react';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import Configurator from 'src/components/theme-layouts/components/configurator/Configurator';
-import { useAppSelector } from 'src/store/hooks';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import FooterLayout3 from './components/FooterLayout3';
 import LeftSideLayout3 from './components/LeftSideLayout3';
 import NavbarWrapperLayout3 from './components/NavbarWrapperLayout3';
@@ -39,7 +38,8 @@ type Layout3Props = {
 function Layout3(props: Layout3Props) {
 	const { children } = props;
 
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout3ConfigDefaultsType;
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout3ConfigDefaultsType;
 
 	return (
 		<Root

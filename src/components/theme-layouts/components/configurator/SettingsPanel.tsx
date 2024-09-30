@@ -2,13 +2,18 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Typography from '@mui/material/Typography';
-import FuseSettings from '@fuse/core/FuseSettings/FuseSettings';
+import FuseSettings, { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import FuseSettingsViewerDialog from 'src/components/theme-layouts/components/FuseSettingsViewerDialog';
 import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import { forwardRef } from 'react';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
+import useFuseSettings from '@/@fuse/core/FuseSettings/hooks/useFuseSettings';
+import useUser from '@/auth/useUser';
+
+import { useAppDispatch } from '@/store/hooks';
+import { showMessage } from '@/@fuse/core/FuseMessage/fuseMessageSlice';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -59,6 +64,22 @@ type SettingsPanelProps = {
 
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
+	const { isGuest, updateUserSettings } = useUser();
+	const dispatch = useAppDispatch();
+
+	const { data: settings, setSettings } = useFuseSettings();
+
+	const handleSettingsChange = (newSettings: Partial<FuseSettingsConfigType>) => {
+		setSettings(newSettings);
+
+		if (!isGuest) {
+			updateUserSettings(newSettings).then((val) => {
+				if (val) {
+					dispatch(showMessage({ message: 'User settings saved.' }));
+				}
+			});
+		}
+	};
 
 	return (
 		<StyledDialog
@@ -89,7 +110,10 @@ function SettingsPanel(props: SettingsPanelProps) {
 					Theme Settings
 				</Typography>
 
-				<FuseSettings />
+				<FuseSettings
+					value={settings}
+					onChange={handleSettingsChange}
+				/>
 
 				<div className="py-32">
 					<FuseSettingsViewerDialog />

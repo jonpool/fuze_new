@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Theme } from '@mui/system/createTheme/createTheme';
@@ -15,32 +17,39 @@ function useThemeMediaQuery(themeCallbackFunc: (theme: Theme) => string) {
 	/**
 	 * The getMatches function checks if the current screen matches the specified media query.
 	 * It takes in a media query string as a parameter and returns a boolean indicating whether the screen matches the query.
-	 *
+	 * This function will return `false` when rendering on the server (no access to window object).
 	 */
 	function getMatches(q: string) {
-		return window.matchMedia(q).matches;
+		if (typeof window !== 'undefined') {
+			return window.matchMedia(q).matches;
+		}
+
+		return false; // Default to false when no window object (SSR)
 	}
 
 	const [matches, setMatches] = useState(getMatches(query));
 
-	useEffect(
-		() => {
-			const mediaQuery = window.matchMedia(query);
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return undefined;
+		}
 
-			// Update the state with the current value
-			setMatches(getMatches(query));
+		const mediaQuery = window.matchMedia(query);
 
-			// Create an event listener
-			const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
+		// Update the state with the current value
+		setMatches(mediaQuery.matches);
 
-			// Attach the event listener to know when the matches value changes
-			mediaQuery.addEventListener('change', handler);
+		// Create an event listener
+		const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
 
-			// Remove the event listener on cleanup
-			return () => mediaQuery.removeEventListener('change', handler);
-		},
-		[query] // Empty array ensures effect is only run on mount and unmount
-	);
+		// Attach the event listener to know when the matches value changes
+		mediaQuery.addEventListener('change', handler);
+
+		// Remove the event listener on cleanup
+		return () => {
+			mediaQuery.removeEventListener('change', handler);
+		};
+	}, [query]);
 
 	return matches;
 }

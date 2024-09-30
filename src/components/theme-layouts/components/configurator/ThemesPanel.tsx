@@ -3,16 +3,20 @@ import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Typography from '@mui/material/Typography';
 import FuseThemeSelector from '@fuse/core/FuseThemeSelector/FuseThemeSelector';
-import { changeFuseTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import { forwardRef } from 'react';
 import Slide from '@mui/material/Slide';
-import { useAppDispatch } from 'src/store/hooks';
 import { SwipeableHandlers } from 'react-swipeable';
 import themeOptions from 'src/configs/themeOptions';
-import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
+import useFuseSettings from '@/@fuse/core/FuseSettings/hooks/useFuseSettings';
+
+import useUser from '@/auth/useUser';
+
+import { useAppDispatch } from '@/store/hooks';
+import { showMessage } from '@/@fuse/core/FuseMessage/fuseMessageSlice';
+import { User } from '@/auth/user';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -63,13 +67,22 @@ type ThemesPanelProps = {
 
 function ThemesPanel(props: ThemesPanelProps) {
 	const { schemesHandlers, onClose, open } = props;
-
+	const { changeTheme } = useFuseSettings();
+	const { isGuest, updateUserSettings } = useUser();
 	const dispatch = useAppDispatch();
 
 	function handleThemeSelect(_theme: FuseThemeOption) {
-		dispatch(changeFuseTheme(_theme?.section)).then(() => {
-			dispatch(showMessage({ message: 'User theme selection saved with the api' }));
-		});
+		changeTheme(_theme?.section);
+
+		if (!isGuest) {
+			updateUserSettings({
+				theme: { ..._theme?.section }
+			} as User['settings']).then((val) => {
+				if (val) {
+					dispatch(showMessage({ message: 'User theme selection saved.' }));
+				}
+			});
+		}
 	}
 
 	return (

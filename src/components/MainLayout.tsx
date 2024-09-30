@@ -25,14 +25,12 @@ function MainLayout({
 }: MainLayoutProps) {
 	const mergedSettings = useMemo(() => {
 		const shorthandSettings = {
-			layout: {
-				config: {
-					navbar: { display: navbar },
-					toolbar: { display: toolbar },
-					footer: { display: footer },
-					leftSidePanel: { display: leftSidePanel },
-					rightSidePanel: { display: rightSidePanel }
-				}
+			config: {
+				...(navbar !== undefined && { navbar: { display: navbar } }),
+				...(toolbar !== undefined && { toolbar: { display: toolbar } }),
+				...(footer !== undefined && { footer: { display: footer } }),
+				...(leftSidePanel !== undefined && { leftSidePanel: { display: leftSidePanel } }),
+				...(rightSidePanel !== undefined && { rightSidePanel: { display: rightSidePanel } })
 			}
 		};
 		return { ...settings, ...shorthandSettings };

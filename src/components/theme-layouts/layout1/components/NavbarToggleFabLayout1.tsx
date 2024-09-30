@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { useAppDispatch } from 'src/store/hooks';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import { navbarToggle, navbarToggleMobile } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import NavbarToggleFab from 'src/components/theme-layouts/components/navbar/NavbarToggleFab';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
 type NavbarToggleFabLayout1Props = {
 	className?: string;
@@ -17,7 +17,8 @@ function NavbarToggleFabLayout1(props: NavbarToggleFabLayout1Props) {
 
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout1ConfigDefaultsType;
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout1ConfigDefaultsType;
 
 	const dispatch = useAppDispatch();
 

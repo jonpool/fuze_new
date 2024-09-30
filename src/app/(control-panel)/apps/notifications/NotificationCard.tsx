@@ -7,14 +7,13 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
 import { MouseEvent } from 'react';
-import { useAppSelector } from 'src/store/hooks';
-import { selectContrastMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { darken, ThemeProvider, useTheme } from '@mui/material/styles';
 import green from '@mui/material/colors/green';
 import blue from '@mui/material/colors/blue';
 import red from '@mui/material/colors/red';
 import orange from '@mui/material/colors/orange';
 import yellow from '@mui/material/colors/yellow';
+import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import { NotificationModelType } from './models/NotificationModel';
 
 type NotificationCardProps = {
@@ -50,7 +49,7 @@ function NotificationCard(props: NotificationCardProps) {
 		bgColor = theme.palette.secondary.dark;
 	}
 
-	const contrastTheme = useAppSelector(selectContrastMainTheme(bgColor));
+	const contrastTheme = useContrastMainTheme(bgColor);
 
 	const handleClose = (ev: MouseEvent<HTMLButtonElement>) => {
 		ev.preventDefault();

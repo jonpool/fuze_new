@@ -5,11 +5,9 @@ import { useMemo } from 'react';
 import createCache, { Options } from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import rtlPlugin from 'stylis-plugin-rtl';
-import { useSelector } from 'react-redux';
-import { selectMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import FuseTheme from '@fuse/core/FuseTheme';
-import { selectCurrentLanguageDirection } from 'src/store/i18nSlice';
-import { useAppSelector } from 'src/store/hooks';
+import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
+import { useI18n } from '@/contexts/I18nProvider';
 
 type MainThemeProviderProps = {
 	children: React.ReactNode;
@@ -29,8 +27,8 @@ const emotionCacheOptions = {
 };
 
 function MainThemeProvider({ children }: MainThemeProviderProps) {
-	const mainTheme = useSelector(selectMainTheme);
-	const langDirection = useAppSelector(selectCurrentLanguageDirection);
+	const mainTheme = useMainTheme();
+	const { langDirection } = useI18n();
 	const cacheProviderValue = useMemo(
 		() => createCache(emotionCacheOptions[langDirection] as Options),
 		[langDirection]

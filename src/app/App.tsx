@@ -9,10 +9,10 @@ import { Provider } from 'react-redux';
 import ErrorBoundary from '@fuse/utils/ErrorBoundary';
 import AppContext from 'src/contexts/AppContext';
 
+import { FuseSettingsProvider } from '@fuse/core/FuseSettings/FuseSettingsProvider';
 import store from '../store/store';
 import MainThemeProvider from '../contexts/MainThemeProvider';
-
-import AuthenticationProvider from '@/auth/AuthenticationProvider';
+import { I18nProvider } from '@/contexts/I18nProvider';
 
 type AppProps = {
 	children?: React.ReactNode;
@@ -35,25 +35,26 @@ function App(props: AppProps) {
 				>
 					{/* Redux Store Provider */}
 					<Provider store={store}>
-						{/* Authentication Provider */}
-						<AuthenticationProvider>
-							{/* Theme Provider */}
-							<MainThemeProvider>
-								{/* Notistack Notification Provider */}
-								<SnackbarProvider
-									maxSnack={5}
-									anchorOrigin={{
-										vertical: 'bottom',
-										horizontal: 'right'
-									}}
-									classes={{
-										containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
-									}}
-								>
-									{children}
-								</SnackbarProvider>
-							</MainThemeProvider>
-						</AuthenticationProvider>
+						<FuseSettingsProvider>
+							<I18nProvider>
+								{/* Theme Provider */}
+								<MainThemeProvider>
+									{/* Notistack Notification Provider */}
+									<SnackbarProvider
+										maxSnack={5}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'right'
+										}}
+										classes={{
+											containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99'
+										}}
+									>
+										{children}
+									</SnackbarProvider>
+								</MainThemeProvider>
+							</I18nProvider>
+						</FuseSettingsProvider>
 					</Provider>
 				</LocalizationProvider>
 			</AppContext.Provider>

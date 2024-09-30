@@ -3,14 +3,13 @@ import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Dialog from '@mui/material/Dialog';
-import { selectFuseCurrentSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import qs from 'qs';
 import Typography from '@mui/material/Typography';
-import { useAppSelector } from 'src/store/hooks';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 type FuseSettingsViewerDialogProps = {
 	className?: string;
@@ -23,7 +22,7 @@ function FuseSettingsViewerDialog(props: FuseSettingsViewerDialogProps) {
 	const { className = '' } = props;
 
 	const [openDialog, setOpenDialog] = useState(false);
-	const settings = useAppSelector(selectFuseCurrentSettings);
+	const { data: settings } = useFuseSettings();
 
 	const jsonStringifiedSettings = JSON.stringify(settings);
 	const queryString = qs.stringify({

@@ -14,13 +14,15 @@ type useUser = {
 
 function useUser(): useUser {
 	const { data, update } = useSession();
+
 	const user = useMemo(() => data?.db, [data]);
 	const isGuest = useMemo(() => !user?.role || user?.role?.length === 0, [user]);
 
 	async function handleUpdateUser(_data: Partial<User>) {
 		const response = await updateDbUser(_data);
+		const updatedUser = response.json();
 		update();
-		return response.json();
+		return updatedUser;
 	}
 
 	async function handleUpdateUserSettings(newSettings: User['settings']) {
@@ -35,10 +37,14 @@ function useUser(): useUser {
 		return updatedUser?.settings;
 	}
 
+	async function handleSignOut() {
+		return signOut();
+	}
+
 	return {
 		data: user,
 		isGuest,
-		signOut,
+		signOut: handleSignOut,
 		updateUser: handleUpdateUser,
 		updateUserSettings: handleUpdateUserSettings
 	} as useUser;

@@ -8,12 +8,12 @@ import {
 	selectFuseNavbar
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { Theme } from '@mui/system/createTheme';
-import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarStyle3Content from './NavbarStyle3Content';
+import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
 const navbarWidth = 120;
 const navbarWidthDense = 64;
@@ -201,9 +201,13 @@ type NavbarStyle3Props = {
 function NavbarStyle3(props: NavbarStyle3Props) {
 	const { className = '', dense = false } = props;
 	const dispatch = useAppDispatch();
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout1ConfigDefaultsType;
-	const navbar = useAppSelector(selectFuseNavbar);
+
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout1ConfigDefaultsType;
+
 	const { folded } = config.navbar;
+
+	const navbar = useAppSelector(selectFuseNavbar);
 
 	useEffect(() => {
 		return () => {

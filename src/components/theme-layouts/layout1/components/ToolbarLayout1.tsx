@@ -4,8 +4,6 @@ import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import NavbarToggleButton from 'src/components/theme-layouts/components/navbar/NavbarToggleButton';
 import { selectFuseNavbar } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useAppSelector } from 'src/store/hooks';
@@ -13,12 +11,15 @@ import themeOptions from 'src/configs/themeOptions';
 import _ from '@lodash';
 import NotificationPanelToggleButton from 'src/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 import LightDarkModeToggle from 'src/components/LightDarkModeToggle';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import { useToolbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import AdjustFontSize from '../../components/AdjustFontSize';
 import FullScreenToggle from '../../components/FullScreenToggle';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 import NavigationShortcuts from '../../components/navigation/NavigationShortcuts';
 import NavigationSearch from '../../components/navigation/NavigationSearch';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
+import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
 type ToolbarLayout1Props = {
 	className?: string;
@@ -29,9 +30,12 @@ type ToolbarLayout1Props = {
  */
 function ToolbarLayout1(props: ToolbarLayout1Props) {
 	const { className } = props;
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout1ConfigDefaultsType;
+
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout1ConfigDefaultsType;
+
 	const navbar = useAppSelector(selectFuseNavbar);
-	const toolbarTheme = useAppSelector(selectToolbarTheme);
+	const toolbarTheme = useToolbarTheme();
 
 	return (
 		<ThemeProvider theme={toolbarTheme}>
@@ -40,17 +44,13 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 				className={clsx('relative z-20 flex border-b', className)}
 				color="default"
 				sx={(theme) => ({
-					backgroundColor: 'var(--default-background-toolbarTheme-palette)',
+					backgroundColor: toolbarTheme.palette.background.default,
 					...theme.applyStyles('light', {
-						backgroundColor: 'var(--paper-background-toolbarTheme-palette)'
+						backgroundColor: toolbarTheme.palette.background.paper
 					})
 				})}
 				position="static"
 				elevation={0}
-				style={{
-					'--paper-background-toolbarTheme-palette': toolbarTheme.palette.background.paper,
-					'--default-background-toolbarTheme-palette': toolbarTheme.palette.background.default
-				}}
 			>
 				<Toolbar className="min-h-48 p-0 md:min-h-64">
 					<div className="flex flex-1 px-8 md:px-16 space-x-8 ">

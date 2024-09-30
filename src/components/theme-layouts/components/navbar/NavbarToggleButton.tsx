@@ -1,13 +1,13 @@
 import IconButton from '@mui/material/IconButton';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFuseCurrentSettings, setDefaultSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
+import { useAppDispatch } from 'src/store/hooks';
 import _ from '@lodash';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import clsx from 'clsx';
 import { IconButtonProps } from '@mui/material/IconButton/IconButton';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import { navbarToggle, navbarToggleMobile } from './navbarSlice';
+import useFuseSettings from '@/@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 export type NavbarToggleButtonProps = IconButtonProps;
 
@@ -30,8 +30,8 @@ function NavbarToggleButton(props: NavbarToggleButtonProps) {
 
 	const dispatch = useAppDispatch();
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-	const settings: FuseSettingsConfigType = useAppSelector(selectFuseCurrentSettings);
-	const { config } = settings.layout;
+	const { config } = useFuseLayoutSettings();
+	const { setSettings } = useFuseSettings();
 
 	return (
 		<IconButton
@@ -39,11 +39,7 @@ function NavbarToggleButton(props: NavbarToggleButtonProps) {
 				if (isMobile) {
 					dispatch(navbarToggleMobile());
 				} else if (config?.navbar?.style === 'style-2') {
-					dispatch(
-						setDefaultSettings(
-							_.set({}, 'layout.config.navbar.folded', !settings?.layout?.config?.navbar?.folded)
-						)
-					);
+					setSettings(_.set({}, 'config.navbar.folded', !config?.navbar?.folded));
 				} else {
 					dispatch(navbarToggle());
 				}

@@ -4,14 +4,13 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import { lighten, ThemeProvider } from '@mui/material/styles';
-import { selectMainThemeDark } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import Card from '@mui/material/Card';
 import Link from 'next/link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { useAppSelector } from 'src/store/hooks';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
+import { useMainThemeDark } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import FaqList from './faqs/FaqList';
 import { useGetHelpCenterFaqCategoriesQuery, useGetHelpCenterFaqsByCategoryQuery } from './HelpCenterApi';
 
@@ -19,7 +18,7 @@ import { useGetHelpCenterFaqCategoriesQuery, useGetHelpCenterFaqsByCategoryQuery
  * The help center home.
  */
 function HelpCenterApp() {
-	const mainThemeDark = useAppSelector(selectMainThemeDark);
+	const mainThemeDark = useMainThemeDark();
 	const { data: faqsCategories } = useGetHelpCenterFaqCategoriesQuery();
 	const mostFaqCategoryId = faqsCategories?.[0]?.id;
 	const { data: faqsMost } = useGetHelpCenterFaqsByCategoryQuery(

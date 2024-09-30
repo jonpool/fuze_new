@@ -9,11 +9,12 @@ import {
 	selectFuseNavbar
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
+
 import { Theme } from '@mui/system/createTheme';
-import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import { useEffect } from 'react';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarStyle2Content from './NavbarStyle2Content';
+import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
 const navbarWidth = 280;
 
@@ -172,7 +173,10 @@ const StyledNavbarMobile = styled(SwipeableDrawer)<StyledNavBarProps>(({ theme }
  */
 function NavbarStyle2() {
 	const dispatch = useAppDispatch();
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout1ConfigDefaultsType;
+
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout1ConfigDefaultsType;
+
 	const navbar = useAppSelector(selectFuseNavbar);
 
 	// const folded = !navbar.open;

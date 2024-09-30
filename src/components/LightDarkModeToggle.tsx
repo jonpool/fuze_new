@@ -4,10 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
-import { changeFuseTheme, selectMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { useAppDispatch } from 'src/store/hooks';
-import { useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 type LightDarkModeToggleProps = {
 	className?: string;
@@ -18,9 +17,9 @@ type LightDarkModeToggleProps = {
 function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 	const { className = '', lightTheme, darkTheme } = props;
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const dispatch = useAppDispatch();
+	const { changeTheme } = useFuseSettings();
 
-	const mainTheme = useSelector(selectMainTheme);
+	const mainTheme = useMainTheme();
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -41,7 +40,7 @@ function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 	};
 
 	function handleThemeSelect(_theme: FuseThemeOption) {
-		dispatch(changeFuseTheme(_theme?.section)).then(() => {});
+		changeTheme(_theme?.section);
 	}
 
 	return (

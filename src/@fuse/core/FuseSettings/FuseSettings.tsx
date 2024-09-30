@@ -4,8 +4,6 @@ import themeLayoutConfigs, { themeLayoutDefaultsProps } from 'src/components/the
 import _ from '@lodash';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch, Typography } from '@mui/material';
 import { memo, useEffect, useMemo } from 'react';
-import { selectFuseCurrentSettings, setDefaultSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { Palette } from '@mui/material/styles/createPalette';
 import { PartialDeep } from 'type-fest';
 import FuseLayoutConfigs from '@fuse/core/FuseSettings/FuseLayoutConfigs';
@@ -52,15 +50,19 @@ export type FuseSettingsConfigType = {
 	loginRedirectUrl: string;
 };
 
+type FuseSettingsProps = {
+	value: FuseSettingsConfigType;
+	onChange: (settings: FuseSettingsConfigType) => void;
+};
+
 /**
  * The FuseSettings component is responsible for rendering the settings form for the Fuse React application.
  * It uses the useForm hook from the react-hook-form library to handle form state and validation.
  * It also uses various MUI components to render the form fields and sections.
  * The component is memoized to prevent unnecessary re-renders.
  */
-function FuseSettings() {
-	const dispatch = useAppDispatch();
-	const settings = useAppSelector(selectFuseCurrentSettings);
+function FuseSettings(props: FuseSettingsProps) {
+	const { onChange, value: settings } = props;
 	const { reset, watch, control } = useForm({ mode: 'onChange', defaultValues: settings });
 
 	const form = watch();
@@ -73,10 +75,6 @@ function FuseSettings() {
 
 	const formChanged = useMemo(() => !_.isEqual(form, prevForm), [form, prevForm]);
 	const settingsChanged = useMemo(() => !_.isEqual(settings, prevSettings), [settings, prevSettings]);
-
-	const handleUpdate = (newSettings: FuseSettingsConfigType) => {
-		dispatch(setDefaultSettings(newSettings));
-	};
 
 	useEffect(() => {
 		// reset form if settings change and not same with form
@@ -104,9 +102,9 @@ function FuseSettings() {
 				_.set(newSettings, 'layout.config', themeLayoutConfigs[newSettings?.layout?.style]?.defaults);
 			}
 
-			handleUpdate(newSettings);
+			onChange(newSettings);
 		}
-	}, [dispatch, form, formChanged, handleUpdate, prevForm, prevSettings, reset, settings, settingsChanged]);
+	}, [form, onChange, formChanged, prevForm, prevSettings, reset, settings, settingsChanged]);
 
 	return (
 		<Root>

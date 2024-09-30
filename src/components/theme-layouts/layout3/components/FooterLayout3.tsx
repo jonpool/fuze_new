@@ -3,9 +3,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { selectFooterTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { useAppSelector } from 'src/store/hooks';
 import DemoLayoutFooterContent from 'src/components/theme-layouts/components/DemoLayoutFooterContent';
+import { useFooterTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 
 type FooterLayout3Props = {
 	className?: string;
@@ -17,7 +16,7 @@ type FooterLayout3Props = {
 function FooterLayout3(props: FooterLayout3Props) {
 	const { className = '' } = props;
 
-	const footerTheme = useAppSelector(selectFooterTheme);
+	const footerTheme = useFooterTheme();
 
 	return (
 		<ThemeProvider theme={footerTheme}>

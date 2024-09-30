@@ -1,10 +1,8 @@
-import { useAppSelector } from 'src/store/hooks';
-import { selectFuseCurrentSettings } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import clsx from 'clsx';
 import NavbarToggleButton, {
 	NavbarToggleButtonProps
 } from 'src/components/theme-layouts/components/navbar/NavbarToggleButton';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 
 type NavbarPinToggleButtonProps = NavbarToggleButtonProps & {
 	className?: string;
@@ -16,8 +14,7 @@ type NavbarPinToggleButtonProps = NavbarToggleButtonProps & {
  */
 function NavbarPinToggleButton(props: NavbarPinToggleButtonProps) {
 	const { ...rest } = props;
-	const settings: FuseSettingsConfigType = useAppSelector(selectFuseCurrentSettings);
-	const { config } = settings.layout;
+	const { config } = useFuseLayoutSettings();
 	const folded = config.navbar?.folded;
 
 	return (

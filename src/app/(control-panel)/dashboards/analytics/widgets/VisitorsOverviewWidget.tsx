@@ -2,7 +2,6 @@ import { alpha, ThemeProvider, useTheme } from '@mui/material/styles';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import { selectContrastMainTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import Typography from '@mui/material/Typography';
 import { ApexOptions } from 'apexcharts';
 // eslint-disable-next-line camelcase
@@ -11,6 +10,7 @@ import { useAppSelector } from 'src/store/hooks';
 import _ from '@lodash';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
+import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import VisitorsOverviewWidgetType from './types/VisitorsOverviewWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
 
@@ -21,7 +21,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function VisitorsOverviewWidget() {
 	const theme = useTheme();
-	const contrastTheme = useAppSelector(selectContrastMainTheme(theme.palette.primary.dark));
+	const contrastTheme = useContrastMainTheme(theme.palette.primary.dark);
 	const widget = useAppSelector(selectWidget<VisitorsOverviewWidgetType>('visitors'));
 
 	if (!widget) {

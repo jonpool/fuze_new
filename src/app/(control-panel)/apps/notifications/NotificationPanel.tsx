@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
-import FuseLoading from '@fuse/core/FuseLoading';
 import _ from '@lodash';
 import { usePathname } from 'next/navigation';
 import NotificationCard from './NotificationCard';
@@ -115,10 +114,6 @@ function NotificationPanel() {
 		});
 	}
 
-	if (isLoading) {
-		return <FuseLoading />;
-	}
-
 	return (
 		<StyledSwipeableDrawer
 			open={state}
@@ -136,7 +131,7 @@ function NotificationPanel() {
 			</IconButton>
 
 			<FuseScrollbars className="flex flex-col p-16 h-full">
-				{notifications.length > 0 ? (
+				{notifications && notifications?.length > 0 ? (
 					<div className="flex flex-auto flex-col">
 						<div className="mb-36 flex items-end justify-between pt-136">
 							<Typography className="text-4xl font-semibold leading-none">Notifications</Typography>

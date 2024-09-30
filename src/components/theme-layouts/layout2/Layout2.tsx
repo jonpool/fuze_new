@@ -3,9 +3,8 @@ import { styled } from '@mui/material/styles';
 import FuseMessage from '@fuse/core/FuseMessage';
 import clsx from 'clsx';
 import { ReactNode, memo } from 'react';
-import { selectFuseCurrentLayoutConfig } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import { Layout2ConfigDefaultsType } from 'src/components/theme-layouts/layout2/Layout2Config';
-import { useAppSelector } from 'src/store/hooks';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import FooterLayout2 from './components/FooterLayout2';
 import LeftSideLayout2 from './components/LeftSideLayout2';
 import NavbarWrapperLayout2 from './components/NavbarWrapperLayout2';
@@ -39,7 +38,8 @@ type Layout2Props = {
 function Layout2(props: Layout2Props) {
 	const { children } = props;
 
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout2ConfigDefaultsType;
+	const settings = useFuseLayoutSettings();
+	const config = settings.config as Layout2ConfigDefaultsType;
 
 	return (
 		<Root

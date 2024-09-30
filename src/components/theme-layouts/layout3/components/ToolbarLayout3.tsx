@@ -4,10 +4,10 @@ import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from '@fuse/core/FuseSettings/fuseSettingsSlice';
 import NavbarToggleButton from 'src/components/theme-layouts/components/navbar/NavbarToggleButton';
-import { useAppSelector } from 'src/store/hooks';
 import NotificationPanelToggleButton from 'src/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
+import { useToolbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
+import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import AdjustFontSize from '../../components/AdjustFontSize';
 import FullScreenToggle from '../../components/FullScreenToggle';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
@@ -15,7 +15,6 @@ import NavigationSearch from '../../components/navigation/NavigationSearch';
 import UserMenu from '../../components/UserMenu';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
 import Logo from '../../components/Logo';
-import { Layout3ConfigDefaultsType } from '../Layout3Config';
 
 type ToolbarLayout3Props = {
 	className?: string;
@@ -26,8 +25,8 @@ type ToolbarLayout3Props = {
  */
 function ToolbarLayout3(props: ToolbarLayout3Props) {
 	const { className = '' } = props;
-	const config = useAppSelector(selectFuseCurrentLayoutConfig) as Layout3ConfigDefaultsType;
-	const toolbarTheme = useAppSelector(selectToolbarTheme);
+	const { config } = useFuseLayoutSettings();
+	const toolbarTheme = useToolbarTheme();
 
 	return (
 		<ThemeProvider theme={toolbarTheme}>

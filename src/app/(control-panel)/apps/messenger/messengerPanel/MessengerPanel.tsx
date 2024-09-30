@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import _ from '@lodash';
 import Chat from './Chat';
 import ContactList from './ContactList';
-import { selectSelectedChatId, selectChatPanelOpen, closeChatPanel, openChatPanel } from './messengerPanelSlice';
+import { selectSelectedChatId, closeChatPanel, openChatPanel, selectChatPanelOpen } from './messengerPanelSlice';
 import {
 	useGetMessengerChatsQuery,
 	useGetMessengerContactsQuery,
@@ -132,6 +132,7 @@ function MessengerPanel() {
 	const contactId = chat?.contactIds?.find((id) => id !== user?.id);
 
 	const selectedContact = _.find(contacts, { id: contactId });
+
 	const open = useAppSelector(selectChatPanelOpen);
 
 	const handlers = useSwipeable({

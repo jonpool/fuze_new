@@ -6,17 +6,15 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import Link from 'next/link';
-import { changeLanguage, LanguageType, selectCurrentLanguage, selectLanguages } from 'src/store/i18nSlice';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { LanguageType, useI18n } from '@/contexts/I18nProvider';
 
 /**
  * The language switcher.
  */
 function LanguageSwitcher() {
-	const currentLanguage = useAppSelector(selectCurrentLanguage);
-	const languages = useAppSelector(selectLanguages);
+	const { language, languages, changeLanguage } = useI18n();
+
 	const [menu, setMenu] = useState<null | HTMLElement>(null);
-	const dispatch = useAppDispatch();
 
 	const langMenuClick = (event: React.MouseEvent<HTMLElement>) => {
 		setMenu(event.currentTarget);
@@ -27,7 +25,7 @@ function LanguageSwitcher() {
 	};
 
 	function handleLanguageChange(lng: LanguageType) {
-		dispatch(changeLanguage(lng.id));
+		changeLanguage(lng.id);
 
 		langMenuClose();
 	}
@@ -40,8 +38,8 @@ function LanguageSwitcher() {
 			>
 				<img
 					className="mx-4 min-w-20"
-					src={`assets/images/flags/${currentLanguage.flag}.svg`}
-					alt={currentLanguage.title}
+					src={`assets/images/flags/${language.flag}.svg`}
+					alt={language.title}
 				/>
 
 				<Typography
@@ -53,7 +51,7 @@ function LanguageSwitcher() {
 						})
 					})}
 				>
-					{currentLanguage.id}
+					{language.id}
 				</Typography>
 			</Button>
 			<Popover

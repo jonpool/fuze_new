@@ -4,10 +4,9 @@ import { styled } from '@mui/material/styles';
 import MobileDetect from 'mobile-detect';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
-import React, { forwardRef, useEffect, useRef, ReactNode, useCallback, useState } from 'react';
-import { selectCustomScrollbarsEnabled } from '@fuse/core/FuseSettings/fuseSettingsSlice';
-import { useAppSelector } from 'src/store/hooks';
+import React, { forwardRef, useEffect, useRef, ReactNode, useCallback, useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 const Root = styled('div')(() => ({
 	overscrollBehavior: 'contain',
@@ -60,7 +59,9 @@ const FuseScrollbars = forwardRef<HTMLDivElement, FuseScrollbarsProps>((props, r
 	const psRef = useRef<PerfectScrollbar | null>(null);
 	const handlerByEvent = useRef<Map<string, EventListener>>(new Map());
 	const [style, setStyle] = useState({});
-	const customScrollbars = useAppSelector(selectCustomScrollbarsEnabled);
+	const { data: settings } = useFuseSettings();
+	const customScrollbars = useMemo(() => settings.customScrollbars, [settings.customScrollbars]);
+
 	const pathname = usePathname();
 
 	const hookUpEvents = useCallback(() => {
