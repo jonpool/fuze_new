@@ -1,6 +1,5 @@
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import clsx from 'clsx';
 import Divider from '@mui/material/Divider';
@@ -10,6 +9,7 @@ import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import ValueSectionSmall from './widgets/ValueSectionSmall';
 import BTCWidgetType from './types/BTCWidgetType';
 import { useGetCryptoDashboardWidgetsQuery } from './CryptoDashboardApi';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 type CryptoDashboardAppHeaderProps = {
 	onToggleLeftSidebar: (ev: MouseEvent) => void;
@@ -21,6 +21,7 @@ type CryptoDashboardAppHeaderProps = {
 function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 	const { onToggleLeftSidebar } = props;
 	const { data: widgets, isLoading } = useGetCryptoDashboardWidgetsQuery();
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	if (isLoading) {
 		return <FuseLoading />;
@@ -35,7 +36,7 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 	return (
 		<div className="flex flex-wrap w-full items-center px-8 py-16 md:px-16">
 			<div className="w-full flex items-center space-x-8 mb-4">
-				<Hidden lgUp>
+				{isMobile && (
 					<IconButton
 						onClick={(ev) => onToggleLeftSidebar(ev)}
 						aria-label="open left sidebar"
@@ -44,7 +45,8 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 					>
 						<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
 					</IconButton>
-				</Hidden>
+				)}
+
 				<PageBreadcrumb />
 			</div>
 
