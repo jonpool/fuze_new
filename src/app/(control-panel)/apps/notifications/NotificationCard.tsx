@@ -70,7 +70,7 @@ function NotificationCard(props: NotificationCardProps) {
 				sx={[
 					{
 						backgroundColor: bgColor,
-						color: contrastTheme.palette.text.primary
+						color: `${contrastTheme.palette.text.primary}!important`
 					},
 					item.link ? { '&:hover': { backgroundColor: darken(bgColor, 0.05) } } : {}
 				]}

@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { OutlinedInput } from '@mui/material';
-import Hidden from '@mui/material/Hidden';
 import _ from '@lodash';
 import MailListTitle from './MailListTitle';
 import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useUpdateMailboxMailsMutation } from '../MailboxApi';
@@ -22,6 +21,7 @@ import {
 	setSelectedMailIds
 } from '../mailboxAppSlice';
 import useGetMails from '../hooks/useGetMails';
+import useThemeMediaQuery from '../../../../../@fuse/hooks/useThemeMediaQuery';
 
 type MailToolbarProps = {
 	onToggleLeftSidebar: () => void;
@@ -39,6 +39,7 @@ type MenuType = {
 function MailToolbar(props: MailToolbarProps) {
 	const { onToggleLeftSidebar } = props;
 	const dispatch = useAppDispatch();
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const { data: mails, isLoading: isMailsLoading } = useGetMails();
 
@@ -114,7 +115,7 @@ function MailToolbar(props: MailToolbarProps) {
 				className="flex items-center w-full min-h-64 py-12 sm:py-0 space-x-8 px-8 border-b "
 			>
 				<div className="flex items-center">
-					<Hidden lgUp>
+					{isMobile && (
 						<IconButton
 							onClick={() => onToggleLeftSidebar()}
 							aria-label="open left sidebar"
@@ -123,7 +124,7 @@ function MailToolbar(props: MailToolbarProps) {
 						>
 							<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
 						</IconButton>
-					</Hidden>
+					)}
 
 					<MailListTitle />
 				</div>

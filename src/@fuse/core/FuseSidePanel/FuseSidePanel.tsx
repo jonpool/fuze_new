@@ -1,7 +1,6 @@
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { styled } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
@@ -9,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import clsx from 'clsx';
 import { memo, ReactNode, useState } from 'react';
 import FuseSvgIcon from '../FuseSvgIcon';
+import useThemeMediaQuery from '../../hooks/useThemeMediaQuery';
 
 const Root = styled('div')(({ theme }) => ({
 	'& .FuseSidePanel-paper': {
@@ -129,7 +129,7 @@ const Root = styled('div')(({ theme }) => ({
 	},
 	'& .FuseSidePanel-mobileButton': {
 		height: 40,
-		position: 'absolute',
+		position: 'fixed',
 		zIndex: 99,
 		bottom: 12,
 		width: 24,
@@ -177,6 +177,7 @@ type FuseSidePanelProps = {
  */
 function FuseSidePanel(props: FuseSidePanelProps) {
 	const { position = 'left', opened = true, className, children } = props;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const [panelOpened, setPanelOpened] = useState(Boolean(opened));
 	const [mobileOpen, setMobileOpen] = useState(false);
@@ -191,7 +192,7 @@ function FuseSidePanel(props: FuseSidePanelProps) {
 
 	return (
 		<Root>
-			<Hidden lgDown>
+			{!isMobile && (
 				<Paper
 					className={clsx(
 						'FuseSidePanel-paper',
@@ -222,34 +223,39 @@ function FuseSidePanel(props: FuseSidePanelProps) {
 						</Tooltip>
 					</div>
 				</Paper>
-			</Hidden>
-			<Hidden lgUp>
-				<SwipeableDrawer
-					classes={{
-						paper: clsx('FuseSidePanel-paper', className)
-					}}
-					anchor={position}
-					open={mobileOpen}
-					onOpen={() => {}}
-					onClose={toggleMobileDrawer}
-					disableSwipeToOpen
-				>
-					<FuseScrollbars className={clsx('content', 'FuseSidePanel-content')}>{children}</FuseScrollbars>
-				</SwipeableDrawer>
+			)}
 
-				<Tooltip
-					title="Hide side panel"
-					placement={position === 'left' ? 'right' : 'right'}
-				>
-					<Fab
-						className={clsx('FuseSidePanel-mobileButton', position)}
-						onClick={toggleMobileDrawer}
-						disableRipple
+			{isMobile && (
+				<>
+					<SwipeableDrawer
+						classes={{
+							paper: clsx('FuseSidePanel-paper', className)
+						}}
+						anchor={position}
+						open={mobileOpen}
+						onOpen={() => {}}
+						onClose={toggleMobileDrawer}
+						disableSwipeToOpen
 					>
-						<FuseSvgIcon className="FuseSidePanel-buttonIcon">heroicons-outline:chevron-right</FuseSvgIcon>
-					</Fab>
-				</Tooltip>
-			</Hidden>
+						<FuseScrollbars className={clsx('content', 'FuseSidePanel-content')}>{children}</FuseScrollbars>
+					</SwipeableDrawer>
+
+					<Tooltip
+						title="Hide side panel"
+						placement={position === 'left' ? 'right' : 'right'}
+					>
+						<Fab
+							className={clsx('FuseSidePanel-mobileButton', position)}
+							onClick={toggleMobileDrawer}
+							disableRipple
+						>
+							<FuseSvgIcon className="FuseSidePanel-buttonIcon">
+								heroicons-outline:chevron-right
+							</FuseSvgIcon>
+						</Fab>
+					</Tooltip>
+				</>
+			)}
 		</Root>
 	);
 }

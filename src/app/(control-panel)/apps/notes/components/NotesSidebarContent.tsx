@@ -58,7 +58,6 @@ function NotesSidebarContent() {
 				<List>
 					<StyledListItemButton
 						component={NavLinkAdapter}
-						end
 						href="/apps/notes"
 						activeClassName="active"
 					>

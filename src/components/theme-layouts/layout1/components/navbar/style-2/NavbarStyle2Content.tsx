@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from 'src/components/theme-layouts/components/navigation/Navigation';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
-import { Divider, Hidden } from '@mui/material';
+import { Divider } from '@mui/material';
 import NavbarPinToggleButton from 'src/components/theme-layouts/components/navbar/NavbarPinToggleButton';
 import Logo from '../../../../components/Logo';
 import GoToDocBox from '@/components/theme-layouts/components/GoToDocBox';
@@ -50,9 +50,7 @@ function NavbarStyle2Content(props: NavbarStyle2ContentProps) {
 		<Root className={clsx('flex h-full flex-auto flex-col overflow-hidden', className)}>
 			<div className="flex h-48 shrink-0 flex-row items-center px-12 md:h-76 gap-6">
 				<Logo />
-				<Hidden lgDown>
-					<NavbarPinToggleButton className="h-32 w-32 p-0" />
-				</Hidden>
+				<NavbarPinToggleButton className="h-32 w-32 p-0" />
 			</div>
 
 			<StyledContent

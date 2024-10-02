@@ -9,13 +9,14 @@ import { useAppSelector } from 'src/store/hooks';
 import NoteListItem from './NoteListItem';
 import { NotesNote, RouteParams, useGetNotesListQuery } from '../../NotesApi';
 import { selectSearchText } from '../../notesAppSlice';
+import FuseLoading from '@/@fuse/core/FuseLoading';
 
 /**
  * The note list.
  */
 function NoteList() {
 	const routeParams = useParams<RouteParams>();
-	const { data: notes } = useGetNotesListQuery(routeParams);
+	const { data: notes, isLoading } = useGetNotesListQuery(routeParams);
 
 	const searchText = useAppSelector(selectSearchText);
 
@@ -38,6 +39,10 @@ function NoteList() {
 			setFilteredData(filterData());
 		}
 	}, [notes, searchText, routeParams]);
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
 
 	if (!filteredData || filteredData.length === 0) {
 		return (

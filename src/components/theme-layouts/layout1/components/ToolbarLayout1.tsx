@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
@@ -20,6 +19,7 @@ import NavigationShortcuts from '../../components/navigation/NavigationShortcuts
 import NavigationSearch from '../../components/navigation/NavigationSearch';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 type ToolbarLayout1Props = {
 	className?: string;
@@ -33,6 +33,7 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 
 	const settings = useFuseLayoutSettings();
 	const config = settings.config as Layout1ConfigDefaultsType;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const navbar = useAppSelector(selectFuseNavbar);
 	const toolbarTheme = useToolbarTheme();
@@ -56,25 +57,24 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 					<div className="flex flex-1 px-8 md:px-16 space-x-8 ">
 						{config.navbar.display && config.navbar.position === 'left' && (
 							<>
-								<Hidden lgDown>
-									{(config.navbar.style === 'style-3' || config.navbar.style === 'style-3-dense') && (
-										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
-									)}
+								{!isMobile && (
+									<>
+										{(config.navbar.style === 'style-3' ||
+											config.navbar.style === 'style-3-dense') && (
+											<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+										)}
 
-									{config.navbar.style === 'style-1' && !navbar.open && (
-										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
-									)}
-								</Hidden>
+										{config.navbar.style === 'style-1' && !navbar.open && (
+											<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+										)}
+									</>
+								)}
 
-								<Hidden lgUp>
-									<NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />
-								</Hidden>
+								{isMobile && <NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />}
 							</>
 						)}
 
-						<Hidden lgDown>
-							<NavigationShortcuts />
-						</Hidden>
+						{!isMobile && <NavigationShortcuts />}
 					</div>
 
 					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
@@ -92,19 +92,19 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 
 					{config.navbar.display && config.navbar.position === 'right' && (
 						<>
-							<Hidden lgDown>
-								{(config.navbar.style === 'style-3' || config.navbar.style === 'style-3-dense') && (
-									<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
-								)}
+							{!isMobile && (
+								<>
+									{(config.navbar.style === 'style-3' || config.navbar.style === 'style-3-dense') && (
+										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+									)}
 
-								{config.navbar.style === 'style-1' && !navbar.open && (
-									<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
-								)}
-							</Hidden>
+									{config.navbar.style === 'style-1' && !navbar.open && (
+										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+									)}
+								</>
+							)}
 
-							<Hidden lgUp>
-								<NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />
-							</Hidden>
+							{isMobile && <NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />}
 						</>
 					)}
 				</Toolbar>

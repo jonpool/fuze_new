@@ -1,4 +1,3 @@
-import Hidden from '@mui/material/Hidden';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { memo, useEffect } from 'react';
@@ -57,11 +56,9 @@ function NavbarWrapperLayout3(props: NavbarWrapperLayout3Props) {
 	return (
 		<>
 			<ThemeProvider theme={navbarTheme}>
-				<Hidden lgDown>
-					<NavbarLayout3 className={className} />
-				</Hidden>
+				{!isMobile && <NavbarLayout3 className={className} />}
 
-				<Hidden lgUp>
+				{isMobile && (
 					<StyledSwipeableDrawer
 						anchor="left"
 						variant="temporary"
@@ -75,13 +72,10 @@ function NavbarWrapperLayout3(props: NavbarWrapperLayout3Props) {
 					>
 						<NavbarMobileLayout3 />
 					</StyledSwipeableDrawer>
-				</Hidden>
+				)}
 			</ThemeProvider>
-			{config.navbar.display && !config.toolbar.display && (
-				<Hidden lgUp>
-					<NavbarToggleFab />
-				</Hidden>
-			)}
+
+			{config.navbar.display && !config.toolbar.display && isMobile && <NavbarToggleFab />}
 		</>
 	);
 }

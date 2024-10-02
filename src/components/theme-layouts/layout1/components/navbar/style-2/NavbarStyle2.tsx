@@ -1,4 +1,3 @@
-import Hidden from '@mui/material/Hidden';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import {
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { Theme } from '@mui/system/createTheme';
 import { useEffect } from 'react';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle2Content from './NavbarStyle2Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 
@@ -115,7 +115,7 @@ const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 						opacity: 0
 					},
 					'& .fuse-list-item': {
-						width: 56
+						width: 52
 					},
 					'& .fuse-list-item-text, & .arrow-icon, & .item-badge': {
 						opacity: 0
@@ -135,7 +135,7 @@ const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 						display: 'none'
 					},
 					'& .user-menu': {
-						minWidth: 56,
+						minWidth: 52,
 						'& .title': {
 							opacity: 0
 						},
@@ -176,10 +176,10 @@ function NavbarStyle2() {
 
 	const settings = useFuseLayoutSettings();
 	const config = settings.config as Layout1ConfigDefaultsType;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const navbar = useAppSelector(selectFuseNavbar);
 
-	// const folded = !navbar.open;
 	const folded = config.navbar?.folded;
 	const foldedandclosed = folded && !navbar.foldedOpen;
 	const foldedandopened = folded && navbar.foldedOpen;
@@ -197,9 +197,9 @@ function NavbarStyle2() {
 			id="fuse-navbar"
 			className="sticky top-0 z-20 h-screen shrink-0"
 		>
-			<Hidden lgDown>
+			{!isMobile && (
 				<StyledNavbar
-					className="sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow"
+					className="hidden lg:flex sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow"
 					position={config?.navbar?.position}
 					folded={folded ? 1 : 0}
 					foldedandopened={foldedandopened ? 1 : 0}
@@ -209,11 +209,12 @@ function NavbarStyle2() {
 				>
 					<NavbarStyle2Content className="NavbarStyle2-content" />
 				</StyledNavbar>
-			</Hidden>
+			)}
 
-			<Hidden lgUp>
+			{isMobile && (
 				<StyledNavbarMobile
 					classes={{
+						root: 'flex lg:hidden',
 						paper: 'flex-col flex-auto h-full'
 					}}
 					folded={folded ? 1 : 0}
@@ -231,7 +232,7 @@ function NavbarStyle2() {
 				>
 					<NavbarStyle2Content className="NavbarStyle2-content" />
 				</StyledNavbarMobile>
-			</Hidden>
+			)}
 		</Root>
 	);
 }

@@ -39,7 +39,7 @@ function NavbarToggleButton(props: NavbarToggleButtonProps) {
 				if (isMobile) {
 					dispatch(navbarToggleMobile());
 				} else if (config?.navbar?.style === 'style-2') {
-					setSettings(_.set({}, 'config.navbar.folded', !config?.navbar?.folded));
+					setSettings(_.set({}, 'layout.config.navbar.folded', !config?.navbar?.folded));
 				} else {
 					dispatch(navbarToggle());
 				}

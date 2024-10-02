@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
@@ -15,6 +14,7 @@ import NavigationSearch from '../../components/navigation/NavigationSearch';
 import UserMenu from '../../components/UserMenu';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
 import Logo from '../../components/Logo';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 type ToolbarLayout3Props = {
 	className?: string;
@@ -27,6 +27,7 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 	const { className = '' } = props;
 	const { config } = useFuseLayoutSettings();
 	const toolbarTheme = useToolbarTheme();
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
 		<ThemeProvider theme={toolbarTheme}>
@@ -38,35 +39,30 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 			>
 				<Toolbar className="container min-h-48 p-0 md:min-h-64 lg:px-24">
 					<div className={clsx('flex shrink px-8 md:px-0 space-x-8')}>
-						{config.navbar.display && (
-							<Hidden lgUp>
-								<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />
-							</Hidden>
+						{config.navbar.display && isMobile && (
+							<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />
 						)}
-						<Hidden lgDown>
-							<Logo />
-						</Hidden>
+
+						{!isMobile && <Logo />}
 					</div>
 
 					<div className="flex flex-1">
-						<Hidden smDown>
+						{!isMobile && (
 							<NavigationSearch
 								className="mx-16 lg:mx-24"
 								variant="basic"
 							/>
-						</Hidden>
+						)}
 					</div>
 
 					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
-						<Hidden smUp>
-							<NavigationSearch />
-						</Hidden>
+						{isMobile && <NavigationSearch />}
 						<LanguageSwitcher />
 						<AdjustFontSize />
 						<FullScreenToggle />
 						<QuickPanelToggleButton />
 						<NotificationPanelToggleButton />
-						<Hidden lgDown>
+						{!isMobile && (
 							<UserMenu
 								className="border border-solid"
 								arrowIcon="heroicons-outline:chevron-down"
@@ -81,7 +77,7 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 									}
 								}}
 							/>
-						</Hidden>
+						)}
 					</div>
 				</Toolbar>
 			</AppBar>

@@ -1,15 +1,15 @@
 import FuseNavigation from '@fuse/core/FuseNavigation/FuseNavigation';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
 import SettingsAppNavigation from './SettingsAppNavigation';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 const Root = styled('div')(({ theme }) => ({
 	'&  .navigation': {
-		padding: 0,
+		padding: `${0}!important`,
 		borderTop: `1px solid ${theme.palette.divider}`
 	},
 	'&  .fuse-list-item': {
@@ -29,13 +29,13 @@ const Root = styled('div')(({ theme }) => ({
 		}
 	},
 	'&  .fuse-list-item-text-primary': {
-		fontSize: 13,
-		fontWeight: '500'
+		fontSize: '13px!important',
+		fontWeight: '500!important'
 	},
 	'&  .fuse-list-item-text-secondary': {
-		fontSize: 12,
-		whiteSpace: 'normal',
-		fontWeight: '400'
+		fontSize: '12px!important',
+		whiteSpace: 'normal!important',
+		fontWeight: '400!important'
 	}
 }));
 
@@ -46,12 +46,13 @@ type SettingsAppSidebarContentProps = {
 
 function SettingsAppSidebarContent(props: SettingsAppSidebarContentProps) {
 	const { className, onSetSidebarOpen } = props;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
 		<Root>
 			<div className={clsx('m-32 mr-24 flex items-center justify-between sm:my-40', className)}>
 				<Typography className="text-4xl font-extrabold leading-none tracking-tight"> Settings</Typography>
-				<Hidden lgUp>
+				{isMobile && (
 					<IconButton
 						onClick={() => onSetSidebarOpen(false)}
 						aria-label="close left sidebar"
@@ -59,7 +60,7 @@ function SettingsAppSidebarContent(props: SettingsAppSidebarContentProps) {
 					>
 						<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 					</IconButton>
-				</Hidden>
+				)}
 			</div>
 			<FuseNavigation navigation={SettingsAppNavigation.children} />
 		</Root>

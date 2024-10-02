@@ -1,12 +1,12 @@
 import _ from '@lodash';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { usePathname } from 'next/navigation';
 import SettingsAppNavigation from './SettingsAppNavigation';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 type SettingsAppHeaderProps = {
 	className?: string;
@@ -17,10 +17,11 @@ function SettingsAppHeader(props: SettingsAppHeaderProps) {
 	const { className, onSetSidebarOpen } = props;
 	const pathname = usePathname();
 	const currentNavigation = _.find(SettingsAppNavigation.children, { url: pathname });
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
 		<div className={clsx('flex space-x-12', className)}>
-			<Hidden lgUp>
+			{isMobile && (
 				<IconButton
 					className="border border-divider"
 					onClick={() => onSetSidebarOpen(true)}
@@ -28,7 +29,8 @@ function SettingsAppHeader(props: SettingsAppHeaderProps) {
 				>
 					<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
 				</IconButton>
-			</Hidden>
+			)}
+
 			<div>
 				<PageBreadcrumb className="mb-8" />
 

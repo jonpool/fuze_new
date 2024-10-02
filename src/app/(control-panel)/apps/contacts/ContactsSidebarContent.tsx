@@ -14,7 +14,14 @@ function ContactsSidebarContent({ children }: ContactsSidebarContentProps) {
 		<div className="flex flex-col flex-auto max-w-full w-md">
 			<IconButton
 				className="absolute top-0 right-0 my-16 mx-32 z-10"
-				sx={{ color: 'white' }}
+				sx={{
+					backgroundColor: 'primary.light',
+					color: 'primary.contrastText',
+					'&:hover': {
+						backgroundColor: 'primary.main',
+						color: 'primary.contrastText'
+					}
+				}}
 				component={NavLinkAdapter}
 				href="/apps/contacts"
 			>

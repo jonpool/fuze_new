@@ -2,7 +2,6 @@
 
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import { useTheme } from '@mui/material/styles';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
@@ -115,14 +114,14 @@ function Course() {
 		<FusePageSimple
 			content={
 				<div className="w-full">
-					<Hidden lgDown>
+					{!isMobile && (
 						<CourseProgress
 							className="sticky top-0 z-10"
 							course={course}
 						/>
-					</Hidden>
+					)}
 
-					<Hidden lgUp>
+					{isMobile && (
 						<Paper
 							className="flex sticky top-0 z-10 items-center w-full px-16 py-8 border-b-1 shadow-0"
 							square
@@ -140,7 +139,7 @@ function Course() {
 
 							<Typography className="text-md font-medium tracking-tight mx-10">{course.title}</Typography>
 						</Paper>
-					</Hidden>
+					)}
 
 					<SwipeableViews
 						index={activeStep - 1}
@@ -157,7 +156,7 @@ function Course() {
 						))}
 					</SwipeableViews>
 
-					<Hidden lgDown>
+					{!isMobile && (
 						<div className="flex justify-center w-full sticky bottom-0 p-16 pb-32 z-10">
 							<ButtonGroup
 								variant="contained"
@@ -166,7 +165,6 @@ function Course() {
 								color="secondary"
 							>
 								<Button
-									className="rounded-full"
 									startIcon={<FuseSvgIcon>heroicons-outline:arrow-small-left</FuseSvgIcon>}
 									onClick={handleBack}
 								>
@@ -174,7 +172,6 @@ function Course() {
 								</Button>
 								<Button className="pointer-events-none">{`${activeStep}/${course.totalSteps}`}</Button>
 								<Button
-									className="rounded-full"
 									endIcon={<FuseSvgIcon>heroicons-outline:arrow-small-right</FuseSvgIcon>}
 									onClick={handleNext}
 								>
@@ -182,9 +179,9 @@ function Course() {
 								</Button>
 							</ButtonGroup>
 						</div>
-					</Hidden>
+					)}
 
-					<Hidden lgUp>
+					{isMobile && (
 						<Box
 							sx={{ backgroundColor: 'background.paper' }}
 							className="flex sticky bottom-0 z-10 items-center w-full p-16 border-t-1"
@@ -212,7 +209,7 @@ function Course() {
 								<FuseSvgIcon>heroicons-outline:arrow-small-right</FuseSvgIcon>
 							</IconButton>
 						</Box>
-					</Hidden>
+					)}
 				</div>
 			}
 			leftSidebarOpen={leftSidebarOpen}

@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarStyle3Content from './NavbarStyle3Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
+import useThemeMediaQuery from '../../../../../../@fuse/hooks/useThemeMediaQuery';
 
 const navbarWidth = 120;
 const navbarWidthDense = 64;
@@ -204,6 +205,7 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 
 	const settings = useFuseLayoutSettings();
 	const config = settings.config as Layout1ConfigDefaultsType;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const { folded } = config.navbar;
 
@@ -237,7 +239,8 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 				})}
 			/>
 
-			<Hidden lgDown>
+			{!isMobile && (
+
 				<StyledNavBar
 					open={navbar.open}
 					dense={dense ? 1 : 0}
@@ -247,9 +250,10 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 				>
 					<NavbarStyle3Content dense={dense ? 1 : 0} />
 				</StyledNavBar>
-			</Hidden>
+			)}
 
-			<Hidden lgUp>
+
+			{isMobile && (
 				<StyledNavBarMobile
 					classes={{
 						paper: clsx('h-screen w-auto max-w-full flex-auto flex-col overflow-hidden', className)
@@ -266,7 +270,7 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 				>
 					<NavbarStyle3Content dense={dense ? 1 : 0} />
 				</StyledNavBarMobile>
-			</Hidden>
+			)}
 		</>
 	);
 }

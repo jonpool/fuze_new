@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
@@ -15,6 +14,7 @@ import NavigationShortcuts from '../../components/navigation/NavigationShortcuts
 import NavigationSearch from '../../components/navigation/NavigationSearch';
 import UserMenu from '../../components/UserMenu';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
+import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 type ToolbarLayout2Props = {
 	className?: string;
@@ -28,6 +28,7 @@ function ToolbarLayout2(props: ToolbarLayout2Props) {
 
 	const { config } = useFuseLayoutSettings();
 	const toolbarTheme = useToolbarTheme();
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
 		<ThemeProvider theme={toolbarTheme}>
@@ -39,14 +40,11 @@ function ToolbarLayout2(props: ToolbarLayout2Props) {
 			>
 				<Toolbar className="container min-h-48 p-0 md:min-h-64 lg:px-24">
 					<div className="flex flex-1 px-8 md:px-16 space-x-8 ">
-						{config.navbar.display && (
-							<Hidden lgUp>
-								<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />
-							</Hidden>
+						{config.navbar.display && isMobile && (
+							<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />
 						)}
-						<Hidden lgDown>
-							<NavigationShortcuts />
-						</Hidden>
+
+						{!isMobile && <NavigationShortcuts />}
 					</div>
 
 					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
@@ -56,7 +54,7 @@ function ToolbarLayout2(props: ToolbarLayout2Props) {
 						<NavigationSearch />
 						<QuickPanelToggleButton />
 						<NotificationPanelToggleButton />
-						<Hidden lgDown>
+						{!isMobile && (
 							<UserMenu
 								className="border border-solid"
 								arrowIcon="heroicons-outline:chevron-down"
@@ -71,7 +69,7 @@ function ToolbarLayout2(props: ToolbarLayout2Props) {
 									}
 								}}
 							/>
-						</Hidden>
+						)}
 					</div>
 				</Toolbar>
 			</AppBar>

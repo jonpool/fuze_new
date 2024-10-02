@@ -1,4 +1,3 @@
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -8,6 +7,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import NotesSearch from './NotesSearch';
 import { selectVariateDescSize, toggleVariateDescSize } from '../notesAppSlice';
+import useThemeMediaQuery from '../../../../../@fuse/hooks/useThemeMediaQuery';
 
 type NotesHeaderProps = {
 	onSetSidebarOpen: (open: boolean) => void;
@@ -18,6 +18,7 @@ type NotesHeaderProps = {
  */
 function NotesHeader(props: NotesHeaderProps) {
 	const { onSetSidebarOpen } = props;
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const dispatch = useAppDispatch();
 	const variateDescSize = useAppSelector(selectVariateDescSize);
@@ -38,7 +39,7 @@ function NotesHeader(props: NotesHeaderProps) {
 			</motion.span>
 
 			<div className="flex flex-1 w-full sm:w-auto items-center justify-end space-x-8">
-				<Hidden lgUp>
+				{isMobile && (
 					<IconButton
 						onClick={() => onSetSidebarOpen(true)}
 						aria-label="open left sidebar"
@@ -46,7 +47,8 @@ function NotesHeader(props: NotesHeaderProps) {
 					>
 						<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
 					</IconButton>
-				</Hidden>
+				)}
+
 				<Tooltip title="Toggle Variate Description Size">
 					<IconButton
 						className="border border-divider"

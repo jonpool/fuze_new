@@ -11,45 +11,39 @@ import { Theme } from '@mui/system/createTheme/createTheme';
  */
 function useThemeMediaQuery(themeCallbackFunc: (theme: Theme) => string) {
 	const theme = useTheme();
-
 	const query = themeCallbackFunc(theme).replace('@media ', '');
 
-	/**
-	 * The getMatches function checks if the current screen matches the specified media query.
-	 * It takes in a media query string as a parameter and returns a boolean indicating whether the screen matches the query.
-	 * This function will return `false` when rendering on the server (no access to window object).
-	 */
-	function getMatches(q: string) {
-		if (typeof window !== 'undefined') {
-			return window.matchMedia(q).matches;
-		}
-
-		return false; // Default to false when no window object (SSR)
-	}
-
-	const [matches, setMatches] = useState(getMatches(query));
+	// State to track whether the component has mounted
+	const [hasMounted, setHasMounted] = useState(false);
+	const [matches, setMatches] = useState(false);
 
 	useEffect(() => {
-		if (typeof window === 'undefined') {
-			return undefined;
+		// After mounting, we can safely access the `window` object and evaluate the media query
+		setHasMounted(true);
+	}, []);
+
+	useEffect(() => {
+		if (hasMounted) {
+			const mediaQuery = window.matchMedia(query);
+
+			// Update the state with the current value
+			setMatches(mediaQuery.matches);
+
+			// Create an event listener to update state when the query matches change
+			const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
+			mediaQuery.addEventListener('change', handler);
+
+			// Cleanup event listener on unmount
+			return () => mediaQuery.removeEventListener('change', handler);
 		}
 
-		const mediaQuery = window.matchMedia(query);
+		return undefined;
+	}, [query, hasMounted]);
 
-		// Update the state with the current value
-		setMatches(mediaQuery.matches);
-
-		// Create an event listener
-		const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
-
-		// Attach the event listener to know when the matches value changes
-		mediaQuery.addEventListener('change', handler);
-
-		// Remove the event listener on cleanup
-		return () => {
-			mediaQuery.removeEventListener('change', handler);
-		};
-	}, [query]);
+	// Prevent rendering mismatched content by ensuring consistent SSR and client behavior
+	if (!hasMounted) {
+		return false; // Prevents server-client mismatch by avoiding media queries until client-side render
+	}
 
 	return matches;
 }

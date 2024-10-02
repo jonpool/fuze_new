@@ -12,12 +12,12 @@ function GoToDocBox(props: GoToDocBoxProps) {
 	const { className } = props;
 	return (
 		<Box
-			className={clsx('flex flex-col px-12 py-8 border-1 rounded gap-8', className)}
+			className={clsx('documentation-hero flex flex-col px-12 py-8 border-1 rounded gap-8', className)}
 			sx={{ backgroundColor: 'background.paper', borderColor: 'divider' }}
 		>
-			<Typography>Need assistance to get started?</Typography>
+			<Typography className="truncate">Need assistance to get started?</Typography>
 			<Typography
-				className="flex items-center gap-4"
+				className="flex items-center gap-4 truncate"
 				component={Link}
 				href="/documentation"
 				color="secondary"

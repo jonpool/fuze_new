@@ -41,10 +41,6 @@ export default async function RootLayout({
 					content="#000000"
 				/>
 				<base href="/" />
-				<link
-					href="/assets/tailwind-base.css"
-					rel="stylesheet"
-				/>
 				{/*
 					manifest.json provides metadata used when your web app is added to the
 					homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -70,6 +66,7 @@ export default async function RootLayout({
 					href="/assets/fonts/meteocons/style.css"
 					rel="stylesheet"
 				/>
+				<noscript id="emotion-insertion-point" />
 			</head>
 			<body
 				id="root"
