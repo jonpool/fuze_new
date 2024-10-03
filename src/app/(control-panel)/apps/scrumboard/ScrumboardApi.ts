@@ -1,7 +1,7 @@
 import { apiService as api } from 'src/store/apiService';
 import { DropResult } from '@hello-pangea/dnd';
 import { PartialDeep } from 'type-fest';
-import _ from '@lodash';
+import _ from 'lodash';
 import { createSelector } from '@reduxjs/toolkit';
 import BoardModel from './models/BoardModel';
 import CardModel from './models/CardModel';

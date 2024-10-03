@@ -1,4 +1,3 @@
-import _ from '@lodash';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -7,6 +6,7 @@ import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { ChangeEvent } from 'react';
 import { NoteListItemType } from '../../../NotesApi';
+import setIn from '@/utils/setIn';
 
 type NoteFormListItemProps = {
 	onListItemRemove: (id: string) => void;
@@ -22,7 +22,7 @@ function NoteFormListItem(props: NoteFormListItemProps) {
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		onListItemChange(
-			_.setIn(
+			setIn(
 				item,
 				event.target.name,
 				event.target.type === 'checkbox' ? event.target.checked : event.target.value

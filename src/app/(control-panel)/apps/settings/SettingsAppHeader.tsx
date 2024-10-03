@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';

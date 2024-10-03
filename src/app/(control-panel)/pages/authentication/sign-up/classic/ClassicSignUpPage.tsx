@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import _ from '@lodash';
+import _ from 'lodash';
 import Paper from '@mui/material/Paper';
 import FormHelperText from '@mui/material/FormHelperText';
 import { zodResolver } from '@hookform/resolvers/zod';

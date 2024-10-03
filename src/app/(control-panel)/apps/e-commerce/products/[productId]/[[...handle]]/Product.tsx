@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import _ from '@lodash';
+import _ from 'lodash';
 import { FormProvider, useForm } from 'react-hook-form';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import * as React from 'react';

@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import Chat from './Chat';
 import ContactList from './ContactList';
 import { selectSelectedChatId, closeChatPanel, openChatPanel, selectChatPanelOpen } from './messengerPanelSlice';

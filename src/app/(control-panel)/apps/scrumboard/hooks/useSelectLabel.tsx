@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useGetScrumboardBoardLabelsQuery } from '../ScrumboardApi';
 
 type useSelectLabelProps = {

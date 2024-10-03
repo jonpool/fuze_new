@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
 import * as React from 'react';
 import { lighten } from '@mui/material/styles';
-import AuthJsForm from '@/auth/forms/AuthJsForm';
+import AuthJsForm from '@auth/forms/AuthJsForm';
 
 /**
  * The sign in page.

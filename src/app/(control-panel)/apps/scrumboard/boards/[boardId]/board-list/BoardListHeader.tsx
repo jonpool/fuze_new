@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState, MouseEvent } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import Box from '@mui/material/Box';
 import { darken } from '@mui/material/styles';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';

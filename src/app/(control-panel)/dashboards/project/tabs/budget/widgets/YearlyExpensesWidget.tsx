@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
-import _ from '@lodash';
+import _ from 'lodash';
 import ExpensesDataType from './types/ExpensesDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 

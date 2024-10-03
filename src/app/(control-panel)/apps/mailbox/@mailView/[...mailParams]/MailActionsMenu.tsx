@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useRouter } from 'next/navigation';
 import { MouseEvent, useMemo, useState } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useUpdateMailboxMailsMutation, useGetMailboxFoldersQuery } from '../../MailboxApi';
 import useGetMail from '../../hooks/useGetMail';
 

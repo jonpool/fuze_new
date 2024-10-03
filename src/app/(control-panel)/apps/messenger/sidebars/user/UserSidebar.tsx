@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import _ from '@lodash';
+import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputAdornment from '@mui/material/InputAdornment';
 import { lighten } from '@mui/material/styles';

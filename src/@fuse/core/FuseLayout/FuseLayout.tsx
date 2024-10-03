@@ -1,6 +1,6 @@
 'use client';
 
-import _ from '@lodash';
+import _ from 'lodash';
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { themeLayoutsType } from 'src/components/theme-layouts/themeLayouts';

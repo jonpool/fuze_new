@@ -1,5 +1,5 @@
 import { MaterialReactTable, useMaterialReactTable, MaterialReactTableProps, MRT_Icons } from 'material-react-table';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useMemo } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Theme } from '@mui/material/styles/createTheme';

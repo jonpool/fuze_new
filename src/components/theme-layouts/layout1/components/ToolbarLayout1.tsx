@@ -7,7 +7,7 @@ import NavbarToggleButton from 'src/components/theme-layouts/components/navbar/N
 import { selectFuseNavbar } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useAppSelector } from 'src/store/hooks';
 import themeOptions from 'src/configs/themeOptions';
-import _ from '@lodash';
+import _ from 'lodash';
 import NotificationPanelToggleButton from 'src/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 import LightDarkModeToggle from 'src/components/LightDarkModeToggle';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';

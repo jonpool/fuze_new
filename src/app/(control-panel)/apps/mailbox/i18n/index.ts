@@ -1,8 +1,8 @@
-import i18next from 'i18next';
+import i18n from '@i18n';
 import ar from './ar';
 import en from './en';
 import tr from './tr';
 
-i18next.addResourceBundle('en', 'mailboxApp', en);
-i18next.addResourceBundle('tr', 'mailboxApp', tr);
-i18next.addResourceBundle('ar', 'mailboxApp', ar);
+i18n.addResourceBundle('en', 'mailboxApp', en);
+i18n.addResourceBundle('tr', 'mailboxApp', tr);
+i18n.addResourceBundle('ar', 'mailboxApp', ar);

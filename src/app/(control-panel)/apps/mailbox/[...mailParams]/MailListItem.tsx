@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Checkbox from '@mui/material/Checkbox';

@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { OutlinedInput } from '@mui/material';
-import _ from '@lodash';
+import _ from 'lodash';
 import MailListTitle from './MailListTitle';
 import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useUpdateMailboxMailsMutation } from '../MailboxApi';
 import {

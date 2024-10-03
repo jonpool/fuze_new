@@ -7,7 +7,7 @@ import { Tooltip } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import VisitorsVsPageViewsType from './types/VisitorsVsPageViewsType';
 import { selectWidget } from '../AnalyticsDashboardApi';
 

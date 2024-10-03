@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { MouseEvent, useCallback, useEffect } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { Popover } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';

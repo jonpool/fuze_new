@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import _ from '@lodash';
+import _ from 'lodash';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';

@@ -6,7 +6,7 @@ import { AvatarGroup } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { formatDistance } from 'date-fns';
-import _ from '@lodash';
+import _ from 'lodash';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { alpha } from '@mui/system/colorManipulator';
 import { ScrumboardBoard, useGetScrumboardMembersQuery } from '../ScrumboardApi';

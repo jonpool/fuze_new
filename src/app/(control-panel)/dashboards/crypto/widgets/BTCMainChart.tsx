@@ -4,7 +4,7 @@ import { sub } from 'date-fns/sub';
 import { format } from 'date-fns/format';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
-import _ from '@lodash';
+import _ from 'lodash';
 import BTCWidgetType from '../types/BTCWidgetType';
 import { useGetCryptoDashboardWidgetsQuery } from '../CryptoDashboardApi';
 

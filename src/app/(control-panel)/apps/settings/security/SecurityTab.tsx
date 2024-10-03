@@ -12,7 +12,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useEffect } from 'react';
 import Error from 'next/error';
 import { SettingsSecurity, useGetSecuritySettingsQuery, useUpdateSecuritySettingsMutation } from '../SettingsApi';

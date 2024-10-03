@@ -4,7 +4,7 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import FusePageSimple from '@fuse/core/FusePageSimple/FusePageSimple';
 import Typography from '@mui/material/Typography';
 import Masonry from 'react-masonry-css';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useDeleteNotificationMutation, useGetAllNotificationsQuery } from './NotificationApi';
 import NotificationCard from './NotificationCard';
 import NotificationsAppHeader from './NotificationsAppHeader';

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useParams } from 'next/navigation';
 import { useGetMailboxFiltersQuery, useGetMailboxFoldersQuery, useGetMailboxLabelsQuery } from '../MailboxApi';
 

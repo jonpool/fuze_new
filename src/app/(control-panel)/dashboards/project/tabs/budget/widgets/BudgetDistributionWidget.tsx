@@ -5,7 +5,7 @@ import { memo } from 'react';
 import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
-import _ from '@lodash';
+import _ from 'lodash';
 import BudgetDistributionDataType from './types/BudgetDistributionDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 

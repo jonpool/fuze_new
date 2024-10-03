@@ -6,7 +6,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import ConversionsWidgetType from './types/ConversionsWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
 

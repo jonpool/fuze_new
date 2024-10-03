@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import clsx from 'clsx';
-import _ from '@lodash';
+import _ from 'lodash';
 import { memo, useEffect, useReducer, useRef, ReactNode } from 'react';
 import Autosuggest, { RenderInputComponentProps, RenderSuggestionParams, ChangeEvent } from 'react-autosuggest';
 import { useRouter } from 'next/navigation';

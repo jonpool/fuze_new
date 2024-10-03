@@ -2,16 +2,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],"@fuse/*": [
+     "@auth/*": [
+        "./src/@auth/*"
+      ],
+      "@i18n": [
+        "./src/@i18n/index"
+      ],
+      "@i18n/*": [
+        "./src/@i18n/*"
+      ],
+      "@fuse/*": [
         "./src/@fuse/*"
       ],
       "@history*": [
         "./src/@history"
-      ],
-      "@lodash": [
-        "./src/@lodash"
       ],
       "@mock-api/*": [
         "./src/@mock-api/*"
@@ -36,7 +40,10 @@
       ],
       "app/AppContext": [
         "./src/app/AppContext"
-      ]
+      ],
+    "@/*": [
+      "./src/*"
+    ]
     },
     "declaration": true,
     "target": "esnext",

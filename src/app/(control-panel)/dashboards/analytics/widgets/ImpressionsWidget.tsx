@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import ImressionsWidgetType from './types/ImpressionsWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
 

@@ -6,7 +6,7 @@ import themeLayoutConfigs from 'src/components/theme-layouts/themeLayoutConfigs'
 
 // Assuming these types are already defined elsewhere in your project
 import { FuseSettingsConfigType, FuseThemesType } from '@fuse/core/FuseSettings/FuseSettings';
-import useUser from '@/auth/useUser';
+import useUser from '@auth/useUser';
 // Define the SettingsContext type
 export type FuseSettingsContextType = {
 	data: FuseSettingsConfigType;
@@ -33,11 +33,11 @@ const initialSettings = getInitialSettings();
 export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 	const { data: user, isGuest } = useUser();
 	const userSettings = useMemo(() => user?.settings || {}, [user]);
-	const [data, setData] = useState<FuseSettingsConfigType>(getInitialSettings());
+	const [data, setData] = useState<FuseSettingsConfigType>(initialSettings);
 
 	// Sync data with userSettings when isGuest or userSettings change
 	useEffect(() => {
-		const guestSettings = getInitialSettings();
+		const guestSettings = initialSettings;
 		const newSettings = isGuest ? guestSettings : _.merge({}, guestSettings, userSettings);
 
 		// Only update if settings are different
@@ -47,7 +47,7 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 	}, [isGuest, userSettings]);
 
 	const setSettings = (newSettings: Partial<FuseSettingsConfigType>) => {
-		const _settings = _.merge({}, initialSettings, newSettings);
+		const _settings = _.merge({}, data, newSettings);
 
 		if (!_.isEqual(_settings, data)) {
 			setData(_.merge({}, _settings));

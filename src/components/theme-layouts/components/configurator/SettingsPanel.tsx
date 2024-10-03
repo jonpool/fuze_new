@@ -9,11 +9,11 @@ import Dialog from '@mui/material/Dialog';
 import { forwardRef } from 'react';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
-import useFuseSettings from '@/@fuse/core/FuseSettings/hooks/useFuseSettings';
-import useUser from '@/auth/useUser';
+import useUser from '@auth/useUser';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
+import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from '@/store/hooks';
-import { showMessage } from '@/@fuse/core/FuseMessage/fuseMessageSlice';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -94,7 +94,7 @@ function SettingsPanel(props: SettingsPanelProps) {
 			}}
 			{...settingsHandlers}
 		>
-			<FuseScrollbars className="p-16 sm:p-32 space-y-32">
+			<FuseScrollbars className="p-16 sm:p-24 space-y-32">
 				<IconButton
 					className="fixed top-0 z-10 ltr:right-0 rtl:left-0"
 					onClick={onClose}

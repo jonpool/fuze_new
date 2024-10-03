@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import FuseUtils from '@fuse/utils';
 import { ReactNode } from 'react';
 

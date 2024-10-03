@@ -1,5 +1,5 @@
 import FuseUtils from '@fuse/utils';
-import _ from '@lodash';
+import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
 import { ScrumboardCheckListItem } from '../ScrumboardApi';
 

@@ -1,6 +1,6 @@
 import { darken, lighten } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
-import _ from '@lodash';
+import _ from 'lodash';
 import { Course, useGetAcademyCategoriesQuery } from './AcademyApi';
 
 type CourseCategoryProps = {

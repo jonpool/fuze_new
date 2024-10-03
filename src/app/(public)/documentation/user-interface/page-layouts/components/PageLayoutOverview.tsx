@@ -5,7 +5,7 @@ import { darken, lighten, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { SyntheticEvent, useState } from 'react';
 import Paper from '@mui/material/Paper';
-import _ from '@lodash';
+import _ from 'lodash';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';

@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
 import { NotesLabel } from '../NotesApi';
 

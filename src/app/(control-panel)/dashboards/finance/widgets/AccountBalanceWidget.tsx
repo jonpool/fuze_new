@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
-import _ from '@lodash';
+import _ from 'lodash';
 import AccountBalanceWidgetType from './types/AccountBalanceWidgetType';
 import { useGetFinanceDashboardWidgetsQuery } from '../FinanceDashboardApi';
 

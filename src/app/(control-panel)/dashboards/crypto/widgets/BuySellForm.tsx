@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-import _ from '@lodash';
+import _ from 'lodash';
 import Typography from '@mui/material/Typography';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';

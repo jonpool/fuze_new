@@ -9,8 +9,8 @@ import type { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
 import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
-import { User } from '@/auth/user';
-import UserModel from '@/auth/user/models/UserModel';
+import { User } from '@auth/user';
+import UserModel from '@auth/user/models/UserModel';
 import apiFetch from '@/utils/apiFetch';
 
 const storage = createStorage({

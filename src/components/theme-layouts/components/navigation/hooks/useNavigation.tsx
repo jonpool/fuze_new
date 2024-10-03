@@ -2,13 +2,13 @@
 
 import { useAppSelector } from 'src/store/hooks';
 import { useMemo } from 'react';
-import i18next from 'i18next';
+import i18n from '@i18n';
+import useUser from '@auth/useUser';
+import { useI18n } from '@i18n/I18nProvider';
+import FuseUtils from '@fuse/utils';
+import FuseNavigationHelper from '@fuse/utils/FuseNavigationHelper';
+import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { selectNavigationAll } from '../store/navigationSlice';
-import FuseNavigationHelper from '@/@fuse/utils/FuseNavigationHelper';
-import useUser from '@/auth/useUser';
-import { FuseNavItemType } from '@/@fuse/core/FuseNavigation/types/FuseNavItemType';
-import FuseUtils from '@/@fuse/utils';
-import { useI18n } from '@/contexts/I18nProvider';
 
 function useNavigation() {
 	const { data: user } = useUser();
@@ -24,7 +24,7 @@ function useNavigation() {
 			return data?.map((item) => ({
 				hasPermission: Boolean(FuseUtils.hasPermission(item?.auth, userRole)),
 				...item,
-				...(item?.translate && item?.title ? { title: i18next.t(`navigation:${item?.translate}`) } : {}),
+				...(item?.translate && item?.title ? { title: i18n.t(`navigation:${item?.translate}`) } : {}),
 				...(item?.children ? { children: setAdditionalData(item?.children) } : {})
 			}));
 		}

@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import FormHelperText from '@mui/material/FormHelperText';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useEffect } from 'react';
 import {
 	SettingsNotifications,

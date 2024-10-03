@@ -1,5 +1,5 @@
-import AuthGuardRedirect from 'src/auth/AuthGuardRedirect';
-import authRoles from 'src/auth/authRoles';
+import AuthGuardRedirect from '@auth/AuthGuardRedirect';
+import authRoles from '@auth/authRoles';
 import AdminRoleExample from './AdminRoleExample';
 
 function AdminRoleExamplePage() {

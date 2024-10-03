@@ -3,7 +3,7 @@ import List from '@mui/material/List';
 import { DragDropContext, Droppable, DroppableProvided, DropResult } from '@hello-pangea/dnd';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import TaskListItem from './TaskListItem';
 import SectionListItem from './SectionListItem';
 import { Task, useGetTasksQuery } from '../TasksApi';

@@ -5,7 +5,7 @@ import 'src/styles/app-base.css';
 import 'src/styles/app-components.css';
 import 'src/styles/app-utilities.css';
 import { SessionProvider } from 'next-auth/react';
-import { auth } from '@/auth/authJs';
+import { auth } from '@auth/authJs';
 import generateMetadata from '../utils/generateMetadata';
 import App from './App';
 

@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from 'src/store/hooks';
+import FuseLoading from '@fuse/core/FuseLoading';
 import NoteListItem from './NoteListItem';
 import { NotesNote, RouteParams, useGetNotesListQuery } from '../../NotesApi';
 import { selectSearchText } from '../../notesAppSlice';
-import FuseLoading from '@/@fuse/core/FuseLoading';
 
 /**
  * The note list.

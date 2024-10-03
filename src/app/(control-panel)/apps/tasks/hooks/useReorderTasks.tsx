@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { useCallback } from 'react';
 import { Task, useGetTasksQuery, useUpdateTasksItemsMutation } from '../TasksApi';
 

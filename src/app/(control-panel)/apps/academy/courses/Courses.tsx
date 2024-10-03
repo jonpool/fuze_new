@@ -1,6 +1,6 @@
 'use client';
 
-import _ from '@lodash';
+import _ from 'lodash';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';

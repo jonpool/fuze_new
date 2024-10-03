@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { MouseEvent, useEffect, useState } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Menu } from '@mui/material';
-import _ from '@lodash';
+import _ from 'lodash';
 import Tooltip from '@mui/material/Tooltip';
 import { labelColorDefs } from './labelColors';
 import { useGetMailboxLabelsQuery } from '../../MailboxApi';

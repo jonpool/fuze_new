@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { ForwardedRef, forwardRef, MouseEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

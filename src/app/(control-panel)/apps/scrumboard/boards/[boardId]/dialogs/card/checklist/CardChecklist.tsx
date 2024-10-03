@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import _ from '@lodash';
+import _ from 'lodash';
 import IconButton from '@mui/material/IconButton';
 import LinearProgress from '@mui/material/LinearProgress';
 import List from '@mui/material/List';
@@ -14,6 +14,7 @@ import CardAddChecklistItem from './CardAddChecklistItem';
 import CardChecklistItem from './CardChecklistItem';
 import CardChecklistName, { CardChecklistHandle } from './CardChecklistName';
 import { ScrumboardChecklist } from '../../../../../ScrumboardApi';
+import setIn from '@/utils/setIn';
 
 type CardChecklistProps = {
 	onCheckListChange: (checklist: ScrumboardChecklist, index: number) => void;
@@ -136,7 +137,7 @@ function CardChecklist(props: CardChecklistProps) {
 									key={checkItem.id}
 									index={_index}
 									onListItemChange={(item, itemIndex) => {
-										onChange(_.setIn(value, `[${itemIndex}]`, item));
+										onChange(setIn(value, `[${itemIndex}]`, item));
 									}}
 									onListItemRemove={() => {
 										onChange(_.reject(value, { id: checkItem.id }));

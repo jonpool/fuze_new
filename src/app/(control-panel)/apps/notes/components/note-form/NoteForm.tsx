@@ -1,6 +1,6 @@
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { Controller, useForm } from 'react-hook-form';
-import _ from '@lodash';
+import _ from 'lodash';
 import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';

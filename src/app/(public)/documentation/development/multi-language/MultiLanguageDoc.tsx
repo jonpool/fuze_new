@@ -1,7 +1,7 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import enLangRaw from 'src/app/(control-panel)/apps/mailbox/i18n/en.ts?raw';
-import i18Raw from 'src/i18n.ts?raw';
+import i18Raw from '@i18n/i18n.ts?raw';
 import mailboxLocalizationRaw from 'src/app/(control-panel)/apps/mailbox/i18n/index.ts?raw';
 
 /**
@@ -123,7 +123,7 @@ function MultiLanguageDoc() {
 				component="p"
 			>
 				To change the default language of the Fuse React, you need to change <code>lng</code> setting in the
-				file <code>src/i18n.ts</code>
+				file <code>@i18n/i18n.ts</code>
 			</Typography>
 
 			<Typography

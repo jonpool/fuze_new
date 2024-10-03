@@ -1,6 +1,6 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { User } from 'src/auth/user';
+import { User } from '@auth/user';
 
 /**
  * Creates a new user object with the specified data.

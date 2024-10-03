@@ -1,5 +1,5 @@
 import { useDebounce, useDeepCompareEffect } from '@fuse/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import clsx from 'clsx';
 import Avatar from '@mui/material/Avatar';
@@ -47,6 +47,7 @@ import {
 	useUpdateScrumboardBoardCardMutation
 } from '../../../../ScrumboardApi';
 import useUpdateScrumboardBoard from '../../../../hooks/useUpdateScrumboardBoard';
+import setIn from '@/utils/setIn';
 
 /**
  * The board card form component.
@@ -342,7 +343,7 @@ function BoardCardForm() {
 							onCheckListChange={(item, itemIndex) => {
 								setValue(
 									'checklists',
-									_.setIn(cardForm.checklists, `[${itemIndex}]`, item) as ScrumboardChecklist[]
+									setIn(cardForm.checklists, `[${itemIndex}]`, item) as ScrumboardChecklist[]
 								);
 							}}
 							onRemoveCheckList={() => {

@@ -6,7 +6,7 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import Link from 'next/link';
-import { LanguageType, useI18n } from '@/contexts/I18nProvider';
+import { LanguageType, useI18n } from '@i18n/I18nProvider';
 
 /**
  * The language switcher.

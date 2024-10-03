@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useMemo } from 'react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import GuideListMenu from './GuideListMenu';

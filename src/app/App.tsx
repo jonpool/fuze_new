@@ -10,9 +10,9 @@ import ErrorBoundary from '@fuse/utils/ErrorBoundary';
 import AppContext from 'src/contexts/AppContext';
 
 import { FuseSettingsProvider } from '@fuse/core/FuseSettings/FuseSettingsProvider';
+import { I18nProvider } from '@i18n/I18nProvider';
 import store from '../store/store';
 import MainThemeProvider from '../contexts/MainThemeProvider';
-import { I18nProvider } from '@/contexts/I18nProvider';
 
 type AppProps = {
 	children?: React.ReactNode;

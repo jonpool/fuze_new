@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { darken } from '@mui/material/styles';
 import { MouseEvent } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useGetNotesLabelsQuery } from '../NotesApi';
 
 type NoteLabelProps = {

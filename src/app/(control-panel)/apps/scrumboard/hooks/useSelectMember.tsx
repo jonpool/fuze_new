@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useGetScrumboardMembersQuery } from '../ScrumboardApi';
 
 function useSelectMember(id: string) {

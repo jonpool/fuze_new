@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import _ from '@lodash';
+import _ from 'lodash';
 import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';

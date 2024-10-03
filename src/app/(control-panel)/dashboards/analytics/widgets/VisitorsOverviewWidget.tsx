@@ -7,7 +7,7 @@ import { ApexOptions } from 'apexcharts';
 // eslint-disable-next-line camelcase
 import { private_safeDarken } from '@mui/system/colorManipulator';
 import { useAppSelector } from 'src/store/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
 import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';

@@ -29,7 +29,7 @@ function GuestRoleExample() {
 						className="language-js"
 					>
 						{`
-					import {authRoles} from '@/auth';
+					import {authRoles} from '@auth';
 					import GuestRoleExample from './StaffRoleExample';
 
 					export const GuestRoleExampleConfig = {

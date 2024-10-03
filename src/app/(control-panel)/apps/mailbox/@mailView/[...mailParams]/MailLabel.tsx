@@ -1,7 +1,7 @@
 import Chip from '@mui/material/Chip';
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { labelColorDefs } from './labelColors';
 import { useGetMailboxLabelsQuery } from '../../MailboxApi';
 

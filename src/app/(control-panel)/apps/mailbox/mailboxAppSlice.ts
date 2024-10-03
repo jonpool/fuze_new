@@ -1,5 +1,5 @@
 import { WithSlice, createSlice } from '@reduxjs/toolkit';
-import _ from '@lodash';
+import _ from 'lodash';
 import { rootReducer } from 'src/store/lazyLoadedSlices';
 import { MailboxMail } from './MailboxApi';
 

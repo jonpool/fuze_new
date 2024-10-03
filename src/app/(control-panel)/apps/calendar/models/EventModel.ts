@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { DeepPartial } from 'react-hook-form';
 import { formatISO } from 'date-fns/formatISO';
 import { Event } from '../CalendarApi';

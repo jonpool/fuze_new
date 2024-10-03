@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import _ from '@lodash';
+import _ from 'lodash';
 import Box from '@mui/material/Box';
 import FuseSvgIcon from '../FuseSvgIcon';
 import { FuseFlatNavItemType } from '../FuseNavigation/types/FuseNavItemType';

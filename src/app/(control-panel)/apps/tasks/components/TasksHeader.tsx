@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Button from '@mui/material/Button';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import _ from '@lodash';
+import _ from 'lodash';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useGetTasksQuery } from '../TasksApi';
 

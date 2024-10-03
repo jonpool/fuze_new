@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
-import _ from '@lodash';
+import _ from 'lodash';
 import clsx from 'clsx';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';

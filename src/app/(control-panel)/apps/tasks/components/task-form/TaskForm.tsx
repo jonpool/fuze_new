@@ -5,7 +5,7 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { useAppDispatch } from 'src/store/hooks';
 import { useEffect } from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
-import _ from '@lodash';
+import _ from 'lodash';
 import { Controller, useForm } from 'react-hook-form';
 import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';

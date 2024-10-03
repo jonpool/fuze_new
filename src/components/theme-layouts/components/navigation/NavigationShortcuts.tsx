@@ -3,11 +3,12 @@
 import FuseShortcuts from '@fuse/core/FuseShortcuts';
 import { usePrevious } from '@fuse/hooks';
 import { useEffect, useState } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import withSlices from 'src/store/withSlices';
-import { User } from 'src/auth/user';
+import { User } from '@auth/user';
+import useUser from '@auth/useUser';
+import setIn from '@/utils/setIn';
 import { navigationSlice } from './store/navigationSlice';
-import useUser from '@/auth/useUser';
 import useNavigation from './hooks/useNavigation';
 
 type NavigationShortcutsProps = {
@@ -27,7 +28,7 @@ function NavigationShortcuts(props: NavigationShortcutsProps) {
 
 	useEffect(() => {
 		if (!isGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
-			updateUser(_.setIn(user, 'shortcuts', userShortcuts) as User);
+			updateUser(setIn(user, 'shortcuts', userShortcuts) as User);
 		}
 	}, [isGuest, userShortcuts]);
 

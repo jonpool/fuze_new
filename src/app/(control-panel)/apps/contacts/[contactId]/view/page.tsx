@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Box from '@mui/system/Box';
 import { format } from 'date-fns/format';
-import _ from '@lodash';
+import _ from 'lodash';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import { useGetContactsItemQuery, useGetContactsCountriesQuery, useGetContactsTagsQuery } from '../../ContactsApi';

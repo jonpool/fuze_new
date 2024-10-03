@@ -10,13 +10,12 @@ import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
 import themeOptions from 'src/configs/themeOptions';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
-import useFuseSettings from '@/@fuse/core/FuseSettings/hooks/useFuseSettings';
+import useUser from '@auth/useUser';
+import { User } from '@auth/user';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
-import useUser from '@/auth/useUser';
-
+import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from '@/store/hooks';
-import { showMessage } from '@/@fuse/core/FuseMessage/fuseMessageSlice';
-import { User } from '@/auth/user';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -98,7 +97,7 @@ function ThemesPanel(props: ThemesPanelProps) {
 			}}
 			{...schemesHandlers}
 		>
-			<FuseScrollbars className="p-16 sm:p-32">
+			<FuseScrollbars className="p-16 sm:p-24">
 				<IconButton
 					className="fixed top-0 z-10 ltr:right-0 rtl:left-0"
 					onClick={onClose}

@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';

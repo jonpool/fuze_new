@@ -8,7 +8,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import IconButton from '@mui/material/IconButton';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useMemo } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useDebounce, useDeepCompareEffect } from '@fuse/hooks';
 import { PartialDeep } from 'type-fest';
 import ListItemButton from '@mui/material/ListItemButton';

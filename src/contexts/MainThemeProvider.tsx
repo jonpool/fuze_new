@@ -5,14 +5,14 @@ import { useMemo } from 'react';
 import rtlPlugin from 'stylis-plugin-rtl';
 import FuseTheme from '@fuse/core/FuseTheme';
 import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import { AppRouterCacheProvider, AppRouterCacheProviderProps } from '@mui/material-nextjs/v14-appRouter';
-import { useI18n } from '@/contexts/I18nProvider';
+import createCache, { Options } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 
 type MainThemeProviderProps = {
 	children: React.ReactNode;
 };
 
-const emotionCacheOptions: Record<string, AppRouterCacheProviderProps['options']> = {
+const emotionCacheOptions: Record<string, Options> = {
 	rtl: {
 		key: 'muirtl',
 		stylisPlugins: [rtlPlugin],
@@ -27,22 +27,19 @@ const emotionCacheOptions: Record<string, AppRouterCacheProviderProps['options']
 
 function MainThemeProvider({ children }: MainThemeProviderProps) {
 	const mainTheme = useMainTheme();
-	const { langDirection } = useI18n();
+	const langDirection = mainTheme?.direction;
 
-	const cacheOptions = useMemo(
-		() => ({ ...emotionCacheOptions[langDirection], enableCssLayer: false }),
-		[langDirection]
-	);
+	const cacheProviderValue = useMemo(() => createCache(emotionCacheOptions[langDirection]), [langDirection]);
 
 	return (
-		<AppRouterCacheProvider options={cacheOptions}>
+		<CacheProvider value={cacheProviderValue}>
 			<FuseTheme
 				theme={mainTheme}
 				root
 			>
 				{children}
 			</FuseTheme>
-		</AppRouterCacheProvider>
+		</CacheProvider>
 	);
 }
 

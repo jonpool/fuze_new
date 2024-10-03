@@ -2,7 +2,7 @@ import Fab from '@mui/material/Fab';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
 import { Controller, useForm } from 'react-hook-form';
-import _ from '@lodash';
+import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';

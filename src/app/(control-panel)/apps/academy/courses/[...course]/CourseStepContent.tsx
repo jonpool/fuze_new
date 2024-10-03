@@ -1,8 +1,8 @@
 import { useTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
+import FuseLoading from '@fuse/core/FuseLoading';
 import { CourseStep, useGetAcademyCourseStepContentQuery } from '../../AcademyApi';
-import FuseLoading from '@/@fuse/core/FuseLoading';
 
 type CourseStepContentProps = {
 	step: CourseStep;

@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect } from 'react';
 import { useDebounce } from '@fuse/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import FormLabel from '@mui/material/FormLabel';
 import { closeDialog, openDialog } from '@fuse/core/FuseDialog/fuseDialogSlice';
 import DialogTitle from '@mui/material/DialogTitle';

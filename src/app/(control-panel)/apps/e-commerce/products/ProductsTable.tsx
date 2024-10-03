@@ -5,7 +5,7 @@ import DataTable from 'src/components/data-table/DataTable';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { Chip, ListItemIcon, MenuItem, Paper } from '@mui/material';
 import * as React from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';

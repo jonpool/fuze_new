@@ -1,7 +1,7 @@
 'use client';
 
-import authRoles from 'src/auth/authRoles';
-import AuthGuardRedirect from 'src/auth/AuthGuardRedirect';
+import authRoles from '@auth/authRoles';
+import AuthGuardRedirect from '@auth/AuthGuardRedirect';
 import SignInPage from './SignInPage';
 
 function Page() {

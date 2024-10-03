@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import i18n from 'src/i18n';
-import _ from '@lodash';
+import _ from 'lodash';
+import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
+import i18n from './i18n';
 
 export type LanguageType = {
 	id: string;
@@ -17,6 +18,7 @@ type I18nContextType = {
 };
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
+
 type I18nProviderProps = {
 	children: React.ReactNode;
 };
@@ -29,16 +31,18 @@ const languages: LanguageType[] = [
 
 export function I18nProvider(props: I18nProviderProps) {
 	const { children } = props;
+	const { data: settings, setSettings } = useFuseSettings();
 	const [languageId, setLanguageId] = useState(i18n.options.lng);
 
 	const changeLanguage = async (languageId: string) => {
-		// const newLangDirection = i18n.dir(languageId);
 		setLanguageId(languageId);
 		await i18n.changeLanguage(languageId);
 	};
 
 	useEffect(() => {
 		i18n.changeLanguage(languageId);
+		const langDirection = i18n.dir(languageId);
+		setSettings({ ...settings, direction: langDirection });
 	}, [languageId]);
 
 	return (

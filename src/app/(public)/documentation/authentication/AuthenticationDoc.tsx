@@ -111,7 +111,7 @@ function AuthenticationDoc() {
 						Firebase Authentication Configuration: <br />
 					</Typography>
 					<Typography>
-						<code>src/auth/services/firebase/firebaseAuthConfig.ts</code>
+						<code>@auth/services/firebase/firebaseAuthConfig.ts</code>
 					</Typography>
 				</li>
 				<li>
@@ -119,7 +119,7 @@ function AuthenticationDoc() {
 						JWT Authentication Configuration: <br />
 					</Typography>
 					<Typography>
-						<code>src/auth/services/jwt/jwtAuthConfig.ts</code>
+						<code>@auth/services/jwt/jwtAuthConfig.ts</code>
 					</Typography>
 				</li>
 				<li>
@@ -127,7 +127,7 @@ function AuthenticationDoc() {
 						AWS Amplify Authentication Configuration: <br />
 					</Typography>
 					<Typography>
-						<code>src/auth/services/aws/awsAuthConfig.ts</code>
+						<code>@auth/services/aws/awsAuthConfig.ts</code>
 					</Typography>
 				</li>
 			</ol>
@@ -153,7 +153,7 @@ function AuthenticationDoc() {
 				<li>
 					<Typography className="mb-4 font-500">Sign-In Auth Form Component:</Typography>
 					<Typography>
-						<code>src/auth/services/jwt/components/JwtSignInForm.tsx</code>
+						<code>@auth/services/jwt/components/JwtSignInForm.tsx</code>
 					</Typography>
 				</li>
 				<li>

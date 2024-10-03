@@ -1,8 +1,9 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useMemo } from 'react';
-import { User } from '@/auth/user';
-import { updateDbUser } from '@/auth/authJs';
-import _ from '@/@lodash/@lodash';
+import { User } from '@auth/user';
+import { updateDbUser } from '@auth/authJs';
+import _ from 'lodash';
+import setIn from '@/utils/setIn';
 
 type useUser = {
 	data: User;
@@ -21,12 +22,14 @@ function useUser(): useUser {
 	async function handleUpdateUser(_data: Partial<User>) {
 		const response = await updateDbUser(_data);
 		const updatedUser = response.json();
-		update();
+		setTimeout(() => {
+			update();
+		}, 100);
 		return updatedUser;
 	}
 
 	async function handleUpdateUserSettings(newSettings: User['settings']) {
-		const newUser = _.setIn(user, 'settings', newSettings) as User;
+		const newUser = setIn(user, 'settings', newSettings) as User;
 
 		if (_.isEqual(user, newUser)) {
 			return undefined;

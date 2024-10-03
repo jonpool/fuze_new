@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import _ from '@lodash';
+import _ from 'lodash';
 import { useEffect } from 'react';
 import { SettingsAccount, useGetAccountSettingsQuery, useUpdateAccountSettingsMutation } from '../SettingsApi';
 

@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import clsx from 'clsx';
 import orderStatuses from './constants/orderStatuses';
 

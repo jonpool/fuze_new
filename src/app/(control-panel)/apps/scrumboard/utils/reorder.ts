@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from 'lodash';
 import { DraggableLocation, DropResult } from '@hello-pangea/dnd';
 import { ScrumboardBoardList } from '../ScrumboardApi';
 

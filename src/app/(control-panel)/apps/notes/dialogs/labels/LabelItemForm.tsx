@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect } from 'react';
 import { useDebounce } from '@fuse/hooks';
-import _ from '@lodash';
+import _ from 'lodash';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {

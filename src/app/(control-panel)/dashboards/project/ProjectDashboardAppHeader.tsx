@@ -3,12 +3,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import _ from '@lodash';
+import _ from 'lodash';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { darken } from '@mui/material/styles';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
-import useUser from '@/auth/useUser';
+import useUser from '@auth/useUser';
 import { useGetProjectDashboardProjectsQuery } from './ProjectDashboardApi';
 
 /**

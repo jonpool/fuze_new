@@ -1,6 +1,6 @@
 'use client';
 
-import AuthGuardRedirect from 'src/auth/AuthGuardRedirect';
+import AuthGuardRedirect from '@auth/AuthGuardRedirect';
 import SignOutPage from './SignOutPage';
 
 function Page() {
