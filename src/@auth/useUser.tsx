@@ -21,10 +21,8 @@ function useUser(): useUser {
 
 	async function handleUpdateUser(_data: Partial<User>) {
 		const response = await updateDbUser(_data);
-		const updatedUser = response.json();
-		setTimeout(() => {
-			update();
-		}, 100);
+		const updatedUser = (await response.json()) as User;
+		update();
 		return updatedUser;
 	}
 
@@ -35,7 +33,7 @@ function useUser(): useUser {
 			return undefined;
 		}
 
-		const updatedUser = (await handleUpdateUser(newUser)) as User;
+		const updatedUser = await handleUpdateUser(newUser);
 
 		return updatedUser?.settings;
 	}
