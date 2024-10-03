@@ -133,13 +133,6 @@ const DocumentationNavigation: FuseNavItemType = {
 					url: '/documentation/development/updating-fuse-react'
 				},
 				{
-					id: 'ts-file-remaming-migration-doc',
-					title: 'Typescript Migration',
-					type: 'item',
-					icon: 'heroicons-outline:document-text',
-					url: '/documentation/development/ts-file-rename-migration'
-				},
-				{
 					id: 'fuse-react-ides-vscode-webstorm-doc',
 					title: 'IDE Configuration',
 					type: 'item',
@@ -454,17 +447,17 @@ const DocumentationNavigation: FuseNavItemType = {
 					title: 'Authorization',
 					type: 'item',
 					icon: 'heroicons-outline:shield-exclamation',
-					url: '/documentation/fuse-components/fuse-authorization'
+					url: '/documentation/authorization'
 				},
 				{
 					id: 'auth',
-					title: 'Auth protected page examples',
+					title: 'Auth protected navigation examples',
 					type: 'collapse',
 					icon: 'heroicons-outline:lock-closed',
 					children: [
 						{
 							id: 'sign-in',
-							title: 'Sign in',
+							title: 'Sign in (only for guest)',
 							type: 'item',
 							url: '/sign-in',
 							auth: authRoles.onlyGuest,
@@ -472,7 +465,7 @@ const DocumentationNavigation: FuseNavItemType = {
 						},
 						{
 							id: 'register',
-							title: 'Register',
+							title: 'Register (only for guest)',
 							type: 'item',
 							url: '/register',
 							auth: authRoles.onlyGuest,
@@ -480,7 +473,7 @@ const DocumentationNavigation: FuseNavItemType = {
 						},
 						{
 							id: 'sign-out',
-							title: 'Sign out',
+							title: 'Sign out (only for user)',
 							type: 'item',
 							auth: authRoles.user,
 							url: '/sign-out',
@@ -488,14 +481,14 @@ const DocumentationNavigation: FuseNavItemType = {
 						},
 						{
 							id: 'auth-admin-example',
-							title: 'Admin: Auth protected page',
+							title: 'Admin: Auth protected page (only for admin)',
 							type: 'item',
 							url: '/auth/admin-role-example',
 							icon: 'security'
 						},
 						{
 							id: 'only-admin-navigation-item',
-							title: 'Nav item only for Admin',
+							title: 'Nav item only for Admin (only for admin)',
 							type: 'item',
 							auth: authRoles.admin,
 							url: '/auth/admin-role-example',
@@ -503,14 +496,14 @@ const DocumentationNavigation: FuseNavItemType = {
 						},
 						{
 							id: 'auth-staff-example',
-							title: 'Staff: Auth protected page',
+							title: 'Staff: Auth protected page (only for staff)',
 							type: 'item',
 							url: '/auth/staff-role-example',
 							icon: 'security'
 						},
 						{
 							id: 'only-staff-navigation-item',
-							title: 'Nav item only for Staff',
+							title: 'Nav item only for Staff (only for staff)',
 							type: 'item',
 							auth: authRoles.staff,
 							url: '/auth/staff-role-example',
@@ -518,14 +511,14 @@ const DocumentationNavigation: FuseNavItemType = {
 						},
 						{
 							id: 'auth-guest-example',
-							title: 'Guest: Auth protected page',
+							title: 'Guest: Auth protected page (only for guest)',
 							type: 'item',
 							url: '/auth/guest-role-example',
 							icon: 'security'
 						},
 						{
 							id: 'only-guest-navigation-item',
-							title: 'Nav item only for Guest',
+							title: 'Nav item only for Guest (only for guest)',
 							type: 'item',
 							auth: authRoles.onlyGuest,
 							url: '/auth/guest-role-example',

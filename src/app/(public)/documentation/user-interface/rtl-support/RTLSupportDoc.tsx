@@ -42,15 +42,15 @@ function RTLSupportDoc() {
 				>
 					TailwindCss's rtl and ltr modifiers
 				</a>{' '}
-				and the{' '}
+				and the styles components plugin{' '}
 				<a
-					href="https://github.com/alitaheri/jss-rtl"
+					href="https://github.com/styled-components/stylis-plugin-rtl"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<code>jss-rtl</code>
+					<code>stylis-plugin-rtl</code>
 				</a>{' '}
-				plugin to support RTL feature of the Fuse React.
+				to support RTL feature of the Fuse React.
 			</Typography>
 
 			<Typography
@@ -62,7 +62,7 @@ function RTLSupportDoc() {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<code>jss-rtl</code>
+					<code>stylis-plugin-rtl</code>
 				</a>{' '}
 				enables right-to-left support by flipping every rule of the jss styles on the x-axis. You can write the
 				application left-to-right and then turn it into right-to-left using this plugin. Or you can start

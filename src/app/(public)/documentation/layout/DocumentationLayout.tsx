@@ -23,7 +23,10 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 	},
 	'& .FusePageCarded-wrapper': {},
 	'& .FusePageCarded-leftSidebar': {},
-	'& .description': {}
+	'& .description': {},
+	'& [class^="language-"]': {
+		margin: 0
+	}
 }));
 type DocumentationLayoutProps = {
 	children: React.ReactNode;
@@ -85,7 +88,7 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 			}
 			content={
 				<div className="p-16 md:p-24 min-h-full flex flex-auto flex-col">
-					<div className="flex flex-col flex-1 relative pb-32">{children}</div>
+					<div className="flex flex-col flex-1 relative pb-32 prose lg:prose-2xl">{children}</div>
 				</div>
 			}
 			leftSidebarContent={

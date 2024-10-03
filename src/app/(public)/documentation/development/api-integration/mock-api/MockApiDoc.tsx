@@ -2,7 +2,6 @@
 
 import Typography from '@mui/material/Typography';
 import { RedocStandalone } from 'redoc';
-import Link from 'next/link';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { RedocRawOptions } from 'redoc/typings/services/RedocNormalizedOptions';
@@ -30,15 +29,7 @@ function MockApiDoc() {
 				<Typography className="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
 					Mock API Definitions (OpenAPI 3.0)
 				</Typography>
-				<Typography component="p">
-					These definitions are used while creating
-					<Link
-						className="link mx-8"
-						href="/documentation/development/api-calls"
-					>
-						@mock-api
-					</Link>
-				</Typography>
+				<Typography component="p">These definitions are used while creating mock api endpoints.</Typography>
 			</div>
 			<Paper className="sticky top-0 w-full shadow">
 				<RedocStandalone

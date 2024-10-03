@@ -21,7 +21,7 @@ function SettingsDoc() {
 				component="p"
 			>
 				To set the default layout and theme settings for your app, navigate to the file:
-				<code>app/configs/settingsConfig.ts</code>
+				<code>src/configs/settingsConfig.ts</code>
 			</Typography>
 
 			<FuseHighlight

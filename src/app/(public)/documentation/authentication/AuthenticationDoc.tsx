@@ -1,10 +1,7 @@
 import Typography from '@mui/material/Typography';
-import FuseHighlight from '@fuse/core/FuseHighlight/FuseHighlight';
+import FuseHighlight from '@fuse/core/FuseHighlight';
+import Link from '@mui/material/Link';
 
-/**
- * The jwt auth doc.
- * This document provides information on how to use the JWT authentication service.
- */
 function AuthenticationDoc() {
 	return (
 		<>
@@ -12,367 +9,281 @@ function AuthenticationDoc() {
 				variant="h4"
 				className="mb-40 font-700"
 			>
-				Authentication System
+				Authentication in Fuse React with Next.js App Router
 			</Typography>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				Fuse React's authentication system is designed to be both flexible and robust, accommodating multiple
-				authentication services to ensure a seamless and secure user experience. Currently, we are giving three
-				example authentication services:
+				Fuse React uses Auth.js (formerly NextAuth.js) for authentication management, integrated with Next.js
+				13's App Router. Auth.js is a complete open-source authentication solution that works seamlessly with
+				Next.js applications.
 			</Typography>
-			<ol className="list-disc pl-16 mb-16 space-y-12">
-				<li>
-					<Typography>Firebase Authentication</Typography>
-				</li>
-				<li>
-					<Typography>JWT (JSON Web Tokens) Authentication</Typography>
-				</li>
-				<li>
-					<Typography>AWS Amplify Authentication</Typography>
-				</li>
-			</ol>
 			<Typography
-				className="mb-16"
-				component="p"
-			>
-				This multi-service approach allows us to cater to a wide range of authentication requirements and
-				preferences, providing developers with the flexibility to choose the service that best fits their
-				project's needs.
-			</Typography>
-
-			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
 				variant="h5"
+				className="mt-32 mb-8 font-700"
 			>
-				Entry Point: AuthenticationProvider
+				Key Features of Auth.js with App Router
 			</Typography>
-
+			<ul className="list-disc list-inside mb-16">
+				<li>Seamless integration with Next.js 13 App Router</li>
+				<li>Support for OAuth providers and custom credentials</li>
+				<li>Server-side session management</li>
+				<li>Built-in CSRF protection</li>
+				<li>TypeScript support</li>
+			</ul>
+			<Typography
+				variant="h5"
+				className="mt-32 mb-8 font-700"
+			>
+				Configuration
+			</Typography>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				The AuthenticationProvider component serves as the entry point for the authentication system. It is
-				typically located in the App.js file and wraps the main application components, ensuring that
-				authentication context is available throughout the application
+				You can findout the auth.js config file at @auth/authjs.ts.
 			</Typography>
-
 			<Typography
-				className="text-lg mb-8 font-500"
-				variant="h6"
+				className="mb-16"
+				component="p"
 			>
-				Integration in App.js
+				You can add your own providers like facebook, github, twitter, etc. Checkout the authjs documentation to
+				know more about it.
 			</Typography>
-
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				This is an example configuration for adding google login provider:
+			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-typescript mb-24"
 			>
 				{`
-				return (
-					<FuseTheme>
-						<AuthenticationProvider>
-							<FuseLayout/>
-						</AuthenticationProvider>
-					</FuseTheme>
-				);
+// app/api/auth/[...nextauth]/route.ts
+import NextAuth from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
+
+const handler = NextAuth({
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    // Add other providers here
+  ],
+  // Add custom configuration options here
+})
+
+export { handler as GET, handler as POST }
 				`}
 			</FuseHighlight>
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
 				variant="h5"
+				className="mt-32 mb-8 font-700"
 			>
-				Authentication Services Directory
-			</Typography>
-
-			<Typography className="mb-16">
-				All authentication services are located under <code>app/auth/services</code>. This directory contains
-				the implementation of each authentication service, including their context providers, hooks, and
-				component integrations.
-			</Typography>
-			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
-				variant="h5"
-			>
-				Service Configurations
+				Custom Session Handling
 			</Typography>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				Each authentication service comes with its own set of configurations, which are essential for
-				initializing and utilizing the service effectively within the application. You can find these
-				configurations in the respective service folders:
+				In Fuse React, we've extended the default Auth.js session handling to include additional user data. When
+				a user logs in, we fetch additional user information from an API and add it to the session. This allows
+				us to store and access more detailed user information throughout the application.
 			</Typography>
-			<ol className="list-disc pl-16 mb-16 space-y-12">
-				<li>
-					<Typography>
-						Firebase Authentication Configuration: <br />
-					</Typography>
-					<Typography>
-						<code>@auth/services/firebase/firebaseAuthConfig.ts</code>
-					</Typography>
-				</li>
-				<li>
-					<Typography>
-						JWT Authentication Configuration: <br />
-					</Typography>
-					<Typography>
-						<code>@auth/services/jwt/jwtAuthConfig.ts</code>
-					</Typography>
-				</li>
-				<li>
-					<Typography>
-						AWS Amplify Authentication Configuration: <br />
-					</Typography>
-					<Typography>
-						<code>@auth/services/aws/awsAuthConfig.ts</code>
-					</Typography>
-				</li>
-			</ol>
-
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="mb-16"
+				component="p"
+			>
+				Here's how it's implemented in the <code>authJs.ts</code> file:
+			</Typography>
+			<FuseHighlight
+				component="pre"
+				className="language-typescript mb-24"
+			>
+				{`
+// src/@auth/authJs.ts
+// ... other imports and configurations ...
+
+const config = {
+  // ... other config options ...
+  callbacks: {
+    async session({ session, token }) {
+      if (token.accessToken && typeof token.accessToken === 'string') {
+        session.accessToken = token.accessToken;
+      }
+
+      if (session && token.sub && typeof token.sub === 'string') {
+        const userId = token.sub;
+        const userDbData = await fetchUserData(userId, session);
+        session.db = userDbData || null;
+      }
+
+      return session;
+    }
+  },
+  // ... other config options ...
+};
+
+async function fetchUserData(userId: string, session: Session): Promise<User | null> {
+  // Fetch user data from API or create a new user if not found
+  // ... implementation details ...
+}
+
+// Extend the Session type to include our custom properties
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string;
+    db: User;
+  }
+}
+				`}
+			</FuseHighlight>
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				This custom session handling allows us to store additional user information, such as roles, settings, or
+				any other custom fields, making it easily accessible throughout the application.
+			</Typography>
+			<Typography
 				variant="h5"
+				className="mt-32 mb-8 font-700"
 			>
-				Service Authentication Form Components
+				useUser Hook
 			</Typography>
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				Fuse React provides a custom <code>useUser</code> hook that simplifies access to user data and provides
+				utility functions for user management. This hook is built on top of Auth.js's <code>useSession</code>{' '}
+				hook and provides additional functionality.
+			</Typography>
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				Here's an overview of the <code>useUser</code> hook:
+			</Typography>
+			<FuseHighlight
+				component="pre"
+				className="language-typescript mb-24"
+			>
+				{`
+// src/@auth/useUser.tsx
+import { useSession, signOut } from 'next-auth/react';
+// ... other imports ...
 
-			<Typography className="mb-16">
-				Each authentication service should provide its own sign-in and sign-up form components. These components
-				are located under the components directory of each service folder.
-			</Typography>
+function useUser(): useUser {
+  const { data, update } = useSession();
+
+  const user = useMemo(() => data?.db, [data]);
+  const isGuest = useMemo(() => !user?.role || user?.role?.length === 0, [user]);
+
+  async function handleUpdateUser(updates: Partial<User>) {
+    // Update user data
+  }
+
+  async function handleUpdateUserSettings(newSettings: User['settings']) {
+    // Update user settings
+  }
+
+  // ... other utility functions ...
+
+  return {
+    data: user,
+    isGuest,
+    signOut: handleSignOut,
+    updateUser: handleUpdateUser,
+    updateUserSettings: handleUpdateUserSettings
+  } as useUser;
+}
+
+export default useUser;
+				`}
+			</FuseHighlight>
 			<Typography
-				className="text-lg mb-8 font-500"
-				variant="h6"
+				className="mb-16"
+				component="p"
 			>
-				Example: JWT Authentication Service Form Components:
+				The <code>useUser</code> hook provides the following:
 			</Typography>
-			<ol className="space-y-12">
-				<li>
-					<Typography className="mb-4 font-500">Sign-In Auth Form Component:</Typography>
-					<Typography>
-						<code>@auth/services/jwt/components/JwtSignInForm.tsx</code>
-					</Typography>
-				</li>
-				<li>
-					<Typography className="mb-4 font-500">Used in:</Typography>
-					<Typography>
-						The sign-in form is used in <code>src/app/(control-panel)/sign-in/tabs/JwtSignInTab.tsx.</code>
-					</Typography>
-				</li>
-			</ol>
+			<ul className="list-disc list-inside mb-16">
+				<li>Access to the current user's data</li>
+				<li>A flag indicating if the current user is a guest</li>
+				<li>Functions to update user data and settings</li>
+				<li>A wrapper for the signOut function</li>
+			</ul>
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="mb-16"
+				component="p"
+			>
+				You can use this hook in your components to easily access and manage user data:
+			</Typography>
+			<FuseHighlight
+				component="pre"
+				className="language-tsx mb-24"
+			>
+				{`
+import useUser from '@auth/useUser';
+
+function UserProfile() {
+  const { data: user, updateUser, isGuest } = useUser();
+
+  if (isGuest) {
+    return <p>Please sign in to view your profile.</p>;
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {user.displayName}</h1>
+      {/* Add more user profile information and management here */}
+    </div>
+  );
+}
+				`}
+			</FuseHighlight>
+			<Typography
+				className="mt-32 mb-16"
+				component="p"
+			>
+				By leveraging the custom session handling and the <code>useUser</code> hook, Fuse React provides a
+				powerful and flexible way to manage user authentication and data throughout your application.
+			</Typography>
+			<Typography
 				variant="h5"
+				className="mt-32 mb-8 font-700"
 			>
-				Adding a New Authentication Service
+				Further Resources
 			</Typography>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				Integrating a new authentication service into our application is designed to be a straightforward
-				process, thanks to the modular and flexible architecture of our authentication system.
+				For more detailed information and advanced usage, refer to the following resources:
 			</Typography>
+			<ul className="list-disc list-inside mb-16">
+				<li>
+					<Link
+						href="https://authjs.dev"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Auth.js Official Documentation
+					</Link>
+				</li>
+			</ul>
 			<Typography
-				className="mb-16"
+				className="mt-32 mb-16"
 				component="p"
 			>
-				If you're looking to add a new authentication provider, you can do so by examining the examples of the
-				already integrated services: Firebase Authentication, JWT Authentication, and AWS Amplify
-				Authentication.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				These examples serve as a blueprint for how to structure your authentication service, making the
-				integration process more intuitive.
-			</Typography>
-			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
-				variant="h5"
-			>
-				Steps to Add a New Authentication Provider:
-			</Typography>
-			<ol className="list-decimal pl-16 mb-16 space-y-16 leading-loose">
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Create Your Authentication Service:
-					</Typography>
-					<Typography>
-						Begin by developing your authentication service. This should include all the necessary logic for
-						signing in, signing out, handling user sessions, and managing user data. Place this service
-						within the app/auth/services directory for organizational consistency.
-					</Typography>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Configure Your Service:
-					</Typography>
-					<Typography>
-						Each authentication service requires a specific set of configurations, such as API keys,
-						endpoints, and other parameters. Create a configuration file for your service in the same
-						directory as your service. Refer to the existing services for examples on how to structure this
-						configuration file.
-					</Typography>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Integrate Your Service into AuthenticationProvider:
-					</Typography>
-					<Typography>
-						The <code>AuthenticationProvider</code> component orchestrates the authentication flow of the
-						application. To integrate your new service, wrap the <code>Authentication</code> component with
-						your service provider, similar to how existing services are integrated. This step is crucial for
-						injecting your service into the React context, making it accessible throughout the application.
-					</Typography>
-
-					<Typography className="text-md my-8 font-600">
-						Example Integration in AuthenticationProvider:
-					</Typography>
-
-					<FuseHighlight
-						component="pre"
-						className="language-jsx mb-24"
-					>
-						{`
-<AuthContext.Provider>
-	<JwtAuthProvider>
-		<AWSAuthProvider>
-			<FirebaseAuthProvider>
-				<YourNewAuthProvider>
-					<Authentication>{children}</Authentication>
-				</YourNewAuthProvider>
-			</FirebaseAuthProvider>
-		</AWSAuthProvider>
-	</JwtAuthProvider>
-</AuthContext.Provider>`}
-					</FuseHighlight>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Utilize the Service's Context Hook:
-					</Typography>
-					<Typography>
-						Implement a context hook for your authentication service to manage the authentication state
-						(e.g., user information, authentication status). This hook will be used within the{' '}
-						<code>Authentication</code> component to monitor changes in the authentication state.
-					</Typography>
-					<Typography className="text-md my-8 font-600">
-						Example: JWT Authentication Service Auth Hook
-					</Typography>
-
-					<FuseHighlight
-						component="pre"
-						className="language-jsx mb-24"
-					>
-						{`
-const { user: jwtUser, authStatus: jwtAuthStatus } = useJwtAuth();
-`}
-					</FuseHighlight>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Handle Sign-In and User State:
-					</Typography>
-					<Typography>
-						Within the Authentication component, use the information provided by your service's context hook
-						to handle user sign-ins and update the main application's user state accordingly.
-					</Typography>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Implement Sign-Out and Update User Operations{' '}
-					</Typography>
-					<Typography>
-						Extend the useAuth hook to implement sign-out and user update operations. This allows for
-						signing out and updating user information from anywhere within the application.{' '}
-					</Typography>
-
-					<Typography className="text-md my-8 font-600">Example: Sign Out Using useAuth Hook</Typography>
-
-					<FuseHighlight
-						component="pre"
-						className="language-jsx mb-24"
-					>
-						{`
-const { signOut } = useAuth();
-`}
-					</FuseHighlight>
-				</li>
-				<li>
-					<Typography
-						className="text-lg mb-8 font-500"
-						variant="h6"
-					>
-						Test Your Integration:
-					</Typography>
-					<Typography>
-						After integrating your new authentication service, thoroughly test the sign-in, sign-out, and
-						user session management functionalities. Ensure that your service correctly updates the
-						application's state and that users can seamlessly transition between authenticated and
-						unauthenticated states.
-					</Typography>
-				</li>
-			</ol>
-			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
-				variant="h5"
-			>
-				Example Services as a Blueprint
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				The existing example authentication services (Firebase, JWT, AWS Amplify) are structured to provide
-				clear examples of how to integrate additional authentication providers. By examining these services, you
-				can gain insights into:
-			</Typography>
-			<ol className="list-disc pl-16 mb-16 space-y-12">
-				<li>
-					<Typography>How to structure your service's API and logic.</Typography>
-				</li>
-				<li>
-					<Typography>The way to configure your service within the application.</Typography>
-				</li>
-				<li>
-					<Typography>
-						Methods for integrating your service into the AuthenticationProvider component.
-					</Typography>
-				</li>
-				<li>
-					<Typography>Implementing a context hook to manage and expose the authentication state.</Typography>
-				</li>
-			</ol>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				By following these guidelines and leveraging the existing services as a blueprint, you can efficiently
-				add new authentication providers to the application, enhancing its flexibility and the range of
-				authentication options available to users.
+				By leveraging Auth.js with Next.js App Router, Fuse React provides a robust, flexible, and secure
+				authentication system that integrates seamlessly with server components and can be easily customized to
+				meet your project's specific requirements.
 			</Typography>
 		</>
 	);

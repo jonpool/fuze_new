@@ -43,7 +43,7 @@ function ThemeLayoutsDoc() {
 				className="my-16"
 				component="div"
 			>
-				Inside the <code>/app/theme-layouts</code> directory
+				Inside the <code>/src/components/theme-layouts</code> directory
 				<ul className="my-8 list-disc ml-16">
 					<li className="mb-8">
 						<b>/layout-1</b> :
@@ -61,7 +61,7 @@ function ThemeLayoutsDoc() {
 						</ul>
 					</li>
 					<li className="mb-8">
-						<b>/shared components</b> : Each layouts shares the components of this directory
+						<b>/components</b> : Each layouts shares the components of this directory
 					</li>
 					<li className="mb-8">
 						<b>/themeLayoutConfigs.tsx</b> : Imports all layout configs.

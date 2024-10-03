@@ -3,7 +3,7 @@ import FuseHighlight from '@fuse/core/FuseHighlight';
 
 /**
  * Directory Structure Doc
- * This document explains the directory structure and naming conventions used in Fuse React.
+ * This document explains the directory structure and naming conventions used in the Fuse React Next.js project.
  */
 function DirectoryStructureDoc() {
 	return (
@@ -18,131 +18,117 @@ function DirectoryStructureDoc() {
 				className="mb-16"
 				component="p"
 			>
-				This document explains the directory structure and naming conventions used in Fuse React. Fuse React is
-				a modular approach based on route settings determined from config files. The directory structure and
-				naming conventions are designed to make it easy to navigate and understand the codebase.
+				This document explains the directory structure and naming conventions used in the Fuse React Nextjs
+				project. The project follows a modular approach based on route settings determined from config files.
+				The directory structure and naming conventions are designed to make it easy to navigate and understand
+				the codebase.
 			</Typography>
 			<FuseHighlight
 				component="pre"
 				className="language-jsx my-24"
 			>
 				{`
-				├── contacts
-				│   ├── ContactListItem.tsx
-				│   ├── ContactsApi.ts
-				│   ├── ContactsApp.tsx
-				│   ├── ContactsAppRoute.tsx
-				│   ├── ContactsHeader.tsx
-				│   ├── ContactsList.tsx
-				│   ├── ContactsSidebarContent.tsx
-				│   ├── contact
-				│   │   ├── ContactForm.tsx
-				│   │   ├── ContactView.tsx
-				│   │   ├── email-selector
-				│   │   │   ├── ContactEmailSelector.tsx
-				│   │   │   └── EmailInput.tsx
-				│   │   └── phone-number-selector
-				│   │       ├── CountryCodeSelector.tsx
-				│   │       ├── PhoneNumberInput.tsx
-				│   │       └── PhoneNumberSelector.tsx
-				│   ├── models
-				│   │   ├── ContactModel.ts
-				│   │   ├── CountryModel.ts
-				│   │   └── TagModel.ts
-				│   └── store
-				│       ├── index.ts
-				│       └── searchTextSlice.ts`}
+				.
+				├── @auth
+				├── @fuse
+				├── @i18n
+				├── @mock-utils
+				├── app
+				│   ├── (control-panel)
+				│   │   ├── apps
+				│   │   ├── auth
+				│   │   ├── dashboards
+				│   │   ├── documentation
+				│   │   ├── layout.tsx
+				│   │   ├── sign-in
+				│   │   ├── sign-out
+				│   │   └── sign-up
+				│   ├── api
+				│   ├── auth
+				│   ├── layout.tsx
+				│   └── page.tsx
+				├── components
+				├── configs
+				├── contexts
+				├── store
+				├── styles
+				└── utils`}
 			</FuseHighlight>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				The directory structure of Fuse React is organized by feature, with each feature having its own
-				directory. Within each feature directory, there are subdirectories for components, models, sidebars,
-				store.
+				The directory structure of this Fuse React Nextjs project is organized by feature and functionality,
+				with each major section having its own directory.
 			</Typography>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				<strong>Directories:</strong> named in lowercase and use hyphens to separate words. Example: `chat`,
-				`contacts`.
+				<strong>Key Directories:</strong>
 			</Typography>
+			<ul className="list-disc list-inside mb-16">
+				<li>
+					<code>app/</code>: The main application directory using Next.js 13+ App Router.
+				</li>
+				<li>
+					<code>@auth/</code>: AuthJs configuration and utilities.
+				</li>
+				<li>
+					<code>@fuse/</code>: Fuse core components and utilities.
+				</li>
+				<li>
+					<code>@i18n/</code>: Internationalization configuration and utilities.
+				</li>
+				<li>
+					<code>@mock-utils/</code>: Mock utilities for data fetching and manipulation.
+				</li>
+				<li>
+					<code>components/</code>: Reusable React components.
+				</li>
+				<li>
+					<code>configs/</code>: Configuration files for various aspects of the application.
+				</li>
+				<li>
+					<code>contexts/</code>: React context providers.
+				</li>
+				<li>
+					<code>store/</code>: State management related files, likely using Redux.
+				</li>
+				<li>
+					<code>styles/</code>: CSS and style-related files.
+				</li>
+				<li>
+					<code>utils/</code>: Utility functions and scripts.
+				</li>
+			</ul>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				<strong>Files:</strong> named in PascalCase and use the name of the component, type, or model they
-				represent. Example: ` ContactApp.tsx`.
+				<strong>Naming Conventions:</strong>
 			</Typography>
+			<ul className="list-disc list-inside mb-16">
+				<li>
+					React components use PascalCase (e.g., <code>MainLayout.tsx</code>, <code>PageTitle.tsx</code>).
+				</li>
+				<li>
+					Utility functions and configuration files use camelCase (e.g., <code>apiFetch.ts</code>,{' '}
+					<code>navigationConfig.ts</code>).
+				</li>
+				<li>
+					API routes and page components within the <code>app/</code> directory use the <code>page.tsx</code>{' '}
+					naming convention as per Next.js 13+ standards.
+				</li>
+				<li>Feature-specific components and utilities are grouped in directories named after the feature.</li>
+			</ul>
 			<Typography
 				className="mb-16"
 				component="p"
 			>
-				<strong>Components:</strong> named in PascalCase and use the name of the component they represent.
-				Example: ` ContactApp.tsx`, ` ContactForm.tsx`.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Models:</strong> named in PascalCase and use the name of the model they represent. Example:
-				`ContactModel.tsx`.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Sidebars/Tabs/Sections/Dialogs etc:</strong> For example Sidebar named in PascalCase and use the
-				name of the sidebar they represent. The `sidebars` folder is used to store components that represent
-				sidebars in the application. Other similar types of components, such as tabs, sections, or dialogs, may
-				have their own folders with similar naming conventions. Example: `ContactSidebar.tsx`,
-				`MainSidebar.tsx`.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Store files:</strong> named in camelCase and use the name of the slice they represent. Example:
-				`contactListSlice.tsx`, `userSlice.tsx`.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Api files:</strong> have api endpoints and named in PascalCase. RTK Query is used for API calls.
-				Example: `ContaactsApi.ts`
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Route files:</strong> With Next.js App Router, routes are defined by the file system. Create a
-				page.tsx file inside the app directory to define a route. For nested routes, create subdirectories.
-				Example: `app/contacts/page.tsx` for the contacts route.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				<strong>Layout files:</strong> Create layout.tsx files in the app directory or its subdirectories to
-				define layouts for routes. These layouts will be applied to all pages within that directory and its
-				subdirectories. Example: `app/contacts/layout.tsx` for a layout specific to the contacts feature.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				By following these conventions, developers can quickly find the files and components they need and
-				understand their purpose. This makes it easier to navigate and maintain the codebase, especially as the
-				project grows in size and complexity.
-			</Typography>
-			<Typography
-				className="mb-16"
-				component="p"
-			>
-				Fuse React's directory structure might look overwhelming and intimidating at first, but following this
-				page and giving a bit time to understand it before jumping right into code will help immensely.
+				This structure supports a modular and scalable approach to building complex applications with Fuse React
+				Nextjs, incorporating features like authentication, internationalization, and various UI components
+				typical of an admin dashboard or control panel.
 			</Typography>
 		</>
 	);
