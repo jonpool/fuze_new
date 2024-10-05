@@ -9,7 +9,7 @@ function UserModel(data: PartialDeep<User>): User {
 	data = data || {};
 
 	return _.defaults(data, {
-		id: '',
+		id: null,
 		role: null,
 		displayName: 'Guest User',
 		photoURL: '',

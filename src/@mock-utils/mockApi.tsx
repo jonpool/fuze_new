@@ -13,7 +13,7 @@ function saveTable(tableName: string, items: any[]) {
 // Generic CRUD operations for the mock API
 const mockApi = (tableName: string) => ({
 	async create(data: any) {
-		const newItem = { ...data, id: uuidv4() };
+		const newItem = { ...data, id: data?.id || uuidv4() };
 		const table = getTable(tableName);
 		table.push(newItem);
 		saveTable(tableName, table);

@@ -44,7 +44,7 @@ export const providers: Provider[] = [
 			}
 
 			return {
-				id: '0'
+				email: formInput?.email as string
 			};
 		}
 	}),
@@ -85,9 +85,8 @@ const config = {
 				session.accessToken = token.accessToken;
 			}
 
-			if (session && token.sub && typeof token.sub === 'string') {
-				const userId = token.sub;
-				const userDbData = await fetchUserData(userId, session);
+			if (session) {
+				const userDbData = await fetchUserData(session);
 				session.db = userDbData || null;
 			}
 
@@ -148,22 +147,17 @@ export function createDbUser(user: Partial<User>) {
 	});
 }
 
-async function fetchUserData(userId: string, session: Session): Promise<User | null> {
+async function fetchUserData(session: Session): Promise<User | null> {
+	const userEmail = session.user.email;
+
 	try {
-		const response = await getDbUser(userId);
+		const response = await apiFetch(`/api/mock/users?email=${userEmail}`);
 
-		if (!response.ok) {
-			throw new Error(`Error: ${response.status}`);
-		}
+		const results = (await response.json()) as User[];
 
-		return response.json() as Promise<User>;
-	} catch (error) {
-		console.error('Error fetching user data:', error);
-
-		if (error instanceof Error && error.message.includes('404')) {
+		if (results.length === 0) {
 			const newUser = await createDbUser({
-				id: userId,
-				email: session.user.email,
+				email: userEmail,
 				role: ['admin'],
 				displayName: session.user.name,
 				photoURL: session.user.image
@@ -171,7 +165,10 @@ async function fetchUserData(userId: string, session: Session): Promise<User | n
 			return newUser.json() as Promise<User>;
 		}
 
-		console.error('Unexpected error:', error);
+		return results[0];
+	} catch (error) {
+		console.error('Error fetching or creating user data:', error);
+
 		return null;
 	}
 }
