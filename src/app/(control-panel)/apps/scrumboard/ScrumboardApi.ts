@@ -432,6 +432,7 @@ export type ScrumboardList = {
 	boardId: string;
 	title: string;
 };
+
 export type ScrumboardBoardList = {
 	id: string;
 	cards: ScrumboardCard['id'][];
@@ -451,6 +452,7 @@ export type ScrumboardAttachment = {
 	time: number;
 	type: string;
 };
+
 export type ScrumboardCheckListItem = {
 	id: number;
 	name: string;

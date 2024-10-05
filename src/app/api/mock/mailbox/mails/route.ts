@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { MailboxMail } from '@/app/(control-panel)/apps/mailbox/MailboxApi';
 
 /**
  * GET api/mock/mailbox/mails
@@ -17,8 +18,8 @@ export async function GET(req: Request) {
  */
 export async function POST(req: Request) {
 	const api = mockApi('mailbox_mails');
-	const requestData = await req.json();
-	const newItem = await api.create(requestData);
+	const requestData = (await req.json()) as MailboxMail;
+	const newItem = await api.create<MailboxMail>(requestData);
 
 	return new Response(JSON.stringify(newItem), { status: 201 });
 }
@@ -28,9 +29,9 @@ export async function POST(req: Request) {
  */
 export async function PUT(req: Request) {
 	const api = mockApi('mailbox_mails');
-	const updatedItems = await req.json();
+	const updatedItems = (await req.json()) as MailboxMail[];
 
-	const result = await Promise.all(updatedItems.map((item: any) => api.update(item.id, item)));
+	const result = await Promise.all(updatedItems.map((item: MailboxMail) => api.update<MailboxMail>(item.id, item)));
 
 	return new Response(JSON.stringify(result), { status: 200 });
 }

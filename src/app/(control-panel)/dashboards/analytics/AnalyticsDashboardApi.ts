@@ -30,16 +30,18 @@ const AnalyticsDashboardApi = api
 	});
 export default AnalyticsDashboardApi;
 
+export type AnalyticsDashboardWidgetType =
+	| AgeWidgetType
+	| ConversionsWidgetType
+	| GenderWidgetType
+	| ImpressionsWidgetType
+	| LanguageWidgetType
+	| NewVsReturningWidgetType
+	| VisitsWidgetType
+	| VisitorsVsPageViewsType;
+
 export type GetAnalyticsDashboardWidgetsApiResponse = {
-	[key: string]:
-		| AgeWidgetType
-		| ConversionsWidgetType
-		| GenderWidgetType
-		| ImpressionsWidgetType
-		| LanguageWidgetType
-		| NewVsReturningWidgetType
-		| VisitsWidgetType
-		| VisitorsVsPageViewsType;
+	[key: string]: AnalyticsDashboardWidgetType;
 };
 export type GetAnalyticsDashboardWidgetsApiArg = void;
 

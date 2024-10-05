@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { Course } from '@/app/(control-panel)/apps/academy/AcademyApi';
 
 /**
  * GET api/mock/academy/courses/{id}
@@ -6,7 +7,7 @@ import mockApi from 'src/@mock-utils/mockApi';
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('academy_courses');
-	const item = await api.find(id);
+	const item = await api.find<Course>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -21,8 +22,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('academy_courses');
-	const data = await req.json();
-	const updatedItem = await api.update(id, data);
+	const data = (await req.json()) as Course;
+	const updatedItem = await api.update<Course>(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { EcommerceOrder } from '@/app/(control-panel)/apps/e-commerce/ECommerceApi';
 
 /**
  * GET api/mock/ecommerce/orders/{id}
@@ -6,7 +7,7 @@ import mockApi from 'src/@mock-utils/mockApi';
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('ecommerce_orders');
-	const item = await api.find(id);
+	const item = await api.find<EcommerceOrder>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -21,8 +22,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('ecommerce_orders');
-	const data = await req.json();
-	const updatedItem = await api.update(id, data);
+	const data = (await req.json()) as EcommerceOrder;
+	const updatedItem = await api.update<EcommerceOrder>(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

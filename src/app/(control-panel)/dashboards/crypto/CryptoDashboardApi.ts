@@ -24,7 +24,10 @@ const CryptoDashboardApi = api
 	});
 export default CryptoDashboardApi;
 
-export type GetCryptoDashboardWidgetsApiResponse = { [key: string]: BTCWidgetType | WalletsType | WatchlistType };
+export type CryptoDashboardWidgetType = BTCWidgetType | WalletsType | WatchlistType;
+
+export type GetCryptoDashboardWidgetsApiResponse = { [key: string]: CryptoDashboardWidgetType };
+
 export type GetCryptoDashboardWidgetsApiArg = void;
 
 export const { useGetCryptoDashboardWidgetsQuery } = CryptoDashboardApi;

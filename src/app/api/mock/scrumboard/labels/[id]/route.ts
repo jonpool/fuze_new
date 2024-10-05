@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { ScrumboardLabel } from '@/app/(control-panel)/apps/scrumboard/ScrumboardApi';
 
 /**
  * GET api/mock/scrumboard/labels/{id}
@@ -6,7 +7,7 @@ import mockApi from 'src/@mock-utils/mockApi';
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('scrumboard_labels');
-	const item = await api.find(id);
+	const item = await api.find<ScrumboardLabel>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -21,8 +22,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('scrumboard_labels');
-	const data = await req.json();
-	const updatedItem = await api.update(id, data);
+	const data = (await req.json()) as ScrumboardLabel;
+	const updatedItem = await api.update<ScrumboardLabel>(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

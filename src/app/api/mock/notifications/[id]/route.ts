@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { Notification } from '@/app/(control-panel)/apps/notifications/NotificationApi';
 
 /**
  * GET api/mock/notifications/{id}
@@ -6,7 +7,7 @@ import mockApi from 'src/@mock-utils/mockApi';
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('notifications');
-	const item = await api.find(id);
+	const item = await api.find<Notification>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

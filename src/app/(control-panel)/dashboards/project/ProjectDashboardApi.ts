@@ -36,18 +36,21 @@ const ProjectDashboardApi = api
 	});
 export default ProjectDashboardApi;
 
+export type ProjectDashboardWidgetType =
+	| BudgetWidgetType
+	| BudgetDetailsDataType
+	| BudgetDistributionDataType
+	| ExpensesDataType
+	| WidgetDataType
+	| GithubIssuesDataType
+	| ScheduleDataType
+	| TaskDistributionDataType
+	| TeamMemberType[];
+
 export type GetProjectDashboardWidgetsApiResponse = {
-	[key: string]:
-		| BudgetWidgetType
-		| BudgetDetailsDataType
-		| BudgetDistributionDataType
-		| ExpensesDataType
-		| WidgetDataType
-		| GithubIssuesDataType
-		| ScheduleDataType
-		| TaskDistributionDataType
-		| TeamMemberType[];
+	[key: string]: ProjectDashboardWidgetType;
 };
+
 export type GetProjectDashboardWidgetsApiArg = void;
 
 export type GetProjectDashboardProjectsApiResponse = /** status 200 OK */ ProjectType[];

@@ -62,7 +62,7 @@ export type DeleteNotificationApiResponse = unknown;
 export type DeleteNotificationApiArg = string; /** notification id */
 
 export type Notification = {
-	id?: string;
+	id: string;
 	icon?: string;
 	title?: string;
 	description?: string;

@@ -2,18 +2,18 @@ import { v4 as uuidv4 } from 'uuid';
 import mockDb from './mockDb.json';
 
 // Helper function to simulate database operations
-function getTable(tableName: string) {
-	return mockDb[tableName] || [];
+function getTable<T>(tableName: string) {
+	return (mockDb[tableName] || []) as T[];
 }
 
-function saveTable(tableName: string, items: any[]) {
+function saveTable<T>(tableName: string, items: T[]) {
 	mockDb[tableName] = items;
 }
 
 // Generic CRUD operations for the mock API
 const mockApi = (tableName: string) => ({
-	async create(data: any) {
-		const newItem = { ...data, id: data?.id || uuidv4() };
+	async create<T extends { id?: string }>(data: T) {
+		const newItem = { ...data, id: data.id || uuidv4() };
 		const table = getTable(tableName);
 		table.push(newItem);
 		saveTable(tableName, table);
@@ -22,15 +22,18 @@ const mockApi = (tableName: string) => ({
 
 	async delete(ids: string[]) {
 		let table = getTable(tableName);
-		table = table.filter((item) => !ids.includes(item.id));
+		table = table.filter((item) => {
+			const typedItem = item as { id: string };
+			return !ids.includes(typedItem.id);
+		});
 		saveTable(tableName, table);
 		return { success: true };
 	},
 
-	async update(id: string, updatedData: any) {
-		const table = getTable(tableName);
+	async update<T extends { id: string }>(id: string, updatedData: T) {
+		const table = getTable<T>(tableName);
 
-		let newItem;
+		let newItem: T;
 
 		const newTable = table.map((item) => {
 			if (item.id === id) {
@@ -50,13 +53,13 @@ const mockApi = (tableName: string) => ({
 		return null;
 	},
 
-	async find(id: string) {
-		const table = getTable(tableName);
+	async find<T extends { id: string }>(id: string) {
+		const table = getTable<T>(tableName);
 		return table.find((item) => item.id === id) || null;
 	},
 
-	async findAll(queryParams: Record<string, any> = {}) {
-		const table = getTable(tableName);
+	async findAll<T>(queryParams: Record<string, unknown> = {}) {
+		const table = getTable<T>(tableName);
 
 		if (Object.keys(queryParams).length > 0) {
 			return table.filter((item) =>

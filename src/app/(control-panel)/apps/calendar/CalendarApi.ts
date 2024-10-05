@@ -113,11 +113,13 @@ export type Event = {
 	end: string;
 	extendedProps?: Dictionary;
 };
+
 export type Label = {
 	id: string;
 	title: string;
 	color: string;
 };
+
 export const {
 	useGetCalendarEventsQuery,
 	useCreateCalendarEventMutation,

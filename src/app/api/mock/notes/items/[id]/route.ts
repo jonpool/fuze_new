@@ -1,4 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
+import { NotesNote } from '@/app/(control-panel)/apps/notes/NotesApi';
 
 /**
  * GET api/mock/notes/items/{id}
@@ -6,7 +7,7 @@ import mockApi from 'src/@mock-utils/mockApi';
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('notes_items');
-	const item = await api.find(id);
+	const item = await api.find<NotesNote>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -21,8 +22,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 	const api = mockApi('notes_items');
-	const data = await req.json();
-	const updatedItem = await api.update(id, data);
+	const data = (await req.json()) as NotesNote;
+	const updatedItem = await api.update<NotesNote>(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

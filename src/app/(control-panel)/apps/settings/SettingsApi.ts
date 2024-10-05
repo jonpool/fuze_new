@@ -134,7 +134,9 @@ export type DeleteTeamMemberSettingsApiArg = {
 };
 export type UpdateTeamMemberSettingsApiResponse = unknown;
 export type UpdateTeamMemberSettingsApiArg = SettingsTeamMember[];
+
 export type SettingsAccount = {
+	id: string;
 	name?: string;
 	username?: string;
 	title?: string;
@@ -145,7 +147,9 @@ export type SettingsAccount = {
 	country?: string;
 	language?: string;
 };
+
 export type SettingsNotifications = {
+	id: string;
 	communication?: boolean;
 	security?: boolean;
 	meetups?: boolean;
@@ -154,13 +158,17 @@ export type SettingsNotifications = {
 	follow?: boolean;
 	inquiry?: boolean;
 };
+
 export type SettingsSecurity = {
+	id: string;
 	currentPassword?: string;
 	newPassword?: string;
 	twoStepVerification?: boolean;
 	askPasswordChange?: boolean;
 };
+
 export type SettingsPlanBilling = {
+	id: string;
 	plan?: string;
 	cardHolder?: string;
 	cardNumber?: string;
@@ -169,12 +177,15 @@ export type SettingsPlanBilling = {
 	country?: string;
 	zip?: string;
 };
+
 export type SettingsTeamMember = {
+	id: string;
 	avatar?: string;
 	name?: string;
 	email?: string;
 	role?: string;
 };
+
 export const {
 	useGetAccountSettingsQuery,
 	useUpdateAccountSettingsMutation,

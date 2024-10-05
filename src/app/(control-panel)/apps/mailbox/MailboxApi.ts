@@ -143,7 +143,7 @@ export type MailboxFilter = {
 };
 
 export type MailboxLabel = {
-	id?: string;
+	id: string;
 	title?: string;
 	slug?: string;
 	color?: LabelColorsType;

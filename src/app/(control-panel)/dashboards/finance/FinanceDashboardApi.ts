@@ -27,13 +27,15 @@ const FinanceDashboardApi = api
 
 export default FinanceDashboardApi;
 
+export type FinanceDashboardWidgetType =
+	| AccountBalanceWidgetType
+	| BudgetWidgetType
+	| CurrentStatementWidgetType
+	| PreviousStatementWidgetType
+	| RecentTransactionsWidgetType;
+
 export type GetFinanceDashboardWidgetsApiResponse = {
-	[key: string]:
-		| AccountBalanceWidgetType
-		| BudgetWidgetType
-		| CurrentStatementWidgetType
-		| PreviousStatementWidgetType
-		| RecentTransactionsWidgetType;
+	[key: string]: FinanceDashboardWidgetType;
 };
 
 export type GetFinanceDashboardWidgetsApiArg = void;
