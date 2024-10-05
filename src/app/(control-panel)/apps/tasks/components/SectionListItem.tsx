@@ -4,6 +4,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import { ListItemText } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 import { Task } from '../TasksApi';
 
 type SectionListItemProps = {
@@ -47,7 +48,7 @@ function SectionListItem(props: SectionListItemProps) {
 						<ListItemText
 							classes={{
 								root: 'm-0',
-								primary: 'font-semibold text-15 truncate'
+								primary: clsx('font-semibold text-15 truncate', data.completed && 'line-through')
 							}}
 							primary={data.title}
 						/>

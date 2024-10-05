@@ -62,7 +62,7 @@ function TaskListItem(props: TaskListItemProps) {
 							</IconButton>
 						</ListItemIcon>
 						<ListItemText
-							classes={{ root: 'm-0', primary: 'truncate' }}
+							classes={{ root: 'm-0', primary: clsx('truncate', data.completed && 'line-through') }}
 							primary={data.title}
 						/>
 						<div className="flex items-center">
