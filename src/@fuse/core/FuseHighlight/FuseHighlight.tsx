@@ -80,7 +80,12 @@ const FuseHighlight = forwardRef<HTMLDivElement, FuseHighlightProps>((props, ref
 				</Tooltip>
 			)}
 
-			<Wrapper ref={innerRef}>{source}</Wrapper>
+			<Wrapper
+				className="m-0"
+				ref={innerRef}
+			>
+				{source}
+			</Wrapper>
 		</div>
 	);
 });

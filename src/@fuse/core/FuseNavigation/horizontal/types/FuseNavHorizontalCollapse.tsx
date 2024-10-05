@@ -66,7 +66,8 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 			disabled: item.disabled,
 			to: item.url,
 			end: item.end,
-			role: 'button'
+			role: 'button',
+			exact: item?.exact
 		};
 	}
 

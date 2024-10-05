@@ -1,6 +1,7 @@
 import { forwardRef, CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import clsx from 'clsx';
 
 export type NavLinkAdapterPropsType = {
 	activeClassName?: string;
@@ -10,6 +11,7 @@ export type NavLinkAdapterPropsType = {
 	className?: string;
 	style?: CSSProperties;
 	role?: string;
+	exact?: boolean;
 };
 
 /**
@@ -18,7 +20,7 @@ export type NavLinkAdapterPropsType = {
  * The component is memoized to prevent unnecessary re-renders.
  */
 const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((props, ref) => {
-	const { activeClassName = 'active', activeStyle, role = 'button', href, ..._props } = props;
+	const { activeClassName = 'active', activeStyle, role = 'button', href, exact = false, ..._props } = props;
 	const router = useRouter();
 	const pathname = usePathname();
 
@@ -27,7 +29,14 @@ const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((p
 		router.push(href);
 	};
 
-	const isActive = pathname === href;
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			router.push(href);
+		}
+	};
+
+	const isActive = exact ? pathname === href : pathname.startsWith(href);
 
 	return (
 		<Link
@@ -35,11 +44,17 @@ const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((p
 			passHref
 			legacyBehavior
 		>
+			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/no-static-element-interactions */}
 			<a
 				ref={ref}
 				role={role}
 				onClick={handleClick}
-				className={`${_props.className} ${isActive ? activeClassName : ''}`}
+				onKeyDown={handleKeyDown}
+				className={clsx(
+					_props.className,
+					isActive ? activeClassName : '',
+					pathname === href && 'pointer-events-none'
+				)}
 				style={isActive ? { ..._props.style, ...activeStyle } : _props.style}
 			>
 				{props.children}
