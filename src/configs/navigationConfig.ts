@@ -685,23 +685,16 @@ const navigationConfig: FuseNavItemType[] = [
 				icon: 'heroicons-outline:calculator',
 				children: [
 					{
-						id: 'pages.invoice.printable',
-						title: 'Printable',
-						type: 'collapse',
-						children: [
-							{
-								id: 'pages.invoice.printable.compact',
-								title: 'Compact',
-								type: 'item',
-								url: '/pages/invoice/printable/compact'
-							},
-							{
-								id: 'pages.invoice.printable.modern',
-								title: 'Modern',
-								type: 'item',
-								url: '/pages/invoice/printable/modern'
-							}
-						]
+						id: 'pages.invoice.compact',
+						title: 'Compact',
+						type: 'item',
+						url: '/pages/invoice/compact'
+					},
+					{
+						id: 'pages.invoice.modern',
+						title: 'Modern',
+						type: 'item',
+						url: '/pages/invoice/modern'
 					}
 				]
 			},

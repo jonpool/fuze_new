@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 
-function MainPage() {
+function DashboardsPage() {
 	redirect(`/dashboards/project`);
 	return null;
 }
 
-export default MainPage;
+export default DashboardsPage;
