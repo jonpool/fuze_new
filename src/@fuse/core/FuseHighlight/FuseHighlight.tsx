@@ -129,6 +129,6 @@ function trimCode(children: FuseHighlightProps['children']) {
 	return sourceRaw;
 }
 
-const StyledFuseHighlight = styled(FuseHighlight)``;
+const StyledFuseHighlight = styled(FuseHighlight)`` as unknown as typeof FuseHighlight;
 
 export default StyledFuseHighlight;
