@@ -102,10 +102,16 @@ function HeaderFullScreenToggle(props: HeaderFullScreenToggleProps) {
 
 	function toggleFullScreen() {
 		const doc: FullScreenDocumentType = document;
+		const elem: FullScreenHTMLElementType = document.documentElement;
 
 		if (doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement) {
 			closeFullscreen();
-		} else {
+		} else if (
+			elem.requestFullscreen ||
+			elem.mozRequestFullScreen ||
+			elem.webkitRequestFullscreen ||
+			elem.msRequestFullscreen
+		) {
 			openFullscreen();
 		}
 	}
