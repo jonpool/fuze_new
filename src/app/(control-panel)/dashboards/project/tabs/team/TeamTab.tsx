@@ -20,7 +20,7 @@ function TeamTab() {
 
 	return (
 		<motion.div
-			className="flex flex-wrap p-24"
+			className="flex flex-wrap py-24 px-24 md:px-32"
 			variants={container}
 			initial="hidden"
 			animate="show"
