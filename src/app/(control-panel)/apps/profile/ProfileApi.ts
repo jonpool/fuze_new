@@ -15,23 +15,24 @@ const ProfileApi = api
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getProfileAlbums: build.query<GetProfileAlbumsApiResponse, GetProfileAlbumsApiArg>({
-				query: () => ({ url: `/api/mock/profile/albums` }),
+				query: () => ({ url: `/api/mock/profile/albums?userId=0` }),
 				providesTags: ['profile_albums']
 			}),
 			getProfileMediaItems: build.query<GetProfileMediaItemsApiResponse, GetProfileMediaItemsApiArg>({
-				query: () => ({ url: `/api/mock/profile/media-items` }),
+				query: () => ({ url: `/api/mock/profile/media-items?userId=0` }),
 				providesTags: ['profile_media_items']
 			}),
 			getProfileActivities: build.query<GetProfileActivitiesApiResponse, GetProfileActivitiesApiArg>({
-				query: () => ({ url: `/api/mock/profile/activities` }),
+				query: () => ({ url: `/api/mock/profile/activities?userId=0` }),
 				providesTags: ['profile_activities']
 			}),
 			getProfilePosts: build.query<GetProfilePostsApiResponse, GetProfilePostsApiArg>({
-				query: () => ({ url: `/api/mock/profile/posts` }),
+				query: () => ({ url: `/api/mock/profile/posts?userId=0` }),
 				providesTags: ['profile_posts']
 			}),
 			getProfileAbout: build.query<GetProfileAboutApiResponse, GetProfileAboutApiArg>({
-				query: () => ({ url: `/api/mock/profile/about` }),
+				query: () => ({ url: `/api/mock/profile/about?userId=0` }),
+				transformResponse: (response: ProfileAbout[]) => (response.length > 0 ? response[0] : null),
 				providesTags: ['profile_about']
 			})
 		}),
@@ -57,6 +58,7 @@ export type GetProfileAboutApiArg = void;
 
 export type ProfileAlbum = {
 	id?: string;
+	userId: string;
 	name?: string;
 	info?: string;
 	created_at?: string;
@@ -64,6 +66,7 @@ export type ProfileAlbum = {
 
 export type ProfileMediaItem = {
 	id?: string;
+	userId: string;
 	album_id?: string;
 	type?: string;
 	title?: string;
@@ -73,6 +76,7 @@ export type ProfileMediaItem = {
 
 export type ProfileActivity = {
 	id?: string;
+	userId: string;
 	user?: {
 		name?: string;
 		avatar?: string;
@@ -83,6 +87,7 @@ export type ProfileActivity = {
 
 export type ProfilePost = {
 	id?: string;
+	userId: string;
 	user?: {
 		name?: string;
 		avatar?: string;
@@ -117,6 +122,8 @@ export type ProfilePost = {
 };
 
 export type ProfileAbout = {
+	id: string;
+	userId: string;
 	general?: {
 		gender?: string;
 		birthday?: string;

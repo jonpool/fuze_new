@@ -2,6 +2,7 @@
   "users": [
     {
       "id": "0",
+      "password": "5;4+0IOx:\\Dy",
       "role": "admin",
       "displayName": "Abbott Keitch",
       "photoURL": "assets/images/avatars/brian-hughes.jpg",
@@ -18,6 +19,7 @@
     },
     {
       "id": "XgbuVEXBU5gtSKdbQRP1Zbbby1i1",
+      "password": "5;4+0IOx:\\Dy",
       "role": "admin",
       "displayName": "Abbott Keitch",
       "photoURL": "assets/images/avatars/brian-hughes.jpg",
@@ -34,6 +36,7 @@
     },
     {
       "id": "XgbuVEXBU6gtSKdbTYR1Zbbby1i3",
+      "password": "staff",
       "role": "staff",
       "displayName": "Arnold Matlock",
       "photoURL": "assets/images/avatars/Arnold.jpg",
@@ -70,19 +73,22 @@
   ],
   "profile_albums": [
     {
-      "id": 1,
+      "id": "1",
+      "userId": "0",
       "name": "June 2018",
       "info": "5 Photos",
       "created_at": "2018-06-01"
     },
     {
-      "id": 2,
+      "id": "2",
+      "userId": "0",
       "name": "May 2018",
       "info": "7 Photos, 3 Videos",
       "created_at": "2018-05-01"
     },
     {
-      "id": 3,
+      "id": "3",
+      "userId": "0",
       "name": "April 2018",
       "info": "7 Photos",
       "created_at": "2018-04-01"
@@ -90,176 +96,198 @@
   ],
   "profile_media_items": [
     {
-      "id": 1,
-      "album_id": 1,
+      "id": "1",
+      "userId": "0",
+      "album_id": "1",
       "type": "photo",
       "title": "A Walk Amongst Friends",
       "preview": "assets/images/apps/profile/a-walk-amongst-friends-small.jpg",
       "created_at": "2018-06-01"
     },
     {
-      "id": 2,
-      "album_id": 1,
+      "id": "2",
+      "userId": "0",
+      "album_id": "1",
       "type": "photo",
       "title": "Braies Lake",
       "preview": "assets/images/apps/profile/braies-lake-small.jpg",
       "created_at": "2018-06-01"
     },
     {
-      "id": 3,
-      "album_id": 1,
+      "id": "3",
+      "userId": "0",
+      "album_id": "1",
       "type": "photo",
       "title": "Fall Glow",
       "preview": "assets/images/apps/profile/fall-glow-small.jpg",
       "created_at": "2018-06-01"
     },
     {
-      "id": 4,
-      "album_id": 1,
+      "id": "4",
+      "userId": "0",
+      "album_id": "1",
       "type": "photo",
       "title": "First Snow",
       "preview": "assets/images/apps/profile/first-snow-small.jpg",
       "created_at": "2018-06-01"
     },
     {
-      "id": 5,
-      "album_id": 1,
+      "id": "5",
+      "userId": "0",
+      "album_id": "1",
       "type": "photo",
       "title": "Lago di Braies",
       "preview": "assets/images/apps/profile/lago-di-braies-small.jpg",
       "created_at": "2018-06-01"
     },
     {
-      "id": 6,
-      "album_id": 2,
+      "id": "6",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Lago di Sorapis",
       "preview": "assets/images/apps/profile/lago-di-sorapis-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 7,
-      "album_id": 2,
+      "id": "7",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Morain Lake",
       "preview": "assets/images/apps/profile/morain-lake-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 8,
-      "album_id": 2,
+      "id": "8",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Never Stop Changing",
       "preview": "assets/images/apps/profile/never-stop-changing-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 9,
-      "album_id": 2,
+      "id": "9",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Reaching",
       "preview": "assets/images/apps/profile/reaching-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 10,
-      "album_id": 2,
+      "id": "10",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Yosemite",
       "preview": "assets/images/apps/profile/yosemite-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 11,
-      "album_id": 2,
+      "id": "11",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "A Walk Amongst Friends",
       "preview": "assets/images/apps/profile/a-walk-amongst-friends-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 12,
-      "album_id": 2,
+      "id": "12",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Braies Lake",
       "preview": "assets/images/apps/profile/braies-lake-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 13,
-      "album_id": 2,
+      "id": "13",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Fall Glow",
       "preview": "assets/images/apps/profile/fall-glow-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 14,
-      "album_id": 2,
+      "id": "14",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "First Snow",
       "preview": "assets/images/apps/profile/first-snow-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 15,
-      "album_id": 2,
+      "id": "15",
+      "userId": "0",
+      "album_id": "2",
       "type": "photo",
       "title": "Lago di Braies",
       "preview": "assets/images/apps/profile/lago-di-braies-small.jpg",
       "created_at": "2018-05-01"
     },
     {
-      "id": 16,
-      "album_id": 3,
+      "id": "16",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Lago di Sorapis",
       "preview": "assets/images/apps/profile/lago-di-sorapis-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 17,
-      "album_id": 3,
+      "id": "17",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Morain Lake",
       "preview": "assets/images/apps/profile/morain-lake-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 18,
-      "album_id": 3,
+      "id": "18",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Never Stop Changing",
       "preview": "assets/images/apps/profile/never-stop-changing-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 19,
-      "album_id": 3,
+      "id": "19",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Reaching",
       "preview": "assets/images/apps/profile/reaching-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 20,
-      "album_id": 3,
+      "id": "20",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Yosemite",
       "preview": "assets/images/apps/profile/yosemite-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 21,
-      "album_id": 3,
+      "id": "21",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "A Walk Amongst Friends",
       "preview": "assets/images/apps/profile/a-walk-amongst-friends-small.jpg",
       "created_at": "2018-04-01"
     },
     {
-      "id": 22,
-      "album_id": 3,
+      "id": "22",
+      "userId": "0",
+      "album_id": "3",
       "type": "photo",
       "title": "Braies Lake",
       "preview": "assets/images/apps/profile/braies-lake-small.jpg",
@@ -269,6 +297,7 @@
   "profile_activities": [
     {
       "id": "1",
+      "userId": "0",
       "user": {
         "name": "Bernard Langley",
         "avatar": "assets/images/avatars/male-02.jpg"
@@ -278,6 +307,7 @@
     },
     {
       "id": "2",
+      "userId": "0",
       "user": {
         "name": "Mclaughlin Steele",
         "avatar": "assets/images/avatars/male-03.jpg"
@@ -287,6 +317,7 @@
     },
     {
       "id": "3",
+      "userId": "0",
       "user": {
         "name": "Garry Newman",
         "avatar": "assets/images/avatars/male-04.jpg"
@@ -296,6 +327,7 @@
     },
     {
       "id": "4",
+      "userId": "0",
       "user": {
         "name": "Carl Henderson",
         "avatar": "assets/images/avatars/male-05.jpg"
@@ -305,6 +337,7 @@
     },
     {
       "id": "5",
+      "userId": "0",
       "user": {
         "name": "Jane Dean",
         "avatar": "assets/images/avatars/female-05.jpg"
@@ -314,6 +347,7 @@
     },
     {
       "id": "6",
+      "userId": "0",
       "user": {
         "name": "Juan Carpenter",
         "avatar": "assets/images/avatars/male-07.jpg"
@@ -323,6 +357,7 @@
     },
     {
       "id": "7",
+      "userId": "0",
       "user": {
         "name": "Judith Burton",
         "avatar": "assets/images/avatars/female-06.jpg"
@@ -332,6 +367,7 @@
     },
     {
       "id": "8",
+      "userId": "0",
       "user": {
         "name": "Vincent Munoz",
         "avatar": "assets/images/avatars/male-08.jpg"
@@ -343,6 +379,7 @@
   "profile_posts": [
     {
       "id": "1",
+      "userId": "0",
       "user": {
         "name": "Garry Newman",
         "avatar": "assets/images/avatars/male-09.jpg"
@@ -370,6 +407,7 @@
     },
     {
       "id": "2",
+      "userId": "0",
       "user": {
         "name": "Andrew Green",
         "avatar": "assets/images/avatars/male-11.jpg"
@@ -402,6 +440,7 @@
     },
     {
       "id": "3",
+      "userId": "0",
       "user": {
         "name": "Carl Henderson",
         "avatar": "assets/images/avatars/male-12.jpg"
@@ -413,102 +452,106 @@
       "share": 1
     }
   ],
-  "profile_about": {
-    "general": {
-      "gender": "Male",
-      "birthday": "February 30th, 1974",
-      "locations": [
-        "London, UK",
-        "New York, USA"
-      ],
-      "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget pharetra felis, sed ullamcorper dui. Sed et elementum neque. Vestibulum pellente viverra ultrices. Etiam justo augue, vehicula ac gravida a, interdum sit amet nisl. Integer vitae nisi id nibh dictum mollis in vitae tortor."
-    },
-    "work": {
-      "occupation": "Developer",
-      "skills": "C#, PHP, Javascript, Angular, JS, HTML, CSS",
-      "jobs": [
+  "profile_about": [
+    {
+      "id": "0",
+      "userId": "0",
+      "general": {
+        "gender": "Male",
+        "birthday": "February 30th, 1974",
+        "locations": [
+          "London, UK",
+          "New York, USA"
+        ],
+        "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget pharetra felis, sed ullamcorper dui. Sed et elementum neque. Vestibulum pellente viverra ultrices. Etiam justo augue, vehicula ac gravida a, interdum sit amet nisl. Integer vitae nisi id nibh dictum mollis in vitae tortor."
+      },
+      "work": {
+        "occupation": "Developer",
+        "skills": "C#, PHP, Javascript, Angular, JS, HTML, CSS",
+        "jobs": [
+          {
+            "company": "Self-Employed",
+            "date": "2010 - Now"
+          },
+          {
+            "company": "Google",
+            "date": "2008 - 2010"
+          }
+        ]
+      },
+      "contact": {
+        "address": "Ut pharetra luctus est quis sodales. Duis nisi tortor, bibendum eget tincidunt, aliquam ac elit. Mauris nec euismod odio.",
+        "tel": [
+          "+6 555 6600",
+          "+9 555 5255"
+        ],
+        "websites": [
+          "withinpixels.com"
+        ],
+        "emails": [
+          "mail@withinpixels.com",
+          "mail@creapond.com"
+        ]
+      },
+      "groups": [
         {
-          "company": "Self-Employed",
-          "date": "2010 - Now"
+          "id": "1",
+          "name": "Android",
+          "category": "Technology",
+          "members": "1.856.546"
         },
         {
-          "company": "Google",
-          "date": "2008 - 2010"
+          "id": "2",
+          "name": "Google",
+          "category": "Web",
+          "members": "1.226.121"
+        },
+        {
+          "id": "3",
+          "name": "Fallout",
+          "category": "Games",
+          "members": "526.142"
+        }
+      ],
+      "friends": [
+        {
+          "id": "1",
+          "name": "Garry Newman",
+          "avatar": "assets/images/avatars/male-11.jpg"
+        },
+        {
+          "id": "2",
+          "name": "Carl Henderson",
+          "avatar": "assets/images/avatars/male-12.jpg"
+        },
+        {
+          "id": "3",
+          "name": "Jane Dean",
+          "avatar": "assets/images/avatars/female-11.jpg"
+        },
+        {
+          "id": "4",
+          "name": "Garry Arnold",
+          "avatar": "assets/images/avatars/male-13.jpg"
+        },
+        {
+          "id": "5",
+          "name": "Vincent Munoz",
+          "avatar": "assets/images/avatars/male-14.jpg"
+        },
+        {
+          "id": "6",
+          "name": "Alice Freeman",
+          "avatar": "assets/images/avatars/female-12.jpg"
+        },
+        {
+          "id": "7",
+          "name": "Andrew Green",
+          "avatar": "assets/images/avatars/male-16.jpg"
         }
       ]
-    },
-    "contact": {
-      "address": "Ut pharetra luctus est quis sodales. Duis nisi tortor, bibendum eget tincidunt, aliquam ac elit. Mauris nec euismod odio.",
-      "tel": [
-        "+6 555 6600",
-        "+9 555 5255"
-      ],
-      "websites": [
-        "withinpixels.com"
-      ],
-      "emails": [
-        "mail@withinpixels.com",
-        "mail@creapond.com"
-      ]
-    },
-    "groups": [
-      {
-        "id": "1",
-        "name": "Android",
-        "category": "Technology",
-        "members": "1.856.546"
-      },
-      {
-        "id": "2",
-        "name": "Google",
-        "category": "Web",
-        "members": "1.226.121"
-      },
-      {
-        "id": "3",
-        "name": "Fallout",
-        "category": "Games",
-        "members": "526.142"
-      }
-    ],
-    "friends": [
-      {
-        "id": "1",
-        "name": "Garry Newman",
-        "avatar": "assets/images/avatars/male-11.jpg"
-      },
-      {
-        "id": "2",
-        "name": "Carl Henderson",
-        "avatar": "assets/images/avatars/male-12.jpg"
-      },
-      {
-        "id": "3",
-        "name": "Jane Dean",
-        "avatar": "assets/images/avatars/female-11.jpg"
-      },
-      {
-        "id": "4",
-        "name": "Garry Arnold",
-        "avatar": "assets/images/avatars/male-13.jpg"
-      },
-      {
-        "id": "5",
-        "name": "Vincent Munoz",
-        "avatar": "assets/images/avatars/male-14.jpg"
-      },
-      {
-        "id": "6",
-        "name": "Alice Freeman",
-        "avatar": "assets/images/avatars/female-12.jpg"
-      },
-      {
-        "id": "7",
-        "name": "Andrew Green",
-        "avatar": "assets/images/avatars/male-16.jpg"
-      }
-    ]
-  },
+    }
+  ],
   "ui_feather_icons": [
     "activity",
     "airplay",
