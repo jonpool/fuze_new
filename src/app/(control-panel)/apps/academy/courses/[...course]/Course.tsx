@@ -113,7 +113,7 @@ function Course() {
 	return (
 		<FusePageSimple
 			content={
-				<div className="w-full">
+				<div className="flex flex-col min-h-full w-full relative">
 					{!isMobile && (
 						<CourseProgress
 							className="sticky top-0 z-10"
@@ -142,13 +142,15 @@ function Course() {
 					)}
 
 					<SwipeableViews
+						className="flex flex-col flex-auto w-full min-h-full"
+						containerStyle={{ minHeight: '100%' }}
 						index={activeStep - 1}
 						enableMouseEvents
 						onChangeIndex={handleStepChange}
 					>
 						{courseSteps?.map((step, index: number) => (
 							<div
-								className="flex justify-center p-16 pb-64 sm:p-24 sm:pb-64 md:p-48 md:pb-64"
+								className="flex justify-center p-16 pb-64 sm:p-24 sm:pb-64 md:p-48 md:pb-96 min-h-full"
 								key={index}
 							>
 								<CourseStepContent step={step} />
@@ -157,7 +159,7 @@ function Course() {
 					</SwipeableViews>
 
 					{!isMobile && (
-						<div className="flex justify-center w-full sticky bottom-0 p-16 pb-32 z-10">
+						<div className="flex justify-center w-full absolute bottom-0 left-0 right-0 p-16 pb-32 z-10">
 							<ButtonGroup
 								variant="contained"
 								aria-label=""
