@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import Paper from '@mui/material/Paper';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
@@ -70,7 +70,7 @@ function ClassicSignInPage() {
 						<Typography>Don't have an account?</Typography>
 						<Link
 							className="ml-4"
-							href="/sign-up"
+							to="/sign-up"
 						>
 							Sign up
 						</Link>
@@ -140,7 +140,7 @@ function ClassicSignInPage() {
 
 							<Link
 								className="text-md font-medium"
-								href="/pages/auth/forgot-password"
+								to="/pages/auth/forgot-password"
 							>
 								Forgot password?
 							</Link>

@@ -269,7 +269,7 @@ function UserProfile() {
 			<ul className="list-disc list-inside mb-16">
 				<li>
 					<Link
-						href="https://authjs.dev"
+						to="https://authjs.dev"
 						target="_blank"
 						rel="noopener noreferrer"
 					>

@@ -9,9 +9,9 @@ import {
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useEffect } from 'react';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle1Content from './NavbarStyle1Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
-import useThemeMediaQuery from '../../../../../../@fuse/hooks/useThemeMediaQuery';
 
 const navbarWidth = 280;
 

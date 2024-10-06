@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import _ from 'lodash';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import NotificationCard from './NotificationCard';
 import {
 	closeNotificationPanel,

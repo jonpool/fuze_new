@@ -7,7 +7,7 @@ import { lighten, ThemeProvider } from '@mui/material/styles';
 import { OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import Card from '@mui/material/Card';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { useMainThemeDark } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
@@ -115,7 +115,7 @@ function HelpCenterApp() {
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-y-32 md:gap-y-0 md:gap-x-24 w-full max-w-sm md:max-w-4xl -mt-64 sm:-mt-96">
 					<Card
 						component={Link}
-						href="/apps/help-center/faqs"
+						to="/apps/help-center/faqs"
 						role="button"
 						className="relative flex flex-col shadow hover:shadow-lg overflow-hidden transition-shadow ease-in-out duration-150"
 					>
@@ -153,7 +153,7 @@ function HelpCenterApp() {
 					</Card>
 					<Card
 						component={Link}
-						href="/apps/help-center/guides"
+						to="/apps/help-center/guides"
 						role="button"
 						className="relative flex flex-col shadow hover:shadow-lg overflow-hidden transition-shadow ease-in-out duration-150"
 					>
@@ -191,7 +191,7 @@ function HelpCenterApp() {
 					</Card>
 					<Card
 						component={Link}
-						href="/apps/help-center/support"
+						to="/apps/help-center/support"
 						role="button"
 						className="relative flex flex-col shadow hover:shadow-lg overflow-hidden transition-shadow ease-in-out duration-150"
 					>

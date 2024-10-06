@@ -14,6 +14,8 @@ type TreeNode = {
  * The FuseRouteItemType type
  */
 export type FuseRouteItemType = {
+	path?: string;
+	element?: React.ReactNode;
 	auth?: string[] | [];
 	settings?: DeepPartial<FuseSettingsConfigType>;
 	children?: FuseRouteItemType[];

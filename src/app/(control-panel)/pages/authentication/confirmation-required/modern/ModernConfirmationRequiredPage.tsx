@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Paper from '@mui/material/Paper';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
@@ -35,7 +35,7 @@ function ModernConfirmationRequiredPage() {
 							<span>Return to</span>
 							<Link
 								className="text-primary-500 ml-4 hover:underline"
-								href="/sign-in"
+								to="/sign-in"
 							>
 								sign in
 							</Link>

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import { FormProvider, useForm } from 'react-hook-form';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
@@ -105,7 +105,7 @@ function Product() {
 					className="mt-24"
 					component={Link}
 					variant="outlined"
-					href="/apps/e-commerce/products"
+					to="/apps/e-commerce/products"
 					color="inherit"
 				>
 					Go to Products Page

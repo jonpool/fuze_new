@@ -15,12 +15,12 @@ import TypographyThemeRaw from '../../components/typography/TypographyTheme.tsx?
 function TypographyDoc(props) {
 	return (
 		<>
-			<Button 
+			<Button
 				className="normal-case absolute right-0"
 				variant="contained"
 				color="secondary"
-				component="a" 
-				href="https://mui.com/components/typography" 
+				component="a"
+				href="https://mui.com/components/typography"
 				target="_blank"
 				role="button"
 				size="small"
@@ -36,8 +36,6 @@ function TypographyDoc(props) {
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Roboto font</Typography>
 <Typography className="text-base mb-32" component="div">Material UI uses the <a href="https://fonts.google.com/specimen/Roboto">Roboto</a> font by default.
 Add it to your project via Fontsource, or with the Google Fonts CDN.</Typography>
-<codeblock storageKey="package-manager">
-
 
 <FuseHighlight component="pre" className="language-bash npm">
 {` 
@@ -56,7 +54,6 @@ pnpm add @fontsource/roboto
 yarn add @fontsource/roboto
 `}
 </FuseHighlight>
-</codeblock>
 
 <Typography className="text-base mb-32" component="div">Then you can import it in your entry point like this:</Typography>
 
@@ -93,7 +90,7 @@ import '@fontsource/roboto/700.css';
                     name="Types.js"
                     className="my-16"
                     iframe={false}
-                    component={TypesComponent} 
+                    component={TypesComponent}
                     raw={TypesRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Theme keys</Typography>
@@ -103,7 +100,7 @@ Hopefully, you might be able to take advantage of the <a href="/material-ui/cust
                     name="TypographyTheme.js"
                     className="my-16"
                     iframe={false}
-                    component={TypographyThemeComponent} 
+                    component={TypographyThemeComponent}
                     raw={TypographyThemeRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Customization</Typography>

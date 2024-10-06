@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import SettingsAppSidebarContent from './SettingsAppSidebarContent';
 import SettingsAppHeader from './SettingsAppHeader';
 

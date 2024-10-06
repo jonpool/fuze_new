@@ -7,7 +7,6 @@ import Tooltip from '@mui/material/Tooltip';
 type IconItemProps = PaperProps & {
 	icon: string;
 	iconSet: string;
-	selectedIcon: string;
 	onIconSelect: (icon: string) => void;
 	size: number;
 };

@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -126,7 +126,7 @@ function SplitScreenReversedSignOutPage() {
 						<span>Go to</span>
 						<Link
 							className="ml-4"
-							href="/sign-in"
+							to="/sign-in"
 						>
 							sign in
 						</Link>

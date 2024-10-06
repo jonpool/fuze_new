@@ -2,13 +2,13 @@
 
 import Breadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import usePathname from '@fuse/hooks/usePathname';
 
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import withSlices from 'src/store/withSlices';
 import { navigationSlice } from 'src/components/theme-layouts/components/navigation/store/navigationSlice';
+import Link from '@fuse/core/Link';
 import useNavigation from './theme-layouts/components/navigation/hooks/useNavigation';
 
 type PageBreadcrumbProps = BreadcrumbsProps & {
@@ -58,6 +58,7 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 
 	return (
 		<Breadcrumbs
+			classes={{ ol: 'list-none m-0 p-0' }}
 			className={clsx('flex w-full', className)}
 			aria-label="breadcrumb"
 			color="primary"
@@ -66,7 +67,7 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 			{crumbs.map((item, index) => (
 				<Typography
 					component={item.url ? Link : 'span'}
-					href={item.url}
+					to={item.url}
 					key={index}
 					className="block font-medium tracking-tight capitalize max-w-128 truncate"
 					role="button"

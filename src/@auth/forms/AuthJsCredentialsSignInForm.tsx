@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Button from '@mui/material/Button';
 import { signIn } from 'next-auth/react';
 import { Alert } from '@mui/material';
@@ -149,7 +149,7 @@ function AuthJsCredentialsSignInForm() {
 
 				<Link
 					className="text-md font-medium"
-					href="/pages/auth/forgot-password"
+					to="/pages/auth/forgot-password"
 				>
 					Forgot password?
 				</Link>

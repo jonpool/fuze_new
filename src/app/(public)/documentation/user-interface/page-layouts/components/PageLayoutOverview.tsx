@@ -7,7 +7,7 @@ import { SyntheticEvent, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import _ from 'lodash';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import FuseTabs from 'src/components/tabs/FuseTabs';
@@ -197,7 +197,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 								color="secondary"
 								variant="contained"
 								component={Link}
-								href={options[selectedOption].link}
+								to={options[selectedOption].link}
 								startIcon={
 									<FuseSvgIcon size={20}>heroicons-solid:arrow-top-right-on-square</FuseSvgIcon>
 								}

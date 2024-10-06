@@ -64,7 +64,7 @@ function MailListItem(props: MailListItemProps) {
 		<StyledListItem
 			component={NavLinkAdapter}
 			activeClassName="selected"
-			href={`/apps/mailbox/${category}/${subCategory}/${mail.id}`}
+			to={`/apps/mailbox/${category}/${subCategory}/${mail.id}`}
 			dense
 			selected={checked}
 			unread={mail.unread ? 1 : 0}

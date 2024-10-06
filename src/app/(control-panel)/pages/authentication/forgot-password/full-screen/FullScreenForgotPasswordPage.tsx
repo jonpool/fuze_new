@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
@@ -100,7 +100,7 @@ function FullScreenForgotPasswordPage() {
 							<span>Return to</span>
 							<Link
 								className="ml-4"
-								href="/sign-in"
+								to="/sign-in"
 							>
 								sign in
 							</Link>

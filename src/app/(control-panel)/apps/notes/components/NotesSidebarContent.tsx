@@ -58,7 +58,7 @@ function NotesSidebarContent() {
 				<List>
 					<StyledListItemButton
 						component={NavLinkAdapter}
-						href="/apps/notes"
+						to="/apps/notes"
 						activeClassName="active"
 					>
 						<FuseSvgIcon
@@ -75,7 +75,7 @@ function NotesSidebarContent() {
 					</StyledListItemButton>
 					<StyledListItemButton
 						component={NavLinkAdapter}
-						href="/apps/notes/reminders"
+						to="/apps/notes/reminders"
 						activeClassName="active"
 					>
 						<FuseSvgIcon
@@ -93,7 +93,7 @@ function NotesSidebarContent() {
 
 					<StyledListItemButton
 						component={NavLinkAdapter}
-						href="/apps/notes/archive"
+						to="/apps/notes/archive"
 						activeClassName="active"
 					>
 						<FuseSvgIcon
@@ -113,7 +113,7 @@ function NotesSidebarContent() {
 						<StyledListItemButton
 							key={label.id}
 							component={NavLinkAdapter}
-							href={`/apps/notes/labels/${label.id}`}
+							to={`/apps/notes/labels/${label.id}`}
 							activeClassName="active"
 						>
 							<FuseSvgIcon

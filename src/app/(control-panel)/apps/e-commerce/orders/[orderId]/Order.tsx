@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import * as React from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
@@ -62,7 +62,7 @@ function Order() {
 					className="mt-24"
 					component={Link}
 					variant="outlined"
-					href="/apps/e-commerce/orders"
+					to="/apps/e-commerce/orders"
 					color="inherit"
 				>
 					Go to Orders Page

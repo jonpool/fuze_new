@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -31,7 +31,7 @@ function SignInPage() {
 						<Typography>Don't have an account?</Typography>
 						<Link
 							className="ml-4"
-							href="/sign-up"
+							to="/sign-up"
 						>
 							Sign up
 						</Link>

@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { ReactNode } from 'react';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * The changelog item type.
@@ -86,8 +86,8 @@ const changelogData: ChangelogItemType[] = [
 						component="li"
 						className="leading-loose"
 					>
-						Checkout the documentation at <Link href="/documentation/configuration/routing">Routing</Link>{' '}
-						for more.
+						Checkout the documentation at <Link to="/documentation/configuration/routing">Routing</Link> for
+						more.
 					</Typography>
 				</ul>
 			</div>
@@ -104,7 +104,7 @@ const changelogData: ChangelogItemType[] = [
 		date: '2024-07-03',
 		newChanges: [
 			<>
-				<Link href="/apps/settings">Settings App/Page</Link> created.
+				<Link to="/apps/settings">Settings App/Page</Link> created.
 			</>
 		],
 		fixedChanges: [],

@@ -76,7 +76,7 @@ function NotificationCard(props: NotificationCardProps) {
 				]}
 				elevation={0}
 				component={item.link ? NavLinkAdapter : 'div'}
-				href={item.link || ''}
+				to={item.link || ''}
 				role={item.link && 'button'}
 			>
 				{item.icon && !item.image && (

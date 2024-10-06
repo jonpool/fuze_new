@@ -1,4 +1,3 @@
-// Type for direction
 import { FuseThemeType } from '@fuse/core/FuseSettings/FuseSettings';
 import { createTheme, getContrastRatio, Theme } from '@mui/material/styles';
 import _ from 'lodash';

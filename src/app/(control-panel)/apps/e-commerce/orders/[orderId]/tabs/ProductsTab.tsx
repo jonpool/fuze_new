@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import { useGetECommerceOrderQuery } from '../../../ECommerceApi';
 
 /**
@@ -52,7 +52,7 @@ function ProductsTab() {
 							<td>
 								<Typography
 									component={Link}
-									href={`/apps/e-commerce/products/${product.id}`}
+									to={`/apps/e-commerce/products/${product.id}`}
 									className="truncate"
 									style={{
 										color: 'inherit',

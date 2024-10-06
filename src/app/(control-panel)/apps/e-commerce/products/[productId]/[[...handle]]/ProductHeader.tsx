@@ -2,10 +2,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
+import useNavigate from '@fuse/hooks/useNavigate';
 import {
 	EcommerceProduct,
 	useCreateECommerceProductMutation,
@@ -28,7 +29,7 @@ function ProductHeader() {
 	const { formState, watch, getValues } = methods;
 	const { isValid, dirtyFields } = formState;
 
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const { name, images, featuredImageId } = watch() as EcommerceProduct;
 
@@ -40,13 +41,13 @@ function ProductHeader() {
 		createProduct(getValues() as EcommerceProduct)
 			.unwrap()
 			.then((data) => {
-				router.push(`/apps/e-commerce/products/${data.id}`);
+				navigate(`/apps/e-commerce/products/${data.id}`);
 			});
 	}
 
 	function handleRemoveProduct() {
 		removeProduct(productId);
-		router.push('/apps/e-commerce/products');
+		navigate('/apps/e-commerce/products');
 	}
 
 	return (

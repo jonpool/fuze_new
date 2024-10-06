@@ -1,6 +1,6 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * RTL Support Doc
@@ -110,7 +110,7 @@ function RTLSupportDoc() {
 				value. Checkout{' '}
 				<Link
 					className="link mx-8"
-					href="/documentation/development/multi-language"
+					to="/documentation/development/multi-language"
 				>
 					Multi Language configuration
 				</Link>

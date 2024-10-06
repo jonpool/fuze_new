@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Box from '@mui/material/Box';
 import { useSession } from 'next-auth/react';
 
@@ -253,14 +253,14 @@ function Error404Page() {
 				{isAuthenticated ? (
 					<Link
 						className="mt-48 block font-normal"
-						href="/"
+						to="/"
 					>
 						Back to Home
 					</Link>
 				) : (
 					<Link
 						className="mt-48 block font-normal"
-						href="/sign-in"
+						to="/sign-in"
 					>
 						Back to sign-in
 					</Link>

@@ -23,7 +23,7 @@ function ContactsSidebarContent({ children }: ContactsSidebarContentProps) {
 					}
 				}}
 				component={NavLinkAdapter}
-				href="/apps/contacts"
+				to="/apps/contacts"
 			>
 				<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 			</IconButton>

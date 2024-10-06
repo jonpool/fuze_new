@@ -13,7 +13,7 @@ import { ListItemButton, ListItemButtonProps } from '@mui/material';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
 import { WithRouterProps } from '@fuse/core/withRouter/withRouter';
 import * as PopperJS from '@popperjs/core';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
 import FuseSvgIcon from '../../../FuseSvgIcon';
 

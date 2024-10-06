@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import useFileManagerData from './hooks/useFileManagerData';
@@ -28,7 +28,7 @@ function FileManagerHeader() {
 				>
 					<Typography
 						component={Link}
-						href="/apps/file-manager"
+						to="/apps/file-manager"
 						className="text-2xl md:text-5xl font-extrabold tracking-tight leading-none"
 						role="button"
 					>
@@ -49,7 +49,7 @@ function FileManagerHeader() {
 									<Link
 										key={index}
 										color="text.primary"
-										href={`/apps/file-manager/${item?.id}`}
+										to={`/apps/file-manager/${item?.id}`}
 									>
 										{item?.name}
 									</Link>

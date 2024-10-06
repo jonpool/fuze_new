@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Draggable } from '@hello-pangea/dnd';
 import clsx from 'clsx';
 
-import { useRouter } from 'next/navigation';
+import useNavigate from '@fuse/hooks/useNavigate';
 import { Task, useUpdateTasksItemMutation } from '../TasksApi';
 
 type TaskListItemProps = {
@@ -20,7 +20,7 @@ type TaskListItemProps = {
 function TaskListItem(props: TaskListItemProps) {
 	const { data } = props;
 	const [updateTask] = useUpdateTasksItemMutation();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	return (
 		<Draggable
@@ -35,7 +35,7 @@ function TaskListItem(props: TaskListItemProps) {
 						ref={provided.innerRef}
 						{...provided.draggableProps}
 						onClick={() => {
-							router.push(`/apps/tasks/${data.id}`);
+							navigate(`/apps/tasks/${data.id}`);
 						}}
 					>
 						<div

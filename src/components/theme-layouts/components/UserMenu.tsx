@@ -5,7 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { darken } from '@mui/material/styles';
 import { alpha } from '@mui/system/colorManipulator';
@@ -140,7 +140,7 @@ function UserMenu(props: UserMenuProps) {
 					<>
 						<MenuItem
 							component={Link}
-							href="/sign-in"
+							to="/sign-in"
 							role="button"
 						>
 							<ListItemIcon className="min-w-36">
@@ -150,7 +150,7 @@ function UserMenu(props: UserMenuProps) {
 						</MenuItem>
 						<MenuItem
 							component={Link}
-							href="/sign-up"
+							to="/sign-up"
 							role="button"
 						>
 							<ListItemIcon className="min-w-36">
@@ -160,16 +160,40 @@ function UserMenu(props: UserMenuProps) {
 						</MenuItem>
 					</>
 				) : (
-					<MenuItem
-						onClick={() => {
-							signOut();
-						}}
-					>
-						<ListItemIcon className="min-w-36">
-							<FuseSvgIcon>heroicons-outline:arrow-right-on-rectangle</FuseSvgIcon>
-						</ListItemIcon>
-						<ListItemText primary="Sign out" />
-					</MenuItem>
+					<>
+						<MenuItem
+							component={Link}
+							to="/apps/profile"
+							onClick={userMenuClose}
+							role="button"
+						>
+							<ListItemIcon className="min-w-36">
+								<FuseSvgIcon>heroicons-outline:user-circle</FuseSvgIcon>
+							</ListItemIcon>
+							<ListItemText primary="My Profile" />
+						</MenuItem>
+						<MenuItem
+							component={Link}
+							to="/apps/mailbox"
+							onClick={userMenuClose}
+							role="button"
+						>
+							<ListItemIcon className="min-w-36">
+								<FuseSvgIcon>heroicons-outline:envelope</FuseSvgIcon>
+							</ListItemIcon>
+							<ListItemText primary="Inbox" />
+						</MenuItem>
+						<MenuItem
+							onClick={() => {
+								signOut();
+							}}
+						>
+							<ListItemIcon className="min-w-36">
+								<FuseSvgIcon>heroicons-outline:arrow-right-on-rectangle</FuseSvgIcon>
+							</ListItemIcon>
+							<ListItemText primary="Sign out" />
+						</MenuItem>
+					</>
 				)}
 			</Popover>
 		</>

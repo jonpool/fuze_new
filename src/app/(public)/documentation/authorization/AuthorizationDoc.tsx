@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import FuseHighlight from '@fuse/core/FuseHighlight';
-import Link from '@mui/material/Link';
+import Link from '@fuse/core/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -164,7 +164,7 @@ function Layout({ children }) {
 			>
 				For more detailed information on how to use <code>AuthGuardRedirect</code> in your routing
 				configuration, please refer to the{' '}
-				<Link href="/documentation/configuration/routing">Routing Documentation</Link>.
+				<Link to="/documentation/configuration/routing">Routing Documentation</Link>.
 			</Typography>
 
 			<Typography

@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import Box from '@mui/material/Box';
 import FuseSvgIcon from '../FuseSvgIcon';
@@ -91,7 +91,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 							(_item) =>
 								_item && (
 									<Link
-										href={_item.url}
+										to={_item.url}
 										key={_item.id}
 										role="button"
 									>
@@ -226,7 +226,7 @@ function ShortcutMenuItem(props: {
 
 	return (
 		<Link
-			href={item.url || ''}
+			to={item.url || ''}
 			role="button"
 		>
 			<MenuItem key={item.id}>

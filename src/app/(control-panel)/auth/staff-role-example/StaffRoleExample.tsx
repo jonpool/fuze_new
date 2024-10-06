@@ -2,7 +2,7 @@ import FuseHighlight from '@fuse/core/FuseHighlight';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FusePageCarded from '@fuse/core/FusePageCarded';
 
 /**
@@ -20,7 +20,7 @@ function StaffRoleExample() {
 						component={Link}
 						variant="contained"
 						color="secondary"
-						href="/sign-out"
+						to="/sign-out"
 						startIcon={<FuseSvgIcon>heroicons-outline:arrow-right-on-rectangle</FuseSvgIcon>}
 					>
 						Sign out

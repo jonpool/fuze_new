@@ -51,7 +51,7 @@ function DevelopmentServerDoc() {
 			>
 				For more information on the Next.js App Router and development server, please refer to the{' '}
 				<Link
-					href="https://nextjs.org/docs/app/api-reference/next-cli#development"
+					to="https://nextjs.org/docs/app/api-reference/next-cli#development"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

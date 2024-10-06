@@ -2,7 +2,7 @@
 
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Box from '@mui/material/Box';
 
 /**
@@ -213,7 +213,7 @@ function Error401Page() {
 				</motion.div>
 				<Link
 					className="mt-48 block font-normal"
-					href="/"
+					to="/"
 				/>
 			</div>
 		</div>

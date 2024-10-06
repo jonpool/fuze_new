@@ -64,7 +64,7 @@ function TeamMembersWidget() {
 					<div className="flex items-center w-full border-t divide-x">
 						<a
 							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
-							href={`mailto:${member.email}`}
+							to={`mailto:${member.email}`}
 							role="button"
 						>
 							<FuseSvgIcon
@@ -77,7 +77,7 @@ function TeamMembersWidget() {
 						</a>
 						<a
 							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
-							href={`tel${member.phone}`}
+							to={`tel${member.phone}`}
 							role="button"
 						>
 							<FuseSvgIcon

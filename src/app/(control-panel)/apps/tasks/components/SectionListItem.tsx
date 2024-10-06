@@ -3,8 +3,8 @@ import { Draggable } from '@hello-pangea/dnd';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import { ListItemText } from '@mui/material';
-import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
+import useNavigate from '@fuse/hooks/useNavigate';
 import { Task } from '../TasksApi';
 
 type SectionListItemProps = {
@@ -16,7 +16,7 @@ type SectionListItemProps = {
  */
 function SectionListItem(props: SectionListItemProps) {
 	const { data } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	return (
 		<Draggable
@@ -31,7 +31,7 @@ function SectionListItem(props: SectionListItemProps) {
 						ref={provided.innerRef}
 						{...provided.draggableProps}
 						onClick={() => {
-							router.push(`/apps/tasks/${data.id}`);
+							navigate(`/apps/tasks/${data.id}`);
 						}}
 					>
 						<div

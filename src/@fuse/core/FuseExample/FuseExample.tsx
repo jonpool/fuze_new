@@ -84,7 +84,6 @@ function FuseExample(props: FuseExampleProps) {
 							<FuseHighlight
 								component="pre"
 								className="language-javascript w-full"
-								sx={{ borderRadius: '0!important' }}
 							>
 								{raw}
 							</FuseHighlight>

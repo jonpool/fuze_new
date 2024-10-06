@@ -28,7 +28,7 @@ function BoardItem(props: BoardItemProps) {
 	return (
 		<Card
 			component={NavLinkAdapter}
-			href={`/apps/scrumboard/boards/${board.id}`}
+			to={`/apps/scrumboard/boards/${board.id}`}
 			role="button"
 			className="flex flex-col items-start w-full h-full p-24 shadow rounded-lg hover:shadow-xl transition-shadow duration-150 ease-in-out"
 		>

@@ -5,7 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useState, MouseEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import useNavigate from '@fuse/hooks/useNavigate';
 import { useDeleteTasksItemMutation } from '../../TasksApi';
 
 type FormActionsMenuProps = {
@@ -17,7 +17,7 @@ type FormActionsMenuProps = {
  */
 function FormActionsMenu(props: FormActionsMenuProps) {
 	const { taskId } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 	const [removeTask] = useDeleteTasksItemMutation();
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 	const open = Boolean(anchorEl);
@@ -34,7 +34,7 @@ function FormActionsMenu(props: FormActionsMenuProps) {
 		removeTask(taskId)
 			.unwrap()
 			.then(() => {
-				router.push('/apps/tasks');
+				navigate('/apps/tasks');
 			});
 	}
 

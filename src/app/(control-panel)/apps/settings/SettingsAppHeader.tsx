@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import SettingsAppNavigation from './SettingsAppNavigation';
 import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 

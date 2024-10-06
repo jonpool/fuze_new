@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { lighten } from '@mui/material/styles';
 import CourseInfo from '../CourseInfo';
@@ -46,7 +46,7 @@ function CourseCard(props: CourseCardProps) {
 				})}
 			>
 				<Button
-					href={`/apps/academy/courses/${course.id}/${course.slug}`}
+					to={`/apps/academy/courses/${course.id}/${course.slug}`}
 					component={Link}
 					className="px-12"
 					color="secondary"

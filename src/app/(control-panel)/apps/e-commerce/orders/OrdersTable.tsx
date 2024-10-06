@@ -7,7 +7,7 @@ import * as React from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { EcommerceOrder, useDeleteECommerceOrdersMutation, useGetECommerceOrdersQuery } from '../ECommerceApi';
 import OrdersStatus from './OrdersStatus';
@@ -25,7 +25,7 @@ function OrdersTable() {
 				Cell: ({ row }) => (
 					<Typography
 						component={Link}
-						href={`/apps/e-commerce/orders/${row.original.id}`}
+						to={`/apps/e-commerce/orders/${row.original.id}`}
 						role="button"
 					>
 						<u>{row.original.reference}</u>

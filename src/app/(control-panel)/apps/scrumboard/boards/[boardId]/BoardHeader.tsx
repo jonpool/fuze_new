@@ -23,7 +23,7 @@ function BoardHeader() {
 				<Button
 					className="whitespace-nowrap"
 					component={NavLinkAdapter}
-					href="/apps/scrumboard/boards/"
+					to="/apps/scrumboard/boards/"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:view-columns</FuseSvgIcon>
 					<span className="hidden sm:flex mx-8">Boards</span>

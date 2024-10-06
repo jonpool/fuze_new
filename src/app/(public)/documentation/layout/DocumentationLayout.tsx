@@ -8,9 +8,9 @@ import { styled } from '@mui/material/styles';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import { Button } from '@mui/material';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import PurchaseButton from 'src/components/theme-layouts/components/PurchaseButton';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import DocumentationNavigation from '../DocumentationNavigation';
@@ -74,7 +74,7 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 							<Button
 								className="whitespace-nowrap"
 								component={Link}
-								href="/"
+								to="/"
 								variant="contained"
 								startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-turn-left-up</FuseSvgIcon>}
 								color="primary"

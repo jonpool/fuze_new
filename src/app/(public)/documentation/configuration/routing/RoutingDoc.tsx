@@ -36,7 +36,7 @@ function RoutingDoc() {
 			>
 				For comprehensive information on Next.js App Router, refer to the{' '}
 				<Link
-					href="https://nextjs.org/docs/app/building-your-application/routing"
+					to="https://nextjs.org/docs/app/building-your-application/routing"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

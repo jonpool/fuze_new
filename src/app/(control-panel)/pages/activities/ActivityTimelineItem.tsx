@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns/format';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import { lighten } from '@mui/material/styles';
 import ActivityItemType from './ActivityItemType';
 
@@ -50,7 +50,7 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 					{item.useRouter && (
 						<Link
 							className="cursor-pointer"
-							href={item.link}
+							to={item.link}
 						>
 							{item.linkedContent}
 						</Link>
@@ -59,7 +59,7 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 					{!item.useRouter && (
 						<a
 							className="cursor-pointer"
-							href={item.link}
+							to={item.link}
 							target="_blank"
 							rel="noreferrer"
 						>

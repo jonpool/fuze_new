@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
@@ -30,7 +30,7 @@ function GuideListMenu(props: GuideListMenuProps) {
 					component={Link}
 					className="flex mt-12 font-medium no-underline hover:underline"
 					key={item.id}
-					href={`/apps/help-center/guides/${categorySlug}/${item.id}`}
+					to={`/apps/help-center/guides/${categorySlug}/${item.id}`}
 					color="secondary"
 					role="button"
 				>
@@ -40,7 +40,7 @@ function GuideListMenu(props: GuideListMenuProps) {
 			{list.length > maxItems && (
 				<Button
 					component={Link}
-					href={`/apps/help-center/guides/${categorySlug}`}
+					to={`/apps/help-center/guides/${categorySlug}`}
 					className="text-md font-medium py-2 px-12 min-h-0 h-24 mt-20"
 					endIcon={<FuseSvgIcon size={20}>heroicons-outline:arrow-small-right</FuseSvgIcon>}
 					variant="contained"

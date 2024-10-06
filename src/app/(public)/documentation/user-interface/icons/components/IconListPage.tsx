@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
-import FusePageSimple from '@fuse/core/FusePageSimple';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import { Controller, useForm } from 'react-hook-form';
@@ -16,15 +14,6 @@ import FuseHighlight from '@fuse/core/FuseHighlight';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { useGetIconsListQuery } from '../IconsApi';
 import IconListItem from './IconListItem';
-
-const Root = styled(FusePageSimple)(({ theme }) => ({
-	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.background.paper,
-		borderBottomWidth: 1,
-		borderStyle: 'solid',
-		borderColor: theme.palette.divider
-	}
-}));
 
 type IconListPageProps = {
 	pageTitle: string;
@@ -121,8 +110,10 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 									label="Search an icon"
 									placeholder="Search.."
 									className="flex-auto"
-									InputLabelProps={{
-										shrink: true
+									slotProps={{
+										inputLabel: {
+											shrink: true
+										}
 									}}
 									variant="outlined"
 									fullWidth

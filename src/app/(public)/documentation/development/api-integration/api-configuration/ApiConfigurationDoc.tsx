@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import TitleReferenceLink from 'src/components/TitleReferenceLink';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * Api Configuration Doc
@@ -106,7 +106,7 @@ app/
 				component="p"
 			>
 				For detailed documentation on the mock API, please visit the{' '}
-				<Link href="/documentation/development/api-integration/mock-api">Mock API Documentation</Link> page.
+				<Link to="/documentation/development/api-integration/mock-api">Mock API Documentation</Link> page.
 			</Typography>
 
 			<Typography

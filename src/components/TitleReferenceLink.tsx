@@ -1,9 +1,10 @@
 'use client';
 
-import { Box, Tooltip } from '@mui/material';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Tooltip, Typography } from '@mui/material';
+import Link from '@fuse/core/Link';
+import usePathname from '@fuse/hooks/usePathname';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
 
 type TitleReferenceLinkProps = {
 	id: string;
@@ -32,14 +33,18 @@ function TitleReferenceLink(props: TitleReferenceLinkProps) {
 			arrow
 		>
 			<Box
-				component={Link}
+				component="span"
 				id={id}
-				href={href}
-				className="opacity-30 italic"
-				sx={{ color: 'inherit!important', textDecoration: 'none!important' }}
-				onClick={handleCopy}
 			>
-				{children}
+				<Typography
+					component={Link}
+					to={href}
+					className="opacity-30 italic"
+					sx={{ color: 'inherit!important', textDecoration: 'none!important' }}
+					onClick={handleCopy}
+				>
+					{children}
+				</Typography>
 			</Box>
 		</Tooltip>
 	);

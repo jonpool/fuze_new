@@ -45,7 +45,7 @@ function FuseNavHorizontalLink(props: FuseNavHorizontalLinkProps) {
 	if (typeof component !== 'string') {
 		itemProps = {
 			disabled: item.disabled,
-			href: item.url,
+			to: item.url,
 			role: 'button',
 			target: item.target ? item.target : '_blank',
 			exact: item?.exact

@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * Navigation Doc
@@ -50,7 +50,7 @@ function NavigationDoc() {
 				component="p"
 			>
 				For more information on FuseNavigation components, redux actions, and item types, check out the section{' '}
-				<Link href="/documentation/fuse-components/fuse-navigation">FuseNavigation Docs</Link>
+				<Link to="/documentation/fuse-components/fuse-navigation">FuseNavigation Docs</Link>
 			</Typography>
 		</>
 	);

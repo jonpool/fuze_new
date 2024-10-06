@@ -1,8 +1,8 @@
 'use client';
 
 import Button from '@mui/material/Button';
-import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
+import Link from '@fuse/core/Link';
+import { useParams } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from 'lodash';
@@ -20,6 +20,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
+import useNavigate from '@fuse/hooks/useNavigate';
 import ContactEmailSelector from './email-selector/ContactEmailSelector';
 import PhoneNumberSelector from './phone-number-selector/PhoneNumberSelector';
 import {
@@ -78,7 +79,7 @@ type ContactFormProps = {
  */
 function ContactForm(props: ContactFormProps) {
 	const { isNew } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
 	const routeParams = useParams<{ contactId: string }>();
@@ -119,7 +120,7 @@ function ContactForm(props: ContactFormProps) {
 			createContact({ contact: form })
 				.unwrap()
 				.then((action) => {
-					router.push(`/apps/contacts/${action.id}`);
+					navigate(`/apps/contacts/${action.id}`);
 				});
 		} else {
 			updateContact({ id: contact.id, ...form });
@@ -132,7 +133,7 @@ function ContactForm(props: ContactFormProps) {
 		}
 
 		deleteContact(contact.id).then(() => {
-			router.push('/apps/contacts');
+			navigate('/apps/contacts');
 		});
 	}
 
@@ -141,7 +142,7 @@ function ContactForm(props: ContactFormProps) {
 
 	if (isError && !isNew) {
 		setTimeout(() => {
-			router.push('/apps/contacts');
+			navigate('/apps/contacts');
 			dispatch(showMessage({ message: 'NOT FOUND' }));
 		}, 0);
 
@@ -506,7 +507,7 @@ function ContactForm(props: ContactFormProps) {
 				<Button
 					component={Link}
 					className="ml-auto"
-					href={`/apps/contacts/${contactId}`}
+					to={`/apps/contacts/${contactId}`}
 				>
 					Cancel
 				</Button>

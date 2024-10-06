@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
 type GoToDocBoxProps = {
@@ -19,7 +19,7 @@ function GoToDocBox(props: GoToDocBoxProps) {
 			<Typography
 				className="flex items-center gap-4 truncate"
 				component={Link}
-				href="/documentation"
+				to="/documentation"
 				color="secondary"
 			>
 				View documentation <FuseSvgIcon size={16}>heroicons-outline:arrow-right</FuseSvgIcon>

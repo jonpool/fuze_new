@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
@@ -78,7 +78,7 @@ function SplitScreenSignUpPage() {
 						<Typography>Already have an account?</Typography>
 						<Link
 							className="ml-4"
-							href="/sign-in"
+							to="/sign-in"
 						>
 							Sign in
 						</Link>

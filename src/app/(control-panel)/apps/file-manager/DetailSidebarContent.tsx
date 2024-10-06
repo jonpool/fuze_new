@@ -7,7 +7,7 @@ import { lighten } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import ItemIcon from './ItemIcon';
 import { resetSelectedItemId } from './fileManagerAppSlice';
 import useFileManagerData from './hooks/useFileManagerData';

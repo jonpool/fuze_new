@@ -3,7 +3,7 @@
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
@@ -86,7 +86,7 @@ function OverviewPageLayoutsUI() {
 				<ul className="list-disc pl-24">
 					<li className="mb-8">
 						<Link
-							href="/documentation/user-interface/page-layouts/simple/full-width"
+							to="/documentation/user-interface/page-layouts/simple/full-width"
 							className="text-blue-500 hover:underline"
 						>
 							FusePageSimple
@@ -95,7 +95,7 @@ function OverviewPageLayoutsUI() {
 					</li>
 					<li className="mb-8">
 						<Link
-							href="/documentation/user-interface/page-layouts/carded/with-sidebars"
+							to="/documentation/user-interface/page-layouts/carded/with-sidebars"
 							className="text-blue-500 hover:underline"
 						>
 							FusePageCarded

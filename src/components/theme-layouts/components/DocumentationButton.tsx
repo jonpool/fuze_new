@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
 type DocumentationButtonProps = {
@@ -15,7 +15,7 @@ function DocumentationButton(props: DocumentationButtonProps) {
 	return (
 		<Button
 			component={Link}
-			href="/documentation"
+			to="/documentation"
 			role="button"
 			className={className}
 			variant="contained"

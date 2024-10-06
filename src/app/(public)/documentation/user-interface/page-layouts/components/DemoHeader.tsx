@@ -27,10 +27,7 @@ function DemoHeader(props: DemoHeaderProps) {
 			)}
 
 			<div className="flex flex-1 flex-col">
-				<PageBreadcrumb
-					maxItems={3}
-					className="mb-8"
-				/>
+				<PageBreadcrumb maxItems={3} />
 
 				<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
 					Page heading

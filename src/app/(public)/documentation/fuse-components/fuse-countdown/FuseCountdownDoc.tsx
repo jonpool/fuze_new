@@ -1,7 +1,7 @@
 import FuseCountdown from '@fuse/core/FuseCountdown';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * FuseCountdown Doc
@@ -61,7 +61,7 @@ function FuseCountdownDoc() {
 
 			<ul>
 				<li className="mb-8">
-					<Link href="/pages/coming-soon/classic">Coming Soon</Link>
+					<Link to="/pages/coming-soon/classic">Coming Soon</Link>
 				</li>
 			</ul>
 		</>

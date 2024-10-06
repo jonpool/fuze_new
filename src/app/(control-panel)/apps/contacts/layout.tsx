@@ -2,9 +2,10 @@
 
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import { useEffect, useRef, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
+import useNavigate from '@fuse/hooks/useNavigate';
 import ContactsHeader from './ContactsHeader';
 import ContactsList from './contact-list/ContactsList';
 import { useGetContactsListQuery, useGetContactsCountriesQuery, useGetContactsTagsQuery } from './ContactsApi';
@@ -29,7 +30,7 @@ type ContactsAppProps = {
  */
 function ContactsApp(props: ContactsAppProps) {
 	const { children } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 	const routeParams = useParams();
 
 	const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
@@ -50,7 +51,7 @@ function ContactsApp(props: ContactsAppProps) {
 			ref={pageLayout}
 			rightSidebarContent={<ContactsSidebarContent>{children}</ContactsSidebarContent>}
 			rightSidebarOpen={rightSidebarOpen}
-			rightSidebarOnClose={() => router.push('/apps/contacts')}
+			rightSidebarOnClose={() => navigate('/apps/contacts')}
 			rightSidebarWidth={640}
 			rightSidebarVariant="temporary"
 			scroll={isMobile ? 'normal' : 'content'}

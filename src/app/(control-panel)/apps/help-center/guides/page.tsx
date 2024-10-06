@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Typography from '@mui/material/Typography';
 import _ from 'lodash';
 import { useMemo } from 'react';
@@ -36,7 +36,7 @@ function GuideCategories() {
 						<div key={category.id}>
 							<Typography
 								component={Link}
-								href={`/apps/help-center/guides/${category.slug}`}
+								to={`/apps/help-center/guides/${category.slug}`}
 								className="mb-4 text-2xl font-semibold"
 								role="button"
 							>

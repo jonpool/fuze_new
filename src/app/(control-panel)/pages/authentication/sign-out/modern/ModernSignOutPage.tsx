@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Paper from '@mui/material/Paper';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
@@ -34,7 +34,7 @@ function ModernSignOutPage() {
 							<span>Go to</span>
 							<Link
 								className="ml-4"
-								href="/sign-in"
+								to="/sign-in"
 							>
 								sign in
 							</Link>

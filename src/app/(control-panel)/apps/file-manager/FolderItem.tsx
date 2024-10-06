@@ -36,7 +36,7 @@ function FolderItem(props: FolderItemProps) {
 			</IconButton>
 			<NavLinkAdapter
 				className="flex flex-col h-full w-full"
-				href={`/apps/file-manager/${item.id}`}
+				to={`/apps/file-manager/${item.id}`}
 				role="button"
 			>
 				<div className="flex flex-auto w-full items-center justify-center">

@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * The sign out page.
@@ -27,7 +27,7 @@ function SignOutPage() {
 						<span>Return to</span>
 						<Link
 							className="text-primary-500 ml-4 hover:underline"
-							href="/sign-in"
+							to="/sign-in"
 						>
 							sign in
 						</Link>

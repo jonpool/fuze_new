@@ -5,9 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { useRouter } from 'next/navigation';
 import { MouseEvent, useMemo, useState } from 'react';
 import _ from 'lodash';
+import useNavigate from '@fuse/hooks/useNavigate';
 import { useUpdateMailboxMailsMutation, useGetMailboxFoldersQuery } from '../../MailboxApi';
 import useGetMail from '../../hooks/useGetMail';
 
@@ -20,7 +20,7 @@ type MailActionsMenuProps = {
  */
 function MailActionsMenu(props: MailActionsMenuProps) {
 	const { className } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -92,7 +92,7 @@ function MailActionsMenu(props: MailActionsMenuProps) {
 				<MenuItem
 					onClick={() => {
 						updateMails([{ id: mail.id, folder: trashFolderId }]);
-						router.push(-1);
+						navigate(-1);
 						handleClose();
 					}}
 				>

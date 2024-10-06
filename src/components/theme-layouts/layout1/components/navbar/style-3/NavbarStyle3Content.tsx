@@ -11,7 +11,7 @@ import { Theme } from '@mui/system';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
 import { navbarCloseMobile } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import useNavigation from '@/components/theme-layouts/components/navigation/hooks/useNavigation';
 
 const Root = styled('div')(({ theme }) => ({

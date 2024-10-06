@@ -1,10 +1,10 @@
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Tooltip from '@mui/material/Tooltip';
+import useNavigate from '@fuse/hooks/useNavigate';
 import MailActionsMenu from './MailActionsMenu';
 import MailLabelsMenu from './MailLabelsMenu';
 import { useUpdateMailboxMailsMutation } from '../../MailboxApi';
@@ -19,10 +19,10 @@ function MailToolbar() {
 	const [updateMails] = useUpdateMailboxMailsMutation();
 
 	const theme = useTheme();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	function handleGoBack() {
-		router.push(-1);
+		navigate(-1);
 	}
 
 	if (!mail) {

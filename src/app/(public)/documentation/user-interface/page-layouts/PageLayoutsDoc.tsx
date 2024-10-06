@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * Page Layouts Doc
@@ -90,10 +90,10 @@ function PageLayoutsDoc() {
 			>
 				<ul>
 					<li className="mb-8">
-						<Link href="/documentation/fuse-components/fuse-page-simple">FusePageSimple</Link>
+						<Link to="/documentation/fuse-components/fuse-page-simple">FusePageSimple</Link>
 					</li>
 					<li className="mb-8">
-						<Link href="/documentation/fuse-components/fuse-page-carded">FusePageCarded</Link>
+						<Link to="/documentation/fuse-components/fuse-page-carded">FusePageCarded</Link>
 					</li>
 				</ul>
 			</Typography>

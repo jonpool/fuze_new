@@ -1,6 +1,6 @@
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
-import { useRouter } from 'next/navigation';
+import useNavigate from '@fuse/hooks/useNavigate';
 import UserAvatar from '../../components/UserAvatar';
 import {
 	Contact,
@@ -22,17 +22,17 @@ function ContactListItem(props: ContactListItemProps) {
 	const [createChat] = useCreateMessengerChatMutation();
 	const { data: user } = useGetMessengerUserProfileQuery();
 
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	function handleClick() {
 		const chat = chatList?.find((chat) => chat.contactIds.includes(item.id));
 
 		if (chat) {
-			router.push(`/apps/messenger/${chat.id}`);
+			navigate(`/apps/messenger/${chat.id}`);
 		} else {
 			createChat({ contactIds: [item.id, user.id] }).then((res) => {
 				const chatId = res.data.id;
-				router.push(`/apps/messenger/${chatId}`);
+				navigate(`/apps/messenger/${chatId}`);
 			});
 		}
 	}

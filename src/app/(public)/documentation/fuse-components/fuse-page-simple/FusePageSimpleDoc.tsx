@@ -1,6 +1,6 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 const demos = [
 	{
@@ -80,7 +80,7 @@ function FusePageSimpleDoc() {
 						key={demo.url}
 						className="mb-8"
 					>
-						<Link href={demo.url}>{demo.title}</Link>
+						<Link to={demo.url}>{demo.title}</Link>
 					</li>
 				))}
 			</ul>

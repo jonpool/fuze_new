@@ -10,7 +10,7 @@ import {
 	selectFuseNavbar
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import withSlices from 'src/store/withSlices';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import { useNavbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
 import NavbarLayout2 from './NavbarLayout2';

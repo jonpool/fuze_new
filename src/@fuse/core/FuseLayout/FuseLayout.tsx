@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { themeLayoutsType } from 'src/components/theme-layouts/themeLayouts';
-import { usePathname } from 'next/navigation';
+import usePathname from '@fuse/hooks/usePathname';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 export type FuseRouteObjectType = {

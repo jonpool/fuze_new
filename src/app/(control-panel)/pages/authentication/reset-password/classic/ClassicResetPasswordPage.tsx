@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import _ from 'lodash';
 import Paper from '@mui/material/Paper';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -123,7 +123,7 @@ function ClassicResetPasswordPage() {
 							<span>Return to</span>
 							<Link
 								className="ml-4"
-								href="/sign-in"
+								to="/sign-in"
 							>
 								sign in
 							</Link>

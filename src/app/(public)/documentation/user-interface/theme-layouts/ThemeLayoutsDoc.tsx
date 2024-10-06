@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * Theme Layouts Doc
@@ -106,7 +106,7 @@ function ThemeLayoutsDoc() {
 				component="p"
 			>
 				You can get more information about route configuration and its usage from{' '}
-				<Link href="/documentation/configuration/routing">the Routing documentation page</Link>.
+				<Link to="/documentation/configuration/routing">the Routing documentation page</Link>.
 			</Typography>
 		</>
 	);

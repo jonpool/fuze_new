@@ -3,7 +3,7 @@
 import FuseExample from '@fuse/core/FuseExample';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
 import AreaComponent from './examples/Area';
@@ -107,10 +107,10 @@ function ReactApexchartsDoc() {
 
 			<ul>
 				<li className="mb-8">
-					<Link href="/dashboards/analytics">Analytics Dashboard</Link>
+					<Link to="/dashboards/analytics">Analytics Dashboard</Link>
 				</li>
 				<li className="mb-8">
-					<Link href="/dashboards/project">Project Dashboard</Link>
+					<Link to="/dashboards/project">Project Dashboard</Link>
 				</li>
 			</ul>
 		</>

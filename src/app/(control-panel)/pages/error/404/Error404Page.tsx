@@ -2,7 +2,7 @@
 
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Box from '@mui/material/Box';
 
 /**
@@ -255,7 +255,7 @@ function Error404Page() {
 
 				<Link
 					className="mt-48 block font-normal"
-					href="/apps/dashboards/project"
+					to="/apps/dashboards/project"
 				>
 					Back to Dashboard
 				</Link>

@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 /**
  * FuseLayout Doc
@@ -37,7 +37,7 @@ function FuseLayoutDoc() {
 				Please checkout{' '}
 				<Link
 					className="font-normal"
-					href="/documentation/theming/theme-layouts"
+					to="/documentation/theming/theme-layouts"
 				>
 					Theme Layouts
 				</Link>{' '}

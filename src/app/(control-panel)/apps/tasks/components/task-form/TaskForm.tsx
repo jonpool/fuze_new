@@ -19,7 +19,8 @@ import { useDeepCompareEffect } from '@fuse/hooks';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import useNavigate from '@fuse/hooks/useNavigate';
 import TaskPrioritySelector from './TaskPrioritySelector';
 import FormActionsMenu from './FormActionsMenu';
 import {
@@ -76,7 +77,7 @@ function TaskForm() {
 	const [createTask] = useCreateTasksItemMutation();
 
 	const dispatch = useAppDispatch();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const { control, watch, reset, handleSubmit, formState } = useForm<Task>({
 		mode: 'onChange',
@@ -120,7 +121,7 @@ function TaskForm() {
 		createTask(data)
 			.unwrap()
 			.then((newTask) => {
-				router.push(`/apps/tasks/${newTask?.id}`);
+				navigate(`/apps/tasks/${newTask?.id}`);
 			})
 			.catch((rejected) => {
 				dispatch(showMessage({ message: `Error creating task item ${rejected}`, variant: 'error' }));
@@ -129,7 +130,7 @@ function TaskForm() {
 
 	if (isError && taskId !== 'new') {
 		setTimeout(() => {
-			router.push('/apps/tasks');
+			navigate('/apps/tasks');
 			dispatch(showMessage({ message: 'NOT FOUND' }));
 		}, 0);
 
@@ -175,7 +176,7 @@ function TaskForm() {
 						{!isNew && <FormActionsMenu taskId={task?.id} />}
 						<IconButton
 							component={NavLinkAdapter}
-							href="/apps/tasks"
+							to="/apps/tasks"
 							size="large"
 						>
 							<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>

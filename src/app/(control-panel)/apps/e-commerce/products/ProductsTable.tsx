@@ -7,7 +7,7 @@ import { Chip, ListItemIcon, MenuItem, Paper } from '@mui/material';
 import * as React from 'react';
 import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import Button from '@mui/material/Button';
@@ -51,7 +51,7 @@ function ProductsTable() {
 				Cell: ({ row }) => (
 					<Typography
 						component={Link}
-						href={`/apps/e-commerce/products/${row.original.id}/${row.original.handle}`}
+						to={`/apps/e-commerce/products/${row.original.id}/${row.original.handle}`}
 						role="button"
 					>
 						<u>{row.original.name}</u>

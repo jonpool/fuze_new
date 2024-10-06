@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import SwipeableViews from 'react-swipeable-views';
 import { Step, StepContent, StepLabel } from '@mui/material';
 import Divider from '@mui/material/Divider';
@@ -127,7 +127,7 @@ function Course() {
 							square
 						>
 							<IconButton
-								href="/apps/academy/courses"
+								to="/apps/academy/courses"
 								component={Link}
 							>
 								<FuseSvgIcon>
@@ -223,7 +223,7 @@ function Course() {
 				<>
 					<div className="p-32">
 						<Button
-							href="/apps/academy/courses"
+							to="/apps/academy/courses"
 							component={Link}
 							className="mb-24"
 							color="secondary"

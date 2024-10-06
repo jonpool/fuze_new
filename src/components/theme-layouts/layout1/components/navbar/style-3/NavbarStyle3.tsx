@@ -1,4 +1,3 @@
-import Hidden from '@mui/material/Hidden';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
@@ -12,9 +11,9 @@ import { Theme } from '@mui/system/createTheme';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle3Content from './NavbarStyle3Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
-import useThemeMediaQuery from '../../../../../../@fuse/hooks/useThemeMediaQuery';
 
 const navbarWidth = 120;
 const navbarWidthDense = 64;
@@ -240,7 +239,6 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 			/>
 
 			{!isMobile && (
-
 				<StyledNavBar
 					open={navbar.open}
 					dense={dense ? 1 : 0}
@@ -251,7 +249,6 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 					<NavbarStyle3Content dense={dense ? 1 : 0} />
 				</StyledNavBar>
 			)}
-
 
 			{isMobile && (
 				<StyledNavBarMobile

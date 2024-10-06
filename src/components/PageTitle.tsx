@@ -3,7 +3,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Chip } from '@mui/material';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 
 export type PageTitleProps = {
 	className?: string;
@@ -23,7 +23,7 @@ function PageTitle(props: PageTitleProps) {
 				<Typography
 					className="flex items-center leading-none space-x-1 mb-px"
 					component={Link}
-					href={backUrl}
+					to={backUrl}
 					role="button"
 					color="text.secondary"
 				>

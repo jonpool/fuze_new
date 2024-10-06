@@ -58,7 +58,7 @@ function TasksHeader() {
 				<Button
 					className="whitespace-nowrap"
 					component={NavLinkAdapter}
-					href="/apps/tasks/new/section"
+					to="/apps/tasks/new/section"
 					color="primary"
 					variant="contained"
 				>
@@ -70,7 +70,7 @@ function TasksHeader() {
 					variant="contained"
 					color="secondary"
 					component={NavLinkAdapter}
-					href="/apps/tasks/new/task"
+					to="/apps/tasks/new/task"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
 					<span className="mx-8">Add Task</span>

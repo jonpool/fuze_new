@@ -1,20 +1,20 @@
 import { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
+import Link from '@fuse/core/Link';
 import { FuseRouteItemType } from '@fuse/utils/FuseUtils';
 import EmptyExampleComponent from '../../../(public)/documentation/user-interface/page-layouts/empty/EmptyExampleComponent';
 import PageLayoutOverview from '../../../(public)/documentation/user-interface/page-layouts/components/PageLayoutOverview';
-import SimpleWithSidebarsNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/SimpleWithSidebarsNormalScrollComponent';
-import SimpleWithSidebarsPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/SimpleWithSidebarsPageScrollComponent';
-import SimpleWithSidebarsContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/SimpleWithSidebarsContentScrollComponent';
-import SimpleFullWidthNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/SimpleFullWidthNormalScrollComponent';
-import SimpleFullWidthPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/SimpleFullWidthPageScrollComponent';
-import SimpleFullWidthContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/SimpleFullWidthContentScrollComponent';
-import CardedFullWidthNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/CardedFullWidthNormalScrollComponent';
-import CardedFullWidthPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/CardedFullWidthPageScrollComponent';
-import CardedFullWidthContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/CardedFullWidthContentScrollComponent';
-import CardedWithSidebarsNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/CardedWithSidebarsNormalScrollComponent';
-import CardedWithSidebarsPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/CardedWithSidebarsPageScrollComponent';
-import CardedWithSidebarsContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/CardedWithSidebarsContentScrollComponent';
+import SimpleWithSidebarsNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/normal-scroll/SimpleWithSidebarsNormalScrollComponent';
+import SimpleWithSidebarsPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/page-scroll/SimpleWithSidebarsPageScrollComponent';
+import SimpleWithSidebarsContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/with-sidebars/content-scroll/SimpleWithSidebarsContentScrollComponent';
+import SimpleFullWidthNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/normal-scroll/SimpleFullWidthNormalScrollComponent';
+import SimpleFullWidthPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/page-scroll/SimpleFullWidthPageScrollComponent';
+import SimpleFullWidthContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/simple/full-width/content-scroll/SimpleFullWidthContentScrollComponent';
+import CardedFullWidthNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/normal-scroll/CardedFullWidthNormalScrollComponent';
+import CardedFullWidthPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/page-scroll/CardedFullWidthPageScrollComponent';
+import CardedFullWidthContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/full-width/content-scroll/CardedFullWidthContentScrollComponent';
+import CardedWithSidebarsNormalScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/normal-scroll/CardedWithSidebarsNormalScrollComponent';
+import CardedWithSidebarsPageScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/page-scroll/CardedWithSidebarsPageScrollComponent';
+import CardedWithSidebarsContentScrollComponent from '../../../(public)/documentation/user-interface/page-layouts/carded/with-sidebars/content-scroll/CardedWithSidebarsContentScrollComponent';
 import overviews from '../../../(public)/documentation/user-interface/page-layouts/constants/overviews';
 
 const OverviewPageLayoutsUI = lazy(
@@ -29,7 +29,7 @@ const PageLayoutsUIRoute: FuseRouteItemType = {
 	children: [
 		{
 			path: '',
-			element: <Navigate href="overview" />
+			element: <Link to="overview" />
 		},
 		{
 			path: 'overview',
@@ -47,7 +47,7 @@ const PageLayoutsUIRoute: FuseRouteItemType = {
 					children: [
 						{
 							path: '',
-							element: <Navigate href="overview" />
+							element: <Link to="overview" />
 						},
 						{
 							path: 'overview',
@@ -72,7 +72,7 @@ const PageLayoutsUIRoute: FuseRouteItemType = {
 					children: [
 						{
 							path: '',
-							element: <Navigate href="overview" />
+							element: <Link to="overview" />
 						},
 						{
 							path: 'overview',
@@ -102,7 +102,7 @@ const PageLayoutsUIRoute: FuseRouteItemType = {
 					children: [
 						{
 							path: '',
-							element: <Navigate href="overview" />
+							element: <Link to="overview" />
 						},
 						{
 							path: 'overview',
@@ -127,7 +127,7 @@ const PageLayoutsUIRoute: FuseRouteItemType = {
 					children: [
 						{
 							path: '',
-							element: <Navigate href="overview" />
+							element: <Link to="overview" />
 						},
 						{
 							path: 'overview',

@@ -2,7 +2,7 @@
 
 import Button from '@mui/material/Button';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import FuseLoading from '@fuse/core/FuseLoading';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -14,6 +14,7 @@ import { format } from 'date-fns/format';
 import _ from 'lodash';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
+import useNavigate from '@fuse/hooks/useNavigate';
 import { useGetContactsItemQuery, useGetContactsCountriesQuery, useGetContactsTagsQuery } from '../../ContactsApi';
 
 /**
@@ -32,7 +33,7 @@ function ContactView() {
 		skip: !contactId
 	});
 	const dispatch = useAppDispatch();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	function getCountryByIso(iso: string) {
 		return countries?.find((country) => country.iso === iso);
@@ -44,7 +45,7 @@ function ContactView() {
 
 	if (isError) {
 		setTimeout(() => {
-			router.push('/apps/contacts');
+			navigate('/apps/contacts');
 			dispatch(showMessage({ message: 'NOT FOUND' }));
 		}, 0);
 
@@ -93,7 +94,7 @@ function ContactView() {
 								variant="contained"
 								color="secondary"
 								component={NavLinkAdapter}
-								href={`/apps/contacts/${contactId}/edit`}
+								to={`/apps/contacts/${contactId}/edit`}
 							>
 								<FuseSvgIcon size={20}>heroicons-outline:pencil-square</FuseSvgIcon>
 								<span className="mx-8">Edit</span>

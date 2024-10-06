@@ -1,6 +1,6 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import AppRaw from 'src/app/App.tsx?raw';
 
 /**
@@ -53,7 +53,7 @@ function FuseThemeDoc() {
 				Please checkout
 				<Link
 					className="font-normal mx-4"
-					href="/documentation/theming/theme-schemes"
+					to="/documentation/theming/theme-schemes"
 				>
 					theming
 				</Link>

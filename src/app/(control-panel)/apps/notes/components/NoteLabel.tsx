@@ -1,6 +1,6 @@
 import Chip from '@mui/material/Chip';
 import clsx from 'clsx';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import { darken } from '@mui/material/styles';
 import { MouseEvent } from 'react';
 import _ from 'lodash';

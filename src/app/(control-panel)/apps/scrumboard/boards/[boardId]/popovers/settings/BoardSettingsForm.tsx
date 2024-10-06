@@ -12,7 +12,7 @@ import _ from 'lodash';
 import { useDebounce, useDeepCompareEffect } from '@fuse/hooks';
 import { PartialDeep } from 'type-fest';
 import ListItemButton from '@mui/material/ListItemButton';
-import { useRouter } from 'next/navigation';
+import useNavigate from '@fuse/hooks/useNavigate';
 import {
 	ScrumboardBoard,
 	useDeleteScrumboardBoardMutation,
@@ -29,7 +29,7 @@ type BoardSettingsFormProps = {
  */
 function BoardSettingsForm(props: BoardSettingsFormProps) {
 	const { onClose } = props;
-	const router = useRouter();
+	const navigate = useNavigate();
 	const { data: board } = useGetScrumboardBoard();
 	const [updateBoard] = useUpdateScrumboardBoardMutation();
 	const [deleteBoard] = useDeleteScrumboardBoardMutation();
@@ -129,7 +129,7 @@ function BoardSettingsForm(props: BoardSettingsFormProps) {
 						deleteBoard(board?.id)
 							.unwrap()
 							.then(() => {
-								router.push(`/apps/scrumboard/boards`);
+								navigate(`/apps/scrumboard/boards`);
 							});
 					}}
 				>

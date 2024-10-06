@@ -3,7 +3,7 @@
 import FuseExample from '@fuse/core/FuseExample';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import SimpleMapComponent from './examples/SimpleMap';
 import SimpleMapRaw from './examples/SimpleMap.tsx?raw';
@@ -59,7 +59,7 @@ function GoogleMapReactDoc() {
 
 			<ul>
 				<li className="mb-8">
-					<Link href="/dashboards/analytics">Analytics Dashboard</Link>
+					<Link to="/dashboards/analytics">Analytics Dashboard</Link>
 				</li>
 			</ul>
 		</>
