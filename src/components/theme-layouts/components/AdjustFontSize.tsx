@@ -1,3 +1,5 @@
+'use client';
+
 import { MouseEvent, useState } from 'react';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
