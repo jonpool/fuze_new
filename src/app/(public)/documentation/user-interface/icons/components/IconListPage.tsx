@@ -31,7 +31,7 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 
 	const methods = useForm({
 		mode: 'onChange',
-		defaultValues: { searchText: '', size: 24 }
+		defaultValues: { searchText: '', size: 32 }
 	});
 
 	const { watch, control } = methods;
@@ -146,7 +146,7 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 					/>
 				</div>
 
-				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-12 sm:gap-32 py-24">
+				<div className="grid grid-cols-2  sm:grid-cols-4 gap-8">
 					{filteredData?.map((icon) => (
 						<IconListItem
 							key={icon}
