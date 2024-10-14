@@ -44,6 +44,7 @@ const plans = [
 ];
 
 const defaultValues: FormType = {
+	id: '',
 	plan: 'team',
 	cardHolder: '',
 	cardNumber: '',

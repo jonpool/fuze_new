@@ -14,10 +14,10 @@ import red from '@mui/material/colors/red';
 import orange from '@mui/material/colors/orange';
 import yellow from '@mui/material/colors/yellow';
 import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import { NotificationModelType } from './models/NotificationModel';
+import { Notification } from './NotificationApi';
 
 type NotificationCardProps = {
-	item: NotificationModelType;
+	item: Notification;
 	className?: string;
 	onClose: (T: string) => void;
 };

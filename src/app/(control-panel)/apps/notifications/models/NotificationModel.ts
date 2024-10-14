@@ -1,28 +1,12 @@
 import _ from 'lodash';
 import FuseUtils from '@fuse/utils';
-import { ReactNode } from 'react';
-
-/**
- * The type of the NotificationModel.
- */
-export type NotificationModelType = {
-	id?: string;
-	icon?: string;
-	title?: string;
-	description?: string;
-	time?: string;
-	read?: boolean;
-	variant?: 'success' | 'info' | 'error' | 'warning' | 'alert' | 'primary' | 'secondary';
-	link?: string;
-	image?: string;
-	children?: ReactNode;
-};
+import { Notification } from '@/app/(control-panel)/apps/notifications/NotificationApi';
 
 /**
  * The NotificationModel class.
  * Implements NotificationModelProps interface.
  */
-function NotificationModel(data: NotificationModelType): NotificationModelType {
+function NotificationModel(data: Notification): Notification {
 	data = data || {};
 
 	return _.defaults(data, {
@@ -33,7 +17,7 @@ function NotificationModel(data: NotificationModelType): NotificationModelType {
 		time: new Date().toISOString(),
 		read: false,
 		variant: 'default'
-	}) as NotificationModelType;
+	}) as Notification;
 }
 
 export default NotificationModel;

@@ -17,29 +17,11 @@
       "@history*": [
         "./src/@history"
       ],
-      "@mock-api/*": [
-        "./src/@mock-api/*"
+      "@mock-utils/*": [
+        "./src/@mock-utils/*"
       ],
       "@schema": [
         "./src/@schema"
-      ],
-      "app/store": [
-        "./src/app/store/index"
-      ],
-      "app/store/*": [
-        "./src/app/store/*"
-      ],
-      "src/shared-components/*": [
-        "./src/shared-components/*"
-      ],
-      "app/configs/*": [
-        "./src/app/configs/*"
-      ],
-      "app/theme-layouts/*": [
-        "./src/app/theme-layouts/*"
-      ],
-      "app/AppContext": [
-        "./src/app/AppContext"
       ],
     "@/*": [
       "./src/*"
@@ -78,12 +60,15 @@
     "incremental": true
   },
   "exclude": [
+    "src/app/(public)/documentation/material-ui-components/components/**/*",
+    "src/app/(public)/documentation/material-ui-components/doc/**/*",
     "node_modules"
   ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "tailwind.config.js",
     ".next/types/**/*.ts",
     "next.config.mjs",
     "build/types/**/*.ts"

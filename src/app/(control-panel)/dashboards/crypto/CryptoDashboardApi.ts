@@ -16,7 +16,7 @@ const CryptoDashboardApi = api
 				GetCryptoDashboardWidgetsApiResponse,
 				GetCryptoDashboardWidgetsApiArg
 			>({
-				query: () => ({ url: `/api/mock/dashboards/crypto/widgets` }),
+				query: () => ({ url: `/api/mock/crypto-dashboard/widgets` }),
 				providesTags: ['crypto_dashboard_widgets']
 			})
 		}),

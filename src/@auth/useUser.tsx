@@ -1,7 +1,7 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useMemo } from 'react';
 import { User } from '@auth/user';
-import { updateDbUser } from '@auth/authJs';
+import { updateDbUser } from '@auth/userApi';
 import _ from 'lodash';
 import setIn from '@/utils/setIn';
 
@@ -15,10 +15,13 @@ type useUser = {
 
 function useUser(): useUser {
 	const { data, update } = useSession();
-
 	const user = useMemo(() => data?.db, [data]);
 	const isGuest = useMemo(() => !user?.role || user?.role?.length === 0, [user]);
 
+	/**
+	 * Update user
+	 * Uses current auth provider's updateUser method
+	 */
 	async function handleUpdateUser(_data: Partial<User>) {
 		const response = await updateDbUser(_data);
 
@@ -33,6 +36,10 @@ function useUser(): useUser {
 		return updatedUser;
 	}
 
+	/**
+	 * Update user settings
+	 * Uses current auth provider's updateUser method
+	 */
 	async function handleUpdateUserSettings(newSettings: User['settings']) {
 		const newUser = setIn(user, 'settings', newSettings) as User;
 
@@ -45,6 +52,9 @@ function useUser(): useUser {
 		return updatedUser?.settings;
 	}
 
+	/**
+	 * Sign out
+	 */
 	async function handleSignOut() {
 		return signOut();
 	}
@@ -55,7 +65,7 @@ function useUser(): useUser {
 		signOut: handleSignOut,
 		updateUser: handleUpdateUser,
 		updateUserSettings: handleUpdateUserSettings
-	} as useUser;
+	};
 }
 
 export default useUser;

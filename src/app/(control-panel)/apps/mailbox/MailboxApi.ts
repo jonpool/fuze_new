@@ -109,8 +109,8 @@ export type MailboxMailAttachment = {
 	type: string;
 	name: string;
 	size: number;
-	preview: string;
-	downloadUrl: string;
+	preview?: string;
+	downloadUrl?: string;
 };
 
 export type MailboxMail = {

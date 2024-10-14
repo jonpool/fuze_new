@@ -14,12 +14,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import _ from 'lodash';
 import { useEffect } from 'react';
-import Error from 'next/error';
 import { SettingsSecurity, useGetSecuritySettingsQuery, useUpdateSecuritySettingsMutation } from '../SettingsApi';
 
 type FormType = SettingsSecurity;
 
 const defaultValues: FormType = {
+	id: '',
 	currentPassword: '',
 	newPassword: '',
 	twoStepVerification: false,
@@ -36,16 +36,16 @@ const schema = z.object({
 	askPasswordChange: z.boolean()
 });
 
+type ErrorRecord = {
+	name: keyof FormType;
+	message: string;
+};
+
 function SecurityTab() {
 	const { data: securitySettings } = useGetSecuritySettingsQuery();
 	const [updateSecuritySettings, { error: updateError, isSuccess }] = useUpdateSecuritySettingsMutation<{
 		isSuccess: boolean;
-		error: Error<
-			{
-				name: keyof FormType;
-				message: string;
-			}[]
-		>;
+		error: ErrorRecord[];
 	}>();
 
 	const { control, setError, reset, handleSubmit, formState } = useForm<FormType>({
@@ -66,7 +66,7 @@ function SecurityTab() {
 
 	useEffect(() => {
 		if (updateError) {
-			updateError?.response?.data?.map((err) => {
+			updateError?.map((err) => {
 				setError(err.name, { type: 'manual', message: err.message });
 				return undefined;
 			});

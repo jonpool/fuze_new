@@ -1,49 +1,62 @@
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
+export const BASE_URL =
+	process.env.NODE_ENV === 'development'
+		? `http://localhost:${process.env.NEXT_PUBLIC_PORT || 3000}`
+		: process.env.NEXT_PUBLIC_BASE_URL || '/';
 // Define the types for options and configuration
 type FetchOptions = RequestInit;
 
-// Request Interceptor
-const requestInterceptor = (config: FetchOptions): FetchOptions => {
-	return config;
+export class FetchApiError extends Error {
+	status: number;
+
+	data: unknown;
+
+	constructor(status: number, data: unknown) {
+		super(`FetchApiError: ${status}`);
+		this.status = status;
+		this.data = data;
+	}
+}
+
+// Global headers configuration
+export const globalHeaders: Record<string, string> = {};
+
+// Function to update global headers
+export const setGlobalHeaders = (newHeaders: Record<string, string>) => {
+	Object.assign(globalHeaders, newHeaders);
 };
 
-// Response Interceptor, passing the request method
-const responseInterceptor = async (response: Response): Promise<Response> => {
-	if (!response.ok) {
-		// Handle specific status codes (e.g., unauthorized, refresh tokens)
-		if (response.status === 401) {
-			console.error('Unauthorized! Redirecting to login...');
-		}
-
-		// Throw an error with status and message for further handling
-		throw new Error(`HTTP error! Status: ${response.status}`);
-	}
-
-	return response;
+export const removeGlobalHeaders = (headerKeys: string[]) => {
+	headerKeys.forEach((key) => {
+		delete globalHeaders[key];
+	});
 };
 
 // Main apiFetch function with interceptors and type safety
 const apiFetch = async <T>(endpoint: string, options: FetchOptions = {}) => {
 	const { headers, ...restOptions } = options;
 	const method = restOptions.method || 'GET';
-
-	// Set default headers
+	// Set default headers, including global headers
 	const config: FetchOptions = {
 		headers: {
 			...(method !== 'GET' && { 'Content-Type': 'application/json' }),
+			...globalHeaders,
 			...headers
 		},
 		...restOptions
 	};
 
-	// Apply request interceptor
-	const interceptedConfig = requestInterceptor(config);
+	try {
+		const response = await fetch(`${BASE_URL}${endpoint}`, config);
 
-	// Perform the fetch
-	const response = await fetch(`${BASE_URL}${endpoint}`, interceptedConfig);
+		if (!response.ok) {
+			throw new FetchApiError(response.status, await response.json());
+		}
 
-	return responseInterceptor(response);
+		return response;
+	} catch (error) {
+		console.error('Error in apiFetch:', error);
+		throw error;
+	}
 };
 
 export default apiFetch;

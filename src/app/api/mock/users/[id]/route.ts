@@ -23,7 +23,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 	const { id } = params;
 	const api = mockApi('users');
 	const data = (await req.json()) as User;
-	const updatedItem = await api.update<User>(id, data);
+	const updatedItem = await api.update(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

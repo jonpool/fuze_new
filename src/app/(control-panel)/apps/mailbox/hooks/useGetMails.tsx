@@ -1,11 +1,6 @@
 import { useParams } from 'next/navigation';
 import _ from 'lodash';
-import {
-	useGetMailboxFiltersQuery,
-	useGetMailboxFoldersQuery,
-	useGetMailboxLabelsQuery,
-	useGetMailboxMailsQuery
-} from '../MailboxApi';
+import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useGetMailboxMailsQuery } from '../MailboxApi';
 
 function useGetMails() {
 	const { mailParams } = useParams<{ mailParams: string[] }>();
@@ -13,7 +8,6 @@ function useGetMails() {
 
 	const { data: folders } = useGetMailboxFoldersQuery();
 	const { data: labels } = useGetMailboxLabelsQuery();
-	const { data: filters } = useGetMailboxFiltersQuery();
 
 	if (category === 'folders') {
 		const folderId = _.find(folders, { slug: subCategory })?.id;

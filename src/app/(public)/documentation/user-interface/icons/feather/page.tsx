@@ -5,7 +5,7 @@ function FeatherPage() {
 		<IconListPage
 			pageTitle="Feather"
 			iconSet="feather"
-			apiUrl="/api/mock/ui/feather-icons"
+			apiUrl="/api/mock/ui-icons/feather"
 		/>
 	);
 }

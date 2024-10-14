@@ -4,14 +4,12 @@ import { createStorage } from 'unstorage';
 import memoryDriver from 'unstorage/drivers/memory';
 import vercelKVDriver from 'unstorage/drivers/vercel-kv';
 import { UnstorageAdapter } from '@auth/unstorage-adapter';
-import type { NextAuthConfig, Session } from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
 import type { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
 import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
-import { User } from '@auth/user';
-import UserModel from '@auth/user/models/UserModel';
-import apiFetch from '@/utils/apiFetch';
+import { getDbUser, createDbUser } from './userApi';
 
 const storage = createStorage({
 	driver: process.env.VERCEL
@@ -86,8 +84,19 @@ const config = {
 			}
 
 			if (session) {
-				const userDbData = await fetchUserData(session);
-				session.db = userDbData || null;
+				const userDbData = await getDbUser(session.user.email);
+
+				if (userDbData) {
+					session.db = userDbData;
+				} else {
+					const newUser = await createDbUser({
+						email: session.user.email,
+						role: ['admin'],
+						displayName: session.user.name,
+						photoURL: session.user.image
+					});
+					session.db = newUser;
+				}
 			}
 
 			return session;
@@ -128,57 +137,3 @@ export const authJsProviderMap: AuthJsProvider[] = providers
 	.filter((provider) => provider.id !== 'credentials');
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
-
-export function updateDbUser(user: Partial<User>) {
-	return apiFetch(`/api/mock/users/${user.id}`, {
-		method: 'PUT',
-		body: JSON.stringify(UserModel(user))
-	});
-}
-
-export function getDbUser(userId: string) {
-	return apiFetch(`/api/mock/users/${userId}`);
-}
-
-export function createDbUser(user: Partial<User>) {
-	return apiFetch('/api/mock/users', {
-		method: 'POST',
-		body: JSON.stringify(UserModel(user))
-	});
-}
-
-async function fetchUserData(session: Session): Promise<User | null> {
-	const userEmail = session.user.email;
-
-	try {
-		const response = await apiFetch(`/api/mock/users?email=${userEmail}`);
-
-		const results = (await response.json()) as User[];
-
-		if (results.length === 0) {
-			const newUser = await createDbUser({
-				email: userEmail,
-				role: ['admin'],
-				displayName: session.user.name,
-				photoURL: session.user.image
-			});
-			return newUser.json() as Promise<User>;
-		}
-
-		return results[0];
-	} catch (error) {
-		console.error('Error fetching or creating user data:', error);
-
-		return null;
-	}
-}
-
-declare module 'next-auth' {
-	interface Session {
-		accessToken?: string;
-		db: User;
-	}
-	interface JWT {
-		accessToken?: string;
-	}
-}

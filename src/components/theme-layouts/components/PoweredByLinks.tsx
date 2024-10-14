@@ -136,7 +136,7 @@ function PoweredByLinks() {
 					role="button"
 				>
 					<img
-						src="/assets/images/logo/nextjs-dark.svg"
+						src="assets/images/logo/nextjs-dark.svg"
 						alt="next.js"
 						className="min-w-0 w-28"
 					/>
@@ -156,7 +156,7 @@ function PoweredByLinks() {
 					role="button"
 				>
 					<img
-						src="/assets/images/logo/authjs.webp"
+						src="assets/images/logo/authjs.webp"
 						alt="next.js"
 						className="min-w-0 w-24"
 					/>

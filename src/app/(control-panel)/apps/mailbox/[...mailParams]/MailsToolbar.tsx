@@ -11,6 +11,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { OutlinedInput } from '@mui/material';
 import _ from 'lodash';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import MailListTitle from './MailListTitle';
 import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useUpdateMailboxMailsMutation } from '../MailboxApi';
 import {
@@ -21,7 +22,6 @@ import {
 	setSelectedMailIds
 } from '../mailboxAppSlice';
 import useGetMails from '../hooks/useGetMails';
-import useThemeMediaQuery from '../../../../../@fuse/hooks/useThemeMediaQuery';
 
 type MailToolbarProps = {
 	onToggleLeftSidebar: () => void;

@@ -1,4 +1,5 @@
 import { apiService as api } from 'src/store/apiService';
+import { ReactNode } from 'react';
 
 export const addTagTypes = ['notifications', 'notification'] as const;
 
@@ -62,7 +63,7 @@ export type DeleteNotificationApiResponse = unknown;
 export type DeleteNotificationApiArg = string; /** notification id */
 
 export type Notification = {
-	id: string;
+	id?: string;
 	icon?: string;
 	title?: string;
 	description?: string;
@@ -70,6 +71,9 @@ export type Notification = {
 	read?: boolean;
 	link?: string;
 	useRouter?: boolean;
+	variant?: 'success' | 'info' | 'error' | 'warning' | 'alert' | 'primary' | 'secondary';
+	image?: string;
+	children?: ReactNode;
 };
 
 export const {

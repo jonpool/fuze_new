@@ -1,8 +1,8 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import controlPanelLayoutRaw from 'src/app/(control-panel)/layout.tsx?raw';
-import publicLayoutRaw from 'src/app/(public)/layout.tsx?raw';
+import controlPanelLayoutRaw from '@/app/(control-panel)/layout.tsx?raw';
+import publicLayoutRaw from '@/app/(public)/layout.tsx?raw';
 
 /**
  * Routing Documentation
@@ -36,7 +36,7 @@ function RoutingDoc() {
 			>
 				For comprehensive information on Next.js App Router, refer to the{' '}
 				<Link
-					to="https://nextjs.org/docs/app/building-your-application/routing"
+					href="https://nextjs.org/docs/app/building-your-application/routing"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

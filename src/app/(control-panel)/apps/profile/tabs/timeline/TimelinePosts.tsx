@@ -1,6 +1,6 @@
 import FuseLoading from '@fuse/core/FuseLoading';
-import { useGetProfilePostsQuery } from 'src/app/(control-panel)/apps/profile/ProfileApi';
 import { motion } from 'framer-motion';
+import { useGetProfilePostsQuery } from '@/app/(control-panel)/apps/profile/ProfileApi';
 import TimelinePostItem from './TimelinePostItem';
 
 const item = {

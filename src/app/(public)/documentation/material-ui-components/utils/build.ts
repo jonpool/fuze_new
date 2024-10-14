@@ -10,8 +10,8 @@ import path, { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const demoDir = 'src/app/(public)/documentation/material-ui-components/components';
-const rootDirectory = 'src/app/(public)/documentation/material-ui-components';
+const demoDir = '@/app/(public)/documentation/material-ui-components/components';
+const rootDirectory = '@/app/(public)/documentation/material-ui-components';
 const examplesDirectory = path.resolve(rootDirectory, './components');
 const pagesDirectory = path.resolve(rootDirectory, './doc');
 const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');

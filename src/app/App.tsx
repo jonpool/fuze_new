@@ -19,7 +19,7 @@ type AppProps = {
 };
 
 /**
- * The main app component.
+ * The main App component.
  */
 function App(props: AppProps) {
 	const { children } = props;

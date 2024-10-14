@@ -1,9 +1,9 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
-import enLangRaw from 'src/app/(control-panel)/apps/mailbox/i18n/en.ts?raw';
 import i18Raw from '@i18n/i18n.ts?raw';
-import mailboxLocalizationRaw from 'src/app/(control-panel)/apps/mailbox/i18n/index.ts?raw';
 import i18nProviderRaw from '@i18n/I18nProvider.tsx?raw';
+import enLangRaw from '@/app/(control-panel)/apps/mailbox/i18n/en.ts?raw';
+import mailboxLocalizationRaw from '@/app/(control-panel)/apps/mailbox/i18n/index.ts?raw';
 
 /**
  * Theme Layouts Doc

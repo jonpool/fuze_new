@@ -1,7 +1,7 @@
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import Link from '@fuse/core/Link';
-import AppRaw from 'src/app/App.tsx?raw';
+import AppRaw from '@/app/App.tsx?raw';
 
 /**
  * Theme Layouts Doc

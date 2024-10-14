@@ -20,6 +20,7 @@ import {
 type FormType = SettingsNotifications;
 
 const defaultValues: FormType = {
+	id: '',
 	communication: false,
 	security: false,
 	meetups: false,

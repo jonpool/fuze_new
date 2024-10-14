@@ -4,8 +4,8 @@ import { alpha, styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import SettingsAppNavigation from './SettingsAppNavigation';
-import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
 
 const Root = styled('div')(({ theme }) => ({
 	'&  .navigation': {

@@ -338,7 +338,7 @@
       },
       "parameters": []
     },
-    "/ui/feather-icons": {
+    "/ui-icons/feather": {
       "get": {
         "summary": "Get Feather Icons",
         "responses": {
@@ -372,7 +372,7 @@
       },
       "parameters": []
     },
-    "/ui/heroicons-icons": {
+    "/ui-icons/heroicons": {
       "get": {
         "summary": "Get Heroicons icons",
         "responses": {
@@ -406,7 +406,7 @@
       },
       "parameters": []
     },
-    "/ui/material-icons": {
+    "/ui-icons/material": {
       "get": {
         "summary": "Get Material Icons",
         "responses": {
@@ -440,7 +440,7 @@
       },
       "parameters": []
     },
-    "/dashboards/project/widgets": {
+    "/project-dashboard/widgets": {
       "get": {
         "summary": "Get widgets",
         "responses": {
@@ -464,11 +464,14 @@
         "description": "Retrieve Project dashboard widgets.",
         "tags": [
           "project_dashboard_widgets"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "tgevur69znwrz"
+        }
       },
       "parameters": []
     },
-    "/dashboards/project/projects": {
+    "/project-dashboard/projects": {
       "get": {
         "summary": "Get projects",
         "responses": {
@@ -495,11 +498,14 @@
         "description": "Retrieve Project dashboard projects.",
         "tags": [
           "project_dashboard_projects"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "9zickumbw44bn"
+        }
       },
       "parameters": []
     },
-    "/dashboards/crypto/widgets": {
+    "/crypto-dashboard/widgets": {
       "get": {
         "summary": "Get widgets",
         "responses": {
@@ -523,11 +529,14 @@
         "description": "Retrieve Crypto dashboard widgets.",
         "tags": [
           "crypto_dashboard_widgets"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "fzw00rpf2qbkx"
+        }
       },
       "parameters": []
     },
-    "/dashboards/finance/widgets": {
+    "/finance-dashboard/widgets": {
       "get": {
         "summary": "Get widgets",
         "responses": {
@@ -551,11 +560,14 @@
         "description": "Retrieve Finance dashboard widgets.",
         "tags": [
           "finance_dashboard_widgets"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "wiqmrhegnp4tk"
+        }
       },
       "parameters": []
     },
-    "/dashboards/analytics/widgets": {
+    "/analytics-dashboard/widgets": {
       "get": {
         "summary": "Get widgets",
         "responses": {
@@ -579,7 +591,10 @@
         "description": "Retrieve Analytics dashboard widgets.",
         "tags": [
           "analytics_dashboard_widgets"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "untqgeqc8som0"
+        }
       },
       "parameters": []
     },
@@ -8176,6 +8191,18 @@
       },
       "notification": {
         "type": "object",
+        "x-examples": {
+          "example-1": {
+            "id": "8f8e1bf9-4661-4939-9e43-390957b60f42",
+            "icon": "heroicons-solid:star",
+            "title": "Daily challenges",
+            "description": "Your submission has been accepted and you are ready to sign-up for the final assigment which will be ready in 2 days",
+            "time": "2022-05-06T10:57:42.703Z",
+            "read": true,
+            "link": "/dashboards/project",
+            "useRouter": true
+          }
+        },
         "properties": {
           "id": {
             "type": "string"
@@ -8200,21 +8227,14 @@
           },
           "useRouter": {
             "type": "boolean"
+          },
+          "variant": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1i1cnwyw487v1"
+            }
           }
-        },
-        "x-examples": {
-          "example-1": {
-            "id": "8f8e1bf9-4661-4939-9e43-390957b60f42",
-            "icon": "heroicons-solid:star",
-            "title": "Daily challenges",
-            "description": "Your submission has been accepted and you are ready to sign-up for the final assigment which will be ready in 2 days",
-            "time": "2022-05-06T10:57:42.703Z",
-            "read": true,
-            "link": "/dashboards/project",
-            "useRouter": true
-          }
-        },
-        "title": ""
+        }
       },
       "user": {
         "type": "object",

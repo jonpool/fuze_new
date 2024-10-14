@@ -1,6 +1,5 @@
 import React from 'react';
 import { MenuItem, Select, ListItemIcon, ListItemText, Typography, useTheme } from '@mui/material';
-import useNavigate from '@fuse/hooks/useNavigate';
 
 type ProjectOption = {
 	value: string;
@@ -30,17 +29,17 @@ const projectOptions: ProjectOption[] = [
 function MainProjectSelection() {
 	const [selectedProjectValue, setSelectedProject] = React.useState<string>(projectOptions[1].value);
 	const selectedProject = projectOptions.find((project) => project.value === selectedProjectValue);
-	const navigate = useNavigate();
 	const theme = useTheme();
 	const handleMenuItemClick = (projectValue: string) => {
 		setSelectedProject(projectValue);
 
 		const selectedProjectUrl = projectOptions.find((project) => project.value === projectValue)?.url;
 
-		if (selectedProjectUrl) {
+		if (typeof window !== 'undefined' && selectedProjectUrl) {
 			const currentUrl = new URL(window.location.href);
 			const newUrl = selectedProjectUrl + currentUrl.pathname;
-			navigate(newUrl);
+
+			window.location.href = newUrl;
 		}
 	};
 

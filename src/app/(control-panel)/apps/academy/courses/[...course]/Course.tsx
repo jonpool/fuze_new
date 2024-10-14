@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseLoading from '@fuse/core/FuseLoading';
-import Error404Page from 'src/app/(public)/404/Error404Page';
+import Error404Page from '@/app/(public)/404/Error404Page';
 import CourseInfo from '../../CourseInfo';
 import CourseProgress from '../../CourseProgress';
 import {

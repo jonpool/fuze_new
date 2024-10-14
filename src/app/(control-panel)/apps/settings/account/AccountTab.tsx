@@ -16,6 +16,7 @@ import { SettingsAccount, useGetAccountSettingsQuery, useUpdateAccountSettingsMu
 type FormType = SettingsAccount;
 
 const defaultValues: FormType = {
+	id: '',
 	name: '',
 	username: '',
 	title: '',

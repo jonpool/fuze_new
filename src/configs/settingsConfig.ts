@@ -1,7 +1,7 @@
 import themesConfig from 'src/configs/themesConfig';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 
-import i18n from '@i18n';
+import i18n from '@i18n/i18n';
 
 /**
  * The settingsConfig object is a configuration object for the Fuse application's settings.

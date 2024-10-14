@@ -552,7 +552,7 @@
       ]
     }
   ],
-  "ui_feather_icons": [
+  "ui_icons_feather": [
     "activity",
     "airplay",
     "alert-circle",
@@ -836,7 +836,7 @@
     "zoom-in",
     "zoom-out"
   ],
-  "ui_heroicons_icons": [
+  "ui_icons_heroicons": [
     "academic-cap",
     "adjustments-horizontal",
     "adjustments-vertical",
@@ -1162,7 +1162,7 @@
     "x-circle",
     "x-mark"
   ],
-  "ui_material_icons": [
+  "ui_icons_material": [
     "10k",
     "10mp",
     "11mp",
@@ -2956,7 +2956,7 @@
     "zoom_out",
     "zoom_out_map"
   ],
-  "dashboards_project_widgets": {
+  "project_dashboard_widgets": {
     "summary": {
       "ranges": {
         "DY": "Yesterday",
@@ -3445,7 +3445,7 @@
       }
     ]
   },
-  "dashboards_project_projects": [
+  "project_dashboard_projects": [
     {
       "id": 1,
       "name": "ACME Corp. Backend App"
@@ -3463,7 +3463,7 @@
       "name": "Withinpixels"
     }
   ],
-  "dashboards_crypto_widgets": {
+  "crypto_dashboard_widgets": {
     "btc": {
       "amount": 8878.48,
       "trend": {
@@ -4655,7 +4655,7 @@
       }
     ]
   },
-  "dashboards_finance_widgets": {
+  "finance_dashboard_widgets": {
     "accountBalance": {
       "growRate": 38.33,
       "ami": 45332,
@@ -5701,7 +5701,7 @@
       ]
     }
   },
-  "dashboards_analytics_widgets": {
+  "analytics_dashboard_widgets": {
     "visitors": {
       "ranges": {
         "this-year": "This Year",

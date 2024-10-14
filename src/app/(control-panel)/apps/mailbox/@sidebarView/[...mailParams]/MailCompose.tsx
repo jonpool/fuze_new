@@ -222,14 +222,8 @@ function MailCompose(props: MailComposeProps) {
 						/>
 
 						<div className="pt-8">
-							<MailAttachment
-								fileName="attachment-2.doc"
-								size="12 kb"
-							/>
-							<MailAttachment
-								fileName="attachment-1.jpg"
-								size="350 kb"
-							/>
+							<MailAttachment attachment={{ name: 'attachment-1.jpg', size: 350, type: 'jpg' }} />
+							<MailAttachment attachment={{ name: 'attachment-2.jpg', size: 350, type: 'jpg' }} />
 						</div>
 					</DialogContent>
 

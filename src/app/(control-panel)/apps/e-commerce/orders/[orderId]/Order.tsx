@@ -4,7 +4,7 @@ import FusePageCarded from '@fuse/core/FusePageCarded';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from '@fuse/core/Link';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
@@ -37,7 +37,10 @@ function Order() {
 
 	const [tabValue, setTabValue] = useState('details');
 
-	function handleTabChange(event: React.SyntheticEvent, value: string) {
+	/**
+	 * Tab Change
+	 */
+	function handleTabChange(event: SyntheticEvent, value: string) {
 		setTabValue(value);
 	}
 

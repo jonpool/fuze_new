@@ -22,7 +22,7 @@ const AnalyticsDashboardApi = api
 				GetAnalyticsDashboardWidgetsApiResponse,
 				GetAnalyticsDashboardWidgetsApiArg
 			>({
-				query: () => ({ url: `/api/mock/dashboards/analytics/widgets` }),
+				query: () => ({ url: `/api/mock/analytics-dashboard/widgets` }),
 				providesTags: ['analytics_dashboard_widgets']
 			})
 		}),

@@ -30,15 +30,19 @@ const mockApi = (tableName: string) => ({
 		return { success: true };
 	},
 
-	async update<T extends { id: string }>(id: string, updatedData: T) {
-		const table = getTable<T>(tableName);
+	async update(id: string, updatedData: Record<string, unknown>) {
+		const table = getTable<unknown[]>(tableName);
 
-		let newItem: T;
+		let newItem: unknown;
 
 		const newTable = table.map((item) => {
-			if (item.id === id) {
-				newItem = { ...item, ...updatedData };
-				return newItem;
+			if (typeof item === 'object' && item !== null && 'id' in item) {
+				const typedItem = item as { id: string };
+
+				if (typedItem.id === id) {
+					newItem = { ...item, ...updatedData };
+					return newItem;
+				}
 			}
 
 			return item;
@@ -51,6 +55,17 @@ const mockApi = (tableName: string) => ({
 		}
 
 		return null;
+	},
+
+	async updateMany<T extends { id: string }>(items: T[]) {
+		const table = getTable<T>(tableName);
+		const newTable = table.map((item) => {
+			const typedItem = item as { id: string };
+			const updatedItem = items.find((i) => i.id === typedItem.id);
+			return { ...item, ...updatedItem };
+		});
+		saveTable(tableName, newTable);
+		return newTable;
 	},
 
 	async find<T extends { id: string }>(id: string) {
@@ -71,7 +86,7 @@ const mockApi = (tableName: string) => ({
 					}
 
 					if (typeof itemVal === 'boolean') {
-						return itemVal === (value === 'true');
+						return itemVal === (value === 'true' || value === true);
 					}
 
 					if (value === 'not_null') {

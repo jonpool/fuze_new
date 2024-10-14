@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL } from '@/utils/apiFetch';
+import { BASE_URL, globalHeaders } from '@/utils/apiFetch';
 
 const baseQuery = async (args, api, extraOptions) => {
 	const result = await fetchBaseQuery({
 		baseUrl: BASE_URL,
 		prepareHeaders: (headers, { getState }) => {
+			Object.entries(globalHeaders).forEach(([key, value]) => {
+				headers.set(key, value);
+			});
 			return headers;
 		}
 	})(args, api, extraOptions);

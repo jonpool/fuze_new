@@ -5,18 +5,19 @@ import { User } from '@auth/user';
 /**
  * Creates a new user object with the specified data.
  */
-function UserModel(data: PartialDeep<User>): User {
+function UserModel(data?: PartialDeep<User>): User {
 	data = data || {};
 
 	return _.defaults(data, {
 		id: null,
-		role: null,
-		displayName: 'Guest User',
+		role: null, // guest
+		displayName: null,
 		photoURL: '',
 		email: '',
 		shortcuts: [],
-		settings: {}
-	});
+		settings: {},
+		loginRedirectUrl: '/'
+	}) as User;
 }
 
 export default UserModel;

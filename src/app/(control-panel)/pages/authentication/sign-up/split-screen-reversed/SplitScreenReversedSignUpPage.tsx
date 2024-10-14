@@ -162,7 +162,7 @@ function SplitScreenReversedSignUpPage() {
 				<div className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
 					<img
 						className="w-48"
-						src="/assets/images/logo/logo.svg"
+						src="assets/images/logo/logo.svg"
 						alt="logo"
 					/>
 

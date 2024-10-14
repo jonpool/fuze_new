@@ -59,7 +59,7 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 					{!item.useRouter && (
 						<a
 							className="cursor-pointer"
-							to={item.link}
+							href={item.link}
 							target="_blank"
 							rel="noreferrer"
 						>

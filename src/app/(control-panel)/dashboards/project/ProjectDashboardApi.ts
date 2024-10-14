@@ -21,14 +21,14 @@ const ProjectDashboardApi = api
 				GetProjectDashboardWidgetsApiResponse,
 				GetProjectDashboardWidgetsApiArg
 			>({
-				query: () => ({ url: `/api/mock/dashboards/project/widgets` }),
+				query: () => ({ url: `/api/mock/project-dashboard/widgets` }),
 				providesTags: ['project_dashboard_widgets']
 			}),
 			getProjectDashboardProjects: build.query<
 				GetProjectDashboardProjectsApiResponse,
 				GetProjectDashboardProjectsApiArg
 			>({
-				query: () => ({ url: `/api/mock/dashboards/project/projects` }),
+				query: () => ({ url: `/api/mock/project-dashboard/projects` }),
 				providesTags: ['project_dashboard_projects']
 			})
 		}),
