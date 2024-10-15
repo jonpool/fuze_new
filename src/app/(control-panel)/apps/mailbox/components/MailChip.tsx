@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-const Root = styled('div')({
+const Root = styled('div')(({ color }) => ({
 	display: 'flex',
 	alignItems: 'center',
 	height: 20,
@@ -15,7 +15,7 @@ const Root = styled('div')({
 		borderRadius: '50%',
 		backgroundColor: color
 	}
-});
+}));
 
 type MailChipProps = {
 	className?: string;

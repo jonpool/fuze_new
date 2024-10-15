@@ -68,9 +68,16 @@ const mockApi = (tableName: string) => ({
 		return newTable;
 	},
 
-	async find<T extends { id: string }>(id: string) {
+	async find<T extends { id: string }>(param: string | Record<string, unknown>) {
 		const table = getTable<T>(tableName);
-		return table.find((item) => item.id === id) || null;
+
+		if (typeof param === 'string') {
+			// Find by ID
+			return table.find((item) => item.id === param) || null;
+		}
+
+		// Find by query parameters
+		return table.find((item) => Object.entries(param).every(([key, value]) => item[key] === value)) || null;
 	},
 
 	async findAll<T>(queryParams: Record<string, unknown> = {}) {

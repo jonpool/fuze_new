@@ -255,7 +255,7 @@ const ScrumboardApi = api
 						_.merge([], board.lists),
 						orderResult.source.index,
 						orderResult.destination.index
-					);
+					) as ScrumboardBoardList[];
 
 					dispatch(
 						ScrumboardApi.util.updateQueryData('getScrumboardBoard', board.id, (draft) => {

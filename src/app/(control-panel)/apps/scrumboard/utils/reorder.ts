@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import { DraggableLocation, DropResult } from '@hello-pangea/dnd';
+import { DropResult } from '@hello-pangea/dnd';
 import { ScrumboardBoardList } from '../ScrumboardApi';
 
 // a little function to help us with reordering the result
-const reorder = (list: string[], startIndex: DraggableLocation['index'], endIndex: DraggableLocation['index']) => {
+const reorder = (list: unknown[], startIndex: number, endIndex: number) => {
 	const result = Array.from(list);
 	const [removed] = result.splice(startIndex, 1);
 	result.splice(endIndex, 0, removed);
@@ -27,7 +27,7 @@ export const reorderQuoteMap = (
 
 	// moving to same list
 	if (source.droppableId === destination?.droppableId) {
-		const reordered = reorder(current.cards, source.index, destination.index);
+		const reordered = reorder(current.cards, source.index, destination.index) as string[];
 		return lists.map((list) => {
 			if (list.id === source.droppableId) {
 				list.cards = reordered;
