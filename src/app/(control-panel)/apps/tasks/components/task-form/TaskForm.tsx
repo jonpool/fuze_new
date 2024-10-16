@@ -312,7 +312,7 @@ function TaskForm() {
 				>
 					<Button
 						onClick={() => {
-							router.back();
+							navigate(-1);
 						}}
 						className="ml-auto"
 					>
