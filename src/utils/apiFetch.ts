@@ -1,7 +1,8 @@
-export const BASE_URL =
+export const API_BASE_URL =
 	process.env.NODE_ENV === 'development'
 		? `http://localhost:${process.env.NEXT_PUBLIC_PORT || 3000}`
 		: process.env.NEXT_PUBLIC_BASE_URL || '/';
+
 // Define the types for options and configuration
 type FetchOptions = RequestInit;
 
@@ -46,7 +47,7 @@ const apiFetch = async <T>(endpoint: string, options: FetchOptions = {}) => {
 	};
 
 	try {
-		const response = await fetch(`${BASE_URL}${endpoint}`, config);
+		const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
 		if (!response.ok) {
 			throw new FetchApiError(response.status, await response.json());
