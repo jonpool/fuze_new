@@ -1,3 +1,5 @@
+'use client';
+
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { styled, useTheme } from '@mui/material/styles';
 import { useDebounce } from '@fuse/hooks';

@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { RedocRawOptions } from 'redoc/typings/services/RedocNormalizedOptions';
 import mockApiJson from 'src/@mock-utils/mockOpenApiSpecs.json';
-import PageBreadcrumb from 'src/components/PageBreadcrumb';
 
 const Root = styled('div')(() => ({
 	'& .menu-content': {
@@ -23,15 +22,13 @@ const Root = styled('div')(() => ({
 function MockApiDoc() {
 	return (
 		<Root className="w-full">
-			<div className="flex flex-col flex-0 p-24 w-full">
-				<PageBreadcrumb className="mb-8" />
-
-				<Typography className="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-					Mock API Definitions (OpenAPI 3.0)
-				</Typography>
-				<Typography component="p">These definitions are used while creating mock api endpoints.</Typography>
-			</div>
-			<Paper className="sticky top-0 w-full shadow">
+			<Typography
+				variant="h4"
+				className="mb-32 font-700"
+			>
+				Mock API Definitions (OpenAPI 3.0)
+			</Typography>
+			<Paper className="sticky top-0 w-full shadow not-prose">
 				<RedocStandalone
 					spec={mockApiJson as object}
 					options={

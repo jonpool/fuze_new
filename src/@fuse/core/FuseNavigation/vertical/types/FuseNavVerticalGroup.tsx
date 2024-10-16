@@ -1,3 +1,5 @@
+'use client';
+
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { alpha, styled } from '@mui/material/styles';
 import clsx from 'clsx';

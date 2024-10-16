@@ -1,7 +1,7 @@
 'use client';
 
 import { styled } from '@mui/material/styles';
-import { Box, BoxProps } from '@mui/system';
+import { Box, BoxProps } from '@mui/material';
 import Icon from '@mui/material/Icon';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
@@ -65,7 +65,7 @@ const FuseSvgIcon = forwardRef<SVGSVGElement, FuseSvgIconProps>((props, ref) => 
 	return (
 		<Root
 			{...props}
-			component="svg"
+			as="svg"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 100 100"

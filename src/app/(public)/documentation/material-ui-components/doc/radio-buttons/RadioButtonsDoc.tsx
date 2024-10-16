@@ -32,7 +32,7 @@ function RadioButtonsDoc(props) {
 	return (
 		<>
 			<Button 
-				className="normal-case absolute right-0"
+				className="normal-case absolute right-0 not-prose"
 				variant="contained"
 				color="secondary"
 				component="a" 

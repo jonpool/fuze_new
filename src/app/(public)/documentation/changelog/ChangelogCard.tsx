@@ -58,7 +58,7 @@ function ChangelogCard(props: ChangelogCardProps) {
 	const { className, version, date, newChanges, fixedChanges, breakingChanges, notes } = props;
 
 	return (
-		<Card className={clsx('py-24 px-32 shadow', className)}>
+		<Card className={clsx('py-24 px-32 shadow not-prose', className)}>
 			<div className="flex items-center">
 				{version && (
 					<Typography

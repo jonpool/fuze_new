@@ -71,7 +71,9 @@ const MailboxApi = api
 
 export default MailboxApi;
 
-export type RouteParams = { category: string; subCategory: string };
+export type RouteParams = {
+	[key: string]: unknown;
+};
 
 export type GetMailboxMailsApiResponse = /** status 200 OK */ MailboxMail[];
 export type GetMailboxMailsApiArg = RouteParams;

@@ -46,7 +46,7 @@ function ThemeSchemesDoc() {
 				className="mb-16"
 				component="p"
 			>
-				Theme configurations are located at <code>app/configs/themesConfig.ts</code> file.
+				Theme configurations are located at <code>src/configs/themesConfig.ts</code> file.
 			</Typography>
 
 			<FuseHighlight

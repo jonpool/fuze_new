@@ -27,9 +27,9 @@ function ThemeLayoutsDoc() {
 				className="mb-16"
 				component="p"
 			>
-				These layouts are accessible from <code>/app/theme-layouts</code> directory and you can modify them
-				however you like. Each layout has its own options. Those options allow you to configure the layout
-				elements such as Toolbar, Footer, and Navbar.
+				These layouts are accessible from <code>/src/components/theme-layouts</code> directory and you can
+				modify them however you like. Each layout has its own options. Those options allow you to configure the
+				layout elements such as Toolbar, Footer, and Navbar.
 			</Typography>
 
 			<Typography

@@ -1,3 +1,5 @@
+'use client';
+
 import Typography from '@mui/material/Typography';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Link from '@fuse/core/Link';
@@ -6,6 +8,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import FuseNavigation from '@fuse/core/FuseNavigation/FuseNavigation';
+import authProtectedNavigationExamples from './authProtectedNavigationExamples';
+import authProtectedNavigationExamplesRaw from './authProtectedNavigationExamples.ts?raw';
 
 function AuthorizationDoc() {
 	return (
@@ -166,6 +171,42 @@ function Layout({ children }) {
 				configuration, please refer to the{' '}
 				<Link to="/documentation/configuration/routing">Routing Documentation</Link>.
 			</Typography>
+
+			<Typography
+				variant="h6"
+				className="mt-32 mb-8 font-700"
+			>
+				Navigation Item Configuration:
+			</Typography>
+
+			<Typography
+				className="mb-16"
+				component="p"
+			>
+				You can control the navigation <b>item/group/collapse</b> visibility by adding <b>auth</b>
+				property in <code>src/configs/NavigationConfig.tsx</code>.
+			</Typography>
+
+			<Typography
+				className="mt-32 mb-8"
+				variant="subtitle2"
+			>
+				Example Usage:
+			</Typography>
+
+			<div className="flex lg:grid-cols-2 gap-12">
+				<div className="flex flex-1">
+					<FuseNavigation navigation={authProtectedNavigationExamples} />
+				</div>
+				<div className="flex flex-1 ">
+					<FuseHighlight
+						component="pre"
+						className="language-js mb-32 max-h-sm overflow-y-auto"
+					>
+						{authProtectedNavigationExamplesRaw}
+					</FuseHighlight>
+				</div>
+			</div>
 
 			<Typography
 				variant="h5"

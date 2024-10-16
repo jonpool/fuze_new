@@ -1,3 +1,5 @@
+'use client';
+
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';

@@ -56,7 +56,7 @@ function ChangingDefaultFontDoc() {
 				component="p"
 			>
 				You need to add <code>typography.fontFamily</code> values into the desired theme config at{' '}
-				<code>app/configs/themesConfig</code>
+				<code>src/configs/themesConfig</code>
 			</Typography>
 			<FuseHighlight
 				component="pre"

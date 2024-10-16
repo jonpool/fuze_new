@@ -366,7 +366,7 @@ function ${fileName}Doc(props) {
 	return (
 		<>
 			<Button 
-				className="normal-case absolute right-0"
+				className="normal-case absolute right-0 not-prose"
 				variant="contained"
 				color="secondary"
 				component="a" 
@@ -528,11 +528,26 @@ async function replaceInExamples() {
 
 		fileSource.then((result) => {
 			result = result
-				.replace('docs/src/modules/components/HighlightedCode', '../../utils/HighlightedCode')
-				.replace('@mui/docs/HighlightedCode', '../../utils/HighlightedCode')
-				.replace(/docs\/src\/modules\/utils\/compose/g, '../../compose')
-				.replace(/docs\/src\/modules\/components\/MarkdownElement/g, '../../utils/MarkdownElement')
-				.replace(/docs\/src\/modules\/components\/HighlightedCode/g, '../../utils/HighlightedCode')
+				.replace(
+					'docs/src/modules/components/HighlightedCode',
+					'@/app/(public)/documentation/material-ui-components/utils/HighlightedCode'
+				)
+				.replace(
+					'@mui/docs/HighlightedCode',
+					'@/app/(public)/documentation/material-ui-components/utils/HighlightedCode'
+				)
+				.replace(
+					/docs\/src\/modules\/utils\/compose/g,
+					'@/app/(public)/documentation/material-ui-components/utils/compose'
+				)
+				.replace(
+					/docs\/src\/modules\/components\/MarkdownElement/g,
+					'@/app/(public)/documentation/material-ui-components/utils/MarkdownElement'
+				)
+				.replace(
+					/docs\/src\/modules\/components\/HighlightedCode/g,
+					'@/app/(public)/documentation/material-ui-components/utils/HighlightedCode'
+				)
 				.replace(/\/static\//g, '/material-ui-static/')
 				.replace(/## Experimental API[\s\S]*$/, ''); // Remove experimental API
 
@@ -655,8 +670,6 @@ async function build() {
 
 	readDir(examplesDirectory).then(({ dir: _dir, list }) => {
 		writePages(_dir, list).then((pages) => {
-			// writeRouteFile(pages);
-
 			log('Route file created.');
 
 			writeNavigationFile(pages);
