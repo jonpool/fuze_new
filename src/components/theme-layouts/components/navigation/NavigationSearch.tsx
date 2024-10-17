@@ -1,6 +1,6 @@
+'use client';
+
 import FuseSearch from '@fuse/core/FuseSearch';
-import withSlices from 'src/store/withSlices';
-import { navigationSlice } from './store/navigationSlice';
 import useNavigation from './hooks/useNavigation';
 
 type NavigationSearchProps = {
@@ -24,6 +24,4 @@ function NavigationSearch(props: NavigationSearchProps) {
 	);
 }
 
-const NavigationSearchWithSlices = withSlices<NavigationSearchProps>([navigationSlice])(NavigationSearch);
-
-export default NavigationSearchWithSlices;
+export default NavigationSearch;
