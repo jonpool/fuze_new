@@ -88,7 +88,9 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 			}
 			content={
 				<div className="p-16 md:p-24 min-h-full flex flex-auto flex-col">
-					<div className="flex flex-col flex-1 relative pb-32 prose max-w-4xl">{children}</div>
+					<div className="flex flex-col flex-1 relative pb-32 prose max-w-4xl dark:prose-invert">
+						{children}
+					</div>
 				</div>
 			}
 			leftSidebarContent={
