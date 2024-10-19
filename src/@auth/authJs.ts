@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-
+import { User } from '@auth/user';
 import { createStorage } from 'unstorage';
 import memoryDriver from 'unstorage/drivers/memory';
 import vercelKVDriver from 'unstorage/drivers/vercel-kv';
@@ -9,7 +9,8 @@ import type { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
 import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
-import { getDbUser, createDbUser } from './userApi';
+import { authGetDbUserByEmail, authCreateDbUser } from './authApi';
+import { FetchApiError } from '@/utils/apiFetch';
 
 const storage = createStorage({
 	driver: process.env.VERCEL
@@ -29,18 +30,28 @@ export const providers: Provider[] = [
 			 * You can create your own validation logic here
 			 * !! Do not use this in production
 			 */
+
+			/**
+			 * Sign in
+			 */
 			if (formInput.formType === 'signin') {
 				if (formInput.password === '' || formInput.email !== 'admin@fusetheme.com') {
 					return null;
 				}
 			}
 
+			/**
+			 * Sign up
+			 */
 			if (formInput.formType === 'signup') {
 				if (formInput.password === '' || formInput.email === '') {
 					return null;
 				}
 			}
 
+			/**
+			 * Response Success with email
+			 */
 			return {
 				email: formInput?.email as string
 			};
@@ -60,11 +71,10 @@ const config = {
 	basePath: '/auth',
 	trustHost: true,
 	callbacks: {
-		authorized({ request, auth }) {
-			const { pathname } = request.nextUrl;
-
-			if (pathname === '/middleware-example') return !!auth;
-
+		authorized() {
+			/** Checkout information to how to use middleware for authorization
+			 * https://next-auth.js.org/configuration/nextjs#middleware
+			 */
 			return true;
 		},
 		jwt({ token, trigger, account, user }) {
@@ -84,22 +94,43 @@ const config = {
 			}
 
 			if (session) {
-				const userDbData = await getDbUser(session.user.email);
+				try {
+					/**
+					 * Get the session user from database
+					 */
+					const response = await authGetDbUserByEmail(session.user.email);
 
-				if (userDbData) {
+					const userDbData = (await response.json()) as User;
+
 					session.db = userDbData;
-				} else {
-					const newUser = await createDbUser({
-						email: session.user.email,
-						role: ['admin'],
-						displayName: session.user.name,
-						photoURL: session.user.image
-					});
-					session.db = newUser;
+
+					return session;
+				} catch (error) {
+					const errorStatus = (error as FetchApiError).status;
+
+					/** If user not found, create a new user */
+					if (errorStatus === 404) {
+						const newUserResponse = await authCreateDbUser({
+							email: session.user.email,
+							role: ['admin'],
+							displayName: session.user.name,
+							photoURL: session.user.image
+						});
+
+						const newUser = (await newUserResponse.json()) as User;
+
+						console.error('Error fetching user data:', error);
+
+						session.db = newUser;
+
+						return session;
+					}
+
+					throw error;
 				}
 			}
 
-			return session;
+			return null;
 		}
 	},
 	experimental: {

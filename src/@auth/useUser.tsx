@@ -1,7 +1,7 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useMemo } from 'react';
 import { User } from '@auth/user';
-import { updateDbUser } from '@auth/userApi';
+import { authUpdateDbUser } from '@auth/authApi';
 import _ from 'lodash';
 import setIn from '@/utils/setIn';
 
@@ -23,7 +23,7 @@ function useUser(): useUser {
 	 * Uses current auth provider's updateUser method
 	 */
 	async function handleUpdateUser(_data: Partial<User>) {
-		const response = await updateDbUser(_data);
+		const response = await authUpdateDbUser(_data);
 
 		if (!response.ok) {
 			throw new Error('Failed to update user');
@@ -31,7 +31,10 @@ function useUser(): useUser {
 
 		const updatedUser = (await response.json()) as User;
 
-		update();
+		// Update AuthJs session data
+		setTimeout(() => {
+			update();
+		}, 300);
 
 		return updatedUser;
 	}

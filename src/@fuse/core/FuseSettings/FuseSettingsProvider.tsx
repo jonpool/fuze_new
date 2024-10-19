@@ -5,11 +5,12 @@ import settingsConfig from 'src/configs/settingsConfig';
 import themeLayoutConfigs from 'src/components/theme-layouts/themeLayoutConfigs';
 import { FuseSettingsConfigType, FuseThemesType } from '@fuse/core/FuseSettings/FuseSettings';
 import useUser from '@auth/useUser';
+import { PartialDeep } from 'type-fest';
 
 // FuseSettingsContext type
 export type FuseSettingsContextType = {
 	data: FuseSettingsConfigType;
-	setSettings: (newSettings: Partial<FuseSettingsConfigType>) => void;
+	setSettings: (newSettings: Partial<FuseSettingsConfigType>) => FuseSettingsConfigType;
 	changeTheme: (newTheme: FuseThemesType) => void;
 };
 
@@ -27,6 +28,18 @@ const getInitialSettings = (): FuseSettingsConfigType => {
 };
 
 const initialSettings = getInitialSettings();
+
+const generateSettings = (
+	_defaultSettings: FuseSettingsConfigType,
+	_newSettings: PartialDeep<FuseSettingsConfigType>
+) => {
+	return _.merge(
+		{},
+		_defaultSettings,
+		{ layout: { config: themeLayoutConfigs[_newSettings?.layout?.style]?.defaults } },
+		_newSettings
+	);
+};
 
 // FuseSettingsProvider component
 export function FuseSettingsProvider({ children }: { children: ReactNode }) {
@@ -52,11 +65,13 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 	}, [calculateSettings]);
 
 	const setSettings = (newSettings: Partial<FuseSettingsConfigType>) => {
-		const _settings = _.merge({}, data, newSettings);
+		const _settings = generateSettings(data, newSettings);
 
 		if (!_.isEqual(_settings, data)) {
 			setData(_.merge({}, _settings));
 		}
+
+		return _settings;
 	};
 
 	const changeTheme = useCallback(
