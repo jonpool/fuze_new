@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google';
 import clsx from 'clsx';
 import 'src/styles/splash-screen.css';
 import 'src/styles/app-base.css';
@@ -8,8 +7,6 @@ import { SessionProvider } from 'next-auth/react';
 import { auth } from '@auth/authJs';
 import generateMetadata from '../utils/generateMetadata';
 import App from './App';
-
-const inter = Inter({ subsets: ['latin'] });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata = await generateMetadata({
@@ -70,7 +67,7 @@ export default async function RootLayout({
 			</head>
 			<body
 				id="root"
-				className={clsx('loading', inter.className)}
+				className={clsx('loading')}
 			>
 				<SessionProvider
 					basePath="/auth"
