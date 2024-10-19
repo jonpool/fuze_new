@@ -149,7 +149,7 @@ function AuthJsCredentialsSignInForm() {
 
 				<Link
 					className="text-md font-medium"
-					to="/pages/auth/forgot-password"
+					to="/#"
 				>
 					Forgot password?
 				</Link>
