@@ -15,7 +15,7 @@ const Link = forwardRef<HTMLAnchorElement, CustomLinkProps>(({ to, href, childre
 	return (
 		<NextLink
 			className={className}
-			href={to || href}
+			href={to || href || ''}
 			role={role}
 			ref={ref}
 			{...rest}
