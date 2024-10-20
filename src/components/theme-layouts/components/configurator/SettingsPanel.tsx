@@ -12,7 +12,6 @@ import { SwipeableHandlers } from 'react-swipeable';
 import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
-import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from '@/store/hooks';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
@@ -72,13 +71,18 @@ function SettingsPanel(props: SettingsPanelProps) {
 	const handleSettingsChange = async (newSettings: Partial<FuseSettingsConfigType>) => {
 		const _newSettings = setSettings(newSettings);
 
-		if (!isGuest) {
+		/**
+		 * Updating user settings disabled for demonstration purposes
+		 * The request is made to the mock API and will not persist the changes
+		 * You can enable it by removing the comment block below when using a real API
+		 * */
+		/* if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
 				dispatch(showMessage({ message: 'User settings saved.' }));
 			}
-		}
+		} */
 	};
 
 	return (
