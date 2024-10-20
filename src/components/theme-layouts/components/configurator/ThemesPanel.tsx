@@ -13,7 +13,6 @@ import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
 import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
-import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { useAppDispatch } from '@/store/hooks';
 
@@ -73,13 +72,18 @@ function ThemesPanel(props: ThemesPanelProps) {
 	async function handleThemeSelect(_theme: FuseThemeOption) {
 		const _newSettings = setSettings({ theme: { ..._theme?.section } } as Partial<FuseSettingsConfigType>);
 
-		if (!isGuest) {
+		/**
+		 * Updating user settings disabled for demonstration purposes
+		 * The request is made to the mock API and will not persist the changes
+		 * You can enable it by removing the comment block below when using a real API
+		 * */
+		/* if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
 				dispatch(showMessage({ message: 'User settings saved.' }));
 			}
-		}
+		} */
 	}
 
 	return (
