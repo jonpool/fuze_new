@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
 import * as React from 'react';
-import { lighten } from '@mui/material/styles';
 import AuthJsForm from '@auth/forms/AuthJsForm';
 
 /**
@@ -38,17 +37,6 @@ function SignInPage() {
 					</div>
 
 					<AuthJsForm formType="signin" />
-
-					<Box
-						className="mt-24 text-md leading-relaxed rounded-lg py-8 px-16"
-						sx={{
-							backgroundColor: (theme) => lighten(theme.palette.primary.main, 0.8),
-							color: 'primary.dark'
-						}}
-					>
-						You are browsing <b>Fuse React Demo</b>. Click on the "Sign in" button to access the Demo and
-						Documentation.
-					</Box>
 				</CardContent>
 			</Paper>
 
